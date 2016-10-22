@@ -1,10 +1,56 @@
 package lanou.around.base;
 
-import android.app.Fragment;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by dllo on 16/10/20.
  */
 
-public class BaseFragment extends Fragment{
+public abstract class BaseFragment extends Fragment {
+
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        return inflater.inflate(setContentView(), null);
+
+
+    }
+
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initViews();
+        initListeners();
+        initData();
+    }
+
+    protected abstract void initData();
+
+    protected abstract int setContentView();
+
+    protected abstract void initViews();
+
+    protected abstract void initListeners();
+
+
+    protected <T extends View> T findView(int id) {
+
+        return (T) getView().findViewById(id);
+    }
+
+    protected <T extends View> T findView(View view, int id) {
+
+        return (T) view.findViewById(id);
+    }
+
+
 }
