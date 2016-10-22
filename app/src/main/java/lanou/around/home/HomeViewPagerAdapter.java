@@ -14,6 +14,9 @@ public class HomeViewPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;
 
+    public void setFragments(List<Fragment> fragments) {
+        this.fragments = fragments;
+    }
 
     public HomeViewPagerAdapter(FragmentManager fm) {
         super(fm);

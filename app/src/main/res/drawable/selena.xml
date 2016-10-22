@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list android:oneshot="false" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:duration="500" android:drawable="@mipmap/rx"></item>
-    <item android:duration="500" android:drawable="@mipmap/ry"></item>
-    <item android:duration="500" android:drawable="@mipmap/rz"></item>
-    <item android:duration="500" android:drawable="@mipmap/s0"></item>
-    <item android:duration="500" android:drawable="@mipmap/s1"></item>
-    <item android:duration="500" android:drawable="@mipmap/s2"></item>
-    <item android:duration="500" android:drawable="@mipmap/s3"></item>
-    <item android:duration="500" android:drawable="@mipmap/s4"></item>
-    <item android:duration="500" android:drawable="@mipmap/s5"></item>
-    <item android:duration="500" android:drawable="@mipmap/s6"></item>
-    <item android:duration="500" android:drawable="@mipmap/s7"></item>
-    <item android:duration="500" android:drawable="@mipmap/s8"></item>
-    <item android:duration="500" android:drawable="@mipmap/s9"></item>
-    <item android:duration="500" android:drawable="@mipmap/s_"></item>
-    <item android:duration="500" android:drawable="@mipmap/sa"></item>
-    <item android:duration="500" android:drawable="@mipmap/sb"></item>
-    <item android:duration="500" android:drawable="@mipmap/sc"></item>
+    <item android:duration="50" android:drawable="@mipmap/rx"></item>
+    <item android:duration="50" android:drawable="@mipmap/ry"></item>
+    <item android:duration="50" android:drawable="@mipmap/rz"></item>
+    <item android:duration="50" android:drawable="@mipmap/s0"></item>
+    <item android:duration="50" android:drawable="@mipmap/s1"></item>
+    <item android:duration="50" android:drawable="@mipmap/s2"></item>
+    <item android:duration="50" android:drawable="@mipmap/s3"></item>
+    <item android:duration="50" android:drawable="@mipmap/s4"></item>
+    <item android:duration="50" android:drawable="@mipmap/s5"></item>
+    <item android:duration="50" android:drawable="@mipmap/s6"></item>
+    <item android:duration="50" android:drawable="@mipmap/s7"></item>
+    <item android:duration="50" android:drawable="@mipmap/s8"></item>
+    <item android:duration="50" android:drawable="@mipmap/s9"></item>
+    <item android:duration="50" android:drawable="@mipmap/s_"></item>
+    <item android:duration="50" android:drawable="@mipmap/sa"></item>
+    <item android:duration="50" android:drawable="@mipmap/sb"></item>
+    <item android:duration="50" android:drawable="@mipmap/sc"></item>
 
 
 
