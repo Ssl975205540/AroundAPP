@@ -70,8 +70,6 @@ public class ArrowRefreshHeader extends LinearLayout implements MyRecyclerView.B
         imageView.setImageResource(R.drawable.selena);
         mProgressBar.setView(imageView);
 
-
-
 		mRotateUpAnim = new RotateAnimation(0.0f, -180.0f,
 				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 		mRotateUpAnim.setDuration(ROTATE_ANIM_DURATION);
