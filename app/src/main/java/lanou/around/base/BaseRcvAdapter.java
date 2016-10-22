@@ -1,10 +1,8 @@
 package lanou.around.base;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 
 import java.util.List;
 
@@ -12,88 +10,97 @@ import java.util.List;
  * Created by dllo on 16/10/22.
  */
 
-public abstract class BaseRcvAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
+public abstract class BaseRcvAdapter<Holder extends RecyclerHolder, T> extends RecyclerView.Adapter<Holder>{
 
-    protected OnItemClickListener onItemClickListener;          //单击
-    protected View.OnLongClickListener onLongClickListener;     //长按
-    protected boolean isEdit = false;                           //是否进入编辑模式
-
+    /** adapter 数据集 */
+    public List<T> data;
+    /** Context */
     protected Context context;
-    protected Fragment fragment;
-    protected LayoutInflater mLayoutInflater;
-    protected List<Object> mList;
+    /** 用于解析布局 */
+    protected LayoutInflater inflater;
 
-    public void setEdit(boolean isEdit) {
-        this.isEdit = isEdit;
-        notifyDataSetChanged();
+    public BaseRcvAdapter(Context context, List<T> data) {
+        this.context = context;
+        this.data = data;
+        inflater = LayoutInflater.from(context);
     }
 
-    public boolean getEdit() {
-        return isEdit;
-    }
-
-    public BaseRcvAdapter(Context context, List<Object> mList) {
-        this.mList = mList;
-        this.context = fragment.getActivity();
-        mLayoutInflater = LayoutInflater.from(context);
-    }
-
-    public BaseRcvAdapter(Fragment fragment, List<Object> mList) {
-        this.fragment = fragment;
-        this.mList = mList;
-        this.context = fragment.getActivity();
-        mLayoutInflater = LayoutInflater.from(context);
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-    }
-
-    public void setOnItemLongClickListener(View.OnLongClickListener onLongClickListener) {
-        this.onLongClickListener = onLongClickListener;
+    public Context getContext(){
+        return this.context;
     }
 
     @Override
     public int getItemCount() {
-        return mList == null ? 0 : mList.size();
+        return data != null ? data.size() : 0;
     }
 
-    @Override
-    public void onBindViewHolder(VH holder, final int position) {
-        if (onItemClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClickListener.onItemClick(v, position);
-                }
-            });
-        }
-
-        if (onLongClickListener != null) {
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    onLongClickListener.onLongClick(v);
-                    return true;
-                }
-            });
-        }
+    /**
+     * 是否是个空的
+     * @return
+     */
+    public boolean isEmpty(){
+        return getItemCount() == 0;
     }
 
-    public void remove(int position) {
-        mList.remove(position);
-        notifyItemRemoved(position);
+    //兼容处理．
+    public T getItem(int position){
+        return data.get(position);
     }
-    public void add(Integer position, Object item) {
-        mList.add(position, item);
-        notifyItemInserted(position);
+
+    /**
+     * 判断非空
+     * @param adapter
+     * @return
+     */
+    public static boolean checkEmpty(BaseRcvAdapter adapter){
+        return adapter == null || adapter.isEmpty();
     }
-    public void add(Object item) {
-        mList.add(item);
+
+
+    public void refresh(List<T> data) {
+        this.data.clear();
+        this.data = data;
         notifyDataSetChanged();
     }
+
+
+    public void append(T data) {
+        this.data.add(data);
+        notifyItemInserted(this.data.size() - 1);
+    }
+
+
+    public void append(int position, T data) {
+        this.data.add(position,data);
+        notifyItemInserted(position);
+    }
+
+
+    public void append(List<T> data) {
+        int oldSize = this.data.size();
+        this.data.addAll(data);
+        notifyItemRangeInserted(oldSize, data.size());
+    }
+
+
+    public T remove(T item) {
+        this.data.remove(item);
+        notifyItemRemoved(this.data.size() + 1);
+        return item;
+    }
+
+
+    public T remove(int position) {
+        T item = this.data.get(position);
+        this.data.remove(position);
+        notifyItemRemoved(position);
+        return item;
+    }
+
+    public void removeAll() {
+        this.data.clear();
+        notifyDataSetChanged();
+    }
+
+
 }

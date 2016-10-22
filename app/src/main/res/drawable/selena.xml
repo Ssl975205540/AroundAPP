@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="50" android:drawable="@mipmap/rx" />
+    　　<item android:duration="50" android:drawable="@mipmap/ry" />
+    　　<item android:duration="50" android:drawable="@mipmap/rz" />
+    　　<item android:duration="50" android:drawable="@mipmap/s0" />
+    　　<item android:duration="50" android:drawable="@mipmap/s1" />
+    　　<item android:duration="50" android:drawable="@mipmap/s2" />
+    　　<item android:duration="50" android:drawable="@mipmap/s3" />
+    　　<item android:duration="50" android:drawable="@mipmap/s4" />
+    　　<item android:duration="50" android:drawable="@mipmap/s5" />
+    　　<item android:duration="50" android:drawable="@mipmap/s6" />
+    　　<item android:duration="50" android:drawable="@mipmap/s7" />
+    　　<item android:duration="50" android:drawable="@mipmap/s8" />
+    　　<item android:duration="50" android:drawable="@mipmap/s9" />
+    　　<item android:duration="50" android:drawable="@mipmap/s_" />
+    　　<item android:duration="50" android:drawable="@mipmap/sa" />
+    　　<item android:duration="50" android:drawable="@mipmap/sb" />
+    　　<item android:duration="50" android:drawable="@mipmap/sc" />
+</selector>
