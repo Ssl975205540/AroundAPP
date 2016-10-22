@@ -8,4 +8,59 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="SupportTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#673AB7</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorPrimaryDark">#512DA8</item>
+        <item name="colorAccent">#FF4081</item>
+    </style>
+
+
+    <style name="release">
+        <item name="android:textSize">11dp</item>
+        <item name="android:textColor">@color/release</item>
+        <item name="android:text">@string/release</item>
+
+    </style>
+
+
+    <style name="PopupWindowAnimLeft">
+        <item name="android:windowEnterAnimation">@anim/anim_botton_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_botton_out</item>
+    </style>
+
+    <style name="cs" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/d</item>
+        <item name="android:windowExitAnimation">@anim/e</item>
+    </style>
+
+    <style name="ct" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/c</item>
+        <item name="android:windowExitAnimation">@anim/f</item>
+    </style>
+
+    <!--窗帘从上到下-->
+    <style name="e0">
+        <item name="android:windowEnterAnimation">@anim/n</item>
+        <item name="android:windowExitAnimation">@anim/m</item>
+    </style>
+
+    <!--淡出效果-->
+    <style name="e1">
+        <item name="android:windowEnterAnimation">@anim/o</item>
+        <item name="android:windowExitAnimation">@anim/p</item>
+    </style>
+
+    <!--快速出现-->
+    <style name="j7">
+        <item name="android:windowEnterAnimation">@anim/s</item>
+        <item name="android:windowExitAnimation">@anim/r</item>
+    </style>
+    <!--底部出现-->
+    <style name="j8">
+        <item name="android:windowEnterAnimation">@anim/t</item>
+        <item name="android:windowExitAnimation">@anim/y</item>
+    </style>
+
 </resources>
