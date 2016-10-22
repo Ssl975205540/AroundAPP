@@ -64,7 +64,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ivClass.setOnClickListener(this);
         ivVideo.setOnClickListener(this);
         ivLogin.setOnClickListener(this);
-
         iv_release.setOnClickListener(this);
     }
 
@@ -106,7 +105,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
 
 
-
                 ivHome.setBackgroundResource(R.mipmap.m_);
                 ivClass.setBackgroundResource(R.mipmap.vq);
                 ivLogin.setBackgroundResource(R.mipmap.sw);
@@ -141,7 +139,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             case R.id.iv_release:
 
-                View view = LayoutInflater.from(this).inflate(R.layout.popupwindow_view,null);
+                View view = LayoutInflater.from(this).inflate(R.layout.popupwindow_view, null);
                 popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, 400, true);
                 // 设置动画效果
 //                popupWindow.setAnimationStyle(R.style.AnimationFade);
