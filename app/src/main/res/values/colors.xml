@@ -8,5 +8,5 @@
     <color name="line">#aeadad</color>
     <color name="release">#9A9A9A</color>
 
-
+    <color name="home_adapter_item">#000000</color>
 </resources>

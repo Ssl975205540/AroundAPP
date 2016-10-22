@@ -23,8 +23,8 @@
             android:layout_height="wrap_content"
             >
 
-            <lanou.lreclerview.lreclerview.XRecyclerView
-                android:id="@+id/recyclerview"
+            <lanou.around.tools.recycle.MyRecyclerView
+                android:id="@+id/recyview_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -40,7 +40,7 @@
         <!--&gt;</android.support.v7.widget.Toolbar>-->
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/idtabLayout"
+            android:id="@+id/tab_home"
             android:layout_width="match_parent"
             android:layout_height="42dp"
 
@@ -51,11 +51,10 @@
 
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+        android:id="@+id/viewpager_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
         android:background="#ffffff"
 
 

@@ -21,7 +21,13 @@
         <item name="android:textSize">11dp</item>
         <item name="android:textColor">@color/release</item>
         <item name="android:text">@string/release</item>
+    </style>
 
+
+    <style name="home_dapter_item">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/home_adapter_item</item>
+        <item name="android:text">@string/home_dapter_item</item>
     </style>
 
 
