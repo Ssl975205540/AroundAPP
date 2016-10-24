@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import lanou.around.R;
 import lanou.around.base.BaseActivity;
-import lanou.around.classification.ClassFragment;
+import lanou.around.classification.ClassifyFragment;
 import lanou.around.home.HomeFragment;
 import lanou.around.login.LoginFragment;
 import lanou.around.video.VideoFragment;
@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private HomeFragment homeFragment;
     private Fragment fragmentGank;
     private boolean back = false;
-    private ClassFragment classFragment;
+    private ClassifyFragment classFragment;
     private VideoFragment videoFragment;
     private LoginFragment loginFragment;
     private ImageView iv_release;
@@ -100,7 +100,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.iv_class:
 
                 if (classFragment == null) {
-                    classFragment = new ClassFragment();
+                    classFragment = new ClassifyFragment();
                 }
                 switchContent(classFragment);
                 // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
