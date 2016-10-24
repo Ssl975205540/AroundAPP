@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lanou.around.R;
+
 /**
  * Created by dllo on 16/10/22.
  */
@@ -41,7 +43,7 @@ public class OnFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        gridView = (GridView) view.findViewById(R.id.gview);
+        gridView = (GridView) view.findViewById(R.id.gview_classify);
 
         //新建List
         data_list = new ArrayList<Map<String, Object>>();

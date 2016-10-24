@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import lanou.around.R;
+
 /**
  * Created by dllo on 16/10/22.
  */

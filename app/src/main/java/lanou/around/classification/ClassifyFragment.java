@@ -13,8 +13,6 @@ import lanou.around.R;
 import lanou.around.base.BaseFragment;
 import lanou.around.widget.PullZoomView;
 
-import static lanou.around.R.id.viewPager;
-
 /**
  * Created by dllo on 16/10/22.
  */
@@ -33,8 +31,8 @@ public class ClassifyFragment extends BaseFragment{
 
     @Override
     protected void initViews() {
-        mViewPager = findView(viewPager);
-        mRecyclerView = findView(R.id.recyclerView);
+        mViewPager = findView(R.id.viewPager_classify);
+        mRecyclerView = findView(R.id.recyclerView_classify);
         mPzv = findView(R.id.pzv);
 
     }
@@ -67,6 +65,10 @@ public class ClassifyFragment extends BaseFragment{
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.setAdapter(myAdapter);
 
+        pullZoomViewData();
+    }
+
+    private void pullZoomViewData() {
         Intent intent = getActivity().getIntent();
         float sensitive = intent.getFloatExtra("sensitive", 1.5f);
         int zoomTime = intent.getIntExtra("zoomTime", 500);

@@ -17,8 +17,6 @@ public abstract class BaseFragment extends Fragment {
 
     public Context context;
 
-    public Context context;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
