@@ -1,5 +1,8 @@
 package lanou.around.video;
 
+import android.widget.ImageButton;
+import android.widget.TextView;
+
 import lanou.around.R;
 import lanou.around.base.BaseFragment;
 
@@ -9,13 +12,20 @@ import lanou.around.base.BaseFragment;
 
 public class VideoFragment extends BaseFragment {
 
+    private TextView video_title;
+    private ImageButton video_code;
     @Override
     protected int setContentView() {
         return R.layout.video_fragment;
+        //设置标题栏
+
     }
 
     @Override
     protected void initViews() {
+        video_title = findView(R.id.video_title_tv);
+        video_code = findView(R.id.video_code);
+
 
     }
 
@@ -26,6 +36,8 @@ public class VideoFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+       video_title.setText("视频");
+        video_code.setImageResource(R.mipmap.ic_launcher);
 
     }
 
