@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include
-         layout="@layout/video_title_layout">
-    </include>
+         layout="@layout/video_title_layout"></include>
+    <lanou.around.flingswipe.SwipeFlingAdapterView
+        android:id="@+id/video_swipe_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:min_adapter_stack="4"
+        app:max_visible="4"
+        app:y_offset_step="28dp"/>
 
 
 </LinearLayout>
