@@ -7,15 +7,15 @@ import java.util.List;
 
 import lanou.around.R;
 import lanou.around.base.BaseRcvAdapter;
-import lanou.around.bean.HomeBean;
+import lanou.around.bean.VideoBean;
 
 /**
  * Created by dllo on 16/10/22.
  */
 
-public class HomeAdapter extends BaseRcvAdapter<HomeViewHolder,HomeBean> {
+public class HomeAdapter extends BaseRcvAdapter<HomeViewHolder,VideoBean> {
 
-    public HomeAdapter(Context context, List<HomeBean> data) {
+    public HomeAdapter(Context context, List<VideoBean> data) {
         super(context, data);
     }
 

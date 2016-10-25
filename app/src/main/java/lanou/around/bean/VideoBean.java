@@ -8,4 +8,21 @@ public class VideoBean {
     private int anInt;
 
     private String url;
+
+    public int getAnInt() {
+        return anInt;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setAnInt(int anInt) {
+
+        this.anInt = anInt;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

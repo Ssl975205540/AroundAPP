@@ -1,10 +1,12 @@
 package lanou.around.main;
 
 
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,6 +39,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private LoginFragment loginFragment;
     private ImageView iv_release;
     private PopupWindow popupWindow;
+    private View view;
+    private LinearLayout pop_linear;
 
 
     @Override
@@ -53,7 +57,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ivClass = findView(R.id.iv_class);
         ivVideo = findView(R.id.iv_video);
         ivLogin = findView(R.id.iv_login);
+        view = LayoutInflater.from(this).inflate(R.layout.popupwindow_view, null);
 
+        pop_linear = findView(view, R.id.pop_linear);
 
         iv_release = findView(R.id.iv_release);
     }
@@ -139,15 +145,35 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             case R.id.iv_release:
 
-                View view = LayoutInflater.from(this).inflate(R.layout.popupwindow_view, null);
                 popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, 400, true);
                 // 设置动画效果
 //                popupWindow.setAnimationStyle(R.style.AnimationFade);
                 popupWindow.setAnimationStyle(R.style.j8);
+
+                popupWindow.setBackgroundDrawable(new BitmapDrawable());
+
                 popupWindow.showAtLocation(iv_release, Gravity.BOTTOM, 0, 0);
+
+
+                view.setFocusable(true);//comment by danielinbiti,设置view能够接听事件，标注1
+                view.setFocusableInTouchMode(true);
+
+
+                view.setOnKeyListener(new View.OnKeyListener() {
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if (keyCode == KeyEvent.KEYCODE_BACK) {
+                            if (popupWindow != null) {
+                                popupWindow.dismiss();
+                            }
+                        }
+                        return false;
+                    }
+                });
+
                 break;
         }
     }
+
 
 
     public void switchContent(Fragment to) {
@@ -172,13 +198,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onBackPressed() {
 
+
         if (back == false) {
 
             Toast.makeText(this, "再按一次退出转转", Toast.LENGTH_SHORT).show();
             back = true;
-            popupWindow.dismiss();
 
         } else {
+
+
             super.onBackPressed();
         }
     }
