@@ -4,12 +4,12 @@ package lanou.around.aroundinterface;
  * Created by dllo on 16/10/25.
  */
 
-public interface InterModel {
+public interface InterModel<T>{
 
     void StartRequest(String url,OnFinishedListener onFinishedListener);
 
-    <T> void InsertSQ(T t);
+    void InsertSQ(T t);
 
-    void QuerySQ();
+   <E>void QuerySQ(OCompleted<E> onCompletedListener);
 
 }

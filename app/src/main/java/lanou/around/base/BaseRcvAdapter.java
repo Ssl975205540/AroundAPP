@@ -6,17 +6,32 @@ import android.view.LayoutInflater;
 
 import java.util.List;
 
+import lanou.around.tools.recycle.MyRecyclerView;
+
 /**
  * Created by dllo on 16/10/22.
  */
 
-public abstract class BaseRcvAdapter<Holder extends RecyclerHolder, T> extends RecyclerView.Adapter<Holder>{
+public abstract class BaseRcvAdapter<Holder extends RecyclerHolder, T> extends RecyclerView.Adapter<Holder> {
 
-    /** adapter 数据集 */
+    /**
+     * adapter 数据集
+     */
     public List<T> data;
-    /** Context */
+    /**
+     * Context
+     */
+    public MyRecyclerView.OnItemClickListener onItemClick;
+
+    public void setOnItemClick(MyRecyclerView.OnItemClickListener onItemClick) {
+
+        this.onItemClick = onItemClick;
+    }
+
     protected Context context;
-    /** 用于解析布局 */
+    /**
+     * 用于解析布局
+     */
     protected LayoutInflater inflater;
 
     public BaseRcvAdapter(Context context, List<T> data) {
@@ -25,7 +40,7 @@ public abstract class BaseRcvAdapter<Holder extends RecyclerHolder, T> extends R
         inflater = LayoutInflater.from(context);
     }
 
-    public Context getContext(){
+    public Context getContext() {
         return this.context;
     }
 
@@ -36,23 +51,25 @@ public abstract class BaseRcvAdapter<Holder extends RecyclerHolder, T> extends R
 
     /**
      * 是否是个空的
+     *
      * @return
      */
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return getItemCount() == 0;
     }
 
     //兼容处理．
-    public T getItem(int position){
+    public T getItem(int position) {
         return data.get(position);
     }
 
     /**
      * 判断非空
+     *
      * @param adapter
      * @return
      */
-    public static boolean checkEmpty(BaseRcvAdapter adapter){
+    public static boolean checkEmpty(BaseRcvAdapter adapter) {
         return adapter == null || adapter.isEmpty();
     }
 
@@ -71,7 +88,7 @@ public abstract class BaseRcvAdapter<Holder extends RecyclerHolder, T> extends R
 
 
     public void append(int position, T data) {
-        this.data.add(position,data);
+        this.data.add(position, data);
         notifyItemInserted(position);
     }
 
@@ -101,6 +118,7 @@ public abstract class BaseRcvAdapter<Holder extends RecyclerHolder, T> extends R
         this.data.clear();
         notifyDataSetChanged();
     }
+
 
 
 }

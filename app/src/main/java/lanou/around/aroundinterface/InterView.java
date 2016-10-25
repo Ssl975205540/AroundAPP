@@ -12,7 +12,7 @@ public interface InterView<T>  {
 
     void onResponse(T t);
 
-    void onError();
+    <E>void onError(E t);
 
 
 
