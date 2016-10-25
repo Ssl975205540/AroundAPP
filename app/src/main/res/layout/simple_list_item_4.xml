@@ -1,20 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="200dp"
     android:orientation="vertical"
     android:layout_margin="3dp">
 
-    <TextView
-        android:id="@+id/tv_left_name4"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+
+        <TextView
+            android:id="@+id/tv_electrical_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="数码" />
+
+        <TextView
+            android:id="@+id/tv_electrical_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/iv_electrical_check"
+            android:text="单反不在穷三代" />
+
+        <ImageView
+            android:id="@+id/iv_electrical_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:src="@mipmap/v1" />
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/gridView_electrical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ff0019"
-        />
-    <TextView
-        android:id="@+id/tv_left_message4"
-        android:background="#ff0019"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        android:columnWidth="90dp"
+        android:numColumns="3"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center">
+    </GridView>
 </LinearLayout>

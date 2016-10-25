@@ -7,10 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lanou.around.R;
 
@@ -92,11 +96,24 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 ThreeViewHolder viewHolder3 = (ThreeViewHolder) holder;
                 viewHolder3.tv_left_name3.setText(strings.get(position).getName());
                 viewHolder3.tv_left_message3.setText(strings.get(position).getMessage());
+                viewHolder3.mGridView.setAdapter(new ClassifyGridAdapter(context));
                 break;
             case 4:
                 FourViewHolder viewHolder4 = (FourViewHolder) holder;
                 viewHolder4.tv_left_name4.setText(strings.get(position).getName());
                 viewHolder4.tv_left_message4.setText(strings.get(position).getMessage());
+                List<Map<String, Object>> items = new ArrayList<Map<String,Object>>();
+                for (int i = 0; i < 6; i++) {
+                    Map<String, Object> item = new HashMap<String, Object>();
+                    item.put("imageItem", R.mipmap.picture4);//添加图像资源的ID
+                    item.put("textItem", "美女" + i);//按序号添加ItemText
+                    items.add(item);
+                }
+
+                SimpleAdapter simpleAdapter = new SimpleAdapter(context, items, R.layout.grid_item,
+                        new String[]{"imageItem", "textItem"},
+                        new int[]{R.id.image_item, R.id.text_item});
+                viewHolder4.mGridView.setAdapter(simpleAdapter);
                 break;
             case 5:
                 FiveViewHolder viewHolder5 = (FiveViewHolder) holder;
@@ -131,12 +148,14 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
 
         public final TextView tv_left_message3;
         public final TextView tv_left_name3;
+        public final GridView mGridView;
 
         public ThreeViewHolder(View itemView) {
             super(itemView);
 
-            tv_left_message3 = (TextView) itemView.findViewById(R.id.tv_left_message3);
-            tv_left_name3 = (TextView) itemView.findViewById(R.id.tv_left_name3);
+            tv_left_message3 = (TextView) itemView.findViewById(R.id.tv_gview_message);
+            tv_left_name3 = (TextView) itemView.findViewById(R.id.tv_gview_name);
+            mGridView = (GridView) itemView.findViewById(R.id.gridView);
         }
     }
 
@@ -144,11 +163,13 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
 
         public final TextView tv_left_message4;
         public final TextView tv_left_name4;
+        public final GridView mGridView;
 
         public FourViewHolder(View itemView) {
             super(itemView);
-            tv_left_message4 = (TextView) itemView.findViewById(R.id.tv_left_message4);
-            tv_left_name4 = (TextView) itemView.findViewById(R.id.tv_left_name4);
+            tv_left_message4 = (TextView) itemView.findViewById(R.id.tv_electrical_message);
+            tv_left_name4 = (TextView) itemView.findViewById(R.id.tv_electrical_name);
+            mGridView = (GridView) itemView.findViewById(R.id.gridView_electrical);
         }
     }
 
