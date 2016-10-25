@@ -17,7 +17,6 @@ public class HomePresenter {
     public HomePresenter(InterView interView) {
 
         this.interView = interView;
-
         homeModel = new HomeModel();
 
     }
