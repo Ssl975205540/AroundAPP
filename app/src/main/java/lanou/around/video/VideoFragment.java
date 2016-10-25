@@ -54,10 +54,23 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
 
     @Override
     protected int setContentView() {
+
         return R.layout.video_fragment;
 
 
+
     }
+//
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setRetainInstance(true);
+//    }
+//
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//    }
 
     @Override
     protected void initViews() {
@@ -70,12 +83,28 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         cardWidth = (int) (dm.widthPixels - (2 * 18 * density));
         cardHeight = (int) (dm.heightPixels - (338 * density));
         swipeView = (SwipeFlingAdapterView) findView(R.id.video_swipe_view);
-        swipeView.setFlingListener(this);
-        swipeView.setOnItemClickListener(this);
+
 
         //适配器
         adapter = new InnerAdapter(getContext());
 
+
+
+    }
+
+    @Override
+    protected void initListeners() {
+        swipeView.setFlingListener(this);
+        swipeView.setOnItemClickListener(this);
+
+    }
+
+    @Override
+    protected void initData() {
+        //设置标题栏
+        video_title.setText("视频");
+        video_code.setImageResource(R.mipmap.ic_launcher);
+//适配器
         adapter.setCardHight(cardHeight);
         adapter.setCardWidth(cardWidth);
         swipeView.setAdapter(adapter);
@@ -90,21 +119,6 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
                 mSuperVideoPlayer.loadAndPlay(uri,0);
             }
         });
-
-    }
-
-    @Override
-    protected void initListeners() {
-
-
-    }
-
-    @Override
-    protected void initData() {
-        //设置标题栏
-        video_title.setText("视频");
-        video_code.setImageResource(R.mipmap.ic_launcher);
-
 
     }
 
@@ -131,6 +145,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
 
     @Override
     public void onAdapterAboutToEmpty(int itemsInAdapter) {
+        setRetainInstance(true);
         loadData();
         Log.d("VideoFragment", "5555555");
         if (itemsInAdapter == 3) {
@@ -192,7 +207,6 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         @Override
         public void onCloseVideo() {
             mSuperVideoPlayer.close();//关闭VideoView
-//            mPlayBtnView.setVisibility(View.VISIBLE);
             mSuperVideoPlayer.setVisibility(View.GONE);
             resetPageToPortrait();
         }
@@ -205,9 +219,11 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
             if (getActivity().getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
                 getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 mSuperVideoPlayer.setPageType(MediaController.PageType.SHRINK);
+
             } else {
                 getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 mSuperVideoPlayer.setPageType(MediaController.PageType.EXPAND);
+
             }
         }
 

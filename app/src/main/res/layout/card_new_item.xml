@@ -23,9 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/iv_title"
-            android:text="陈翔六点半"
             android:textColor="#000"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tv_brief"
@@ -34,8 +33,7 @@
             android:layout_below="@+id/tv_title"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/iv_title"
-            android:text="55555555555555"
-            android:textSize="10dp" />
+            android:textSize="10sp" />
     </RelativeLayout>
 
 
@@ -63,16 +61,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="我和老板不可告人的秘密"
+
         android:textColor="#000"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/video_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="99999" />
+         />
 
 
 </LinearLayout>
