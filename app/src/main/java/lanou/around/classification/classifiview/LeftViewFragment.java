@@ -5,6 +5,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
@@ -14,7 +17,7 @@ import lanou.around.tools.recycle.http.URLValues;
 /**
  * Created by dllo on 16/10/22.
  */
-public class OnFragment extends BaseFragment implements InterView<ClassifyViewBean> {
+public class LeftViewFragment extends BaseFragment implements InterView<ClassifyViewBean> {
 
     private Context context;
     private GridView gridView;
@@ -22,7 +25,7 @@ public class OnFragment extends BaseFragment implements InterView<ClassifyViewBe
 
     @Override
     protected int setContentView() {
-        return R.layout.one;
+        return R.layout.grid_classify_view;
     }
 
     @Override
@@ -53,9 +56,12 @@ public class OnFragment extends BaseFragment implements InterView<ClassifyViewBe
 
     @Override
     public void onResponse(ClassifyViewBean classifyViewBean) {
-
-        GridViewLeftAdapter gridViewAdapter = new GridViewLeftAdapter(context);
-        gridViewAdapter.setRespDataBeen(classifyViewBean);
+        List<ClassifyViewBean.RespDataBean> respDataBeen = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            respDataBeen.add(classifyViewBean.getRespData().get(i));
+        }
+        GridViewPagerLeftAdapter gridViewAdapter = new GridViewPagerLeftAdapter(context);
+        gridViewAdapter.setRespDataBeen(respDataBeen);
         gridView.setAdapter(gridViewAdapter);
 
     }

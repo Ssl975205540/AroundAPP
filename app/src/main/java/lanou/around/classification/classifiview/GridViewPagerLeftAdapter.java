@@ -10,37 +10,42 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import lanou.around.R;
 import lanou.around.bean.ClassifyViewBean;
 
 /**
  * Created by dllo on 16/10/25.
  */
-public class GridViewLeftAdapter extends BaseAdapter {
+public class GridViewPagerLeftAdapter extends BaseAdapter {
 
     private View mView;
     private Context mContext;
     private ImageView mImageView;
     private TextView mTextView;
-    private ClassifyViewBean mRespDataBeen;
+    private List<ClassifyViewBean.RespDataBean> mRespDataBeen;
 
-    public void setRespDataBeen(ClassifyViewBean respDataBeen) {
+
+    public void setRespDataBeen(List<ClassifyViewBean.RespDataBean> respDataBeen) {
         mRespDataBeen = respDataBeen;
+        notifyDataSetChanged();
     }
 
 
-    public GridViewLeftAdapter(Context context) {
+
+    public GridViewPagerLeftAdapter(Context context) {
         mContext = context;
     }
 
     @Override
     public int getCount() {
-        return 8;
+        return mRespDataBeen == null ? 0 : mRespDataBeen.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mRespDataBeen.getRespData().get(position);
+        return mRespDataBeen.get(position);
     }
 
     @Override
@@ -56,8 +61,8 @@ public class GridViewLeftAdapter extends BaseAdapter {
             mView = LayoutInflater.from(mContext).inflate(R.layout.item_left_gridview, parent, false);
             mImageView = (ImageView) mView.findViewById(R.id.image_left);
             mTextView = (TextView) mView.findViewById(R.id.text_left);
-            Picasso.with(mContext).load(mRespDataBeen.getRespData().get(position).getCateUrl()).into(mImageView);
-            mTextView.setText(mRespDataBeen.getRespData().get(position).getCateName());
+            Picasso.with(mContext).load(mRespDataBeen.get(position).getCateUrl()).into(mImageView);
+            mTextView.setText(mRespDataBeen.get(position).getCateName());
         }
         return mView;
     }

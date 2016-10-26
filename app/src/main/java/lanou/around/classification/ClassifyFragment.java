@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -17,8 +18,10 @@ import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.ClassifyTabBean;
+import lanou.around.classification.classifiview.CenterViewFragment;
 import lanou.around.classification.classifiview.ClassifyViewAdapter;
-import lanou.around.classification.classifiview.OnFragment;
+import lanou.around.classification.classifiview.LeftViewFragment;
+import lanou.around.classification.classifiview.RightViewFragment;
 import lanou.around.presenter.ClassifyTabPresenter;
 import lanou.around.tools.recycle.http.URLValues;
 import lanou.around.widget.PullZoomView;
@@ -36,6 +39,8 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
     private ImageView mPhoto;
     private TextView mTitle;
     private TextView mMessage;
+    private ArrayList<ImageView> dots = new ArrayList<>();
+    private LinearLayout mDotsLinear;
 
 
     @Override
@@ -51,6 +56,7 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
         mPhoto = findView(R.id.iv_classify_photo);
         mTitle = findView(R.id.tv_classify_title);
         mMessage = findView(R.id.et_classify_message);
+        mDotsLinear = findView(R.id.ll_viewpager);
 
     }
 
@@ -64,12 +70,28 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
     protected void initData() {
 
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new OnFragment());
-        fragments.add(new TwoFragment());
-        fragments.add(new ThreeFragment());
+        fragments.add(new LeftViewFragment());
+        fragments.add(new CenterViewFragment());
+        fragments.add(new RightViewFragment());
 
-        ClassifyViewAdapter adapter = new ClassifyViewAdapter(getChildFragmentManager(),fragments);
+        ClassifyViewAdapter adapter = new ClassifyViewAdapter(getChildFragmentManager(), fragments);
         mViewPager.setAdapter(adapter);
+        //创建小圆点个数
+        for (int i = 0; i < 3; i++) {
+            ImageView imageView = new ImageView(context);
+            if (0 == i) {
+                imageView.setImageResource(R.drawable.dot_normal);
+            } else {
+                imageView.setImageResource(R.drawable.dot_focus);
+            }
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(15, 15);
+            params.setMargins(10, 0, 10, 0);
+            imageView.setLayoutParams(params);
+            dots.add(imageView);
+            mDotsLinear.addView(dots.get(i));
+        }
+        viewPagerScallListener();
 
 
         strings = new ArrayList<>();
@@ -86,6 +108,35 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
         mRecyclerView.setAdapter(myAdapter);
 
         pullZoomViewData();
+    }
+
+    private void viewPagerScallListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            int a;
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (dots.size() > 0){
+                    a = position % dots.size();
+                    for (int i = 0; i < dots.size(); i++) {
+                        if (i == a) {
+                            dots.get(i).setImageResource(R.drawable.dot_normal);
+                        } else {
+                            dots.get(i).setImageResource(R.drawable.dot_focus);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void pullZoomViewData() {
@@ -149,5 +200,11 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
     @Override
     public void onError() {
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        dots.clear();
+        super.onDestroyView();
     }
 }
