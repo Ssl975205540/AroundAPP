@@ -46,6 +46,8 @@
                 <ImageView
                     android:id="@+id/iv_home"
                     android:layout_width="@dimen/passcode_width"
+                    android:layout_marginBottom="2dp"
+
                     android:layout_height="@dimen/passcode_height"
                     android:layout_gravity="center"
                     android:background="@mipmap/ma" />
@@ -64,6 +66,8 @@
                     android:layout_width="@dimen/passcode_width"
                     android:layout_height="@dimen/passcode_height"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="2dp"
+
                     android:background="@mipmap/vp" />
 
             </LinearLayout>
@@ -98,6 +102,7 @@
                     android:layout_width="@dimen/passcode_width"
                     android:layout_height="@dimen/passcode_height"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="2dp"
                     android:background="@mipmap/sy" />
 
             </LinearLayout>
@@ -113,6 +118,8 @@
                     android:layout_width="@dimen/passcode_width"
                     android:layout_height="@dimen/passcode_height"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="2dp"
+
                     android:background="@mipmap/sw" />
 
             </LinearLayout>

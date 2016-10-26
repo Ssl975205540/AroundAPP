@@ -543,7 +543,7 @@ public class MyRecyclerView extends RecyclerView {
             }
         }
     }
-    interface OnItemClickListener{
+   public interface OnItemClickListener{
         void onItemClick(ViewHolder viewHolder, int position);
 
     }

@@ -1,4 +1,4 @@
-package lanou.around.classification;
+package lanou.around.classification.classifiview;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

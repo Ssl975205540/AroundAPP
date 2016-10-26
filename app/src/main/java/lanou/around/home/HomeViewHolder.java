@@ -16,7 +16,6 @@ public class HomeViewHolder extends RecyclerHolder {
     public HomeViewHolder(View itemView) {
         super(itemView);
 
-
         img = (ImageView) itemView.findViewById(R.id.iv_home_dapter_item);
     }
 }

@@ -1,36 +1,52 @@
 package lanou.around.home;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 
 import lanou.around.R;
 import lanou.around.base.BaseRcvAdapter;
-import lanou.around.bean.HomeBean;
+import lanou.around.bean.HomeBeanHot;
 
 /**
  * Created by dllo on 16/10/22.
  */
 
-public class HomeAdapter extends BaseRcvAdapter<HomeViewHolder,HomeBean> {
+public class HomeAdapter extends BaseRcvAdapter<HomeViewHolder, HomeBeanHot> {
 
-    public HomeAdapter(Context context, List<HomeBean> data) {
+    public HomeAdapter(Context context, ArrayList<HomeBeanHot> data) {
         super(context, data);
     }
 
     @Override
     public HomeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        HomeViewHolder homeViewHolder =  new HomeViewHolder(inflater.inflate(R.layout.home_adapter_item,parent,false));
+        HomeViewHolder homeViewHolder = new HomeViewHolder(inflater.inflate(R.layout.home_adapter_item, parent, false));
 
         return homeViewHolder;
+
+
     }
 
     @Override
-    public void onBindViewHolder(HomeViewHolder holder, int position) {
+    public void onBindViewHolder(final HomeViewHolder holder, final int position) {
 
-        holder.img.setBackgroundResource(data.get(position).getAnInt());
+
+        Glide.with(context)
+                .load(data.get(position).getImageUrl())
+                .centerCrop()
+                .into(holder.img);
+        holder.rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClick.onItemClick(holder, position);
+            }
+        });
+
 
     }
 }
