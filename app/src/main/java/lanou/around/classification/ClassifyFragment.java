@@ -5,24 +5,38 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import lanou.around.R;
+import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+import lanou.around.bean.ClassifyTabBean;
+import lanou.around.classification.classifiview.ClassifyViewAdapter;
+import lanou.around.classification.classifiview.OnFragment;
+import lanou.around.presenter.ClassifyTabPresenter;
+import lanou.around.tools.recycle.http.URLValues;
 import lanou.around.widget.PullZoomView;
 
 /**
  * Created by dllo on 16/10/22.
  */
 
-public class ClassifyFragment extends BaseFragment{
+public class ClassifyFragment extends BaseFragment implements InterView<ClassifyTabBean> {
 
     private ViewPager mViewPager;
     private RecyclerView mRecyclerView;
     private List<ClassifyBean> strings;
     private PullZoomView mPzv;
+    private ImageView mPhoto;
+    private TextView mTitle;
+    private TextView mMessage;
+
 
     @Override
     protected int setContentView() {
@@ -34,21 +48,27 @@ public class ClassifyFragment extends BaseFragment{
         mViewPager = findView(R.id.viewPager_classify);
         mRecyclerView = findView(R.id.recyclerView_classify);
         mPzv = findView(R.id.pzv);
+        mPhoto = findView(R.id.iv_classify_photo);
+        mTitle = findView(R.id.tv_classify_title);
+        mMessage = findView(R.id.et_classify_message);
 
     }
 
     @Override
     protected void initListeners() {
-
+        ClassifyTabPresenter presenter = new ClassifyTabPresenter(this);
+        presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE);
     }
 
     @Override
     protected void initData() {
+
         List<Fragment> fragments = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            fragments.add(new OnFragment());
-        }
-        ClassifyViewAdapter adapter = new ClassifyViewAdapter(getChildFragmentManager(), fragments);
+        fragments.add(new OnFragment());
+        fragments.add(new TwoFragment());
+        fragments.add(new ThreeFragment());
+
+        ClassifyViewAdapter adapter = new ClassifyViewAdapter(getChildFragmentManager(),fragments);
         mViewPager.setAdapter(adapter);
 
 
@@ -108,4 +128,26 @@ public class ClassifyFragment extends BaseFragment{
         });
     }
 
+    @Override
+    public void startAnimation() {
+
+    }
+
+    @Override
+    public void stopAnimation() {
+
+    }
+
+    @Override
+    public void onResponse(ClassifyTabBean classifyTabBean) {
+        Picasso.with(context).load(classifyTabBean.getRespData().getPhotoUrl()).into(mPhoto);
+        mTitle.setText(classifyTabBean.getRespData().getShowName());
+        mMessage.setText(classifyTabBean.getRespData().getInputName());
+
+    }
+
+    @Override
+    public void onError() {
+
+    }
 }

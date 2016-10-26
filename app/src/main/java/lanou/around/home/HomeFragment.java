@@ -147,9 +147,9 @@ public class HomeFragment extends BaseFragment implements InterView<HomeBean> {
     }
 
     @Override
-    public <E> void onError(E t) {
+    public void onError() {
 
-        ArrayList<HomeBeanHot> arrayList = (ArrayList<HomeBeanHot>) t;
+        ArrayList<HomeBeanHot> arrayList = new ArrayList<>();
         homeAdapter = new HomeAdapter(context, arrayList);
 
         setOnItemClick();

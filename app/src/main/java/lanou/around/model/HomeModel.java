@@ -48,7 +48,7 @@ public class HomeModel implements InterModel<HomeBean>{
                     public void onCompleted(ArrayList<HomeBeanHot> result) {
 
                         if(result.size() != 0){
-                            onFinishedListener.onError(result);
+                            onFinishedListener.onError();
 
                         }else {
                             onFailed(result);
@@ -59,7 +59,7 @@ public class HomeModel implements InterModel<HomeBean>{
 
                     @Override
                     public void onFailed(ArrayList<HomeBeanHot> result) {
-                        onFinishedListener.onError(result);
+                        onFinishedListener.onError();
 
 
                     }

@@ -18,8 +18,7 @@
     <dimen name="passcode_height">38dp</dimen>
     <dimen name="width">0dp</dimen>
     <dimen name="release_width">45dp</dimen>
-
-
+    <dimen name="fineSize">12sp</dimen>
 
 
 </resources>

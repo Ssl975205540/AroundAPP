@@ -23,7 +23,6 @@ public class HomePresenter {
     public HomePresenter(InterView interView) {
 
         this.interView = interView;
-
         homeModel = new HomeModel();
 
     }
@@ -43,12 +42,12 @@ public class HomePresenter {
             }
 
             @Override
-            public <E> void onError(E e) {
+            public void onError() {
 
-                ArrayList<HomeBeanHot> arrayList = (ArrayList<HomeBeanHot>) e;
+                ArrayList<HomeBeanHot> arrayList = new ArrayList<HomeBeanHot>();
                 if(arrayList.size() != 0){
 
-                    interView.onError(arrayList);
+                    interView.onError();
 
                 }else {
 

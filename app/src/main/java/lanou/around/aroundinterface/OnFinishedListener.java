@@ -9,7 +9,7 @@ public interface OnFinishedListener<T> {
 
     void onFinished(T t);
 
-    <E>void onError(E e);
+    void onError();
 
 
 
