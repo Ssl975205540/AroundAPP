@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lanou.around.R;
+import lanou.around.aroundinterface.InterClassifyView;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.ClassifyTabBean;
@@ -30,11 +31,11 @@ import lanou.around.widget.PullZoomView;
  * Created by dllo on 16/10/22.
  */
 
-public class ClassifyFragment extends BaseFragment implements InterView<ClassifyTabBean> {
+public class ClassifyFragment extends BaseFragment implements InterView<ClassifyTabBean>,InterClassifyView<ClassifyBean> {
 
     private ViewPager mViewPager;
     private RecyclerView mRecyclerView;
-    private List<ClassifyBean> strings;
+    private List<ClassifyBean> mClassifyBeanList;
     private PullZoomView mPzv;
     private ImageView mPhoto;
     private TextView mTitle;
@@ -64,6 +65,9 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
     protected void initListeners() {
         ClassifyTabPresenter presenter = new ClassifyTabPresenter(this);
         presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE);
+
+        ClassifyPresenter classifyPresenter = new ClassifyPresenter(this);
+        classifyPresenter.startRequest(URLValues.CLASSIFY_WANT_BUY_MESSAGE);
     }
 
     @Override
@@ -92,20 +96,6 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
             mDotsLinear.addView(dots.get(i));
         }
         viewPagerScallListener();
-
-
-        strings = new ArrayList<>();
-        strings.add(new ClassifyBean("手机", "有机品验机", 1));
-        strings.add(new ClassifyBean("22222", "20202020", 2));
-        strings.add(new ClassifyBean("33333", "30303030", 3));
-        strings.add(new ClassifyBean("44444", "40404040", 4));
-        strings.add(new ClassifyBean("55555", "50505050", 5));
-
-
-        ClassifyAdapter myAdapter = new ClassifyAdapter(context);
-        myAdapter.setStrings(strings);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-        mRecyclerView.setAdapter(myAdapter);
 
         pullZoomViewData();
     }
@@ -189,6 +179,21 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
 
     }
 
+
+    @Override
+    public void onClassifyResponse(ClassifyBean classifyBean) {
+
+        for (int i = 0; i < classifyBean.getRespData().size(); i++) {
+            classifyBean.getRespData().get(i).setType(i);
+
+        }
+        ClassifyAdapter myAdapter = new ClassifyAdapter(context);
+        myAdapter.setClassifyBean(classifyBean);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mRecyclerView.setAdapter(myAdapter);
+
+    }
+
     @Override
     public void onResponse(ClassifyTabBean classifyTabBean) {
         Picasso.with(context).load(classifyTabBean.getRespData().getPhotoUrl()).into(mPhoto);
@@ -207,4 +212,7 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
         dots.clear();
         super.onDestroyView();
     }
+
+
+
 }

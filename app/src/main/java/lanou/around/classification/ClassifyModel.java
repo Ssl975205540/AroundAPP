@@ -1,22 +1,20 @@
-package lanou.around.model;
+package lanou.around.classification;
 
 import lanou.around.aroundinterface.InterModel;
 import lanou.around.aroundinterface.OCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
-import lanou.around.bean.ClassifyTabBean;
 import lanou.around.tools.recycle.http.HtttpManger;
 import lanou.around.tools.recycle.http.OnCompletedListener;
 
 /**
- * Created by dllo on 16/10/25.
+ * Created by dllo on 16/10/26.
  */
-
-public class ClassifyTabModel implements InterModel<ClassifyTabBean> {
+public class ClassifyModel implements InterModel<ClassifyBean> {
     @Override
     public void StartRequest(String url, final OnFinishedListener onFinishedListener) {
-        HtttpManger.getInstance().getRequest(url, ClassifyTabBean.class, new OnCompletedListener<ClassifyTabBean>() {
+        HtttpManger.getInstance().getRequest(url, ClassifyBean.class, new OnCompletedListener<ClassifyBean>() {
             @Override
-            public void onCompleted(ClassifyTabBean result) {
+            public void onCompleted(ClassifyBean result) {
                 if (result.getRespData().equals("")) {
                     onFinishedListener.onError();
                     return;
@@ -28,12 +26,11 @@ public class ClassifyTabModel implements InterModel<ClassifyTabBean> {
             public void onFailed() {
                 onFinishedListener.onError();
             }
-
         });
     }
 
     @Override
-    public void InsertSQ(ClassifyTabBean classifyTabBean) {
+    public void InsertSQ(ClassifyBean classifyBean) {
 
     }
 
@@ -41,6 +38,4 @@ public class ClassifyTabModel implements InterModel<ClassifyTabBean> {
     public <E> void QuerySQ(OCompleted<E> onCompletedListener) {
 
     }
-
-
 }
