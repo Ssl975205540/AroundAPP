@@ -33,6 +33,7 @@ public abstract class BaseFragment extends Fragment {
         initViews();
         initListeners();
         initData();
+        initLoad();
     }
 
     protected abstract void initData();
@@ -43,6 +44,9 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void initListeners();
 
+    protected void initLoad(){
+
+    }
 
     protected <T extends View> T findView(int id) {
 

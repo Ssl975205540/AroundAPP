@@ -3,7 +3,7 @@ package lanou.around.video;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.AsyncTask;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -15,14 +15,27 @@ import android.widget.TextView;
 import com.android.tedcoder.wkvideoplayer.util.DensityUtil;
 import com.android.tedcoder.wkvideoplayer.view.MediaController;
 import com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import lanou.around.R;
 import lanou.around.base.BaseFragment;
+import lanou.around.bean.VideoDetailsBean;
 import lanou.around.flingswipe.SwipeFlingAdapterView;
+import lanou.around.tools.recycle.http.URLValues;
+import okhttp3.Cache;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by dllo on 16/10/22.
@@ -34,17 +47,6 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
     private TextView video_title;
     private ImageButton video_code;
     private SuperVideoPlayer mSuperVideoPlayer;
-
-    String[] names = {"梅嘲讽", "我差点就信了", "淮秀帮", "咸鱼", "徐老师来巡山", "鬼畜精选"};
-    String[] citys = {"9999", "8888", "7777", "6666", "1111", "2222"};
-
-    String[] edus = {"asdia ", " adha", "irs ", "uhuhehye", "ahueddZZ"};
-
-    String[] years = {"1年", "2年", "3年", "4年", "5年"};
-
-    Random ran = new Random();
-
-
     private int cardWidth;
     private int cardHeight;
 
@@ -54,71 +56,65 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
 
     @Override
     protected int setContentView() {
-
         return R.layout.video_fragment;
 
-
-
     }
-//
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setRetainInstance(true);
-//    }
-//
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//    }
+
 
     @Override
     protected void initViews() {
         //标题栏
         video_title = findView(R.id.video_title_tv);
         video_code = findView(R.id.video_code);
+
         //卡片模式
         DisplayMetrics dm = getResources().getDisplayMetrics();
         float density = dm.density;
         cardWidth = (int) (dm.widthPixels - (2 * 18 * density));
         cardHeight = (int) (dm.heightPixels - (338 * density));
         swipeView = (SwipeFlingAdapterView) findView(R.id.video_swipe_view);
-
-
         //适配器
         adapter = new InnerAdapter(getContext());
 
 
+    }
 
+    @Override
+    protected void initLoad() {
+        loadData();
     }
 
     @Override
     protected void initListeners() {
         swipeView.setFlingListener(this);
         swipeView.setOnItemClickListener(this);
+//        VideoPresenter presenter = new VideoPresenter(this);
+//        presenter.startRequest(URL_VIDEO);
+
 
     }
 
     @Override
     protected void initData() {
+
         //设置标题栏
         video_title.setText("视频");
         video_code.setImageResource(R.mipmap.ic_launcher);
-//适配器
         adapter.setCardHight(cardHeight);
         adapter.setCardWidth(cardWidth);
-        swipeView.setAdapter(adapter);
-        adapter.setDdd(new InnerAdapter.ddd() {
+        adapter.setVideoSuper(new InnerAdapter.videoSuper() {
             @Override
-            public void dad(SuperVideoPlayer superVideoPlayer, String url) {
+            public void superVideo(SuperVideoPlayer superVideoPlayer, String url) {
 
-                VideoFragment.this.mSuperVideoPlayer =  superVideoPlayer;
+                VideoFragment.this.mSuperVideoPlayer = superVideoPlayer;
                 mSuperVideoPlayer.setVideoPlayCallback(mVideoPlayCallback);
                 mSuperVideoPlayer.setAutoHideController(false);
                 Uri uri = Uri.parse(url);
-                mSuperVideoPlayer.loadAndPlay(uri,0);
+                mSuperVideoPlayer.loadAndPlay(uri, 0);
             }
         });
+        loadData();
+
 
     }
 
@@ -145,57 +141,62 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
 
     @Override
     public void onAdapterAboutToEmpty(int itemsInAdapter) {
-        setRetainInstance(true);
         loadData();
-        Log.d("VideoFragment", "5555555");
         if (itemsInAdapter == 3) {
-
             loadData();
         }
 
     }
 
     private void loadData() {
-        new AsyncTask<Void, Void, List<Talent>>() {
-            @Override
-            protected List<Talent> doInBackground(Void... params) {
-                ArrayList<Talent> list = new ArrayList<>(10);
-                Talent talent;
-                for (int i = 0; i < 10; i++) {
-                    talent = new Talent();
 
-                    talent.nickname = names[ran.nextInt(names.length - 1)];
-                    talent.cityName = citys[ran.nextInt(citys.length - 1)];
-                    talent.educationName = edus[ran.nextInt(edus.length - 1)];
-                    talent.workYearName = years[ran.nextInt(years.length - 1)];
-                    list.add(talent);
+        File fileDir = Environment.getDownloadCacheDirectory();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(10000, TimeUnit.MILLISECONDS)
+                .cache(new Cache(fileDir, 10 * 1024 * 1024))
+                .build();
+        FormBody body = new FormBody.Builder()
+                .build();
+        final Request request = new Request.Builder()
+                .post(body)
+                .url(URLValues.URL_VIDEO)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String str = response.body().string();
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<List<VideoDetailsBean>>() {
+                    }.getType();
+                    String s =  type.toString();
+                    final List<VideoDetailsBean> been = gson.fromJson(str, type);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.d("VideoFragment", "been.size():" + been.size());
+                            adapter.setVideoDetailsBeans(been);
+                            swipeView.setAdapter(adapter);
+                        }
+                    });
+
+
                 }
-                return list;
             }
+        });
 
-
-            @Override
-            protected void onPostExecute(List<Talent> list) {
-                super.onPostExecute(list);
-
-                adapter.addAll(list);
-
-
-            }
-        }.execute();
     }
+
     @Override
     public void onScroll(float progress, float scrollXProgress) {
 
     }
 
-    public static class Talent {
-
-        public String nickname;
-        public String cityName;
-        public String educationName;
-        public String workYearName;
-    }
 
     /**
      * 播放器的回调函数
@@ -235,7 +236,6 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
 
         }
     };
-
 
 
     /***
@@ -279,9 +279,6 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
             mSuperVideoPlayer.setPageType(MediaController.PageType.SHRINK);
         }
     }
-
-
-
 
 
 }
