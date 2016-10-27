@@ -1,4 +1,4 @@
-package lanou.around.classification;
+package lanou.around.bean;
 
 import java.util.List;
 

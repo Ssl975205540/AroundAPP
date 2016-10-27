@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="110dp"
+              android:layout_marginTop="15dp"
               android:background="@color/colorText"
-    android:layout_margin="3dp">
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp">
+        android:layout_height="35dp"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/tv_gview_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginLeft="10dp"/>
 
         <TextView
             android:id="@+id/tv_gview_message"
@@ -27,24 +28,26 @@
 
         <ImageView
             android:id="@+id/iv_gview_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:src="@mipmap/v1" />
+            android:src="@mipmap/v1"/>
     </RelativeLayout>
+
     <GridView
-        android:layout_marginTop="8dp"
         android:id="@+id/gridView"
-        android:divider="@color/line"
-        android:dividerHeight="1dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="3"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
+        android:layout_marginTop="8dp"
+        android:divider="@color/line"
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp"
         android:stretchMode="columnWidth"
-        android:gravity="center">
+        android:numColumns="3"
+        android:gravity="center"
+        android:listSelector="@null"
+        android:background="#DCDCDC"  >
     </GridView>
 </LinearLayout>

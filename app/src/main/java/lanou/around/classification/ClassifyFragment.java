@@ -18,20 +18,23 @@ import lanou.around.R;
 import lanou.around.aroundinterface.InterClassifyView;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+import lanou.around.bean.ClassifyBean;
 import lanou.around.bean.ClassifyTabBean;
 import lanou.around.classification.classifiview.CenterViewFragment;
 import lanou.around.classification.classifiview.ClassifyViewAdapter;
 import lanou.around.classification.classifiview.LeftViewFragment;
 import lanou.around.classification.classifiview.RightViewFragment;
 import lanou.around.presenter.ClassifyTabPresenter;
-import lanou.around.tools.recycle.http.URLValues;
+import lanou.around.tools.http.URLValues;
 import lanou.around.widget.PullZoomView;
+import lanou.around.widget.TransparentToolBar;
 
 /**
  * Created by dllo on 16/10/22.
  */
 
-public class ClassifyFragment extends BaseFragment implements InterView<ClassifyTabBean>,InterClassifyView<ClassifyBean> {
+public class ClassifyFragment extends BaseFragment
+        implements InterView<ClassifyTabBean>,InterClassifyView<ClassifyBean>,TransparentToolBar.OnScrollStateListener {
 
     private ViewPager mViewPager;
     private RecyclerView mRecyclerView;
@@ -42,6 +45,7 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
     private TextView mMessage;
     private ArrayList<ImageView> dots = new ArrayList<>();
     private LinearLayout mDotsLinear;
+    private TransparentToolBar mToolBar;
 
 
     @Override
@@ -58,7 +62,7 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
         mTitle = findView(R.id.tv_classify_title);
         mMessage = findView(R.id.et_classify_message);
         mDotsLinear = findView(R.id.ll_viewpager);
-
+        mToolBar = findView(R.id.toobar_classify);
     }
 
     @Override
@@ -68,6 +72,11 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
 
         ClassifyPresenter classifyPresenter = new ClassifyPresenter(this);
         classifyPresenter.startRequest(URLValues.CLASSIFY_WANT_BUY_MESSAGE);
+
+        mToolBar.setOnScrollStateListener(this);
+        mToolBar.setOffset(200);
+        mToolBar.setBgColor(getResources().getColor(R.color.toolbar_home_color));
+        mPzv.setTitleBar(mToolBar);
     }
 
     @Override
@@ -96,8 +105,9 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
             mDotsLinear.addView(dots.get(i));
         }
         viewPagerScallListener();
-
         pullZoomViewData();
+
+
     }
 
     private void viewPagerScallListener() {
@@ -214,5 +224,8 @@ public class ClassifyFragment extends BaseFragment implements InterView<Classify
     }
 
 
-
+    @Override
+    public void updateFraction(float fraction) {
+        //ToolBar滚动回调的百分比0~1
+    }
 }

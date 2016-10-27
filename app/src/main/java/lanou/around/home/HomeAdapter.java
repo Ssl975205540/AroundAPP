@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
@@ -35,10 +36,8 @@ public class HomeAdapter extends BaseRcvAdapter<HomeViewHolder, HomeBeanHot> {
     @Override
     public void onBindViewHolder(final HomeViewHolder holder, final int position) {
 
-
-        Glide.with(context)
-                .load(data.get(position).getImageUrl())
-                .centerCrop()
+        Glide.with(getContext()).load(data.get(position).getImageUrl()).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.mipmap.home01_bg_card).placeholder(R.mipmap.rx)
                 .into(holder.img);
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 
 import java.util.List;
 
-import lanou.around.tools.recycle.MyRecyclerView;
+import lanou.around.widget.MyRecyclerView;
 
 /**
  * Created by dllo on 16/10/22.

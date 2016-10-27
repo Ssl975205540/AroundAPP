@@ -56,7 +56,7 @@
             android:layout_toLeftOf="@id/listview_header_text"
             />
 
-        <lanou.around.tools.recycle.SimpleViewSwitcher
+        <lanou.around.widget.SimpleViewSwitcher
             android:id="@+id/listview_header_progressbar"
             android:layout_width="30dip"
             android:layout_height="30dip"

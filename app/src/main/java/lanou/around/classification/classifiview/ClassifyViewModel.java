@@ -1,11 +1,11 @@
 package lanou.around.classification.classifiview;
 
 import lanou.around.aroundinterface.InterModel;
-import lanou.around.aroundinterface.OCompleted;
+import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.ClassifyViewBean;
-import lanou.around.tools.recycle.http.HtttpManger;
-import lanou.around.tools.recycle.http.OnCompletedListener;
+import lanou.around.tools.http.HtttpManger;
+import lanou.around.tools.http.OnCompletedListener;
 
 /**
  * Created by dllo on 16/10/25.
@@ -37,7 +37,7 @@ public class ClassifyViewModel implements InterModel<ClassifyViewBean> {
     }
 
     @Override
-    public <E> void QuerySQ(OCompleted<E> onCompletedListener) {
+    public <E> void QuerySQ(OnCompleted<E> onCompletedListener) {
 
     }
 

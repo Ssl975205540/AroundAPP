@@ -12,7 +12,7 @@ import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.ClassifyViewBean;
-import lanou.around.tools.recycle.http.URLValues;
+import lanou.around.tools.http.URLValues;
 
 /**
  * Created by dllo on 16/10/25.

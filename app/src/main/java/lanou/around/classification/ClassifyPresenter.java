@@ -2,6 +2,7 @@ package lanou.around.classification;
 
 import lanou.around.aroundinterface.InterClassifyView;
 import lanou.around.aroundinterface.OnFinishedListener;
+import lanou.around.bean.ClassifyBean;
 
 /**
  * Created by dllo on 16/10/26.
