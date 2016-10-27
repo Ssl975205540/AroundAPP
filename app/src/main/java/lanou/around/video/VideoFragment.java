@@ -28,7 +28,7 @@ import lanou.around.R;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.VideoDetailsBean;
 import lanou.around.flingswipe.SwipeFlingAdapterView;
-import lanou.around.tools.recycle.http.URLValues;
+import lanou.around.tools.http.URLValues;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;

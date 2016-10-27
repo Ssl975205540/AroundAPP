@@ -1,7 +1,6 @@
 package lanou.around.model;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +10,9 @@ import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeBeanHot;
-import lanou.around.tools.recycle.db.AroundDBManager;
-import lanou.around.tools.recycle.http.HtttpManger;
-import lanou.around.tools.recycle.http.OnCompletedListener;
+import lanou.around.tools.db.AroundDBManager;
+import lanou.around.tools.http.HtttpManger;
+import lanou.around.tools.http.OnCompletedListener;
 
 /**
  * Created by dllo on 16/10/25.

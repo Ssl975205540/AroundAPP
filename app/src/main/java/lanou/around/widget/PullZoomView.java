@@ -44,9 +44,14 @@ public class PullZoomView extends ScrollView {
     private int touchSlop;
 
     private OnScrollListener scrollListener;  //滚动的监听
+    private TransparentToolBar mTitleBar;
 
     public void setOnScrollListener(OnScrollListener scrollListener) {
         this.scrollListener = scrollListener;
+    }
+
+    public void setTitleBar(TransparentToolBar titleBar) {
+        mTitleBar = titleBar;
     }
 
     /** 滚动的监听，范围从 0 ~ maxY */
@@ -148,6 +153,7 @@ public class PullZoomView extends ScrollView {
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
+        mTitleBar.setChangeTop(t);
         if (scrollListener != null) scrollListener.onScroll(l, t, oldl, oldt);
         if (t >= 0 && t <= maxY) {
             scrollFlag = true;
@@ -282,4 +288,5 @@ public class PullZoomView extends ScrollView {
     public void setZoomTime(int zoomTime) {
         this.zoomTime = zoomTime;
     }
+
 }

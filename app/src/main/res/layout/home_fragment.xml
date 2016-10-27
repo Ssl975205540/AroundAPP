@@ -19,7 +19,7 @@
         android:background="#FFFFFF"
         android:fitsSystemWindows="true">
 
-        <lanou.around.tools.recycle.MyRecyclerView
+        <lanou.around.widget.MyRecyclerView
             android:id="@+id/recyview_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

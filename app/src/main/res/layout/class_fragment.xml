@@ -4,107 +4,98 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
-
-<lanou.around.widget.PullZoomView
-    android:id="@+id/pzv"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <LinearLayout
+    <lanou.around.widget.PullZoomView
+        android:id="@+id/pzv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="vertical"
-            android:tag="header">
-
-            <ImageView
-                android:id="@+id/iv_classify_photo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:tag="zoom"/>
-
-            <TextView
-                android:id="@+id/tv_classify_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="60dp"
-                android:textColor="@color/colorFind"/>
-
-            <LinearLayout
-                android:id="@+id/linear_edit_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_classify_title"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:alpha="0.5"
-                android:background="@drawable/edit_shape"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:src="@mipmap/qc"/>
-
-                <TextView
-                    android:id="@+id/et_classify_message"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="5dp"
-                    android:textColor="@color/home_adapter_item"
-                    android:textSize="@dimen/fineSize"/>
-            </LinearLayout>
-        </RelativeLayout>
-
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager_classify"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:background="@color/colorText"/>
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/ll_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/colorText"
-            android:gravity="center"
-            android:orientation="horizontal"/>
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView_classify"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:tag="content"/>
+            android:orientation="vertical">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="100dp"
-            android:layout_marginTop="30dp"
-            android:background="@color/colorText"
-            android:text="@string/check_more"
-            android:textColor="@color/colorRed"/>
-    </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:tag="header">
 
+                <ImageView
+                    android:id="@+id/iv_classify_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:tag="zoom"/>
 
+                <TextView
+                    android:id="@+id/tv_classify_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="60dp"
+                    android:textColor="@color/colorFind"/>
 
-</lanou.around.widget.PullZoomView>
+                <LinearLayout
+                    android:id="@+id/linear_edit_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_classify_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:alpha="0.5"
+                    android:background="@drawable/edit_shape"
+                    android:gravity="center">
 
-    <android.support.v7.widget.Toolbar
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@mipmap/qc"/>
+
+                    <TextView
+                        android:id="@+id/et_classify_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:textColor="@color/home_adapter_item"
+                        android:textSize="@dimen/fineSize"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager_classify"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@color/colorText"/>
+
+            <LinearLayout
+                android:id="@+id/ll_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/colorText"
+                android:gravity="center"
+                android:orientation="horizontal"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_classify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="content"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="100dp"
+                android:layout_marginTop="30dp"
+                android:background="@color/colorText"
+                android:text="@string/check_more"
+                android:textColor="@color/colorRed"/>
+        </LinearLayout>
+    </lanou.around.widget.PullZoomView>
+
+    <lanou.around.widget.TransparentToolBar
+        android:id="@+id/toobar_classify"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:visibility="invisible"
-        android:background="@color/colorRed"/>
+        android:background="@color/colorRed" />
 
 </FrameLayout>

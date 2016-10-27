@@ -1,4 +1,4 @@
-package lanou.around.tools.recycle.db;
+package lanou.around.tools.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
