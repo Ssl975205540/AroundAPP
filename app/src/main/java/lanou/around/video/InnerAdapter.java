@@ -1,11 +1,9 @@
 package lanou.around.video;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +23,7 @@ import lanou.around.tools.recycle.CircleTransform;
  * Created by dllo on 16/10/24.
  */
 
-public class InnerAdapter extends BaseAdapter{
+public class InnerAdapter extends lanou.around.base.BaseAdapter{
 
     private Context context;
     private videoSuper videoSuper;
@@ -33,6 +31,11 @@ public class InnerAdapter extends BaseAdapter{
     int cardHight;
     private ArrayList<VideoBean> arrayList;
     private List<VideoDetailsBean> videoDetailsBeans;
+
+    public InnerAdapter(Context context) {
+        super(context);
+        this.context = context;
+    }
 
     public void setVideoSuper(videoSuper videoSuper) {
         this.videoSuper = videoSuper;
@@ -56,9 +59,8 @@ public class InnerAdapter extends BaseAdapter{
         notifyDataSetChanged();
     }
 
-    public InnerAdapter(Context context) {
-        this.context = context;
-    }
+
+
 
     public void addAll(Collection<VideoDetailsBean> collection) {
         if (isEmpty()) {
@@ -69,32 +71,40 @@ public class InnerAdapter extends BaseAdapter{
         }
     }
 
+    @Override
     public void clear() {
         videoDetailsBeans.clear();
         notifyDataSetChanged();
     }
 
+    @Override
     public boolean isEmpty() {
         return videoDetailsBeans.isEmpty();
     }
 
-    public void remove(int index) {
-        if (index > -1 && index < Integer.MAX_VALUE) {
-            videoDetailsBeans.remove(index);
+
+
+    @Override
+    public void remove(int position) {
+        if (position > -1 && position < Integer.MAX_VALUE) {
+            videoDetailsBeans.remove(position);
             notifyDataSetChanged();
         }
     }
+
     @Override
     public int getCount() {
-
         return videoDetailsBeans.size();
     }
 
+
     @Override
     public VideoDetailsBean getItem(int position) {
-        if(videoDetailsBeans==null ||videoDetailsBeans.size()==0) return null;
+        if (videoDetailsBeans == null || videoDetailsBeans.size() == 0) return null;
         return videoDetailsBeans.get(position);
     }
+
+
 
     @Override
     public long getItemId(int position) {
@@ -102,8 +112,9 @@ public class InnerAdapter extends BaseAdapter{
     }
 
 
+
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
         final VideoDetailsBean videoDetailsBean = getItem(position);
         if (convertView == null) {
@@ -123,8 +134,6 @@ public class InnerAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 holder.imageView.setVisibility(View.GONE);
-//                holder.portraitView.setVisibility(View.GONE);
-//                holder.superVideoPlayer.setVisibility(View.VISIBLE);
                 videoSuper.superVideo(holder.superVideoPlayer,videoDetailsBean.getLinkMp4());
             }
         });
@@ -133,8 +142,18 @@ public class InnerAdapter extends BaseAdapter{
 
 
 
+    @Override
+    public int getContentView() {
+        return 0;
+    }
 
-     class ViewHolder {
+    @Override
+    public void onInitView(View view, int position) {
+
+    }
+
+
+    class ViewHolder {
         SuperVideoPlayer superVideoPlayer;
          ImageView imageView , avatar;
          TextView channelName , channelIntro , intro , tag;
