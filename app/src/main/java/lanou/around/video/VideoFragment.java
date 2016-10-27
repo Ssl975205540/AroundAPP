@@ -100,6 +100,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         //设置标题栏
         video_title.setText("视频");
         video_code.setImageResource(R.mipmap.ic_launcher);
+
         adapter.setCardHight(cardHeight);
         adapter.setCardWidth(cardWidth);
         adapter.setVideoSuper(new InnerAdapter.videoSuper() {
