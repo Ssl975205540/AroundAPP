@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lanou.around.aroundinterface.InterModel;
-import lanou.around.aroundinterface.OCompleted;
+import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeBeanHot;
@@ -42,7 +42,7 @@ public class HomeModel implements InterModel<HomeBean> {
             @Override
             public void onFailed() {
 
-                QuerySQ(new OCompleted<ArrayList<HomeBeanHot>>() {
+                QuerySQ(new OnCompleted<ArrayList<HomeBeanHot>>() {
 
                     @Override
                     public void onCompleted(ArrayList<HomeBeanHot> result) {
@@ -128,9 +128,9 @@ public class HomeModel implements InterModel<HomeBean> {
     }
 
     @Override
-    public <E> void QuerySQ(OCompleted<E> onCompletedListener) {
+    public <E> void QuerySQ(OnCompleted<E> onCompletedListener) {
         myAsyncTask myAsyncTask = new myAsyncTask();
-        myAsyncTask.setArrayListOnCompletedListener((OCompleted<ArrayList<HomeBeanHot>>) onCompletedListener);
+        myAsyncTask.setArrayListOnCompletedListener((OnCompleted<ArrayList<HomeBeanHot>>) onCompletedListener);
         myAsyncTask.execute();
     }
 
@@ -138,9 +138,9 @@ public class HomeModel implements InterModel<HomeBean> {
     class myAsyncTask extends AsyncTask<Void, Void, ArrayList<HomeBeanHot>> {
 
 
-        private OCompleted<ArrayList<HomeBeanHot>> arrayListOnCompletedListener;
+        private OnCompleted<ArrayList<HomeBeanHot>> arrayListOnCompletedListener;
 
-        public void setArrayListOnCompletedListener(OCompleted<ArrayList<HomeBeanHot>> arrayListOnCompletedListener) {
+        public void setArrayListOnCompletedListener(OnCompleted<ArrayList<HomeBeanHot>> arrayListOnCompletedListener) {
             this.arrayListOnCompletedListener = arrayListOnCompletedListener;
         }
 

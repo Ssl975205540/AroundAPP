@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import lanou.around.R;
+import lanou.around.bean.ClassifyBean;
 
 import static lanou.around.app.AroundAPP.context;
 

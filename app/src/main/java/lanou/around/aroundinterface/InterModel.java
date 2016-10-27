@@ -10,6 +10,6 @@ public interface InterModel<T>{
 
     void InsertSQ(T t);
 
-   <E>void QuerySQ(OCompleted<E> onCompletedListener);
+   <E>void QuerySQ(OnCompleted<E> onCompletedListener);
 
 }
