@@ -3,6 +3,7 @@ package lanou.around.tools.recycle.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -44,18 +45,21 @@ public class AroundDBManager {
             for (int j = 0; j < 3; j++) {
                 HomeBeanHot homeBeanHot = new HomeBeanHot();
                 homeBeanHot.setImageUrl(bean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getImageUrl());
-                homeBeanHot.setGoOperation(bean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getGoOperation());
+//                homeBeanHot.setGoOperation(bean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getGoOperation());
                 arrayList.add(homeBeanHot);
             }
         }
+        Log.d("AroundDBManager", "arrayList.size():" + arrayList.size());
+        db.delete("homegettopbanner",null,null);
 
         for (int j = 0; j < arrayList.size(); j++) {
 
             ContentValues content = new ContentValues();
             content.put("url",arrayList.get(j).getImageUrl());
             db.insert("homegettopbanner",null,content);
-
         }
+
+
     }
 
 
@@ -70,9 +74,11 @@ public class AroundDBManager {
                 while (cursor.moveToNext()){
                     String url = cursor.getString(cursor.getColumnIndex("url"));
                 HomeBeanHot home = new HomeBeanHot();
+                    Log.d("AroundDBManager", "ddd");
                     home.setImageUrl(url);
 
                     arraylist.add(home);
+                    Log.d("AroundDBManager", "arraylist.size():" + arraylist.size());
                 }
 
             }

@@ -8,7 +8,7 @@ public interface OCompleted<T> {
 
     void onCompleted(T result);
 
-    void onFailed(T result);
+    void onFailed();
 
 
 }
