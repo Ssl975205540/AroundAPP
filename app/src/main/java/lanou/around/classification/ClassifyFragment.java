@@ -18,6 +18,7 @@ import lanou.around.R;
 import lanou.around.aroundinterface.InterClassifyView;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+import lanou.around.tools.http.URLValues;
 import lanou.around.bean.ClassifyBean;
 import lanou.around.bean.ClassifyTabBean;
 import lanou.around.classification.classifiview.CenterViewFragment;
@@ -25,7 +26,6 @@ import lanou.around.classification.classifiview.ClassifyViewAdapter;
 import lanou.around.classification.classifiview.LeftViewFragment;
 import lanou.around.classification.classifiview.RightViewFragment;
 import lanou.around.presenter.ClassifyTabPresenter;
-import lanou.around.tools.http.URLValues;
 import lanou.around.widget.PullZoomView;
 import lanou.around.widget.TransparentToolBar;
 
