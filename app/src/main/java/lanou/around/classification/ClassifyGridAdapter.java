@@ -1,11 +1,14 @@
 package lanou.around.classification;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+
+import lanou.around.bean.ClassifyBean;
 
 /**
  * Created by dllo on 16/10/24.
@@ -47,6 +50,7 @@ public class ClassifyGridAdapter extends BaseAdapter {
             textView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
             textView.setTextSize(15);
+            textView.setBackgroundColor(Color.WHITE);
             textView.setPadding(8, 4, 8, 4);//设置间距
         } else {
             textView = (TextView) convertView;

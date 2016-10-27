@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<lanou.around.widget.PullZoomView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+<lanou.around.widget.PullZoomView
     android:id="@+id/pzv"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,13 +70,12 @@
             android:id="@+id/viewPager_classify"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:layout_marginTop="20dp"
             android:background="@color/colorText"/>
 
         <LinearLayout
             android:id="@+id/ll_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="30dp"
             android:background="@color/colorText"
             android:gravity="center"
             android:orientation="horizontal"/>
@@ -84,9 +91,20 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="100dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:background="@color/colorText"
             android:text="@string/check_more"
             android:textColor="@color/colorRed"/>
     </LinearLayout>
+
+
+
 </lanou.around.widget.PullZoomView>
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:visibility="invisible"
+        android:background="@color/colorRed"/>
+
+</FrameLayout>

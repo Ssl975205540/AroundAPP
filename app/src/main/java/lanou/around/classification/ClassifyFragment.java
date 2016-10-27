@@ -18,6 +18,7 @@ import lanou.around.R;
 import lanou.around.aroundinterface.InterClassifyView;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+import lanou.around.bean.ClassifyBean;
 import lanou.around.bean.ClassifyTabBean;
 import lanou.around.classification.classifiview.CenterViewFragment;
 import lanou.around.classification.classifiview.ClassifyViewAdapter;
@@ -31,7 +32,8 @@ import lanou.around.widget.PullZoomView;
  * Created by dllo on 16/10/22.
  */
 
-public class ClassifyFragment extends BaseFragment implements InterView<ClassifyTabBean>,InterClassifyView<ClassifyBean> {
+public class ClassifyFragment extends BaseFragment
+        implements InterView<ClassifyTabBean>,InterClassifyView<ClassifyBean> {
 
     private ViewPager mViewPager;
     private RecyclerView mRecyclerView;

@@ -5,6 +5,7 @@
               android:orientation="vertical">
 
     <GridView
+        android:layout_marginTop="20dp"
         android:id="@+id/gview_classify"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

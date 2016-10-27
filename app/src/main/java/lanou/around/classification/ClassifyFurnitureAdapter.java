@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import lanou.around.bean.ClassifyBean;
+
 /**
  * Created by dllo on 16/10/26.
  */

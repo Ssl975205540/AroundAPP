@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import lanou.around.R;
+import lanou.around.bean.ClassifyBean;
 
 /**
  * Created by dllo on 16/10/22.
@@ -95,8 +96,8 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 break;
             case 1:
                 DigitViewHolder digitViewHolder = (DigitViewHolder) holder;
-                digitViewHolder.digit_message.setText(mClassifyBean.getRespData().get(position).getCateName());
-                digitViewHolder.digit_name.setText(mClassifyBean.getRespData().get(position).getCateDescribe());
+                digitViewHolder.digit_name.setText(mClassifyBean.getRespData().get(position).getCateName());
+                digitViewHolder.digit_message.setText(mClassifyBean.getRespData().get(position).getCateDescribe());
 
                 View viewLeft = mInflater.inflate(R.layout.layout_grid_left, null);
                 viewLeftRequest(position, viewLeft);
@@ -115,8 +116,8 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 break;
             case 2:
                 ComputerViewHolder computerViewHolder = (ComputerViewHolder) holder;
-                computerViewHolder.computerMessage.setText(mClassifyBean.getRespData().get(position).getCateName());
-                computerViewHolder.computerTitle.setText(mClassifyBean.getRespData().get(position).getCateDescribe());
+                computerViewHolder.computerTitle.setText(mClassifyBean.getRespData().get(position).getCateName());
+                computerViewHolder.computerMessage.setText(mClassifyBean.getRespData().get(position).getCateDescribe());
 
                 ClassifyGridAdapter gridAdapter = new ClassifyGridAdapter(context);
                 gridAdapter.setClassifyBean(mClassifyBean);

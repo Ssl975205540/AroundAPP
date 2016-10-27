@@ -1,7 +1,7 @@
 package lanou.around.model;
 
 import lanou.around.aroundinterface.InterModel;
-import lanou.around.aroundinterface.OCompleted;
+import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.ClassifyTabBean;
 import lanou.around.tools.recycle.http.HtttpManger;
@@ -38,7 +38,7 @@ public class ClassifyTabModel implements InterModel<ClassifyTabBean> {
     }
 
     @Override
-    public <E> void QuerySQ(OCompleted<E> onCompletedListener) {
+    public <E> void QuerySQ(OnCompleted<E> onCompletedListener) {
 
     }
 
