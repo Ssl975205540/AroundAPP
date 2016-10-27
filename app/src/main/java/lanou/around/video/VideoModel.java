@@ -1,23 +1,24 @@
-package lanou.around.model;
+package lanou.around.video;
 
 import lanou.around.aroundinterface.InterModel;
 import lanou.around.aroundinterface.OCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
-import lanou.around.bean.ClassifyTabBean;
+import lanou.around.bean.VideoDetailsBean;
 import lanou.around.tools.recycle.http.HtttpManger;
 import lanou.around.tools.recycle.http.OnCompletedListener;
 
 /**
- * Created by dllo on 16/10/25.
+ * Created by dllo on 16/10/26.
  */
 
-public class ClassifyTabModel implements InterModel<ClassifyTabBean> {
+public class VideoModel implements InterModel<VideoDetailsBean>{
     @Override
     public void StartRequest(String url, final OnFinishedListener onFinishedListener) {
-        HtttpManger.getInstance().getRequest(url, ClassifyTabBean.class, new OnCompletedListener<ClassifyTabBean>() {
+        HtttpManger.getInstance().getRequest(url, VideoDetailsBean.class, new OnCompletedListener<VideoDetailsBean>() {
             @Override
-            public void onCompleted(ClassifyTabBean result) {
-                if (result.getRespData().equals("")) {
+            public void onCompleted(VideoDetailsBean result) {
+                if (result.equals("")) {
+
                     onFinishedListener.onError();
                     return;
                 }
@@ -26,14 +27,13 @@ public class ClassifyTabModel implements InterModel<ClassifyTabBean> {
 
             @Override
             public void onFailed() {
-                onFinishedListener.onError();
+                 onFinishedListener.onError();
             }
-
         });
     }
 
     @Override
-    public void InsertSQ(ClassifyTabBean classifyTabBean) {
+    public void InsertSQ(VideoDetailsBean videoDetailsBean) {
 
     }
 
@@ -41,6 +41,4 @@ public class ClassifyTabModel implements InterModel<ClassifyTabBean> {
     public <E> void QuerySQ(OCompleted<E> onCompletedListener) {
 
     }
-
-
 }

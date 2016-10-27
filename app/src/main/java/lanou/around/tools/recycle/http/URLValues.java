@@ -25,6 +25,9 @@ public class URLValues {
 
 
     //手机按钮点击进入中iPhone SE的WebView接口
-    public static final String CLASSIFY_PHONE_WEBVIEW = "http://youpin.m.58.com/bj/shouji/27769198399433x.shtml?channel=zz_youpin&webview=zzn&tt=E9E3D9A8EFFEF4A277C9C9D697C50FB21477299349933&zzv=2.4.4";
+    public static final String CLASSIFY_PHONE_WEBVIEW = "http://youpin.m.58.com/bj/shouji/27769198399433x.shtml?channel=zz_youpin&webview=zzn&tt=E9E3D9A8EFFEF4A277C9C9D697C50FB21477299349933&zzv2.4.4";
     //
+
+    //视频界面接口
+    public static final String URL_VIDEO = "http://m.live.netease.com/bolo/api/rank/hotVideo.htm";
 }

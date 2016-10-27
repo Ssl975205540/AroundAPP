@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,26 +18,30 @@ import java.util.List;
 
 import lanou.around.R;
 import lanou.around.bean.VideoBean;
+import lanou.around.bean.VideoDetailsBean;
+import lanou.around.tools.recycle.CircleTransform;
 
 /**
  * Created by dllo on 16/10/24.
  */
 
 public class InnerAdapter extends BaseAdapter{
-    List<VideoFragment.Talent> objs;
-    Context content;
 
-    private ddd ddd;
+    private Context context;
+    private videoSuper videoSuper;
+    int cardWidth;
+    int cardHight;
+    private ArrayList<VideoBean> arrayList;
+    private List<VideoDetailsBean> videoDetailsBeans;
 
-    public void setDdd(InnerAdapter.ddd ddd) {
-        this.ddd = ddd;
+    public void setVideoSuper(videoSuper videoSuper) {
+        this.videoSuper = videoSuper;
     }
 
     public void setArrayList(ArrayList<VideoBean> arrayList) {
         this.arrayList = arrayList;
+        notifyDataSetChanged();
     }
-
-    private ArrayList<VideoBean> arrayList;
 
     public void setCardWidth(int cardWidth) {
         this.cardWidth = cardWidth;
@@ -46,57 +51,49 @@ public class InnerAdapter extends BaseAdapter{
         this.cardHight = cardHight;
     }
 
-    int cardWidth;
-    int cardHight;
-
-
-
-
-    public InnerAdapter(Context context) {
-        this.content = context;
-        objs = new ArrayList<>();
-
+    public void setVideoDetailsBeans(List<VideoDetailsBean> videoDetailsBeans) {
+        this.videoDetailsBeans = videoDetailsBeans;
+        notifyDataSetChanged();
     }
 
-    public void addAll(Collection<VideoFragment.Talent> collection) {
+    public InnerAdapter(Context context) {
+        this.context = context;
+    }
+
+    public void addAll(Collection<VideoDetailsBean> collection) {
         if (isEmpty()) {
-            objs.addAll(collection);
+            videoDetailsBeans.addAll(collection);
             notifyDataSetChanged();
         } else {
-            objs.addAll(collection);
+            videoDetailsBeans.addAll(collection);
         }
     }
 
     public void clear() {
-        objs.clear();
+        videoDetailsBeans.clear();
         notifyDataSetChanged();
     }
 
     public boolean isEmpty() {
-        return objs.isEmpty();
+        return videoDetailsBeans.isEmpty();
     }
 
     public void remove(int index) {
-        if (index > -1 && index < objs.size()) {
-            objs.remove(index);
+        if (index > -1 && index < Integer.MAX_VALUE) {
+            videoDetailsBeans.remove(index);
             notifyDataSetChanged();
         }
     }
-
-
     @Override
     public int getCount() {
-        Log.d("InnerAdapter", "objs.size():" + objs.size());
-        return objs.size();
 
-
-
+        return videoDetailsBeans.size();
     }
 
     @Override
-    public VideoFragment.Talent getItem(int position) {
-        if(objs==null ||objs.size()==0) return null;
-        return objs.get(position);
+    public VideoDetailsBean getItem(int position) {
+        if(videoDetailsBeans==null ||videoDetailsBeans.size()==0) return null;
+        return videoDetailsBeans.get(position);
     }
 
     @Override
@@ -106,94 +103,59 @@ public class InnerAdapter extends BaseAdapter{
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
-        VideoFragment.Talent talent = getItem(position);
+        final VideoDetailsBean videoDetailsBean = getItem(position);
         if (convertView == null) {
-            convertView = LayoutInflater.from(content).inflate(R.layout.card_new_item, parent, false);
-            holder  = new ViewHolder();
+            convertView = LayoutInflater.from(context).inflate(R.layout.card_new_item, parent, false);
+            holder  = new ViewHolder(convertView);
             convertView.setTag(holder);
             convertView.getLayoutParams().width = cardWidth;
-
-            holder.titleView = (ImageView) convertView.findViewById(R.id.iv_title);
-
-            holder.nameView = (TextView) convertView.findViewById(R.id.tv_title);
-
-            holder.superVideoPlayer = (SuperVideoPlayer)convertView.findViewById(R.id.video_player_item_1);
-            holder.imageView = (ImageView)convertView.findViewById(R.id.play_btn);
-
-            holder.cityView = (TextView) convertView.findViewById(R.id.tv_brief);
-            holder.eduView = (TextView) convertView.findViewById(R.id.video_title);
-            holder.workView = (TextView) convertView.findViewById(R.id.video_tag);
-
-
-
-
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
-
-
-        holder.titleView.setImageResource(R.mipmap.ic_launcher);
-
-        holder.nameView.setText(String.format("%s", talent.nickname));
-
-
-
+        Picasso.with(context).load(videoDetailsBean.getAvatar()).transform(new CircleTransform()).into(holder.avatar);
+        holder.channelName.setText(videoDetailsBean.getChannelName());
+        holder.channelIntro.setText(videoDetailsBean.getChannelIntro());
+        holder.tag.setText(videoDetailsBean.getTag());
+        holder.intro.setText(videoDetailsBean.getIntro());
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 holder.imageView.setVisibility(View.GONE);
 //                holder.portraitView.setVisibility(View.GONE);
 //                holder.superVideoPlayer.setVisibility(View.VISIBLE);
-
-                ddd.dad(holder.superVideoPlayer,"http://bobolive.nosdn.127.net/aac_bobo_1471873939069_14732651.mp4");
-
+                videoSuper.superVideo(holder.superVideoPlayer,videoDetailsBean.getLinkMp4());
             }
         });
-
-
-
-        final CharSequence no = "暂无";
-
-        holder.cityView.setHint(no);
-        holder.cityView.setText(talent.cityName);
-
-
-        holder.eduView.setHint(no);
-        holder.eduView.setText(talent.educationName);
-
-
-        holder.workView.setHint(no);
-        holder.workView.setText(talent.workYearName);
-
-
-
         return convertView;
     }
 
 
 
 
-    private static class ViewHolder {
-        ImageView portraitView , titleView;
-        TextView nameView;
-        TextView cityView;
-        TextView eduView;
-        TextView workView;
-
+     class ViewHolder {
         SuperVideoPlayer superVideoPlayer;
+         ImageView imageView , avatar;
+         TextView channelName , channelIntro , intro , tag;
 
-        ImageView imageView;
+         public ViewHolder(View view) {
+             superVideoPlayer = (SuperVideoPlayer) view.findViewById(R.id.video_player_item_1);
+             imageView = (ImageView) view.findViewById(R.id.play_btn);
+             avatar =(ImageView) view.findViewById(R.id.iv_title);
+             channelName = (TextView) view.findViewById(R.id.tv_title);
+             channelIntro = (TextView) view.findViewById(R.id.tv_brief);
+             intro = (TextView) view.findViewById(R.id.video_title);
+             tag = (TextView) view.findViewById(R.id.video_tag);
 
 
-    }
+         }
+     }
 
 
 
-    interface ddd{
-        void dad(SuperVideoPlayer superVideoPlayer, String url);
+    interface videoSuper {
+        void superVideo(SuperVideoPlayer superVideoPlayer, String url);
 
     }
 }
