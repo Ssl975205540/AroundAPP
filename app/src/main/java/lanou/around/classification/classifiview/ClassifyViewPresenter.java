@@ -2,7 +2,6 @@ package lanou.around.classification.classifiview;
 
 import lanou.around.aroundinterface.InterView;
 import lanou.around.aroundinterface.OnFinishedListener;
-import lanou.around.bean.ClassifyViewBean;
 
 
 /**
@@ -17,11 +16,13 @@ public class ClassifyViewPresenter {
         mClassifyViewModel = new ClassifyViewModel();
     }
 
-    public void startRequest(String url) {
-        mClassifyViewModel.StartRequest(url, new OnFinishedListener<ClassifyViewBean>() {
+    public <T> void startRequest(String url,Class<T> tClass) {
+        mClassifyViewModel.StartRequest(url, tClass ,new OnFinishedListener<T>() {
+
+
             @Override
-            public void onFinished(ClassifyViewBean viewBean) {
-                mInterView.onResponse(viewBean);
+            public void onFinished(T t) {
+                mInterView.onResponse(t);
             }
 
             @Override

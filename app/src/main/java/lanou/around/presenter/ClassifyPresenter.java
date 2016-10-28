@@ -1,8 +1,9 @@
-package lanou.around.classification;
+package lanou.around.presenter;
 
 import lanou.around.aroundinterface.InterClassifyView;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.ClassifyBean;
+import lanou.around.classification.ClassifyModel;
 
 /**
  * Created by dllo on 16/10/26.
@@ -17,11 +18,14 @@ public class ClassifyPresenter {
         mClassifyModel = new ClassifyModel();
     }
 
-    public void startRequest(String url) {
-        mClassifyModel.StartRequest(url, new OnFinishedListener<ClassifyBean>() {
+    public <T> void startRequest(String url,Class<T> tClass) {
+        mClassifyModel.StartRequest(url,tClass, new OnFinishedListener<T>() {
+
+
             @Override
-            public void onFinished(ClassifyBean bean) {
-                mInterClassifyView.onClassifyResponse(bean);
+            public void onFinished(T t) {
+                mInterClassifyView.onClassifyResponse(t);
+
             }
 
             @Override

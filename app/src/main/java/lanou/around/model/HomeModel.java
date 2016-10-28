@@ -1,6 +1,7 @@
 package lanou.around.model;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,18 +19,20 @@ import lanou.around.tools.http.OnCompletedListener;
  * Created by dllo on 16/10/25.
  */
 
-public class HomeModel implements InterModel<HomeBean> {
+public class HomeModel implements InterModel {
 
 
     @Override
-    public void StartRequest(String url, final OnFinishedListener onFinishedListener) {
+    public <T> void StartRequest(String url, final Class<T> tClass, final OnFinishedListener<T> onFinishedListener) {
 
-        HtttpManger.getInstance().getRequest(url, HomeBean.class, new OnCompletedListener<HomeBean>() {
+        HtttpManger.getInstance().getRequest(url, tClass, new OnCompletedListener<T>() {
             @Override
-            public void onCompleted(HomeBean result) {
+            public void onCompleted(Object tClass1) {
 
-                if (result.getRespCode().equals("0")) {
-                    onFinishedListener.onFinished(result);
+
+                if (((HomeBean) tClass1).getRespCode().equals("0")) {
+
+                    onFinishedListener.onFinished((T) tClass1);
 
                 } else {
                     onFailed();
@@ -37,6 +40,7 @@ public class HomeModel implements InterModel<HomeBean> {
 
 
             }
+
 
             @Override
             public void onFailed() {
@@ -96,7 +100,7 @@ public class HomeModel implements InterModel<HomeBean> {
                             }
 
 
-                            onFinishedListener.onFinished(homeBean);
+                            onFinishedListener.onFinished((T) homeBean);
 
                         } else {
                             onFailed();
@@ -115,15 +119,11 @@ public class HomeModel implements InterModel<HomeBean> {
 
 
         });
-
     }
 
     @Override
-    public void InsertSQ(HomeBean homeBean) {
-
-        AroundDBManager.getInstance().insert(homeBean);
-
-
+    public <F> void InsertSQ(F t) {
+        AroundDBManager.getInstance().insert((HomeBean) t);
     }
 
     @Override

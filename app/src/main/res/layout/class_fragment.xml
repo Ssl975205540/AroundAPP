@@ -52,7 +52,7 @@
                         android:src="@mipmap/qc"/>
 
                     <TextView
-                        android:id="@+id/et_classify_message"
+                        android:id="@+id/tv_classify_message"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
@@ -60,6 +60,7 @@
                         android:textSize="@dimen/fineSize"/>
                 </LinearLayout>
             </RelativeLayout>
+
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPager_classify"
@@ -96,6 +97,43 @@
         android:id="@+id/toobar_classify"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorRed" />
+        android:clickable="true"
+        android:layout_gravity="top">
+
+        <ImageView
+            android:id="@+id/iv_classify_search"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/wa"/>
+
+        <LinearLayout
+            android:id="@+id/ll_classify_search"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:alpha="0"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/edit_shape"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_classify_check"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@mipmap/qc"/>
+
+            <TextView
+                android:alpha="0"
+                android:id="@+id/tv_classify_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:textColor="@color/home_adapter_item"
+                android:textSize="@dimen/fineSize"/>
+        </LinearLayout>
+
+
+    </lanou.around.widget.TransparentToolBar>
 
 </FrameLayout>
