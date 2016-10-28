@@ -9,13 +9,20 @@ import lanou.around.tools.recycle.http.OnCompletedListener;
 /**
  * Created by dllo on 16/10/26.
  */
-public class ClassifyModel implements InterModel<ClassifyBean> {
+public class ClassifyModel implements InterModel {
+
+
+
+
     @Override
-    public void StartRequest(String url, final OnFinishedListener onFinishedListener) {
-        HtttpManger.getInstance().getRequest(url, ClassifyBean.class, new OnCompletedListener<ClassifyBean>() {
+    public <T> void StartRequest(String url, Class<T> tClass, final OnFinishedListener<T> onFinishedListener) {
+
+        HtttpManger.getInstance().getRequest(url, tClass, new OnCompletedListener<T>() {
+
+
             @Override
-            public void onCompleted(ClassifyBean result) {
-                if (result.getRespData().equals("")) {
+            public void onCompleted(T result) {
+                if (((ClassifyBean)result).getRespData().equals("")) {
                     onFinishedListener.onError();
                     return;
                 }
@@ -30,7 +37,7 @@ public class ClassifyModel implements InterModel<ClassifyBean> {
     }
 
     @Override
-    public void InsertSQ(ClassifyBean classifyBean) {
+    public <F> void InsertSQ(F t) {
 
     }
 

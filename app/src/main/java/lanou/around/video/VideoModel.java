@@ -3,7 +3,6 @@ package lanou.around.video;
 import lanou.around.aroundinterface.InterModel;
 import lanou.around.aroundinterface.OCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
-import lanou.around.bean.VideoDetailsBean;
 import lanou.around.tools.recycle.http.HtttpManger;
 import lanou.around.tools.recycle.http.OnCompletedListener;
 
@@ -11,12 +10,17 @@ import lanou.around.tools.recycle.http.OnCompletedListener;
  * Created by dllo on 16/10/26.
  */
 
-public class VideoModel implements InterModel<VideoDetailsBean>{
+public class VideoModel implements InterModel{
+   
+
+
     @Override
-    public void StartRequest(String url, final OnFinishedListener onFinishedListener) {
-        HtttpManger.getInstance().getRequest(url, VideoDetailsBean.class, new OnCompletedListener<VideoDetailsBean>() {
+    public <T> void StartRequest(String url, Class<T> tClass, final OnFinishedListener<T> onFinishedListener) {
+
+        HtttpManger.getInstance().getRequest(url, tClass, new OnCompletedListener<T>() {
+
             @Override
-            public void onCompleted(VideoDetailsBean result) {
+            public void onCompleted(T result) {
                 if (result.equals("")) {
 
                     onFinishedListener.onError();
@@ -27,13 +31,13 @@ public class VideoModel implements InterModel<VideoDetailsBean>{
 
             @Override
             public void onFailed() {
-                 onFinishedListener.onError();
+                onFinishedListener.onError();
             }
         });
     }
 
     @Override
-    public void InsertSQ(VideoDetailsBean videoDetailsBean) {
+    public <F> void InsertSQ(F t) {
 
     }
 

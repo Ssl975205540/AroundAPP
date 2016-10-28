@@ -2,7 +2,6 @@ package lanou.around.presenter;
 
 import lanou.around.aroundinterface.InterView;
 import lanou.around.aroundinterface.OnFinishedListener;
-import lanou.around.bean.HomeBean;
 import lanou.around.model.HomeModel;
 
 /**
@@ -22,15 +21,15 @@ public class HomePresenter {
     }
 
 
-    public void startRequest(String url) {
+    public <T> void startRequest(String url, Class<T> tClass) {
 
-        homeModel.StartRequest(url, new OnFinishedListener<HomeBean>() {
+        homeModel.StartRequest(url,tClass, new OnFinishedListener<T>() {
+
+
             @Override
-            public void onFinished(HomeBean homeBean) {
-
-                interView.onResponse(homeBean);
-                homeModel.InsertSQ(homeBean);
-
+            public void onFinished(T t) {
+                interView.onResponse(t);
+                homeModel.InsertSQ(t);
             }
 
             @Override

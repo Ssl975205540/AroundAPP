@@ -1,6 +1,7 @@
 package lanou.around.main;
 
 
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -41,6 +42,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private PopupWindow popupWindow;
     private View view;
     private LinearLayout pop_linear;
+    private int statusBarHeight;
+
 
 
     @Override
@@ -200,7 +203,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
         if (back == false) {
-
+            onWindowFocusChanged(true);
             Toast.makeText(this, "再按一次退出转转", Toast.LENGTH_SHORT).show();
             back = true;
 
@@ -210,5 +213,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             super.onBackPressed();
         }
     }
+
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        Rect frame = new Rect();
+        getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        // 状态栏高度
+        statusBarHeight = frame.top;
+        homeFragment.setStatusBarHeight(statusBarHeight);
+
+    }
+
 
 }
