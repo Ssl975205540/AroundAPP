@@ -10,6 +10,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -28,8 +29,8 @@ import lanou.around.bean.HomeBeanHot;
 import lanou.around.home.nearby.NearByFragment;
 import lanou.around.home.recommend.RecommendFragment;
 import lanou.around.presenter.HomePresenter;
-import lanou.around.widget.MyRecyclerView;
 import lanou.around.tools.http.URLValues;
+import lanou.around.widget.MyRecyclerView;
 import lanou.around.widget.StretchAnimation;
 import lanou.around.widget.TransparentToolBar;
 import lanou.around.widget.WrapContentHeightViewPager;
@@ -139,12 +140,15 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
             public void onRefresh() {
 
 
+
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
+
 
                         homePresenter.startRequest(URLValues.HOME_HOT_MARKET,HomeBean.class);
 
                         recyviewHome.refreshComplete();
+                        toolbarHome.setVisibility(View.VISIBLE);
                     }
 
                 }, 1000);
@@ -192,7 +196,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 
                 toolbarHome.setChangeTop(-verticalOffset);
-
+                Log.d("HomeFragment", "appBarLayout.getTop():" + appBarLayout.getTop());
                 if (-verticalOffset == appBarLayout.getHeight() - tabHome.getHeight() - statusBarHeight) {
 
 
