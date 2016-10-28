@@ -130,7 +130,7 @@ public class StretchAnimation {
             Log.e(TAG, "view 不能为空");
             return;
         }
-        ViewGroup.LayoutParams params = mView.getLayoutParams();
+
 
         if (isFinished) {
             mDurationReciprocal = 1.0f / (float) mDuration;
@@ -158,8 +158,8 @@ public class StretchAnimation {
 
     private AnimationListener animationlistener;
 
-    public interface AnimationListener {
-        public void animationEnd(View v);
+    public  interface AnimationListener {
+         void animationEnd(View v);
     }
 
     public void setOnAnimationListener(AnimationListener listener) {

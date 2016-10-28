@@ -3,6 +3,7 @@ package lanou.around.classification.classifiview;
 import lanou.around.aroundinterface.InterModel;
 import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
+
 import lanou.around.bean.ClassifyViewBean;
 import lanou.around.tools.http.HtttpManger;
 import lanou.around.tools.http.OnCompletedListener;
@@ -11,12 +12,18 @@ import lanou.around.tools.http.OnCompletedListener;
  * Created by dllo on 16/10/25.
  */
 
-public class ClassifyViewModel implements InterModel<ClassifyViewBean> {
+public class ClassifyViewModel implements InterModel {
+
+
     @Override
-    public void StartRequest(String url, final OnFinishedListener onFinishedListener) {
-        HtttpManger.getInstance().getRequest(url, ClassifyViewBean.class, new OnCompletedListener<ClassifyViewBean>() {
+    public <T> void StartRequest(String url, Class<T> tClass, final OnFinishedListener<T> onFinishedListener) {
+
+
+        HtttpManger.getInstance().getRequest(url, tClass, new OnCompletedListener<T>() {
+
+
             @Override
-            public void onCompleted(ClassifyViewBean result) {
+            public void onCompleted(T result) {
                 if (result.equals("")) {
                     onFinishedListener.onError();
                     return;
@@ -32,7 +39,7 @@ public class ClassifyViewModel implements InterModel<ClassifyViewBean> {
     }
 
     @Override
-    public void InsertSQ(ClassifyViewBean classifyViewBean) {
+    public <F> void InsertSQ(F t) {
 
     }
 

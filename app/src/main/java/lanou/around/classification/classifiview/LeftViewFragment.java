@@ -17,7 +17,7 @@ import lanou.around.tools.http.URLValues;
 /**
  * Created by dllo on 16/10/22.
  */
-public class LeftViewFragment extends BaseFragment implements InterView<ClassifyViewBean> {
+public class LeftViewFragment extends BaseFragment implements InterView {
 
     private Context context;
     private GridView gridView;
@@ -35,7 +35,7 @@ public class LeftViewFragment extends BaseFragment implements InterView<Classify
     @Override
     protected void initListeners() {
         ClassifyViewPresenter presenter = new ClassifyViewPresenter(this);
-        presenter.startRequest(URLValues.CLASSIFY_CHILD_CATES_LOGIC);
+        presenter.startRequest(URLValues.CLASSIFY_CHILD_CATES_LOGIC,ClassifyViewBean.class);
     }
     @Override
     protected void initData() {
@@ -55,7 +55,9 @@ public class LeftViewFragment extends BaseFragment implements InterView<Classify
     }
 
     @Override
-    public void onResponse(ClassifyViewBean classifyViewBean) {
+    public <T> void onResponse(T t) {
+        ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
+
         List<ClassifyViewBean.RespDataBean> respDataBeen = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             respDataBeen.add(classifyViewBean.getRespData().get(i));
@@ -63,8 +65,8 @@ public class LeftViewFragment extends BaseFragment implements InterView<Classify
         GridViewPagerLeftAdapter gridViewAdapter = new GridViewPagerLeftAdapter(context);
         gridViewAdapter.setRespDataBeen(respDataBeen);
         gridView.setAdapter(gridViewAdapter);
-
     }
+
 
 
     @Override

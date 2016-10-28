@@ -71,12 +71,9 @@
 
     <style name="home_relayout">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_height">25dp</item>
         <item name="android:background">@color/colorText</item>
-        <item name="android:layout_marginBottom">10dp</item>
-        <item name="android:layout_marginLeft">30dp</item>
-        <item name="android:layout_marginRight">30dp</item>
+
 
 
         <item name="android:layout_centerHorizontal">true</item>

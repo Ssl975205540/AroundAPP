@@ -18,11 +18,13 @@ public class VideoPresenter {
         mVideoModel = new VideoModel();
     }
 
-    public void startRequest(String url) {
-        mVideoModel.StartRequest(url, new OnFinishedListener<VideoDetailsBean>() {
+    public <T> void startRequest(String url,Class<T> tClass) {
+        mVideoModel.StartRequest(url, tClass ,new OnFinishedListener<T>() {
+
+
             @Override
-            public void onFinished(VideoDetailsBean videoDetailsBean) {
-                mInterView.onResponse(videoDetailsBean);
+            public void onFinished(T t) {
+                mInterView.onResponse(t);
             }
 
             @Override

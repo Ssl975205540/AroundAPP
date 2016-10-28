@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,7 +87,7 @@ public class MyRecyclerView extends RecyclerView {
         return  mHeaderViews.size() > 0 &&  sHeaderTypes.contains(itemViewType);
     }
 
-    //判断是否是XRecyclerView保留的itemViewType
+    //判断是否是RecyclerView保留的itemViewType
     private boolean isReservedItemViewType(int itemViewType) {
         if(itemViewType == TYPE_REFRESH_HEADER || itemViewType == TYPE_FOOTER || sHeaderTypes.contains(itemViewType)) {
             return true;
@@ -218,7 +219,10 @@ public class MyRecyclerView extends RecyclerView {
         }
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
+
+
                 mLastY = ev.getRawY();
+                Log.d("MyRecyclerView", "mLastY:" + mLastY);
                 break;
             case MotionEvent.ACTION_MOVE:
                 final float deltaY = ev.getRawY() - mLastY;

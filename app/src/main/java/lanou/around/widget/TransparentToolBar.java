@@ -86,6 +86,8 @@ public class TransparentToolBar extends RelativeLayout {
         return Color.argb(alpha, red, green, blue);
     }
 
+
+
     public interface OnScrollStateListener {
         void updateFraction(float fraction);
     }
