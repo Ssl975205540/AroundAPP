@@ -159,6 +159,7 @@ public class MediaController extends FrameLayout implements SeekBar.OnSeekBarCha
         return playSecondStr + "/" + allSecondStr;
     }
 
+
     /**
      * 播放样式 展开、缩放
      */
