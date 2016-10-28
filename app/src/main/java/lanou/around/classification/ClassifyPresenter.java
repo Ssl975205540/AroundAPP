@@ -17,11 +17,14 @@ public class ClassifyPresenter {
         mClassifyModel = new ClassifyModel();
     }
 
-    public void startRequest(String url) {
-        mClassifyModel.StartRequest(url, new OnFinishedListener<ClassifyBean>() {
+    public <T> void startRequest(String url,Class<T> tClass) {
+        mClassifyModel.StartRequest(url,tClass, new OnFinishedListener<T>() {
+
+
             @Override
-            public void onFinished(ClassifyBean bean) {
-                mInterClassifyView.onClassifyResponse(bean);
+            public void onFinished(T t) {
+                mInterClassifyView.onClassifyResponse(t);
+
             }
 
             @Override

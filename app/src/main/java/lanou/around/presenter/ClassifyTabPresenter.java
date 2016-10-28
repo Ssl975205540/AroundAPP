@@ -2,7 +2,6 @@ package lanou.around.presenter;
 
 import lanou.around.aroundinterface.InterView;
 import lanou.around.aroundinterface.OnFinishedListener;
-import lanou.around.bean.ClassifyTabBean;
 import lanou.around.model.ClassifyTabModel;
 
 /**
@@ -19,11 +18,13 @@ public class ClassifyTabPresenter {
         mClassifyTabModel = new ClassifyTabModel();
     }
 
-    public void startRequest(String url) {
-        mClassifyTabModel.StartRequest(url, new OnFinishedListener<ClassifyTabBean>() {
+    public <T> void startRequest(String url, Class<T> tClass) {
+        mClassifyTabModel.StartRequest(url, tClass, new OnFinishedListener<T>() {
+
+
             @Override
-            public void onFinished(ClassifyTabBean tabBean) {
-                mInterView.onResponse(tabBean);
+            public void onFinished(T t) {
+                mInterView.onResponse(t);
             }
 
             @Override

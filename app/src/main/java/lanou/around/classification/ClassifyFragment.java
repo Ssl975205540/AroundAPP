@@ -33,8 +33,10 @@ import lanou.around.widget.TransparentToolBar;
  * Created by dllo on 16/10/22.
  */
 
+
 public class ClassifyFragment extends BaseFragment
-        implements InterView<ClassifyTabBean>,InterClassifyView<ClassifyBean>,TransparentToolBar.OnScrollStateListener {
+        implements InterView, TransparentToolBar.OnScrollStateListener {
+
 
     private ViewPager mViewPager;
     private RecyclerView mRecyclerView;
@@ -68,15 +70,17 @@ public class ClassifyFragment extends BaseFragment
     @Override
     protected void initListeners() {
         ClassifyTabPresenter presenter = new ClassifyTabPresenter(this);
-        presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE);
 
-        ClassifyPresenter classifyPresenter = new ClassifyPresenter(this);
-        classifyPresenter.startRequest(URLValues.CLASSIFY_WANT_BUY_MESSAGE);
 
         mToolBar.setOnScrollStateListener(this);
         mToolBar.setOffset(200);
         mToolBar.setBgColor(getResources().getColor(R.color.toolbar_home_color));
         mPzv.setTitleBar(mToolBar);
+
+        presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE, ClassifyTabBean.class);
+
+        presenter.startRequest(URLValues.CLASSIFY_WANT_BUY_MESSAGE, ClassifyBean.class);
+
     }
 
     @Override
@@ -113,6 +117,7 @@ public class ClassifyFragment extends BaseFragment
     private void viewPagerScallListener() {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             int a;
+
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -120,7 +125,7 @@ public class ClassifyFragment extends BaseFragment
 
             @Override
             public void onPageSelected(int position) {
-                if (dots.size() > 0){
+                if (dots.size() > 0) {
                     a = position % dots.size();
                     for (int i = 0; i < dots.size(); i++) {
                         if (i == a) {
@@ -191,24 +196,32 @@ public class ClassifyFragment extends BaseFragment
 
 
     @Override
-    public void onClassifyResponse(ClassifyBean classifyBean) {
+    public void onResponse(Object classifyTabBean) {
 
-        for (int i = 0; i < classifyBean.getRespData().size(); i++) {
-            classifyBean.getRespData().get(i).setType(i);
 
+        if (classifyTabBean instanceof ClassifyTabBean) {
+
+            ClassifyTabBean classifyTabBean1 = (ClassifyTabBean) classifyTabBean;
+            Picasso.with(context).load(classifyTabBean1.getRespData().getPhotoUrl()).into(mPhoto);
+            mTitle.setText(classifyTabBean1.getRespData().getShowName());
+            mMessage.setText(classifyTabBean1.getRespData().getInputName());
         }
-        ClassifyAdapter myAdapter = new ClassifyAdapter(context);
-        myAdapter.setClassifyBean(classifyBean);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-        mRecyclerView.setAdapter(myAdapter);
 
-    }
 
-    @Override
-    public void onResponse(ClassifyTabBean classifyTabBean) {
-        Picasso.with(context).load(classifyTabBean.getRespData().getPhotoUrl()).into(mPhoto);
-        mTitle.setText(classifyTabBean.getRespData().getShowName());
-        mMessage.setText(classifyTabBean.getRespData().getInputName());
+        if (classifyTabBean instanceof ClassifyBean) {
+
+            ClassifyBean classifyTabBean1 = (ClassifyBean) classifyTabBean;
+
+            for (int i = 0; i < classifyTabBean1.getRespData().size(); i++) {
+                classifyTabBean1.getRespData().get(i).setType(i);
+
+            }
+            ClassifyAdapter myAdapter = new ClassifyAdapter(context);
+            myAdapter.setClassifyBean(classifyTabBean1);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+            mRecyclerView.setAdapter(myAdapter);
+        }
+
 
     }
 
@@ -228,4 +241,5 @@ public class ClassifyFragment extends BaseFragment
     public void updateFraction(float fraction) {
         //ToolBar滚动回调的百分比0~1
     }
+
 }
