@@ -1,8 +1,9 @@
-package lanou.around.classification;
+package lanou.around.presenter;
 
 import lanou.around.aroundinterface.InterClassifyView;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.ClassifyBean;
+import lanou.around.classification.ClassifyModel;
 
 /**
  * Created by dllo on 16/10/26.
