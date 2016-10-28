@@ -1,8 +1,10 @@
 package lanou.around.video;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -11,12 +13,15 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.tedcoder.wkvideoplayer.util.DensityUtil;
 import com.android.tedcoder.wkvideoplayer.view.MediaController;
 import com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,6 +39,8 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
 import static lanou.around.tools.http.URLValues.URL_VIDEO;
 
@@ -42,7 +49,7 @@ import static lanou.around.tools.http.URLValues.URL_VIDEO;
  */
 
 public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView.onFlingListener,
-        SwipeFlingAdapterView.OnItemClickListener {
+        SwipeFlingAdapterView.OnItemClickListener , EasyPermissions.PermissionCallbacks, View.OnClickListener {
 
     private TextView video_title;
     private ImageButton video_code;
@@ -51,7 +58,17 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
     private int cardHeight;
 
     private SwipeFlingAdapterView swipeView;
-    private InnerAdapter adapter;
+   private InnerAdapter adapter;
+    /**
+     * 扫描跳转Activity RequestCode
+     */
+    public static final int REQUEST_CODE = 111;
+
+    /**
+     * 请求CAMERA权限码
+     */
+    public static final int REQUEST_CAMERA_PERM = 101;
+
 
 
     @Override
@@ -87,6 +104,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
     protected void initListeners() {
         swipeView.setFlingListener(this);
         swipeView.setOnItemClickListener(this);
+        video_code.setOnClickListener(this);
     }
 
     @Override
@@ -94,7 +112,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
 
         //设置标题栏
         video_title.setText("视频");
-        video_code.setImageResource(R.mipmap.ic_launcher);
+        video_code.setImageResource(R.mipmap.icon_scan);
 
         adapter.setCardHight(cardHeight);
         adapter.setCardWidth(cardWidth);
@@ -274,6 +292,62 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         }
     }
 
+    //二维码扫描
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //处理扫描结果（在界面上显示）
+        if (null != data) {
+            Bundle bundle = data.getExtras();
+            if (bundle == null) {
+                return;
+            }
+            if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                String result = bundle.getString(CodeUtils.RESULT_STRING);
+                //用默认浏览器打开扫描得到的地址
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse(result.toString());
+                intent.setData(content_url);
+                startActivity(intent);
+            } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                Toast.makeText(getContext(), "解析二维码失败", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
+
+
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        Toast.makeText(context, "走", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+                   if (EasyPermissions.somePermissionPermanentlyDenied(getContext() , perms)) {
+                       new AppSettingsDialog.Builder(this , "当前App需要申请camera权限,需要打开设置页面么?")
+                               .setTitle("权限申请")
+                               .setPositiveButton("确认")
+                               .setNegativeButton("取消" , null)
+                               .setRequestCode(REQUEST_CAMERA_PERM)
+                               .build()
+                               .show();
+
+                   }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.video_code:
+                Intent intent =new Intent(getContext() , CaptureActivity.class);
+                startActivityForResult(intent , REQUEST_CODE);
+                break;
+        }
+
+    }
 }

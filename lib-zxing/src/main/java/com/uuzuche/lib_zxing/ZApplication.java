@@ -1,32 +1,22 @@
-package lanou.around.app;
+package com.uuzuche.lib_zxing;
 
 import android.app.Application;
-import android.content.Context;
 import android.util.DisplayMetrics;
 
-import com.uuzuche.lib_zxing.DisplayUtil;
-
 /**
- * Created by dllo on 16/10/25.
+ * Created by aaron on 16/8/9.
  */
 
-public class AroundAPP extends Application{
+public class ZApplication extends Application{
 
-    public static Context context;
     @Override
     public void onCreate() {
         super.onCreate();
-        this.context = this;
+        /**
+         * 初始化尺寸工具类
+         */
         initDisplayOpinion();
     }
-
-    public static Context getContext(){
-
-
-
-        return context;
-    }
-
 
     private void initDisplayOpinion() {
         DisplayMetrics dm = getResources().getDisplayMetrics();
