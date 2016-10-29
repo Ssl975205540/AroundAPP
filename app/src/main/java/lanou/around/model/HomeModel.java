@@ -30,6 +30,7 @@ public class HomeModel implements InterModel {
             @Override
             public void onCompleted(Object tClass1) {
 
+
                 if(tClass1 instanceof HomeBean){
                     if (((HomeBean) tClass1).getRespCode().equals("0")) {
 
@@ -42,6 +43,8 @@ public class HomeModel implements InterModel {
 
                 if (tClass1 instanceof HomeTabBean){
 
+
+                    Log.d("HomeModel", "ni你妈的");
                     onFinishedListener.onFinished((T) tClass1);
 
                 }

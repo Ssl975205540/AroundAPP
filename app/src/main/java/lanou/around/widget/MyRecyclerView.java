@@ -45,6 +45,8 @@ public class MyRecyclerView extends RecyclerView {
     private View mFootView;
     private final AdapterDataObserver mDataObserver = new DataObserver();
     private AppBarStateChangeListener.State appbarState = AppBarStateChangeListener.State.EXPANDED;
+
+
     public MyRecyclerView(Context context) {
         this(context, null);
     }
@@ -127,15 +129,12 @@ public class MyRecyclerView extends RecyclerView {
 
     public void refreshComplete() {
         mRefreshHeader.refreshComplete();
+
         setNoMore(false);
     }
 
     public void setRefreshHeader(ArrowRefreshHeader refreshHeader) {
         mRefreshHeader = refreshHeader;
-    }
-
-    public void setPullRefreshEnabled(boolean enabled) {
-        pullRefreshEnabled = enabled;
     }
 
     public void setLoadingMoreEnabled(boolean enabled) {
@@ -187,6 +186,18 @@ public class MyRecyclerView extends RecyclerView {
     @Override
     public void onScrollStateChanged(int state) {
         super.onScrollStateChanged(state);
+
+
+        if(mRefreshHeader.getVisibleHeight() >= 0){
+            if (mRefreshHeader.getState() == ArrowRefreshHeader.STATE_REFRESHING){
+                mLoadingListener.setdisplay(1);
+            }else {
+                mLoadingListener.setdisplay(0);
+
+            }
+
+        }
+
         if (state == RecyclerView.SCROLL_STATE_IDLE && mLoadingListener != null && !isLoadingData && loadingMoreEnabled) {
             LayoutManager layoutManager = getLayoutManager();
             int lastVisibleItemPosition;
@@ -221,15 +232,22 @@ public class MyRecyclerView extends RecyclerView {
             case MotionEvent.ACTION_DOWN:
 
 
+
                 mLastY = ev.getRawY();
-                Log.d("MyRecyclerView", "mLastY:" + mLastY);
+
                 break;
             case MotionEvent.ACTION_MOVE:
+
+
+
                 final float deltaY = ev.getRawY() - mLastY;
                 mLastY = ev.getRawY();
                 if (isOnTop() && pullRefreshEnabled && appbarState == AppBarStateChangeListener.State.EXPANDED) {
                     mRefreshHeader.onMove(deltaY / DRAG_RATE);
                     if (mRefreshHeader.getVisibleHeight() > 0 && mRefreshHeader.getState() < ArrowRefreshHeader.STATE_REFRESHING) {
+                        mLoadingListener.setdisplay(1);
+                        Log.d("MyRecyclerView", "mRefreshHeader.getVisibleHeight():" + mRefreshHeader.getVisibleHeight());
+
                         return false;
                     }
                 }
@@ -250,6 +268,7 @@ public class MyRecyclerView extends RecyclerView {
 
     private int findMax(int[] lastPositions) {
         int max = lastPositions[0];
+
         for (int value : lastPositions) {
             if (value > max) {
                 max = value;
@@ -266,7 +285,10 @@ public class MyRecyclerView extends RecyclerView {
         }
     }
 
+
+
     private class DataObserver extends AdapterDataObserver {
+
         @Override
         public void onChanged() {
             Adapter<?> adapter = getAdapter();
@@ -290,7 +312,6 @@ public class MyRecyclerView extends RecyclerView {
                 mWrapAdapter.notifyDataSetChanged();
             }
         }
-
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
             mWrapAdapter.notifyItemRangeInserted(positionStart, itemCount);
@@ -315,8 +336,8 @@ public class MyRecyclerView extends RecyclerView {
         public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
             mWrapAdapter.notifyItemMoved(fromPosition, toPosition);
         }
-    };
 
+    };
     public class WrapAdapter extends Adapter<ViewHolder> {
 
         private Adapter adapter;
@@ -489,12 +510,12 @@ public class MyRecyclerView extends RecyclerView {
         }
 
         private class SimpleViewHolder extends ViewHolder {
+
             public SimpleViewHolder(View itemView) {
                 super(itemView);
             }
         }
     }
-
     public void setLoadingListener(LoadingListener listener) {
         mLoadingListener = listener;
     }
@@ -502,10 +523,11 @@ public class MyRecyclerView extends RecyclerView {
     public interface LoadingListener {
 
         void onRefresh();
+        void setdisplay(int i);
 
         void onLoadMore();
-    }
 
+    }
     public void setRefreshing(boolean refreshing) {
         if (refreshing && pullRefreshEnabled && mLoadingListener != null) {
             mRefreshHeader.setState(ArrowRefreshHeader.STATE_REFRESHING);
@@ -547,12 +569,13 @@ public class MyRecyclerView extends RecyclerView {
             }
         }
     }
-   public interface OnItemClickListener{
-        void onItemClick(ViewHolder viewHolder, int position);
 
+    public interface OnItemClickListener{
+        void onItemClick(ViewHolder viewHolder, int position);
     }
 
     public class ProgressStyle {
+
         public static final int SysProgress=-1;
         public static final int BallPulse=0;
         public static final int BallGridPulse=1;
@@ -584,12 +607,15 @@ public class MyRecyclerView extends RecyclerView {
         public static final int SemiCircleSpin=27;
     }
     interface BaseRefreshHeader {
-
         int STATE_NORMAL = 0;
-        int STATE_RELEASE_TO_REFRESH = 1;
-        int STATE_REFRESHING = 2;
-        int STATE_DONE = 3;
 
+        //释放刷新
+        int STATE_RELEASE_TO_REFRESH = 1;
+
+        //更新状态
+        int STATE_REFRESHING = 2;
+
+        int STATE_DONE = 3;
         void onMove(float delta);
 
         boolean releaseAction();
@@ -600,12 +626,13 @@ public class MyRecyclerView extends RecyclerView {
 
     public static abstract  class AppBarStateChangeListener implements AppBarLayout.OnOffsetChangedListener {
 
+
+
         public enum State {
             EXPANDED,
             COLLAPSED,
-            IDLE
+            IDLE;
         }
-
         private State mCurrentState = State.IDLE;
 
         @Override
@@ -627,7 +654,13 @@ public class MyRecyclerView extends RecyclerView {
                 mCurrentState = State.IDLE;
             }
         }
+
         public abstract void onStateChanged(AppBarLayout appBarLayout, State state);
+    }
+
+
+    public void setPullRefreshEnabled(boolean enabled) {
+        pullRefreshEnabled = enabled;
     }
 
 }

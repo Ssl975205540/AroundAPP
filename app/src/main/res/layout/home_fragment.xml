@@ -6,6 +6,7 @@
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/main_content"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,9 +15,8 @@
             android:id="@+id/recyview_appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:fitsSystemWindows="true">
-
+            android:background="#FFFFFF">
+            
             <lanou.around.widget.MyRecyclerView
                 android:id="@+id/recyview_home"
                 android:layout_width="match_parent"
@@ -24,26 +24,31 @@
                 android:minHeight="?android:attr/actionBarSize"
                 app:layout_scrollFlags="scroll"/>
 
+            <LinearLayout
+                android:id="@+id/supplement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-            <!--&gt;</android.support.v7.widget.Toolbar>-->
+            </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/supplementary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F2F3F6"
+                android:orientation="vertical">
+
+            </LinearLayout>
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tab_home"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-
                 app:tabIndicatorColor="@color/toolbar_home_color"
-                app:tabSelectedTextColor="@color/toolbar_home_color"
-
-                />
+                app:tabSelectedTextColor="@color/toolbar_home_color"/>
 
         </android.support.design.widget.AppBarLayout>
-
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/nestscroll_home"
@@ -52,19 +57,15 @@
             android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
             <lanou.around.widget.WrapContentHeightViewPager
                 android:id="@+id/viewpager_home"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#ffffff"/>
 
-
         </android.support.v4.widget.NestedScrollView>
 
-
     </android.support.design.widget.CoordinatorLayout>
-
 
     <lanou.around.widget.TransparentToolBar
         android:id="@+id/toolbar_home"
@@ -72,18 +73,94 @@
         android:layout_height="wrap_content"
         android:clickable="true">
 
-        <RelativeLayout
+        <lanou.around.widget.MorphFrameLayout
             android:id="@+id/rl_home"
-            android:layout_width="wrap_content"
-
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <RelativeLayout
+                android:id="@+id/rl1_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_not_spending"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="推荐"
+                                android:textColor="#FFFFFF"
+                                android:textSize="17dp"/>
+
+                            <ImageView
+                                android:id="@+id/img_not_spending"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/tab_shape"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_yet_spent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:layout_gravity="center"
+                                android:text="附近"
+                                android:textColor="#000000"
+                                android:textSize="17dp"/>
+
+                            <ImageView
+                                android:id="@+id/img_yet_spent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/tab_shape"/>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <lanou.around.widget.RoundImageView
+                        android:id="@+id/circle_search_home"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@android:color/white"
+                        android:foregroundGravity="center"
+                        android:src="@mipmap/wf"/>
+                </RelativeLayout>
+            </RelativeLayout>
+            <RelativeLayout
                 android:id="@+id/rl0_home"
                 style="@style/home_relayout">
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,79 +182,9 @@
                         android:text="输入你正在找的宝贝"
                         android:textColor="@android:color/background_dark"
                         android:textSize="12dp"/>
+
                 </LinearLayout>
-
-
             </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl1_home"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                >
-
-                <RelativeLayout
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tv_not_spending"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="推荐"
-                            android:textColor="#FFFFFF"
-                            android:textSize="17dp"/>
-
-                        <ImageView
-                            android:id="@+id/img_not_spending"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="4dp"
-                            android:background="@drawable/tab_shape"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tv_yet_spent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:layout_gravity="center"
-                            android:text="附近"
-                            android:textColor="#000000"
-                            android:textSize="17dp"/>
-
-                        <ImageView
-                            android:id="@+id/img_yet_spent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="4dp"
-                            android:background="@drawable/tab_shape"/>
-                    </LinearLayout>
-
-
-                </RelativeLayout>
-
-            </RelativeLayout>
-        </RelativeLayout>
+        </lanou.around.widget.MorphFrameLayout>
     </lanou.around.widget.TransparentToolBar>
-
 </FrameLayout>

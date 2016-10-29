@@ -12,6 +12,10 @@ public class URLValues {
     //热门市场和轮播图 的网址接口
     public static final String HOME_HOT_MARKET = "http://zhuanzhuan.58.com/zz/transfer/gettopbanner";
 
+    //推荐
+    public static final String POST_RECOMMEND = "http://zhuanzhuan.58.com/zz/transfer/getRecommendInfoForIndex";
+
+    public static final String POSTBODY_RECOMMEND = "pageNum=1&lat=38.883479&lng=121.544684&pageSize=20&";
     //首页附近的TabLayout中的标题
     public static final String HOME_NEAR_TAB_MARKET = "http://zhuanzhuan.58.com/zz/transfer/getNearAndVillageCateList";
 
