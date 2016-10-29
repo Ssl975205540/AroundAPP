@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="110dp"
+              android:layout_height="105dp"
               android:layout_marginTop="15dp"
               android:background="@color/colorText"
               android:orientation="vertical">
@@ -13,6 +13,7 @@
 
         <TextView
             android:id="@+id/tv_gview_name"
+            android:textColor="@color/home_adapter_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
+            android:textColor="@color/home_adapter_item"
             android:layout_toLeftOf="@+id/iv_gview_check"/>
 
         <ImageView
@@ -35,18 +37,21 @@
             android:layout_marginRight="5dp"
             android:src="@mipmap/v1"/>
     </RelativeLayout>
-
-    <GridView
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/itemBackgrand"/>
+    <lanou.around.widget.ExpandGridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:divider="@color/line"
-        android:horizontalSpacing="1dp"
-        android:verticalSpacing="1dp"
+        android:horizontalSpacing="0.5dp"
+        android:verticalSpacing="0.5dp"
         android:stretchMode="columnWidth"
         android:numColumns="3"
+        android:background="@color/itemBackgrand"
         android:gravity="center"
         android:listSelector="@null">
-    </GridView>
+    </lanou.around.widget.ExpandGridView>
 </LinearLayout>

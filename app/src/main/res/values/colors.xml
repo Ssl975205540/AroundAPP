@@ -10,8 +10,14 @@
 
     <color name="line">#aeadad</color>
     <color name="release">#9A9A9A</color>
+    <color name="itemBackgrand">#f6f3f3</color>
 
     <color name="home_adapter_item">#000000</color>
 
     <color name="toolbar_home_color">#FF5644</color>
+
+    <color name="primary">#FF03A9F4</color>
+    <color name="primary_dark">#FF0288D1</color>
+    <color name="status_bar_color">@color/primary_dark</color>
+
 </resources>

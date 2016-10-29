@@ -9,12 +9,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_photograph"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/home_adapter_item"/>
 
         <ImageView
             android:id="@+id/iv_photograph"
@@ -22,17 +24,24 @@
             android:layout_height="60dp"/>
     </LinearLayout>
 
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="116dp"
+        android:background="@color/itemBackgrand"/>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_mp4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/home_adapter_item"/>
 
         <ImageView
             android:id="@+id/iv_mp4"
@@ -41,17 +50,24 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="116dp"
+        android:background="@color/itemBackgrand"/>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_earphone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/home_adapter_item"/>
 
         <ImageView
             android:id="@+id/iv_earphone"

@@ -59,19 +59,6 @@ public class ClassifyBabyAdapter extends BaseAdapter {
         body.setText(mClassifyBean.getRespData().get(3)
                 .getSubCateArr().get(position).getSubCateDescribe());
 
-//        TextView textView;
-//        ImageView imageView;
-//        if (convertView == null) {
-//            textView = new TextView(context);
-//            imageView = new ImageView(context);
-//            textView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-//                    ViewGroup.LayoutParams.WRAP_CONTENT));
-//            textView.setTextSize(15);
-//            textView.setPadding(8, 4, 8, 4);//设置间距
-//        } else {
-//            textView = (TextView) convertView;
-//            imageView = (ImageView) convertView;
-//        }
         return view;
     }
 

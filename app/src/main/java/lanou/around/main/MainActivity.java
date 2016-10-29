@@ -108,8 +108,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.iv_class:
 
                 if (classFragment == null) {
-                    classFragment = new ClassifyFragment();
+                    classFragment = new ClassifyFragment(statusBarHeight);
                 }
+
                 switchContent(classFragment);
                 // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
 
@@ -188,14 +189,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             if (!to.isAdded()) {
 
-                transaction.hide(fragmentGank).add(R.id.fl_main, to).commit(); // “˛≤ÿµ±«∞µƒfragment£¨addœ¬“ª∏ˆµΩActivity÷–
+                transaction.hide(fragmentGank).add(R.id.fl_main, to).commit();
             } else {
 
                 transaction.hide(fragmentGank).show(to).commit();
             }
             fragmentGank = to;
         }
-
     }
 
     @Override

@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:textColor="@color/home_adapter_item"
             android:layout_marginLeft="10dp" />
 
         <TextView
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
+            android:textColor="@color/home_adapter_item"
             android:layout_toLeftOf="@+id/iv_phone_check"/>
         <ImageView
             android:id="@+id/iv_phone_check"
@@ -51,27 +53,46 @@
         <TextView
             android:id="@+id/tv_iphone"
             android:layout_width="0dp"
+            android:textColor="@color/home_adapter_item"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"/>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="15dp"
+            android:background="@color/itemBackgrand"
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/tv_mic"
             android:layout_width="0dp"
+            android:textColor="@color/home_adapter_item"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"/>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="15dp"
+            android:background="@color/itemBackgrand"
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/tv_sanxing"
             android:layout_width="0dp"
+            android:textColor="@color/home_adapter_item"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"/>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="15dp"
+            android:background="@color/itemBackgrand"
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/tv_huawei"
             android:layout_width="0dp"
+            android:textColor="@color/home_adapter_item"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"/>
