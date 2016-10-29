@@ -9,10 +9,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +53,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     private WrapContentHeightViewPager viewPagerHome;
     private TabLayout tabHome;
     private HomeAdapter homeAdapter;
-    private int d;
     private HomePresenter homePresenter;
     private AppBarLayout homeAppbar;
     private TransparentToolBar toolbarHome;
@@ -63,14 +62,10 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     private RelativeLayout rl1, rl0;
     private TextView tvSpending, tvSpent;
     private ImageView imgSpending, imgSpent;
-    private int screentWidth;
-    private int screentHeight;
-    private int maxSize;
-    private int minSize;
 
     private RoundImageView circle_search_home;
-    private RevealToolbar tool;
     private ConvenientBanner bannerHome;
+    private LinearLayout supplementary,supplement;
 
 
     @Override
@@ -96,22 +91,12 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
 
 
-        DisplayMetrics metric = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
-        screentWidth = metric.widthPixels; // 屏幕宽度（像素）
-        screentHeight = metric.heightPixels;
-        measureSize(screentHeight);
-
-    }
-
-
-    private void measureSize(int layoutSize) {
-        int halfWidth = layoutSize / 2;
-        maxSize = halfWidth - 50;
-//        minSize = (layoutSize - maxSize) / (mainContain.getChildCount() - 1);
 
 
     }
+
+
+
 
     @Override
     protected int setContentView() {
@@ -126,6 +111,10 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         viewPagerHome = findView(R.id.viewpager_home);
         toolbarHome = findView(R.id.toolbar_home);
         tabHome = findView(R.id.tab_home);
+
+        supplement = findView(R.id.supplement);
+
+        supplementary = findView(R.id.supplementary);
         nestscrollHome = findView(R.id.nestscroll_home);
 //        tab1Home = findView(R.id.tab1_home);
         homeAppbar = findView(R.id.recyview_appbar);
@@ -225,22 +214,30 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         homeAppbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
 
 
+            public boolean supple = true;
+
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 
                 toolbarHome.setChangeTop(-verticalOffset);
-                if (-verticalOffset == appBarLayout.getHeight() - tabHome.getHeight() - statusBarHeight) {
 
 
-                    rl1.setVisibility(View.VISIBLE);
-                    RevealToolbar.HideReveal(rl0);
+
+                if (-verticalOffset == appBarLayout.getHeight()-tabHome.getHeight()-statusBarHeight) {
+
+                    if(supple){
+                        rl1.setVisibility(View.VISIBLE);
+                        RevealToolbar.HideReveal(rl0);
+                        supple= false;
+                    }
+
 
                 } else {
 
-                    rl0.setVisibility(View.VISIBLE);
+
                     rl1.setVisibility(View.INVISIBLE);
-
-
+                    rl0.setVisibility(View.VISIBLE);
+                    supple= true;
                 }
             }
         });
@@ -342,7 +339,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 //                //设置指示器的方向
 //                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
 //                .setOnPageChangeListener(this)//监听翻页事件
-                .setOnItemClickListener(this).startTurning(2000);
+                .setOnItemClickListener(this).startTurning(4000);
 
 
 
@@ -389,9 +386,13 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
         this.statusBarHeight = statusBarHeight;
         toolbarHome.getLayoutParams().height = statusBarHeight + tabHome.getHeight();
+
+
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) rl.getLayoutParams();
         params.setMargins(50, statusBarHeight + 20, 50, 5);// 通过自定义坐标来放置你的控件
         rl.setLayoutParams(params);
+        supplementary.getLayoutParams().height = statusBarHeight/2;
+        supplement.getLayoutParams().height = statusBarHeight/2;
 
 
     }

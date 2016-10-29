@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private View view;
     private LinearLayout pop_linear;
     private int statusBarHeight;
-
+    private boolean dadsaa = true;
 
 
     @Override
@@ -99,6 +99,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     homeFragment = new HomeFragment();
                 }
                 switchContent(homeFragment);
+
                 ivHome.setBackgroundResource(R.mipmap.ma);
                 ivClass.setBackgroundResource(R.mipmap.vp);
                 ivLogin.setBackgroundResource(R.mipmap.sw);
@@ -219,11 +220,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
-        Rect frame = new Rect();
-        getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-        // 状态栏高度
-        statusBarHeight = frame.top;
-        homeFragment.setStatusBarHeight(statusBarHeight);
+        if(dadsaa){
+            Rect frame = new Rect();
+            getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+            // 状态栏高度
+            statusBarHeight = frame.top;
+            homeFragment.setStatusBarHeight(statusBarHeight);
+            dadsaa = false;
+        }
+
 
     }
 
