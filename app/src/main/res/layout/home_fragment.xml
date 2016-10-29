@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:imagecontrol="http://schemas.android.com/tools">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/main_content"
@@ -72,11 +73,100 @@
         android:clickable="true"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <lanou.around.widget.MorphFrameLayout
             android:id="@+id/rl_home"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
 
             android:layout_height="wrap_content">
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/rl1_home"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                 android:layout_centerInParent="true"
+                   >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_not_spending"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="推荐"
+                            android:layout_gravity="center"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17dp" />
+
+                        <ImageView
+                            android:id="@+id/img_not_spending"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+
+                            android:background="@drawable/tab_shape" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                       android:layout_alignParentRight="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_yet_spent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="附近"
+                            android:layout_gravity="center"
+                            android:textColor="#000000"
+                            android:textSize="17dp" />
+
+                        <ImageView
+                            android:id="@+id/img_yet_spent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+
+                            android:background="@drawable/tab_shape" />
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                    <lanou.around.widget.RoundImageView
+                        android:id="@+id/circle_search_home"
+                        android:layout_width="20dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="3dp"
+                        android:src="@mipmap/wf"
+                        android:foregroundGravity="center"
+                        android:background="@android:color/white"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_height="20dp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
 
 
             <RelativeLayout
@@ -105,79 +195,15 @@
                         android:text="输入你正在找的宝贝"
                         android:textColor="@android:color/background_dark"
                         android:textSize="12dp" />
+
+
+
                 </LinearLayout>
 
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rl1_home"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                >
-
-                <RelativeLayout
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                 android:layout_centerInParent="true"
-                   >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tv_not_spending"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="推荐"
-                            android:layout_gravity="center"
-                            android:textColor="#FFFFFF"
-                            android:textSize="17dp" />
-
-                        <ImageView
-                            android:id="@+id/img_not_spending"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="4dp"
-                            android:background="@drawable/tab_shape" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                       android:layout_alignParentRight="true"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tv_yet_spent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:text="附近"
-                            android:layout_gravity="center"
-                            android:textColor="#000000"
-                            android:textSize="17dp" />
-
-                        <ImageView
-                            android:id="@+id/img_yet_spent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="4dp"
-                            android:background="@drawable/tab_shape" />
-                    </LinearLayout>
-
-
-                </RelativeLayout>
-
-            </RelativeLayout>
-        </RelativeLayout>
+        </lanou.around.widget.MorphFrameLayout>
     </lanou.around.widget.TransparentToolBar>
 
 </FrameLayout>
