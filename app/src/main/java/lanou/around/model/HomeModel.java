@@ -29,9 +29,10 @@ public class HomeModel implements InterModel {
             @Override
             public void onCompleted(Object tClass1) {
 
-
+                Log.d("HomeModel", ((HomeBean) tClass1).getRespCode());
                 if (((HomeBean) tClass1).getRespCode().equals("0")) {
 
+                    Log.d("HomeModel", "ni你妈的");
                     onFinishedListener.onFinished((T) tClass1);
 
                 } else {
