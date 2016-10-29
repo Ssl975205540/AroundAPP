@@ -67,9 +67,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
         HomeViewPagerAdapter homeViewPagerAdapter = new HomeViewPagerAdapter(getChildFragmentManager());
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new NearByFragment());
-
         fragments.add(new RecommendFragment());
+        fragments.add(new NearByFragment());
 
         homeViewPagerAdapter.setFragments(fragments);
 
@@ -138,31 +137,21 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         recyviewHome.setLoadingListener(new MyRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-
-
-
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
-
-
                         homePresenter.startRequest(URLValues.HOME_HOT_MARKET,HomeBean.class);
-
                         recyviewHome.refreshComplete();
                         toolbarHome.setVisibility(View.VISIBLE);
                     }
 
                 }, 1000);
             }
-
             @Override
             public void onLoadMore() {
 
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
-
-
                         recyviewHome.loadMoreComplete();
-
                     }
                 }, 1000);
             }
@@ -187,7 +176,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
             }
         });
-
 
         homeAppbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
 

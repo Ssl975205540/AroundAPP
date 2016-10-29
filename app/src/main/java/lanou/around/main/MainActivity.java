@@ -1,6 +1,7 @@
 package lanou.around.main;
 
 
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
+
+import com.jaeger.library.StatusBarUtil;
 
 import lanou.around.R;
 import lanou.around.base.BaseActivity;
@@ -99,6 +102,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     homeFragment = new HomeFragment();
                 }
                 switchContent(homeFragment);
+
                 ivHome.setBackgroundResource(R.mipmap.ma);
                 ivClass.setBackgroundResource(R.mipmap.vp);
                 ivLogin.setBackgroundResource(R.mipmap.sw);
@@ -109,12 +113,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 if (classFragment == null) {
                     classFragment = new ClassifyFragment(statusBarHeight);
+                    StatusBarUtil.setColor(this, Color.BLACK);
                 }
 
                 switchContent(classFragment);
-                // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
-
-
+                //给此页的状态栏设置颜色 需添加依赖
+                
                 ivHome.setBackgroundResource(R.mipmap.m_);
                 ivClass.setBackgroundResource(R.mipmap.vq);
                 ivLogin.setBackgroundResource(R.mipmap.sw);
@@ -131,7 +135,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 ivLogin.setBackgroundResource(R.mipmap.sw);
                 ivVideo.setBackgroundResource(R.mipmap.sz);
 
-
                 break;
             case R.id.iv_login:
                 if (loginFragment == null) {
@@ -143,6 +146,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 ivClass.setBackgroundResource(R.mipmap.vp);
                 ivVideo.setBackgroundResource(R.mipmap.sy);
 
+                StatusBarUtil.setColor(this, Color.TRANSPARENT);
 
                 break;
 
