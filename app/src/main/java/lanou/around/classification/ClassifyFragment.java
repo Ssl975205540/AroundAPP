@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jaeger.library.StatusBarUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ import lanou.around.classification.classifiview.CenterViewFragment;
 import lanou.around.classification.classifiview.ClassifyViewAdapter;
 import lanou.around.classification.classifiview.LeftViewFragment;
 import lanou.around.classification.classifiview.RightViewFragment;
-import lanou.around.presenter.ClassifyTabPresenter;
+import lanou.around.presenter.ClassifyPresenter;
 import lanou.around.tools.recycle.DisplayUtil;
 import lanou.around.widget.PullZoomView;
 import lanou.around.widget.TransparentToolBar;
@@ -87,7 +86,7 @@ public class ClassifyFragment extends BaseFragment
         mSearchText.setAlpha(0);
         mCheck.setImageAlpha(0);
 
-        ClassifyTabPresenter presenter = new ClassifyTabPresenter(this);
+        ClassifyPresenter presenter = new ClassifyPresenter(this);
         presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE, ClassifyTabBean.class);
         presenter.startRequest(URLValues.CLASSIFY_WANT_BUY_MESSAGE, ClassifyBean.class);
     }

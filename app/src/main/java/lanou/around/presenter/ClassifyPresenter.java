@@ -2,20 +2,20 @@ package lanou.around.presenter;
 
 import lanou.around.aroundinterface.InterView;
 import lanou.around.aroundinterface.OnFinishedListener;
-import lanou.around.model.ClassifyTabModel;
+import lanou.around.model.ClassifyModel;
 
 /**
  * Created by dllo on 16/10/25.
  */
 
-public class ClassifyTabPresenter {
+public class ClassifyPresenter {
 
     private InterView mInterView;
-    private final ClassifyTabModel mClassifyTabModel;
+    private final ClassifyModel mClassifyTabModel;
 
-    public ClassifyTabPresenter(InterView interView) {
+    public ClassifyPresenter(InterView interView) {
         this.mInterView = interView;
-        mClassifyTabModel = new ClassifyTabModel();
+        mClassifyTabModel = new ClassifyModel();
     }
 
     public <T> void startRequest(String url, Class<T> tClass) {

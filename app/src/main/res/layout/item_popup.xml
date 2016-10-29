@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:paddingTop="10dp"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_popup_home"
+        android:layout_width="110dp"
+        android:layout_height="70dp"
+        android:background="@drawable/popup_item">
+
+        <TextView
+            android:id="@+id/tv_popup_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/home_adapter_item"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"/>
+        <TextView
+            android:id="@+id/tv_popup_body"
+            android:layout_below="@+id/tv_popup_name"
+            android:layout_marginTop="3dp"
+            android:textSize="12sp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</LinearLayout>

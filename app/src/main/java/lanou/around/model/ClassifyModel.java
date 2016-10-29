@@ -11,7 +11,7 @@ import lanou.around.tools.http.OnCompletedListener;
  * Created by dllo on 16/10/25.
  */
 
-public class ClassifyTabModel implements InterModel {
+public class ClassifyModel implements InterModel {
 
 
 

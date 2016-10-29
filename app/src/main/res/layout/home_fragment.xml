@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/main_content"
@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="?android:attr/actionBarSize"
-                app:layout_scrollFlags="scroll" />
+                app:layout_scrollFlags="scroll"/>
 
 
             <!--<android.support.v7.widget.Toolbar-->
@@ -57,7 +57,7 @@
                 android:id="@+id/viewpager_home"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ffffff" />
+                android:background="#ffffff"/>
 
 
         </android.support.v4.widget.NestedScrollView>
@@ -69,8 +69,8 @@
     <lanou.around.widget.TransparentToolBar
         android:id="@+id/toolbar_home"
         android:layout_width="match_parent"
-        android:clickable="true"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clickable="true">
 
         <RelativeLayout
             android:id="@+id/rl_home"
@@ -94,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@mipmap/wf" />
+                        android:src="@mipmap/wf"/>
 
                     <TextView
 
@@ -104,7 +104,7 @@
                         android:layout_marginLeft="5dp"
                         android:text="输入你正在找的宝贝"
                         android:textColor="@android:color/background_dark"
-                        android:textSize="12dp" />
+                        android:textSize="12dp"/>
                 </LinearLayout>
 
 
@@ -121,8 +121,8 @@
                 <RelativeLayout
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                 android:layout_centerInParent="true"
-                   >
+                    android:layout_centerInParent="true"
+                    >
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -134,10 +134,10 @@
                             android:id="@+id/tv_not_spending"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="推荐"
                             android:layout_gravity="center"
+                            android:text="推荐"
                             android:textColor="#FFFFFF"
-                            android:textSize="17dp" />
+                            android:textSize="17dp"/>
 
                         <ImageView
                             android:id="@+id/img_not_spending"
@@ -145,13 +145,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="4dp"
-                            android:background="@drawable/tab_shape" />
+                            android:background="@drawable/tab_shape"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                       android:layout_alignParentRight="true"
+                        android:layout_alignParentRight="true"
                         android:orientation="vertical">
 
                         <TextView
@@ -159,10 +159,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
 
-                            android:text="附近"
                             android:layout_gravity="center"
+                            android:text="附近"
                             android:textColor="#000000"
-                            android:textSize="17dp" />
+                            android:textSize="17dp"/>
 
                         <ImageView
                             android:id="@+id/img_yet_spent"
@@ -170,7 +170,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="4dp"
-                            android:background="@drawable/tab_shape" />
+                            android:background="@drawable/tab_shape"/>
                     </LinearLayout>
 
 
