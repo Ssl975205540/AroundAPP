@@ -76,9 +76,6 @@ public class ClassifyFragment extends BaseFragment
         mSearchText = findView(R.id.ll_classify_search);
         mCheck = findView(R.id.iv_classify_check);
         mToolBar = findView(R.id.toobar_classify);
-        //给此页的状态栏设置颜色 需添加依赖
-        StatusBarUtil.setColor(getActivity(), Color.BLACK);
-
 
     }
 
