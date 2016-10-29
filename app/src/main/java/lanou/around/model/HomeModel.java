@@ -11,6 +11,7 @@ import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeBeanHot;
+import lanou.around.home.HomeTabBean;
 import lanou.around.tools.db.AroundDBManager;
 import lanou.around.tools.http.HtttpManger;
 import lanou.around.tools.http.OnCompletedListener;
@@ -29,15 +30,25 @@ public class HomeModel implements InterModel {
             @Override
             public void onCompleted(Object tClass1) {
 
-                Log.d("HomeModel", ((HomeBean) tClass1).getRespCode());
-                if (((HomeBean) tClass1).getRespCode().equals("0")) {
+
+                if(tClass1 instanceof HomeBean){
+                    if (((HomeBean) tClass1).getRespCode().equals("0")) {
+
+                        onFinishedListener.onFinished((T) tClass1);
+                        return;
+                    } else {
+                        onFailed();
+                    }
+                }
+
+                if (tClass1 instanceof HomeTabBean){
+
 
                     Log.d("HomeModel", "ni你妈的");
                     onFinishedListener.onFinished((T) tClass1);
 
-                } else {
-                    onFailed();
                 }
+
 
 
             }
@@ -124,7 +135,10 @@ public class HomeModel implements InterModel {
 
     @Override
     public <F> void InsertSQ(F t) {
-        AroundDBManager.getInstance().insert((HomeBean) t);
+        if(t instanceof HomeBean){
+            AroundDBManager.getInstance().insert((HomeBean) t);
+
+        }
     }
 
     @Override

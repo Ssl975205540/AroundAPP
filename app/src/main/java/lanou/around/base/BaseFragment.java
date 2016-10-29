@@ -36,15 +36,15 @@ public abstract class BaseFragment extends Fragment {
         initLoad();
     }
 
-    protected abstract void initData();
-
     protected abstract int setContentView();
+
+    protected abstract void initData();
 
     protected abstract void initViews();
 
     protected abstract void initListeners();
 
-    protected void initLoad(){
+    protected void initLoad() {
 
     }
 

@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <TextView
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tb_home_top"
         android:layout_width="match_parent"
-        android:text="ccccc"
-        android:layout_height="500dp" />
+        app:tabMode="scrollable"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/iv_dropDownButton" />
 
-</LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_home_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tb_home_top" />
+
+    <ImageView
+        android:id="@+id/iv_dropDownButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="18dp"
+        android:src="@mipmap/qj"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

@@ -65,7 +65,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
     private RoundImageView circle_search_home;
     private ConvenientBanner bannerHome;
-    private LinearLayout supplementary,supplement;
+    private LinearLayout supplementary, supplement;
 
 
     @Override
@@ -74,9 +74,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
         HomeViewPagerAdapter homeViewPagerAdapter = new HomeViewPagerAdapter(getChildFragmentManager());
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new NearByFragment());
-
         fragments.add(new RecommendFragment());
+        fragments.add(new NearByFragment());
 
         homeViewPagerAdapter.setFragments(fragments);
 
@@ -91,11 +90,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
 
 
-
-
     }
-
-
 
 
     @Override
@@ -127,12 +122,11 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         imgSpent = findView(R.id.img_yet_spent);
         circle_search_home = findView(R.id.circle_search_home);
 
-        View view = LayoutInflater.from(context).inflate(R.layout.home_recly_header,null);
+        View view = LayoutInflater.from(context).inflate(R.layout.home_recly_header, null);
         recyviewHome.addHeaderView(view);
-        bannerHome = findView(view,R.id.banner_home);
+        bannerHome = findView(view, R.id.banner_home);
 
 
-        
     }
 
     @Override
@@ -142,12 +136,12 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         tvSpent.setOnClickListener(this);
         imgSpent.setOnClickListener(this);
         recyviewHome.setLoadingMoreEnabled(false);
+
         recyviewHome.setLoadingListener(new MyRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-
-
                 new Handler().postDelayed(new Runnable() {
+                    @Override
                     public void run() {
 
 
@@ -157,8 +151,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
 
                     }
-
                 }, 1000);
+
             }
 
             @Override
@@ -172,26 +166,22 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                         toolbarHome.setVisibility(View.GONE);
                         break;
                 }
-
             }
 
             @Override
             public void onLoadMore() {
-
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
-
-
                         recyviewHome.loadMoreComplete();
-
                     }
                 }, 1000);
             }
         });
 
+
+
         toolbarHome.setOnScrollStateListener(this);
-        toolbarHome.setOffset(360
-        );
+        toolbarHome.setOffset(360);
         toolbarHome.setBgColor(getResources().getColor(R.color.toolbar_home_color));
         viewPagerHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -210,7 +200,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
             }
         });
 
-
         homeAppbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
 
 
@@ -222,13 +211,12 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                 toolbarHome.setChangeTop(-verticalOffset);
 
 
+                if (-verticalOffset == appBarLayout.getHeight() - tabHome.getHeight() - statusBarHeight) {
 
-                if (-verticalOffset == appBarLayout.getHeight()-tabHome.getHeight()-statusBarHeight) {
-
-                    if(supple){
+                    if (supple) {
                         rl1.setVisibility(View.VISIBLE);
                         RevealToolbar.HideReveal(rl0);
-                        supple= false;
+                        supple = false;
                     }
 
 
@@ -237,7 +225,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
                     rl1.setVisibility(View.INVISIBLE);
                     rl0.setVisibility(View.VISIBLE);
-                    supple= true;
+                    supple = true;
                 }
             }
         });
@@ -342,12 +330,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                 .setOnItemClickListener(this).startTurning(4000);
 
 
-
-
-
-
-
-
     }
 
     @Override
@@ -391,8 +373,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) rl.getLayoutParams();
         params.setMargins(50, statusBarHeight + 20, 50, 5);// 通过自定义坐标来放置你的控件
         rl.setLayoutParams(params);
-        supplementary.getLayoutParams().height = statusBarHeight/2;
-        supplement.getLayoutParams().height = statusBarHeight/2;
+        supplementary.getLayoutParams().height = statusBarHeight / 2;
+        supplement.getLayoutParams().height = statusBarHeight / 2;
 
 
     }
