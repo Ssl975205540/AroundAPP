@@ -54,7 +54,6 @@ public class ClassifyFragment extends BaseFragment
     private ImageView mCheck;
     private ArrayList<ImageView> dots = new ArrayList<>();
     private int statusBarHeight;
-    private LinearLayout mEdit_message;
 
 
     @Override
@@ -77,7 +76,6 @@ public class ClassifyFragment extends BaseFragment
         mSearchText = findView(R.id.ll_classify_search);
         mCheck = findView(R.id.iv_classify_check);
         mToolBar = findView(R.id.toobar_classify);
-        mEdit_message = findView(R.id.linear_edit_message);
         //给此页的状态栏设置颜色 需添加依赖
         StatusBarUtil.setColor(getActivity(), Color.BLACK);
 
