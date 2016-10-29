@@ -1,4 +1,4 @@
-package lanou.around.video;
+package lanou.around.model;
 
 import lanou.around.aroundinterface.InterModel;
 import lanou.around.aroundinterface.OnCompleted;
@@ -24,6 +24,7 @@ public class VideoModel implements InterModel{
             public void onCompleted(T result) {
                 if (result.equals("")) {
 
+
                     onFinishedListener.onError();
                     return;
                 }
@@ -33,6 +34,19 @@ public class VideoModel implements InterModel{
             @Override
             public void onFailed() {
                 onFinishedListener.onError();
+            }
+        });
+
+
+        HtttpManger.getInstance().postRequest(url, null, VideoDetailsBean.class, new OnCompletedListener<VideoDetailsBean>() {
+            @Override
+            public void onCompleted(VideoDetailsBean result) {
+
+            }
+
+            @Override
+            public void onFailed() {
+
             }
         });
 

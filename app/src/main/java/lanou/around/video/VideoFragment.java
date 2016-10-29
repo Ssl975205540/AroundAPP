@@ -28,14 +28,14 @@ import lanou.around.R;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.VideoDetailsBean;
 import lanou.around.flingswipe.SwipeFlingAdapterView;
-import lanou.around.tools.http.URLValues;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static lanou.around.tools.http.URLValues.URL_VIDEO;
 
 /**
  * Created by dllo on 16/10/22.
@@ -57,10 +57,9 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
     @Override
     protected int setContentView() {
         return R.layout.video_fragment;
-
     }
 
-
+   
     @Override
     protected void initViews() {
         //标题栏
@@ -88,10 +87,6 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
     protected void initListeners() {
         swipeView.setFlingListener(this);
         swipeView.setOnItemClickListener(this);
-//        VideoPresenter presenter = new VideoPresenter(this);
-//        presenter.startRequest(URL_VIDEO);
-
-
     }
 
     @Override
@@ -156,11 +151,9 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
                 .connectTimeout(10000, TimeUnit.MILLISECONDS)
                 .cache(new Cache(fileDir, 10 * 1024 * 1024))
                 .build();
-        FormBody body = new FormBody.Builder()
-                .build();
+
         final Request request = new Request.Builder()
-                .post(body)
-                .url(URLValues.URL_VIDEO)
+                .url(URL_VIDEO)
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -280,6 +273,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
             mSuperVideoPlayer.setPageType(MediaController.PageType.SHRINK);
         }
     }
+
 
 
 }

@@ -1,8 +1,9 @@
-package lanou.around.video;
+package lanou.around.presenter;
 
 import lanou.around.aroundinterface.InterView;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.VideoDetailsBean;
+import lanou.around.model.VideoModel;
 
 /**
  * Created by dllo on 16/10/26.

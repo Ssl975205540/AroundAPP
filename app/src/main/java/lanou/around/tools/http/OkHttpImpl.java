@@ -125,7 +125,7 @@ public class OkHttpImpl implements IHttpRequest {
     }
 
 
-    private <T> void asyncRequest(final Class<T> tClass, final OnCompletedListener<T> listener, Request request) {
+    private <T> void asyncRequest(final Class<T> tClass, final OnCompletedListener<T> listener, final Request request) {
         mClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -140,9 +140,12 @@ public class OkHttpImpl implements IHttpRequest {
 
                 if (response.isSuccessful()) {
 
-                    final T result = mGson.fromJson(response.body().string(), tClass);
+                                final T result = mGson.fromJson(response.body().string(),tClass);
 
-                    postResPonse(result, listener);
+                                postResPonse(result, listener);
+
+
+
 
 
                 } else {
