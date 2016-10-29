@@ -2,6 +2,7 @@ package lanou.around.classification;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -47,9 +48,11 @@ public class ClassifyGridAdapter extends BaseAdapter {
         TextView textView;
         if (convertView == null) {
             textView = new TextView(context);
-            textView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+            textView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
             textView.setTextSize(15);
+            textView.setGravity(Gravity.CENTER);
+            textView.setTextColor(Color.BLACK);
             textView.setBackgroundColor(Color.WHITE);
             textView.setPadding(8, 4, 8, 4);//设置间距
         } else {

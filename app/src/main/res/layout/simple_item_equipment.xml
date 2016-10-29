@@ -16,7 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/home_adapter_item"/>
 
         <TextView
             android:id="@+id/tv_equipment_message"
@@ -24,7 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/iv_equipment_check"/>
+            android:layout_toLeftOf="@+id/iv_equipment_check"
+            android:textColor="@color/home_adapter_item"/>
 
         <ImageView
             android:id="@+id/iv_equipment_check"
@@ -39,30 +41,83 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"/>
+        android:background="@color/itemBackgrand"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/iv_equipment_bike"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_weight="1"/>
+            android:layout_height="90dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_equipment_electric"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_equipment_bike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/home_adapter_item"/>
 
-        <ImageView
-            android:id="@+id/iv_equipment_motor"
+            <ImageView
+                android:id="@+id/iv_equipment_bike"
+                android:layout_width="75dp"
+                android:layout_height="75dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="90dp"
+            android:background="@color/itemBackgrand"/>
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_weight="1"/>
+            android:layout_height="90dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_equipment_electric"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/home_adapter_item"/>
+
+            <ImageView
+                android:id="@+id/iv_equipment_electric"
+                android:layout_width="75dp"
+                android:layout_height="75dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="90dp"
+            android:background="@color/itemBackgrand"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_equipment_motor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/home_adapter_item"/>
+
+            <ImageView
+                android:id="@+id/iv_equipment_motor"
+                android:layout_width="75dp"
+                android:layout_height="75dp"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

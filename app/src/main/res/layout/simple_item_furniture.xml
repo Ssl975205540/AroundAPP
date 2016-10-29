@@ -16,7 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/home_adapter_item"/>
 
         <TextView
             android:id="@+id/tv_furniture_message"
@@ -25,7 +26,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/iv_furniture_check"
-            android:text="单反不在穷三代"/>
+            android:textColor="@color/home_adapter_item"/>
 
         <ImageView
             android:id="@+id/iv_furniture_check"
@@ -37,17 +38,22 @@
             android:src="@mipmap/v1"/>
     </RelativeLayout>
 
-    <GridView
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/itemBackgrand"/>
+
+    <lanou.around.widget.ExpandGridView
         android:id="@+id/gridView_furniture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:divider="@color/line"
-        android:dividerHeight="1dp"
-        android:gravity="center"
-        android:horizontalSpacing="10dp"
-        android:numColumns="3"
+        android:horizontalSpacing="0.5dp"
+        android:verticalSpacing="0.5dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp">
-    </GridView>
+        android:numColumns="3"
+        android:background="@color/itemBackgrand"
+        android:gravity="center"
+        android:listSelector="@null">
+    </lanou.around.widget.ExpandGridView>
 </LinearLayout>

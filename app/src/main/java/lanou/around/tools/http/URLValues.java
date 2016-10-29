@@ -19,7 +19,7 @@ public class URLValues {
     //手机,数码等图标 的网址接口
     public static final String CLASSIFY_CHILD_CATES_LOGIC = "http://zhuanzhuan.58.com/zz/transfer/getChildCatesLogic";
     //手机,数码,电脑,母婴用品等 网址接口
-    public static final String CLASSIFY_WANT_BUY_MESSAGE = "http://zhuanzhuan.58.com/zz/transfer/getIWantBuyCateMessage";
+    public static final String CLASSIFY_WANT_BUY_MESSAGE = "";
     //EditText中的图和文字等接口
     public static final String CLASSIFY_EDITTEXT_TITLTE = "http://zhuanzhuan.58.com/zz/transfer/getTitleInformation";
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="320dp"
+              android:layout_height="276dp"
               android:layout_marginTop="15dp"
               android:background="@color/colorText"
               android:orientation="vertical">
@@ -14,6 +14,7 @@
         <TextView
             android:id="@+id/tv_electrical_name"
             android:layout_width="wrap_content"
+            android:textColor="@color/home_adapter_item"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"/>
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
+            android:textColor="@color/home_adapter_item"
             android:layout_toLeftOf="@+id/iv_electrical_check"/>
 
         <ImageView
@@ -39,18 +41,16 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"/>
+        android:background="@color/itemBackgrand"/>
 
-    <GridView
+    <lanou.around.widget.ExpandGridView
         android:id="@+id/gridView_electrical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:columnWidth="90dp"
         android:gravity="center"
-        android:horizontalSpacing="10dp"
+        android:horizontalSpacing="0.0dp"
         android:numColumns="3"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp">
-    </GridView>
+        android:verticalSpacing="0.0dp">
+    </lanou.around.widget.ExpandGridView>
 </LinearLayout>

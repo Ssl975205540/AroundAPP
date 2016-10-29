@@ -6,11 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jaeger.library.StatusBarUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -37,25 +38,22 @@ import lanou.around.widget.TransparentToolBar;
 
 
 public class ClassifyFragment extends BaseFragment
-
         implements InterView, TransparentToolBar.OnScrollStateListener {
-
-
 
     private ViewPager mViewPager;
     private RecyclerView mRecyclerView;
-    private List<ClassifyBean> mClassifyBeanList;
     private PullZoomView mPzv;
     private ImageView mPhoto;
     private TextView mTitle;
     private TextView mMessage;
-    private ArrayList<ImageView> dots = new ArrayList<>();
     private LinearLayout mDotsLinear;
     private TransparentToolBar mToolBar;
     private TextView mSearch;
     private ImageView mSearchPhoto;
     private LinearLayout mSearchText;
     private ImageView mCheck;
+    private ArrayList<ImageView> dots = new ArrayList<>();
+    private int statusBarHeight;
 
 
     @Override
@@ -72,36 +70,34 @@ public class ClassifyFragment extends BaseFragment
         mTitle = findView(R.id.tv_classify_title);
         mMessage = findView(R.id.tv_classify_message);
         mDotsLinear = findView(R.id.ll_viewpager);
-        mToolBar = findView(R.id.toobar_classify);
+
         mSearch = findView(R.id.tv_classify_search);
         mSearchPhoto = findView(R.id.iv_classify_search);
         mSearchText = findView(R.id.ll_classify_search);
         mCheck = findView(R.id.iv_classify_check);
+        mToolBar = findView(R.id.toobar_classify);
+        //给此页的状态栏设置颜色 需添加依赖
+        StatusBarUtil.setColor(getActivity(), Color.BLACK);
+
 
     }
 
     @Override
     protected void initListeners() {
-        ClassifyTabPresenter presenter = new ClassifyTabPresenter(this);
-
-
         mToolBar.setOnScrollStateListener(this);
-        mToolBar.setOffset(200);
-        mToolBar.setBgColor(getResources().getColor(R.color.toolbar_home_color));
-        mPzv.setTitleBar(mToolBar);
-
-        presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE, ClassifyTabBean.class);
-
-        presenter.startRequest(URLValues.CLASSIFY_WANT_BUY_MESSAGE, ClassifyBean.class);
-
         mSearchPhoto.setImageAlpha(0);
         mSearch.setAlpha(0);
         mSearchText.setAlpha(0);
         mCheck.setImageAlpha(0);
 
-
+        ClassifyTabPresenter presenter = new ClassifyTabPresenter(this);
+        presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE, ClassifyTabBean.class);
+        presenter.startRequest(URLValues.CLASSIFY_WANT_BUY_MESSAGE, ClassifyBean.class);
     }
 
+    public ClassifyFragment(int statusBarHeight) {
+        this.statusBarHeight = statusBarHeight;
+    }
 
     @Override
     protected void initData() {
@@ -121,7 +117,6 @@ public class ClassifyFragment extends BaseFragment
             } else {
                 imageView.setImageResource(R.drawable.dot_focus);
             }
-
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(15, 15);
             params.setMargins(10, 0, 10, 0);
             imageView.setLayoutParams(params);
@@ -131,8 +126,15 @@ public class ClassifyFragment extends BaseFragment
         viewPagerScallListener();
         pullZoomViewData();
 
+        // 通过自定义坐标来放置你的控件
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mToolBar.getLayoutParams();
+        params.setMargins(0, statusBarHeight, 0, 0);
+        mToolBar.setLayoutParams(params);
+
+
 
     }
+
 
     private void viewPagerScallListener() {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -172,12 +174,14 @@ public class ClassifyFragment extends BaseFragment
         boolean isZoomEnable = intent.getBooleanExtra("isZoomEnable", true);
 
         mPzv.setIsParallax(isParallax);
+
         mPzv.setIsZoomEnable(isZoomEnable);
         mPzv.setSensitive(sensitive);
         mPzv.setZoomTime(zoomTime);
         mPzv.setOnScrollListener(new PullZoomView.OnScrollListener() {
             float centerHeight = DisplayUtil.dip2px(context, 150);
             float endHeight = DisplayUtil.dip2px(context, 200);
+
             @Override
             public void onScroll(int l, int t, int oldl, int oldt) {
 
@@ -190,15 +194,20 @@ public class ClassifyFragment extends BaseFragment
                 }
                 if (t >= centerHeight && t <= endHeight) {
                     int alpha = (int) ((t - centerHeight) / (endHeight - centerHeight) * 255);
-                    float alp = (t - centerHeight) / (endHeight - centerHeight) * 255;
-                    Log.d("ClassifyFragment", "alpha:" + alpha);
-                    Log.d("ClassifyFragment", "alp:" + alp);
+                    float alp = (t - centerHeight) / (endHeight - centerHeight) * 1.0f;
                     mToolBar.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
                     mSearchPhoto.setImageAlpha(alpha);
                     mSearchText.setAlpha(alp);
                     mSearch.setAlpha(alp);
                     mCheck.setImageAlpha(alpha);
 
+
+                } else if (t > endHeight) {
+                    mToolBar.setBackgroundColor(Color.argb(255, 255, 255, 255));
+                    mSearchPhoto.setImageAlpha(255);
+                    mSearchText.setAlpha(1.0f);
+                    mSearch.setAlpha(1f);
+                    mCheck.setImageAlpha(255);
                 }
             }
 
@@ -239,33 +248,26 @@ public class ClassifyFragment extends BaseFragment
     }
 
     @Override
-    public void onResponse(Object classifyTabBean) {
-
-
-        if (classifyTabBean instanceof ClassifyTabBean) {
-
-            ClassifyTabBean classifyTabBean1 = (ClassifyTabBean) classifyTabBean;
-            Picasso.with(context).load(classifyTabBean1.getRespData().getPhotoUrl()).into(mPhoto);
-            mTitle.setText(classifyTabBean1.getRespData().getShowName());
-            mMessage.setText(classifyTabBean1.getRespData().getInputName());
+    public void onResponse(Object bean) {
+        if (bean instanceof ClassifyTabBean) {
+            ClassifyTabBean classifyTabBean = (ClassifyTabBean) bean;
+            Picasso.with(context).load(classifyTabBean.getRespData().getPhotoUrl()).into(mPhoto);
+            mTitle.setText(classifyTabBean.getRespData().getShowName());
+            mMessage.setText(classifyTabBean.getRespData().getInputName());
+            mSearch.setText(classifyTabBean.getRespData().getInputName());
         }
 
+        if (bean instanceof ClassifyBean) {
 
-        if (classifyTabBean instanceof ClassifyBean) {
-
-            ClassifyBean classifyTabBean1 = (ClassifyBean) classifyTabBean;
-
-            for (int i = 0; i < classifyTabBean1.getRespData().size(); i++) {
-                classifyTabBean1.getRespData().get(i).setType(i);
-
+            ClassifyBean classifyBean = (ClassifyBean) bean;
+            for (int i = 0; i < classifyBean.getRespData().size(); i++) {
+                classifyBean.getRespData().get(i).setType(i);
             }
             ClassifyAdapter myAdapter = new ClassifyAdapter(context);
-            myAdapter.setClassifyBean(classifyTabBean1);
+            myAdapter.setClassifyBean(classifyBean);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
             mRecyclerView.setAdapter(myAdapter);
         }
-
-
     }
 
     @Override
@@ -284,5 +286,4 @@ public class ClassifyFragment extends BaseFragment
     public void updateFraction(float fraction) {
         //ToolBar滚动回调的百分比0~1
     }
-
 }
