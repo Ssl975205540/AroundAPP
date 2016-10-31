@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -117,7 +118,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
 
                 switchContent(classFragment);
-                //给此页的状态栏设置颜色 需添加依赖
+
                 
                 ivHome.setBackgroundResource(R.mipmap.m_);
                 ivClass.setBackgroundResource(R.mipmap.vq);
@@ -229,8 +230,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
+
         if(dadsaa){
             Rect frame = new Rect();
+            Log.d("MainActivity", "statusBarHeight:" + statusBarHeight);
             getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
             // 状态栏高度
             statusBarHeight = frame.top;

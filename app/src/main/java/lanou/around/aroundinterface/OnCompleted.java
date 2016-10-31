@@ -6,7 +6,7 @@ package lanou.around.aroundinterface;
 
 public interface OnCompleted<T> {
 
-    void onCompleted(T result);
+    void onSuccess(T result);
 
     void onFailed();
 

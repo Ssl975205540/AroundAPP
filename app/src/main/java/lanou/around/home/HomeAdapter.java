@@ -1,6 +1,7 @@
 package lanou.around.home;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 
 import lanou.around.R;
 import lanou.around.base.BaseRcvAdapter;
-import lanou.around.base.RecyclerHolder;
 import lanou.around.bean.HomeBeanHot;
 
 /**
@@ -41,7 +41,7 @@ public class HomeAdapter extends BaseRcvAdapter<HomeAdapter.HomeViewHolder, Home
         Glide.with(getContext()).load(data.get(position).getImageUrl()).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.mipmap.home01_bg_card).placeholder(R.mipmap.rx)
                 .into(holder.img);
-        holder.rootView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onItemClick.onItemClick(holder, position);
@@ -53,7 +53,7 @@ public class HomeAdapter extends BaseRcvAdapter<HomeAdapter.HomeViewHolder, Home
 
 
 
-    public class HomeViewHolder extends RecyclerHolder {
+    public class HomeViewHolder extends RecyclerView.ViewHolder {
 
         public final ImageView img;
 

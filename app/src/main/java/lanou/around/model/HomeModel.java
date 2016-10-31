@@ -56,7 +56,7 @@ public class HomeModel implements InterModel {
                 QuerySQ(new OnCompleted<HomeBean>() {
 
                     @Override
-                    public void onCompleted(HomeBean result) {
+                    public void onSuccess(HomeBean result) {
 
 
 
@@ -114,7 +114,7 @@ public class HomeModel implements InterModel {
         protected void onPostExecute(HomeBean o) {
             super.onPostExecute(o);
 
-            arrayListOnCompletedListener.onCompleted(o);
+            arrayListOnCompletedListener.onSuccess(o);
 
             arrayListOnCompletedListener.onFailed();
 
