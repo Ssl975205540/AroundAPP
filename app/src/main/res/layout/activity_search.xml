@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorText"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/iv_search_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/o3"/>
+
+        <LinearLayout
+            android:id="@+id/ll_search"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/edit_shape"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_search_check"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@mipmap/qc"/>
+
+            <TextView
+                android:id="@+id/tv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:textColor="@color/home_adapter_item"
+                android:textSize="@dimen/fineSize"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_search_set"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:src="@mipmap/nr"/>
+    </RelativeLayout>
+</LinearLayout>

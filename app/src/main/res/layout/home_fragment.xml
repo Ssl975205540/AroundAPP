@@ -50,9 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 app:tabIndicatorColor="@color/toolbar_home_color"
-
-                app:tabSelectedTextColor="@color/toolbar_home_color" />
-
+                app:tabSelectedTextColor="@color/toolbar_home_color"
+                app:tabTextColor="@color/release"/>
 
         </android.support.design.widget.AppBarLayout>
 

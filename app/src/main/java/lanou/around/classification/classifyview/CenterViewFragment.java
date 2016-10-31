@@ -1,4 +1,4 @@
-package lanou.around.classification.classifiview;
+package lanou.around.classification.classifyview;
 
 import android.content.Context;
 import android.view.View;
@@ -12,6 +12,7 @@ import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.ClassifyViewBean;
+import lanou.around.presenter.ClassifyViewPresenter;
 import lanou.around.tools.http.URLValues;
 
 /**
@@ -60,7 +61,7 @@ public class CenterViewFragment extends BaseFragment implements InterView {
         for (int i = 8; i < 16 ; i++) {
             respDataBeanList.add(classifyViewBean.getRespData().get(i));
         }
-        GridViewPagerLeftAdapter gridViewAdapter = new GridViewPagerLeftAdapter(context);
+        GridViewPagerAdapter gridViewAdapter = new GridViewPagerAdapter(context);
         gridViewAdapter.setRespDataBeen(respDataBeanList);
         gridView.setAdapter(gridViewAdapter);
     }

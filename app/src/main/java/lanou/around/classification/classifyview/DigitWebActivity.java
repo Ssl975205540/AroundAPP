@@ -1,16 +1,19 @@
-package lanou.around.classification;
+package lanou.around.classification.classifyview;
 
 import android.content.Intent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 import lanou.around.R;
 import lanou.around.base.BaseActivity;
 
-public class WebActivity extends BaseActivity {
+public class DigitWebActivity extends BaseActivity {
 
     private WebView mWebView;
+    private ImageView mBack;
 
     @Override
     protected int setContentView() {
@@ -20,6 +23,7 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void initViews() {
         mWebView = findView(R.id.webview);
+        mBack = findView(R.id.iv_back);
 
     }
 
@@ -44,14 +48,16 @@ public class WebActivity extends BaseActivity {
         webSettings.setJavaScriptEnabled(true);
         mWebView.setWebViewClient(new WebViewClient());
 
-
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
-
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
-
     }
 }

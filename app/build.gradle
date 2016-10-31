@@ -38,7 +38,7 @@ dependencies {
     compile 'cn.yipianfengye.android:zxing-library:2.0'
     compile 'pub.devrel:easypermissions:0.2.0'
 
-    compile 'com.jaeger.statusbaruitl:library:1.2.5'
+
     compile 'konifar:fab-transformation:1.0.0'
     compile 'com.bigkoo:convenientbanner:2.0.5'
     compile 'org.greenrobot:eventbus:3.0.0'

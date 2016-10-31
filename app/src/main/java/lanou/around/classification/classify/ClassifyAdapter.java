@@ -1,4 +1,4 @@
-package lanou.around.classification;
+package lanou.around.classification.classify;
 
 
 import android.content.Context;
@@ -125,7 +125,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 computerViewHolder.computerTitle.setText(mRespDataBeanList.get(position).getCateName());
                 computerViewHolder.computerMessage.setText(mRespDataBeanList.get(position).getCateDescribe());
 
-                ClassifyGridAdapter gridAdapter = new ClassifyGridAdapter(context);
+                ClassifyComputerAdapter gridAdapter = new ClassifyComputerAdapter(context);
                 gridAdapter.setClassifyBean(mClassifyBean);
                 computerViewHolder.mGridView.setAdapter(gridAdapter);
                 break;

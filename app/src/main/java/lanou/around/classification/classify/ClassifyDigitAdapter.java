@@ -1,4 +1,4 @@
-package lanou.around.classification;
+package lanou.around.classification.classify;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;

@@ -19,7 +19,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/iv_dropDownButton"
-                app:tabMode="scrollable" />
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/release"
+                app:tabTextColor="@color/release"/>
 
 
             <ImageView

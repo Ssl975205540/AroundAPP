@@ -1,7 +1,8 @@
-package lanou.around.classification.classifiview;
+package lanou.around.presenter;
 
 import lanou.around.aroundinterface.InterView;
 import lanou.around.aroundinterface.OnFinishedListener;
+import lanou.around.model.ClassifyViewModel;
 
 
 /**

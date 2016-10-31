@@ -4,21 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lanou.around.classification.WebActivity">
+    tools:context="lanou.around.classification.classifyview.DigitWebActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorText">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/o3"/>
+
         <TextView
-            android:text="数码"
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="数码"
+            android:textColor="@color/home_adapter_item"/>
+
+        <ImageView
+            android:id="@+id/iv_share"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:src="@mipmap/wg"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/iv_share"
+            android:src="@mipmap/wf"/>
     </RelativeLayout>
-<WebView
-    android:id="@+id/webview"
-    android:layout_marginTop="50dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</WebView>
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp">
+    </WebView>
 </RelativeLayout>
