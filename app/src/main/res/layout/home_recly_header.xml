@@ -7,7 +7,6 @@
     <com.bigkoo.convenientbanner.ConvenientBanner
         android:id="@+id/banner_home"
         android:layout_width="match_parent"
-
-        android:layout_height="180dp">
+        android:layout_height="220dp">
     </com.bigkoo.convenientbanner.ConvenientBanner>
 </LinearLayout>

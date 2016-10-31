@@ -4,9 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <permission android:name="android.permission.INTERNET"/>
-    <permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <!-- Sd写的权限 -->
@@ -27,6 +24,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
+
     <application
         android:name=".app.AroundAPP"
         android:allowBackup="true"
@@ -36,6 +34,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".main.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:theme="@style/SupportTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

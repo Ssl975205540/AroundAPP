@@ -1,16 +1,12 @@
 package lanou.around.model;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterModel;
 import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.HomeBean;
-import lanou.around.bean.HomeBeanHot;
 import lanou.around.home.HomeTabBean;
 import lanou.around.tools.db.AroundDBManager;
 import lanou.around.tools.http.HtttpManger;
@@ -32,24 +28,24 @@ public class HomeModel implements InterModel {
 
 
                 if(tClass1 instanceof HomeBean){
-                    if (((HomeBean) tClass1).getRespCode().equals("0")) {
+
+                    if(AroundAPP.isNetworkAvailable()){
 
                         onFinishedListener.onFinished((T) tClass1);
-                        return;
-                    } else {
+                    }else {
                         onFailed();
+
                     }
+
+
                 }
 
                 if (tClass1 instanceof HomeTabBean){
 
 
-                    Log.d("HomeModel", "ni你妈的");
                     onFinishedListener.onFinished((T) tClass1);
 
                 }
-
-
 
             }
 
@@ -57,73 +53,22 @@ public class HomeModel implements InterModel {
             @Override
             public void onFailed() {
 
-                QuerySQ(new OnCompleted<ArrayList<HomeBeanHot>>() {
+                QuerySQ(new OnCompleted<HomeBean>() {
 
                     @Override
-                    public void onCompleted(ArrayList<HomeBeanHot> result) {
-                        if (result.size() != 0) {
-                            HomeBean homeBean = new HomeBean();
-                            homeBean.setRespCode("0");
-                            homeBean.setRespData(new HomeBean.RespDataBean());
-                            homeBean.getRespData().setActBanners(new ArrayList<HomeBean.RespDataBean.ActBannersBean>());
-                            homeBean.getRespData().getActBanners().add(new HomeBean.RespDataBean.ActBannersBean());
-                            homeBean.getRespData().getActBanners().get(0).setMiddleBanner(new HomeBean.RespDataBean.ActBannersBean.MiddleBannerBean());
-                            List<List<HomeBean.RespDataBean.ActBannersBean.MiddleBannerBean.BannersBean>> arrayLists = new ArrayList<>();
-                            for (int i = 0; i < 3; i++) {
-
-                                ArrayList<HomeBean.RespDataBean.ActBannersBean.MiddleBannerBean.BannersBean> arrayList = new ArrayList<>();
-                                arrayList.add(new HomeBean.RespDataBean.ActBannersBean.MiddleBannerBean.BannersBean());
-                                arrayList.add(new HomeBean.RespDataBean.ActBannersBean.MiddleBannerBean.BannersBean());
-                                arrayList.add(new HomeBean.RespDataBean.ActBannersBean.MiddleBannerBean.BannersBean());
-                                arrayLists.add(arrayList);
-
-                            }
-
-                            homeBean.getRespData().getActBanners().get(0).getMiddleBanner().setBanners(arrayLists);
-
-                            for (int i = 0; i < 3; i++) {
-                                if (i == 0) {
-                                    for (int j = 0; j < 3; j++) {
-                                        homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).setImageUrl(result.get(j).getImageUrl());
-//                                        homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).setGoOperation(result.get(j).getGoOperation());
-
-                                    }
-                                }
-
-                                if (i == 1) {
-
-                                    for (int j = 0; j < 3; j++) {
-                                        homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).setImageUrl(result.get(j + 3).getImageUrl());
-//                                        homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).setGoOperation(result.get(j+3).getGoOperation());
-                                    }
-
-                                }
+                    public void onCompleted(HomeBean result) {
 
 
-                                if (i == 2) {
-                                    for (int k = 0; k < 3; k++) {
-                                        homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(k).setImageUrl(result.get(k + 6).getImageUrl());
-//                                        homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(k).setGoOperation(result.get(k+6).getGoOperation());
 
-                                    }
-
-                                }
-
-                            }
-
-
-                            onFinishedListener.onFinished((T) homeBean);
-
-                        } else {
-                            onFailed();
+                        if(result != null){
+                            onFinishedListener.onFinished((T) result);
                         }
+
 
                     }
 
                     @Override
                     public void onFailed() {
-                        onFinishedListener.onError();
-
 
                     }
                 });
@@ -144,29 +89,29 @@ public class HomeModel implements InterModel {
     @Override
     public <E> void QuerySQ(OnCompleted<E> onCompletedListener) {
         myAsyncTask myAsyncTask = new myAsyncTask();
-        myAsyncTask.setArrayListOnCompletedListener((OnCompleted<ArrayList<HomeBeanHot>>) onCompletedListener);
+        myAsyncTask.setArrayListOnCompletedListener((OnCompleted<HomeBean>) onCompletedListener);
         myAsyncTask.execute();
     }
 
 
-    class myAsyncTask extends AsyncTask<Void, Void, ArrayList<HomeBeanHot>> {
+    class myAsyncTask extends AsyncTask<Void, Void, HomeBean> {
 
 
-        private OnCompleted<ArrayList<HomeBeanHot>> arrayListOnCompletedListener;
+        private OnCompleted<HomeBean> arrayListOnCompletedListener;
 
-        public void setArrayListOnCompletedListener(OnCompleted<ArrayList<HomeBeanHot>> arrayListOnCompletedListener) {
+        public void setArrayListOnCompletedListener(OnCompleted<HomeBean> arrayListOnCompletedListener) {
             this.arrayListOnCompletedListener = arrayListOnCompletedListener;
         }
 
         @Override
-        protected ArrayList<HomeBeanHot> doInBackground(Void... params) {
+        protected HomeBean doInBackground(Void... params) {
 
-            return (ArrayList<HomeBeanHot>) AroundDBManager.getInstance().query("homegettopbanner");
+            return AroundDBManager.getInstance().query("homegettopbanner");
 
         }
 
         @Override
-        protected void onPostExecute(ArrayList<HomeBeanHot> o) {
+        protected void onPostExecute(HomeBean o) {
             super.onPostExecute(o);
 
             arrayListOnCompletedListener.onCompleted(o);
@@ -178,5 +123,7 @@ public class HomeModel implements InterModel {
 
 
     }
+
+
 
 }
