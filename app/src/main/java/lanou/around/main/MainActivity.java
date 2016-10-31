@@ -1,7 +1,6 @@
 package lanou.around.main;
 
 
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
@@ -19,7 +18,7 @@ import android.widget.Toast;
 
 import lanou.around.R;
 import lanou.around.base.BaseActivity;
-import lanou.around.classification.ClassifyFragment;
+import lanou.around.classification.classify.ClassifyFragment;
 import lanou.around.home.HomeFragment;
 import lanou.around.login.LoginFragment;
 import lanou.around.video.VideoFragment;

@@ -17,7 +17,7 @@ import java.util.List;
 import lanou.around.R;
 import lanou.around.bean.VideoBean;
 import lanou.around.bean.VideoDetailsBean;
-import lanou.around.tools.recycle.CircleTransform;
+import lanou.around.widget.CircleTransform;
 
 /**
  * Created by dllo on 16/10/24.
@@ -129,7 +129,8 @@ public class InnerAdapter extends lanou.around.base.BaseAdapter{
         holder.channelName.setText(videoDetailsBean.getChannelName());
         holder.channelIntro.setText(videoDetailsBean.getChannelIntro());
         holder.tag.setText(videoDetailsBean.getTag());
-        holder.intro.setText(videoDetailsBean.getIntro());
+
+        holder.intro.setText(videoDetailsBean.getTitle());
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

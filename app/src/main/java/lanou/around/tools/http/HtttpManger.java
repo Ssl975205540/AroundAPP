@@ -52,6 +52,20 @@ public class HtttpManger implements IHttpRequest{
     }
 
     @Override
+    public <T> void postRequest(String urlStr, Map<String, String> headers, String requestBody, Class<T> tClass, OnCompletedListener<T> listener) {
+        mRequest.postRequest(urlStr,headers,requestBody,tClass,listener);
+
+
+
+
+
+
+
+
+    }
+
+
+    @Override
     public <T> void postRequest(String urlStr, Map<String, String> headers, Map<String, String> requestBody, Class<T> tClass, OnCompletedListener<T> listener) {
         mRequest.postRequest(urlStr,headers,requestBody,tClass,listener);
     }

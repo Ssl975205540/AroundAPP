@@ -1,6 +1,5 @@
-package lanou.around.classification;
+package lanou.around.classification.checkall;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -8,10 +7,9 @@ import android.widget.ListView;
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseActivity;
-import lanou.around.base.BaseFragment;
 import lanou.around.bean.ClassifyViewBean;
 
-import lanou.around.classification.classifiview.ClassifyViewPresenter;
+import lanou.around.presenter.ClassifyViewPresenter;
 import lanou.around.tools.http.URLValues;
 
 /**
@@ -70,11 +68,12 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    public <T> void onResponse(T t) {
+    public void onResponse(Object t) {
         ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
         CheckAllAdapter adapter = new CheckAllAdapter(this, classifyViewBean.getRespData());
         mClassify.setAdapter(adapter);
     }
+
 
     @Override
     public void onError() {

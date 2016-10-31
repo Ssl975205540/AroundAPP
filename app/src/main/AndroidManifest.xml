@@ -41,9 +41,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".classification.WebActivity">
+        <activity android:name=".classification.classifyview.DigitWebActivity"/>
+        <activity android:name=".classification.checkall.CheckAllActivity"/>
+        <activity android:name=".login.LoginTreatyActivity"/>
+        <activity android:name=".classification.search.SearchActivity"/>
+        <activity android:name=".classification.seek.SeekActivity">
         </activity>
-        <activity android:name=".classification.CheckAllActivity"/>
     </application>
 
 </manifest>

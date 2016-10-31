@@ -1,4 +1,4 @@
-package lanou.around.classification;
+package lanou.around.classification.classify;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,7 +18,7 @@ import static lanou.around.app.AroundAPP.context;
 /**
  * Created by dllo on 16/10/26.
  */
-public class ClassifyBabyAdapter extends BaseAdapter {
+public class ClassifyElectricalAdapter extends BaseAdapter {
     private Context mContext;
     private ClassifyBean mClassifyBean;
 
@@ -27,13 +27,13 @@ public class ClassifyBabyAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public ClassifyBabyAdapter(Context context) {
+    public ClassifyElectricalAdapter(Context context) {
         mContext = context;
     }
 
     @Override
     public int getCount() {
-        return mClassifyBean.getRespData().get(3).getSubCateArr().size();
+        return mClassifyBean.getRespData().get(5).getSubCateArr().size();
     }
 
     @Override
@@ -48,17 +48,13 @@ public class ClassifyBabyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_baby_grid, parent, false);
-        ImageView photo = (ImageView) view.findViewById(R.id.iv_baby_photo);
-        TextView title = (TextView) view.findViewById(R.id.tv_baby_title);
-        TextView body = (TextView) view.findViewById(R.id.tv_baby_body);
-        Picasso.with(context).load(mClassifyBean.getRespData().get(3)
+        View view = LayoutInflater.from(context).inflate(R.layout.item_electrical_grid, parent, false);
+        ImageView photo = (ImageView) view.findViewById(R.id.iv_electrical_photo);
+        TextView title = (TextView) view.findViewById(R.id.tv_electrical_title);
+        Picasso.with(context).load(mClassifyBean.getRespData().get(5)
                 .getSubCateArr().get(position).getSubCateLogo()).into(photo);
-        title.setText(mClassifyBean.getRespData().get(3)
+        title.setText(mClassifyBean.getRespData().get(5)
                 .getSubCateArr().get(position).getSubCateName());
-        body.setText(mClassifyBean.getRespData().get(3)
-                .getSubCateArr().get(position).getSubCateDescribe());
-
         return view;
     }
 

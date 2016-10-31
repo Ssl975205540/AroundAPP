@@ -1,4 +1,4 @@
-package lanou.around.tools.recycle;
+package lanou.around.widget;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

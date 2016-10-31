@@ -1,4 +1,4 @@
-package lanou.around.classification.classifiview;
+package lanou.around.classification.classifyview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,7 +18,7 @@ import lanou.around.bean.ClassifyViewBean;
 /**
  * Created by dllo on 16/10/25.
  */
-public class GridViewPagerLeftAdapter extends BaseAdapter {
+public class GridViewPagerAdapter extends BaseAdapter {
 
     private View mView;
     private Context mContext;
@@ -34,7 +34,7 @@ public class GridViewPagerLeftAdapter extends BaseAdapter {
 
 
 
-    public GridViewPagerLeftAdapter(Context context) {
+    public GridViewPagerAdapter(Context context) {
         mContext = context;
     }
 

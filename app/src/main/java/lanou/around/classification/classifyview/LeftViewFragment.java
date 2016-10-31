@@ -1,4 +1,4 @@
-package lanou.around.classification.classifiview;
+package lanou.around.classification.classifyview;
 
 import android.content.Intent;
 import android.view.View;
@@ -13,7 +13,8 @@ import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.ClassifyViewBean;
-import lanou.around.classification.WebActivity;
+import lanou.around.classification.search.SearchActivity;
+import lanou.around.presenter.ClassifyViewPresenter;
 import lanou.around.tools.http.URLValues;
 
 /**
@@ -60,13 +61,13 @@ public class LeftViewFragment extends BaseFragment implements InterView {
     }
 
     @Override
-    public <T> void onResponse(T t) {
+    public  void onResponse(Object t) {
         ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
         mRespDataBeen = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             mRespDataBeen.add(classifyViewBean.getRespData().get(i));
         }
-        GridViewPagerLeftAdapter gridViewAdapter = new GridViewPagerLeftAdapter(context);
+        GridViewPagerAdapter gridViewAdapter = new GridViewPagerAdapter(context);
         gridViewAdapter.setRespDataBeen(mRespDataBeen);
         gridView.setAdapter(gridViewAdapter);
     }
@@ -84,13 +85,13 @@ public class LeftViewFragment extends BaseFragment implements InterView {
             System.out.println("arg2 = " + arg2); // 打印出点击的位置
             if (1 == arg2) {
                 if (mRespDataBeen.get(1).getMurl() != null){
-                    Intent intent = new Intent(AroundAPP.getContext(), WebActivity.class);
+                    Intent intent = new Intent(AroundAPP.getContext(), DigitWebActivity.class);
                     intent.putExtra("url", mRespDataBeen.get(1).getMurl());
                     getActivity().startActivity(intent);
                 }
 
             } else {
-                Intent intent = new Intent(getContext(), WebActivity.class);
+                Intent intent = new Intent(getContext(), SearchActivity.class);
                 getActivity().startActivity(intent);
             }
 

@@ -1,10 +1,9 @@
-package lanou.around.classification.classifiview;
+package lanou.around.model;
 
 import lanou.around.aroundinterface.InterModel;
 import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
 
-import lanou.around.bean.ClassifyViewBean;
 import lanou.around.tools.http.HtttpManger;
 import lanou.around.tools.http.OnCompletedListener;
 

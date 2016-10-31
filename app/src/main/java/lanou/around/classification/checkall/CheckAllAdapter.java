@@ -1,4 +1,4 @@
-package lanou.around.classification;
+package lanou.around.classification.checkall;
 
 import android.content.Context;
 import android.view.View;

@@ -1,10 +1,8 @@
-package lanou.around.classification;
+package lanou.around.classification.classify;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,13 +21,15 @@ import java.util.List;
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+import lanou.around.classification.checkall.CheckAllActivity;
+import lanou.around.classification.classifyview.CenterViewFragment;
+import lanou.around.classification.classifyview.ClassifyViewAdapter;
+import lanou.around.classification.classifyview.LeftViewFragment;
+import lanou.around.classification.classifyview.RightViewFragment;
 import lanou.around.tools.http.URLValues;
 import lanou.around.bean.ClassifyBean;
 import lanou.around.bean.ClassifyTabBean;
-import lanou.around.classification.classifiview.CenterViewFragment;
-import lanou.around.classification.classifiview.ClassifyViewAdapter;
-import lanou.around.classification.classifiview.LeftViewFragment;
-import lanou.around.classification.classifiview.RightViewFragment;
+
 import lanou.around.presenter.ClassifyPresenter;
 import lanou.around.tools.recycle.DisplayUtil;
 import lanou.around.widget.PullZoomView;

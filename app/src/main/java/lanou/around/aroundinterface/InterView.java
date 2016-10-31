@@ -10,7 +10,7 @@ public interface InterView  {
 
     void stopAnimation();
 
-    <T>void onResponse(T t);
+    void onResponse(Object t);
 
     void onError();
 

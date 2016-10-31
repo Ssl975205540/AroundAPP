@@ -1,4 +1,4 @@
-package lanou.around.classification;
+package lanou.around.classification.classify;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,9 +12,9 @@ import android.widget.TextView;
 import lanou.around.bean.ClassifyBean;
 
 /**
- * Created by dllo on 16/10/26.
+ * Created by dllo on 16/10/24.
  */
-public class ClassifyFurnitureAdapter extends BaseAdapter {
+public class ClassifyComputerAdapter extends BaseAdapter {
     //上下文对象
     private Context context;
     private ClassifyBean mClassifyBean;
@@ -23,13 +23,13 @@ public class ClassifyFurnitureAdapter extends BaseAdapter {
         mClassifyBean = classifyBean;
     }
 
-    public ClassifyFurnitureAdapter(Context context) {
+    public ClassifyComputerAdapter(Context context) {
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return mClassifyBean.getRespData().get(6).getSubCateArr().size();
+        return mClassifyBean.getRespData().get(2).getSubCateArr().size();
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ClassifyFurnitureAdapter extends BaseAdapter {
         } else {
             textView = (TextView) convertView;
         }
-        textView.setText(mClassifyBean.getRespData().get(6).getSubCateArr().get(position).getSubCateName());
+        textView.setText(mClassifyBean.getRespData().get(2).getSubCateArr().get(position).getSubCateName());
         return textView;
     }
 }

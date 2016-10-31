@@ -17,8 +17,10 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.Headers;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -101,8 +103,22 @@ public class OkHttpImpl implements IHttpRequest {
 
     }
 
+    @Override
+    public <T> void postRequest(String urlStr, Map<String, String> headers, String requestBody, Class<T> tClass, OnCompletedListener<T> listener) {
+
+
+        MediaType MEDIA_TYPE_TEXT = MediaType.parse("application/x-www-form-urlencoded");
+        Request request = new Request.Builder().url(urlStr).headers(Headers.of(headers)).post(RequestBody.create(MEDIA_TYPE_TEXT, requestBody)).build();
+
+
+        asyncRequest(tClass,listener,request);
+
+    }
+
     @NonNull
     private FormBody getFormBody(Map<String, String> requestBody) {
+
+
         FormBody.Builder builder = new FormBody.Builder();
 
         for (String key : requestBody.keySet()) {
@@ -113,6 +129,7 @@ public class OkHttpImpl implements IHttpRequest {
 
         return builder.build();
     }
+
 
     @Override
     public <T> void postRequest(String urlStr, Map<String, String> headers, Map<String, String> requestBody, Class<T> tClass, OnCompletedListener<T> listener) {

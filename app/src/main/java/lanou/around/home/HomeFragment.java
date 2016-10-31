@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,6 +23,9 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +33,7 @@ import lanou.around.R;
 import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+import lanou.around.bean.EventBean;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeBeanHot;
 import lanou.around.home.nearby.NearByFragment;
@@ -67,6 +72,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     private RoundImageView circle_search_home;
     private ConvenientBanner bannerHome;
     private LinearLayout supplementary, supplement;
+    private FrameLayout fffff;
+    private NestedScrollView nestscroll;
 
 
     @Override
@@ -103,16 +110,18 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
     @Override
     protected void initViews() {
+        EventBus.getDefault().register(this);
         recyviewHome = findView(R.id.recyview_home);
         viewPagerHome = findView(R.id.viewpager_home);
         toolbarHome = findView(R.id.toolbar_home);
         tabHome = findView(R.id.tab_home);
 
+
+        fffff = findView(R.id.fffff);
         supplement = findView(R.id.supplement);
 
         supplementary = findView(R.id.supplementary);
-        nestscrollHome = findView(R.id.nestscroll_home);
-//        tab1Home = findView(R.id.tab1_home);
+
         homeAppbar = findView(R.id.recyview_appbar);
         rl = findView(R.id.rl_home);
         rl1 = findView(R.id.rl1_home);
@@ -128,6 +137,19 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         bannerHome = findView(view, R.id.banner_home);
 
 
+    }
+
+    @Subscribe
+    public void setEvent(EventBean event){
+
+
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -195,7 +217,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
             @Override
             public void onPageSelected(int position) {
-                nestscrollHome.scrollTo(0, 0);
+
+
             }
 
             @Override
@@ -207,7 +230,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         homeAppbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
 
 
-          
+
 
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -220,6 +243,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
                         rl1.setVisibility(View.VISIBLE);
                         RevealToolbar.HideReveal(rl0);
+
 
 
 
