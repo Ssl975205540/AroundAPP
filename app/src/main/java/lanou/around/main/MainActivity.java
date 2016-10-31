@@ -113,11 +113,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 if (classFragment == null) {
                     classFragment = new ClassifyFragment(statusBarHeight);
-                    StatusBarUtil.setColor(this, Color.BLACK);
+                    //给此页的状态栏设置颜色 需添加依赖
+                    StatusBarUtil.setColor(this, Color.WHITE);
                 }
 
                 switchContent(classFragment);
-                //给此页的状态栏设置颜色 需添加依赖
                 
                 ivHome.setBackgroundResource(R.mipmap.m_);
                 ivClass.setBackgroundResource(R.mipmap.vq);
