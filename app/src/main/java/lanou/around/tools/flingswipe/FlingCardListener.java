@@ -1,4 +1,4 @@
-package lanou.around.flingswipe;
+package lanou.around.tools.flingswipe;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

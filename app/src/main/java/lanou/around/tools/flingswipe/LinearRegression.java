@@ -1,4 +1,4 @@
-package lanou.around.flingswipe;
+package lanou.around.tools.flingswipe;
 
 /**
  * Created by dllo on 16/10/24.

@@ -1,4 +1,4 @@
-package lanou.around.flingswipe;
+package lanou.around.tools.flingswipe;
 
 import android.content.Context;
 import android.util.AttributeSet;
