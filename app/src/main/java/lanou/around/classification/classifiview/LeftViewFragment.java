@@ -83,7 +83,7 @@ public class LeftViewFragment extends BaseFragment implements InterView {
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
             System.out.println("arg2 = " + arg2); // 打印出点击的位置
             if (1 == arg2) {
-                if (mRespDataBeen.get(1).getCateUrl() != null){
+                if (mRespDataBeen.get(1).getMurl() != null){
                     Intent intent = new Intent(AroundAPP.getContext(), WebActivity.class);
                     intent.putExtra("url", mRespDataBeen.get(1).getMurl());
                     getActivity().startActivity(intent);

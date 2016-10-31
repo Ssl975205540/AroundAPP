@@ -3,6 +3,7 @@ package lanou.around.video;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -112,6 +113,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
 
         //设置标题栏
         video_title.setText("视频");
+        video_title.setTextColor(Color.BLACK);
         video_code.setImageResource(R.mipmap.icon_scan);
 
         adapter.setCardHight(cardHeight);

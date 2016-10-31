@@ -15,9 +15,13 @@ public class URLValues {
     //推荐
     public static final String POST_RECOMMEND = "http://zhuanzhuan.58.com/zz/transfer/getRecommendInfoForIndex";
 
+
     public static final String PIN_RECOMMEND = "http://pic8.58cdn.com.cn/zhuanzh/";
 
     public static final String POSTBODY_RECOMMEND = "pageNum=1&lat=38.883479&lng=121.544684&pageSize=20&";
+
+    public static final String POST_BODY_RECOMMEND = "pageNum=1&lat=38.883479&lng=121.544684&pageSize=20&";
+
     //首页附近的TabLayout中的标题
     public static final String HOME_NEAR_TAB_MARKET = "http://zhuanzhuan.58.com/zz/transfer/getNearAndVillageCateList";
 
@@ -36,4 +40,6 @@ public class URLValues {
 
     //视频界面接口
     public static final String URL_VIDEO = "http://m.live.netease.com/bolo/api/rank/hotVideo.htm";
+    // 服务协议接口
+    public static final String URL_TREATY = "http://m.zhuanzhuan.58.com/Mzhuanzhuan/Mxieyi/xieyi.html";
 }

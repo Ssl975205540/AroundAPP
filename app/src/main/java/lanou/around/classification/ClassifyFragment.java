@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -92,6 +93,7 @@ public class ClassifyFragment extends BaseFragment
     }
 
     public ClassifyFragment(int statusBarHeight) {
+        Log.d("ClassifyFragment", "000000");
         this.statusBarHeight = statusBarHeight;
     }
 
