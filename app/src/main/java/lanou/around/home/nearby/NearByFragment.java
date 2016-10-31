@@ -2,30 +2,20 @@ package lanou.around.home.nearby;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
-
-
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
-import lanou.around.bean.ClassifyTabBean;
 import lanou.around.home.HomeTabBean;
 import lanou.around.presenter.HomePresenter;
 import lanou.around.tools.http.URLValues;
@@ -44,7 +34,7 @@ public class NearByFragment extends BaseFragment
     private List<String> strings = new ArrayList<>();
     private List<String> mStringList = new ArrayList<>();
     private HomeTabFragment mFragment;
-    private FrameLayout mFrameLayout;
+
 
 
     @Override
@@ -58,7 +48,7 @@ public class NearByFragment extends BaseFragment
         mViewPager = findView(R.id.vp_home_top);
         mDropDownButton = findView(R.id.iv_dropDownButton);
         mDropDownButton.setOnClickListener(this);
-        mFrameLayout = findView(R.id.frame_home_tab);
+
     }
 
     @Override
@@ -83,7 +73,7 @@ public class NearByFragment extends BaseFragment
     }
 
     @Override
-    public void onResponse(Object bean) {
+    public <T>void onResponse(T bean) {
         if (bean instanceof HomeTabBean) {
             HomeTabBean homeTabBean = (HomeTabBean) bean;
             for (int i = 0; i < homeTabBean.getRespData().size(); i++) {
@@ -134,7 +124,6 @@ public class NearByFragment extends BaseFragment
                         }
                     }
                 });
-
 
                 adapter.setPopupOnItemClickListener(new PopupWindowAdapter.OnItemClickListener() {
                     @Override

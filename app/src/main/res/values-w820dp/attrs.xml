@@ -13,4 +13,13 @@
         <attr name="border_outside_color" format="color"></attr>
     </declare-styleable>
 
+    <!-- 选中状态的颜色 -->
+    <attr name="checkedTextColor" format="color|reference"/>
+    <!-- 未选中状态的颜色(默认) -->
+    <attr name="unCheckedTextColor" format="color|reference"/>
+    <!-- 选中边框颜色 -->
+    <attr name="checkedStrokeColor" format="color|reference"/>
+    <!-- 未选中边框颜色(默认) -->
+    <attr name="unCheckedStrokeColor" format="color|reference"/>
+
 </resources>
