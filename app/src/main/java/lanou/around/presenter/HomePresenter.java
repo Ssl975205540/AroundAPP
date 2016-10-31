@@ -1,5 +1,6 @@
 package lanou.around.presenter;
 
+import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.model.HomeModel;
@@ -17,25 +18,34 @@ public class HomePresenter {
 
         this.interView = interView;
         homeModel = new HomeModel();
+        interView.startAnimation();
 
     }
 
 
     public <T> void startRequest(String url, Class<T> tClass) {
 
-        homeModel.StartRequest(url,tClass, new OnFinishedListener<T>() {
+        if(AroundAPP.isNetworkAvailable() == false){
+            interView.onError();
+        }
 
+        homeModel.StartRequest(url,tClass, new OnFinishedListener<T>() {
 
             @Override
             public void onFinished(T t) {
+
+                interView.stopAnimation();
                 interView.onResponse(t);
-                homeModel.InsertSQ(t);
+                if(AroundAPP.isNetworkAvailable()){
+                    homeModel.InsertSQ(t);
+                }
+
+
             }
 
             @Override
             public void onError() {
 
-                interView.onError();
 
             }
 

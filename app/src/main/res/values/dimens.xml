@@ -7,7 +7,6 @@
     <dimen name="textandiconmargin">2dp</dimen>
 
 
-
     <!--main_activity-->
     <dimen name="activity_main_layout_marginLeft">5dp</dimen>
     <dimen name="activity_main_layout_marginRight">5dp</dimen>

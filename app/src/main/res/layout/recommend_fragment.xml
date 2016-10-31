@@ -7,7 +7,7 @@
     <lanou.around.widget.MyRecyclerView
         android:id="@+id/recyclerview_recommend"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="500dp">
 
 
 

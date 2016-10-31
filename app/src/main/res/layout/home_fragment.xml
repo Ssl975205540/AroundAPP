@@ -2,9 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    xmlns:imagecontrol="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/main_content"
@@ -17,9 +15,7 @@
             android:id="@+id/recyview_appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            >
-
+            android:background="#FFFFFF">
 
 
             <lanou.around.widget.MyRecyclerView
@@ -38,21 +34,22 @@
 
             <LinearLayout
                 android:id="@+id/supplement"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/supplementary"
-                android:orientation="vertical"
-                android:background="#F2F3F6"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#F2F3F6"
+                android:orientation="vertical">
 
             </LinearLayout>
+
             <android.support.design.widget.TabLayout
                 android:id="@+id/tab_home"
                 android:layout_width="match_parent"
@@ -90,16 +87,14 @@
     <lanou.around.widget.TransparentToolBar
         android:id="@+id/toolbar_home"
         android:layout_width="match_parent"
-        android:clickable="true"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clickable="true">
 
         <lanou.around.widget.MorphFrameLayout
             android:id="@+id/rl_home"
             android:layout_width="match_parent"
 
             android:layout_height="wrap_content">
-
-
 
 
             <RelativeLayout
@@ -115,75 +110,74 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <RelativeLayout
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                 android:layout_centerInParent="true"
-                   >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:orientation="vertical">
+                        android:layout_centerInParent="true">
 
-                        <TextView
-                            android:id="@+id/tv_not_spending"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="推荐"
-                            android:layout_gravity="center"
-                            android:textColor="#FFFFFF"
-                            android:textSize="17dp" />
+                            android:layout_alignParentLeft="true"
+                            android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/img_not_spending"
+                            <TextView
+                                android:id="@+id/tv_not_spending"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="推荐"
+                                android:textColor="#FFFFFF"
+                                android:textSize="17dp" />
+
+                            <ImageView
+                                android:id="@+id/img_not_spending"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+
+                                android:background="@drawable/tab_shape" />
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
+                            android:layout_alignParentRight="true"
+                            android:orientation="vertical">
 
-                            android:background="@drawable/tab_shape" />
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/tv_yet_spent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                       android:layout_alignParentRight="true"
-                        android:orientation="vertical">
+                                android:layout_gravity="center"
+                                android:text="附近"
+                                android:textColor="#000000"
+                                android:textSize="17dp" />
 
-                        <TextView
-                            android:id="@+id/tv_yet_spent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            <ImageView
+                                android:id="@+id/img_yet_spent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
 
-                            android:text="附近"
-                            android:layout_gravity="center"
-                            android:textColor="#000000"
-                            android:textSize="17dp" />
-
-                        <ImageView
-                            android:id="@+id/img_yet_spent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-
-                            android:background="@drawable/tab_shape" />
-                    </LinearLayout>
+                                android:background="@drawable/tab_shape" />
+                        </LinearLayout>
 
 
-                </RelativeLayout>
+                    </RelativeLayout>
 
                     <lanou.around.widget.RoundImageView
                         android:id="@+id/circle_search_home"
                         android:layout_width="20dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="3dp"
-                        android:src="@mipmap/wf"
-                        android:foregroundGravity="center"
-                        android:background="@android:color/white"
+                        android:layout_height="20dp"
                         android:layout_alignParentRight="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginRight="5dp"
-                        android:layout_height="20dp" />
+                        android:layout_marginTop="3dp"
+                        android:background="@android:color/white"
+                        android:foregroundGravity="center"
+                        android:src="@mipmap/wf" />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -215,7 +209,6 @@
                         android:text="输入你正在找的宝贝"
                         android:textColor="@android:color/background_dark"
                         android:textSize="12dp" />
-
 
 
                 </LinearLayout>

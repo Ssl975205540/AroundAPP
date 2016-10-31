@@ -5,7 +5,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.holder.Holder;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import lanou.around.R;
 
 /**
  * Created by dllo on 16/10/29.
@@ -22,6 +25,9 @@ public class LocalImageHolderView implements Holder<String> {
 
     @Override
     public void UpdateUI(Context context, int position, String data) {
-        Picasso.with(context).load(data).into(imageView);
+
+        Glide.with(context).load(data).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.mipmap.home01_bg_card).placeholder(R.mipmap.rx)
+                .into(imageView);
     }
 }
