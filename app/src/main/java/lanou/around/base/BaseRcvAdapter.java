@@ -12,7 +12,7 @@ import lanou.around.widget.MyRecyclerView;
  * Created by dllo on 16/10/22.
  */
 
-public abstract class BaseRcvAdapter<Holder extends RecyclerHolder, T> extends RecyclerView.Adapter<Holder> {
+public abstract class BaseRcvAdapter<Holder extends RecyclerView.ViewHolder, T> extends RecyclerView.Adapter<Holder> {
 
     /**
      * adapter 数据集

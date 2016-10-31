@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -206,21 +207,20 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         homeAppbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
 
 
-            public boolean supple = true;
+          
 
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 
                 toolbarHome.setChangeTop(-verticalOffset);
-
-
+                Log.d("HomeFragment", "-verticalOffset:" + -verticalOffset);
+                Log.d("HomeFragment", "appBarLayout.getHeight() - tabHome.getHeight() - statusBarHeight:" + (appBarLayout.getHeight() - tabHome.getHeight() - statusBarHeight));
                 if (-verticalOffset == appBarLayout.getHeight() - tabHome.getHeight() - statusBarHeight) {
 
-                    if (supple) {
+
                         rl1.setVisibility(View.VISIBLE);
                         RevealToolbar.HideReveal(rl0);
-                        supple = false;
-                    }
+
 
 
                 } else {
@@ -228,7 +228,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
                     rl1.setVisibility(View.INVISIBLE);
                     rl0.setVisibility(View.VISIBLE);
-                    supple = true;
+
                 }
             }
         });
@@ -371,13 +371,16 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
     public void setStatusBarHeight(int statusBarHeight) {
 
+
         this.statusBarHeight = statusBarHeight;
-        toolbarHome.getLayoutParams().height = statusBarHeight + tabHome.getHeight();
+        Log.d("HomeFragment", "statusBarHeight:" + statusBarHeight);
+
 
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) rl.getLayoutParams();
         params.setMargins(50, statusBarHeight + 20, 50, 5);// 通过自定义坐标来放置你的控件
         rl.setLayoutParams(params);
+        toolbarHome.getLayoutParams().height = statusBarHeight + tabHome.getHeight();
         supplementary.getLayoutParams().height = statusBarHeight / 2;
         supplement.getLayoutParams().height = statusBarHeight / 2;
 
