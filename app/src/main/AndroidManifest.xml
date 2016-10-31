@@ -45,6 +45,7 @@
         </activity>
         <activity android:name=".classification.WebActivity">
         </activity>
+        <activity android:name=".login.LoginTreatyActivity"/>
     </application>
 
 </manifest>

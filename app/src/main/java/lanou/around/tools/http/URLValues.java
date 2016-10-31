@@ -34,4 +34,6 @@ public class URLValues {
 
     //视频界面接口
     public static final String URL_VIDEO = "http://m.live.netease.com/bolo/api/rank/hotVideo.htm";
+    // 服务协议接口
+    public static final String URL_TREATY = "http://m.zhuanzhuan.58.com/Mzhuanzhuan/Mxieyi/xieyi.html";
 }
