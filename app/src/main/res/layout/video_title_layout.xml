@@ -12,7 +12,7 @@
         <ImageButton
             android:id="@+id/video_title_back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:background="#fcfafa"/>
         <TextView

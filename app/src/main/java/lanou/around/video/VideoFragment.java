@@ -53,7 +53,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         SwipeFlingAdapterView.OnItemClickListener , EasyPermissions.PermissionCallbacks, View.OnClickListener {
 
     private TextView video_title;
-    private ImageButton video_code;
+    private ImageButton video_code , location;
     private SuperVideoPlayer mSuperVideoPlayer;
     private int cardWidth;
     private int cardHeight;
@@ -83,6 +83,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         //标题栏
         video_title = findView(R.id.video_title_tv);
         video_code = findView(R.id.video_code);
+        location = findView(R.id.video_title_back);
 
         //卡片模式
         DisplayMetrics dm = getResources().getDisplayMetrics();
@@ -106,6 +107,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         swipeView.setFlingListener(this);
         swipeView.setOnItemClickListener(this);
         video_code.setOnClickListener(this);
+        location.setOnClickListener(this);
     }
 
     @Override
@@ -115,6 +117,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         video_title.setText("视频");
         video_title.setTextColor(Color.BLACK);
         video_code.setImageResource(R.mipmap.icon_scan);
+        location.setImageResource(R.mipmap.locationsu);
 
         adapter.setCardHight(cardHeight);
         adapter.setCardWidth(cardWidth);
@@ -350,6 +353,9 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
             case R.id.video_code:
                 Intent intent =new Intent(getContext() , CaptureActivity.class);
                 startActivityForResult(intent , REQUEST_CODE);
+                break;
+            case R.id.video_title_back:
+
                 break;
         }
 
