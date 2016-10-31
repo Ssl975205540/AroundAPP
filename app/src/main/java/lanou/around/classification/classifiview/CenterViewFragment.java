@@ -54,7 +54,7 @@ public class CenterViewFragment extends BaseFragment implements InterView {
     }
 
     @Override
-    public <T> void onResponse(T t) {
+    public void onResponse(Object t) {
         ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
         List<ClassifyViewBean.RespDataBean> respDataBeanList = new ArrayList<>();
         for (int i = 8; i < 16 ; i++) {

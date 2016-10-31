@@ -17,7 +17,7 @@ import java.util.List;
 import lanou.around.R;
 import lanou.around.bean.VideoBean;
 import lanou.around.bean.VideoDetailsBean;
-import lanou.around.tools.recycle.CircleTransform;
+import lanou.around.widget.CircleTransform;
 
 /**
  * Created by dllo on 16/10/24.

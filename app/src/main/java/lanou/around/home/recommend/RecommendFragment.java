@@ -1,9 +1,12 @@
 package lanou.around.home.recommend;
 
+import android.support.v7.widget.LinearLayoutManager;
+
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.RecommendBean;
+import lanou.around.presenter.RecommendPresenter;
 import lanou.around.widget.MyRecyclerView;
 
 /**
@@ -17,6 +20,9 @@ public class RecommendFragment extends BaseFragment implements InterView {
     @Override
     protected void initData() {
 
+        RecommendPresenter recommendPresenter = new RecommendPresenter(this);
+
+        recommendPresenter.startRequest("http://zhuanzhuan.58.com/zz/transfer/getRecommendInfoForIndex",RecommendBean.class);
     }
 
     @Override
@@ -34,7 +40,24 @@ public class RecommendFragment extends BaseFragment implements InterView {
 
     @Override
     protected void initListeners() {
+        recyclerview.setLoadingMoreEnabled(false);
 
+        recyclerview.setLoadingListener(new MyRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+
+            @Override
+            public void setdisplay(int i) {
+
+            }
+
+            @Override
+            public void onLoadMore() {
+
+            }
+        });
     }
 
     @Override
@@ -48,15 +71,27 @@ public class RecommendFragment extends BaseFragment implements InterView {
     }
 
     @Override
-    public <T> void onResponse(T t) {
-
+    public  void onResponse(Object t) {
 
         RecommendBean bean = (RecommendBean) t;
+
         RecommendAdapter recommendAdapter = new RecommendAdapter(context, bean.getRespData());
+
+        recyclerview.setAdapter(recommendAdapter);
+
+        recyclerview.setLayoutManager(new LinearLayoutManager(context));
+
+
+
+
+
     }
 
     @Override
     public void onError() {
+
+
+
 
     }
 }

@@ -54,7 +54,7 @@ public class RightViewFragment extends BaseFragment implements InterView {
     }
 
     @Override
-    public <T> void onResponse(T t) {
+    public  void onResponse(Object t) {
         ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
         List<ClassifyViewBean.RespDataBean> dataBeanList = new ArrayList<>();
         for (int i = 16; i < 19 ; i++) {

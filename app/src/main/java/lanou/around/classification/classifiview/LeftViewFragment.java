@@ -60,7 +60,7 @@ public class LeftViewFragment extends BaseFragment implements InterView {
     }
 
     @Override
-    public <T> void onResponse(T t) {
+    public  void onResponse(Object t) {
         ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
         mRespDataBeen = new ArrayList<>();
         for (int i = 0; i < 8; i++) {

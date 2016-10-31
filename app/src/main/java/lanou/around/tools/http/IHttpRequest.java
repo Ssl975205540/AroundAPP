@@ -20,6 +20,8 @@ public interface IHttpRequest {
 
     <T> void postRequest(String urlStr, Map<String, String> requestBody, Class<T> tClass, OnCompletedListener<T> listener);
 
+    <T> void postRequest(String urlStr, Map<String, String> headers,String requestBody, Class<T> tClass, OnCompletedListener<T> listener);
+
     <T> void postRequest(String urlStr, Map<String, String> headers, Map<String, String> requestBody, Class<T> tClass, OnCompletedListener<T> listener);
 
 
