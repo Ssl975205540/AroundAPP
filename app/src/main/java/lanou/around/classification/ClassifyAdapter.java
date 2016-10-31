@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lanou.around.R;
+import lanou.around.base.BaseRcvAdapter;
 import lanou.around.bean.ClassifyBean;
 
 /**

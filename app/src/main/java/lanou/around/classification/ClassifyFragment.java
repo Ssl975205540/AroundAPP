@@ -3,10 +3,13 @@ package lanou.around.classification;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,7 +41,7 @@ import lanou.around.widget.TransparentToolBar;
 
 
 public class ClassifyFragment extends BaseFragment
-        implements InterView, TransparentToolBar.OnScrollStateListener {
+        implements InterView, TransparentToolBar.OnScrollStateListener, View.OnClickListener {
 
     private ViewPager mViewPager;
     private RecyclerView mRecyclerView;
@@ -54,6 +57,7 @@ public class ClassifyFragment extends BaseFragment
     private ImageView mCheck;
     private ArrayList<ImageView> dots = new ArrayList<>();
     private int statusBarHeight;
+    private Button mCheckAll;
 
 
     @Override
@@ -76,6 +80,7 @@ public class ClassifyFragment extends BaseFragment
         mSearchText = findView(R.id.ll_classify_search);
         mCheck = findView(R.id.iv_classify_check);
         mToolBar = findView(R.id.toobar_classify);
+        mCheckAll = findView(R.id.btn_classify_check);
 
     }
 
@@ -87,13 +92,14 @@ public class ClassifyFragment extends BaseFragment
         mSearchText.setAlpha(0);
         mCheck.setImageAlpha(0);
 
+        mCheckAll.setOnClickListener(this);
+
         ClassifyPresenter presenter = new ClassifyPresenter(this);
         presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE, ClassifyTabBean.class);
         presenter.startRequest(URLValues.CLASSIFY_WANT_BUY_MESSAGE, ClassifyBean.class);
     }
 
     public ClassifyFragment(int statusBarHeight) {
-        Log.d("ClassifyFragment", "000000");
         this.statusBarHeight = statusBarHeight;
     }
 
@@ -283,5 +289,15 @@ public class ClassifyFragment extends BaseFragment
     @Override
     public void updateFraction(float fraction) {
         //ToolBar滚动回调的百分比0~1
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_classify_check:
+                Intent intent = new Intent(context, CheckAllActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

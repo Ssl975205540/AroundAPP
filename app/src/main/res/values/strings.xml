@@ -4,6 +4,7 @@
     <string name="home_dapter_item">同城购</string>
     <string name="check_more">查看所有分类</string>
     <string name="kind">切换类型</string>
+    <string name="allClassify">全部分类</string>
 
 
 </resources>

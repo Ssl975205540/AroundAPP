@@ -14,8 +14,8 @@ import java.util.List;
  */
 
 public abstract class BaseAdapter<T> extends android.widget.BaseAdapter {
-    private List<T> list;
-
+    public List<T> list;
+    public Context mContext;
     private LayoutInflater inflater;
 
     public BaseAdapter(Context context) {
@@ -27,6 +27,7 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter {
     }
 
     private void init(Context context, List<T> list) {
+        this.mContext = context;
         this.list = list;
         this.inflater = LayoutInflater.from(context);
     }
@@ -78,7 +79,10 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter {
         if (null == convertView) {
             convertView = inflate(getContentView());
         }
+
         onInitView(convertView, position);
+
+
         return convertView;
     }
 

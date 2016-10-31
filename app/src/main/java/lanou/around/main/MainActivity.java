@@ -17,8 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
-import com.jaeger.library.StatusBarUtil;
-
 import lanou.around.R;
 import lanou.around.base.BaseActivity;
 import lanou.around.classification.ClassifyFragment;
@@ -28,7 +26,6 @@ import lanou.around.video.VideoFragment;
 
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
-
 
     private ImageView ivHome;
     private ImageView ivClass;
@@ -114,8 +111,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 if (classFragment == null) {
                     classFragment = new ClassifyFragment(statusBarHeight);
-                    //给此页的状态栏设置颜色 需添加依赖
-                    StatusBarUtil.setColor(this, Color.WHITE);
+//                    //给此页的状态栏设置颜色 需添加依赖
+//                    StatusBarUtil.setColor(this, Color.RED);
                 }
 
                 switchContent(classFragment);
@@ -152,8 +149,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 ivHome.setBackgroundResource(R.mipmap.m_);
                 ivClass.setBackgroundResource(R.mipmap.vp);
                 ivVideo.setBackgroundResource(R.mipmap.sy);
-
-                StatusBarUtil.setColor(this, Color.TRANSPARENT);
 
                 break;
 
