@@ -1,5 +1,8 @@
 package lanou.around.login;
 
+import android.widget.ImageButton;
+import android.widget.TextView;
+
 import lanou.around.R;
 import lanou.around.base.BaseFragment;
 
@@ -8,8 +11,12 @@ import lanou.around.base.BaseFragment;
  */
 
 public class LoginFragment extends BaseFragment{
+    private ImageButton back;
+    private TextView login_title;
     @Override
     protected void initData() {
+        login_title.setText("登录");
+        back.setImageResource(R.mipmap.rn);
 
     }
 
@@ -20,6 +27,8 @@ public class LoginFragment extends BaseFragment{
 
     @Override
     protected void initViews() {
+        back = findView(R.id.video_title_back);
+        login_title = findView(R.id.video_title_tv);
 
     }
 

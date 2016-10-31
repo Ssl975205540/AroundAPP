@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="50dp">
+    android:layout_height="50dp"
+  >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ece9e9"
+        android:background="#fcfafa"
         android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/video_title_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#fcfafa"/>
         <TextView
             android:id="@+id/video_title_tv"
             android:layout_width="wrap_content"
@@ -22,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:background="#ece9e9"
+            android:background="#fcfafa"
             />
 
     </LinearLayout>
