@@ -216,10 +216,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             onWindowFocusChanged(true);
             Toast.makeText(this, "再按一次退出转转", Toast.LENGTH_SHORT).show();
             back = true;
-
         } else {
-
-
             super.onBackPressed();
         }
     }

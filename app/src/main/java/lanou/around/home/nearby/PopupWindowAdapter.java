@@ -6,10 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import lanou.around.R;
 
 /**
@@ -52,12 +49,14 @@ public class PopupWindowAdapter extends RecyclerView.Adapter<PopupWindowAdapter.
         holder.mName.setText(arrayList.get(position));
         holder.mBody.setText(mStringList.get(position));
 
+
         if (popupOnItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     popupOnItemClickListener.OnItemClickListener
                             (holder.itemView, holder.getLayoutPosition());
+
                 }
             });
         }
@@ -75,8 +74,10 @@ public class PopupWindowAdapter extends RecyclerView.Adapter<PopupWindowAdapter.
         private final TextView mName;
         private final TextView mBody;
 
+
         public ViewHolder(View itemView) {
             super(itemView);
+
             mName = (TextView) itemView.findViewById(R.id.tv_popup_name);
             mBody = (TextView) itemView.findViewById(R.id.tv_popup_body);
 
