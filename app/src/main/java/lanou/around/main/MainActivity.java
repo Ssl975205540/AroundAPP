@@ -129,7 +129,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 if (videoFragment == null) {
                     videoFragment = new VideoFragment();
                 }
+
                 switchContent(videoFragment);
+//                Intent intent = new Intent();
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                intent.setClass(MainActivity.this, VideoActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(0, 0);
                 ivHome.setBackgroundResource(R.mipmap.m_);
                 ivClass.setBackgroundResource(R.mipmap.vp);
                 ivLogin.setBackgroundResource(R.mipmap.sw);
@@ -234,6 +240,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
     }
+
 
 
 }

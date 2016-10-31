@@ -258,11 +258,13 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        Log.d("VideoFragment", "return");
         if (null == mSuperVideoPlayer) return;
         /***
          * 根据屏幕方向重新设置播放器的大小
          */
         if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Log.d("VideoFragment", "继续");
             getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getActivity().getWindow().getDecorView().invalidate();

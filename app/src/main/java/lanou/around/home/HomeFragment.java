@@ -62,7 +62,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     private RelativeLayout rl1, rl0;
     private TextView tvSpending, tvSpent;
     private ImageView imgSpending, imgSpent;
-
+    private boolean refresh = false;
     private RoundImageView circle_search_home;
     private ConvenientBanner bannerHome;
     private LinearLayout supplementary, supplement;
@@ -141,17 +141,20 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
             @Override
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
+
+
                     @Override
                     public void run() {
 
-
-                        homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
-                        recyviewHome.refreshComplete();
-                        setdisplay(0);
+                        if(refresh == true){
+                            homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
+                        }else {
+                            refresh = true;
+                        }
 
 
                     }
-                }, 1000);
+                }, 3000);
 
             }
 
@@ -274,13 +277,15 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     @Override
     public void startAnimation() {
 
-
+        recyviewHome.setRefreshing(true);
+        toolbarHome.setVisibility(View.GONE);
     }
 
     @Override
     public void stopAnimation() {
 
-
+        recyviewHome.refreshComplete();
+        toolbarHome.setVisibility(View.VISIBLE);
     }
 
     @Override
