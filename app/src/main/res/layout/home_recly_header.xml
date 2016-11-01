@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-
+ android:background="@color/colorText"
     android:layout_height="match_parent">
 
     <com.bigkoo.convenientbanner.ConvenientBanner
@@ -9,4 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="220dp">
     </com.bigkoo.convenientbanner.ConvenientBanner>
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/hsv_ll_home"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
 </LinearLayout>
