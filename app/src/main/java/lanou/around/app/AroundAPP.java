@@ -12,9 +12,10 @@ import com.uuzuche.lib_zxing.DisplayUtil;
  * Created by dllo on 16/10/25.
  */
 
-public class AroundAPP extends Application{
+public class AroundAPP extends Application {
 
     public static Context context;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -22,8 +23,7 @@ public class AroundAPP extends Application{
         initDisplayOpinion();
     }
 
-    public static Context getContext(){
-
+    public static Context getContext() {
 
 
         return context;
@@ -65,8 +65,6 @@ public class AroundAPP extends Application{
         }
         return false;
     }
-
-
 
 
 }

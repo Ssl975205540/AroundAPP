@@ -35,12 +35,11 @@ public class RecommendFragment extends BaseFragment implements InterView {
 
         recyclerview = findView(R.id.recyclerview_recommend);
 
-
     }
 
     @Override
     protected void initListeners() {
-        recyclerview.setLoadingMoreEnabled(false);
+
 
         recyclerview.setLoadingListener(new MyRecyclerView.LoadingListener() {
             @Override
