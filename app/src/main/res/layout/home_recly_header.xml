@@ -11,7 +11,8 @@
     </com.bigkoo.convenientbanner.ConvenientBanner>
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
         <LinearLayout
             android:id="@+id/hsv_ll_home"
             android:layout_width="wrap_content"
@@ -19,6 +20,69 @@
             android:layout_height="wrap_content">
         </LinearLayout>
     </HorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/friend_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/your_friend_image"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/ic_launcher"/>
+
+            <Button
+                android:id="@+id/your_friend_btn"
+                android:layout_width="160dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/toolbar_home_color"
+                android:text="瞅瞅朋友在卖啥"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_below="@+id/your_friend_image"/>
+
+            <TextView
+                android:id="@+id/here_my_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="你的好友都在这"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/home_adapter_item"
+                android:layout_marginTop="13dp"
+                android:layout_alignTop="@+id/your_friend_image"
+                android:layout_toEndOf="@+id/your_friend_image" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/your_friend_creame"
+            android:layout_width="53dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="150dp"
+            android:src="@mipmap/ic_launcher"
+            />
+            <ImageView
+                android:id="@+id/your_friend_pakge"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="15dp"
+                android:src="@mipmap/ic_launcher"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

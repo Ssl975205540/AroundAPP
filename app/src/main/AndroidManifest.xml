@@ -47,6 +47,8 @@
         <activity android:name=".classification.search.SearchActivity"/>
         <activity android:name=".classification.seek.SeekActivity">
         </activity>
+       <activity android:name=".home.HSVClickActivity"/>
+        <activity android:name=".home.FriendActivity"/>
     </application>
 
 </manifest>

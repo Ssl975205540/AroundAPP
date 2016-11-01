@@ -9,6 +9,8 @@ public class URLValues {
     //首页页面
     //你的好友都在这 的网址接口
     public static final String HOME_FIRENE_SELLING = "http://zhuanzhuan.58.com/zz/transfer/getLatestFriendSelling";
+    public static final String HOME_FRIEND_CREAME = "http://img.58cdn.com.cn/zhuanzhuan/friends/en1.png";
+    public static final String HOME_FRIEND_PAKGE = "http://img.58cdn.com.cn/zhuanzhuan/friends/en2.png";
     //热门市场和轮播图 的网址接口
     public static final String HOME_HOT_MARKET = "http://zhuanzhuan.58.com/zz/transfer/gettopbanner";
 

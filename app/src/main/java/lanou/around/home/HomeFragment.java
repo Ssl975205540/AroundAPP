@@ -1,6 +1,8 @@
 package lanou.around.home;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
@@ -9,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -46,7 +50,6 @@ import lanou.around.widget.MyRecyclerView;
 import lanou.around.widget.RoundImageView;
 import lanou.around.widget.StretchAnimation;
 import lanou.around.widget.TransparentToolBar;
-import lanou.around.widget.WrapContentHeightViewPager;
 
 
 /**
@@ -67,13 +70,14 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     private MorphFrameLayout rl;
     private RelativeLayout rl1, rl0;
     private TextView tvSpending, tvSpent;
-    private ImageView imgSpending, imgSpent;
+    private ImageView imgSpending, imgSpent , icon , friendIcon , friendCreame , friendPakge;
     private boolean refresh = false;
     private RoundImageView circle_search_home;
     private ConvenientBanner bannerHome;
-    private LinearLayout supplementary, supplement;
+    private LinearLayout supplementary, supplement , hsvLinear , friendLinear;
     private FrameLayout fffff;
     private NestedScrollView nestscroll;
+
 
 
     @Override
@@ -96,6 +100,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
         homePresenter = new HomePresenter(this);
         homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
+
+
 
 
     }
@@ -133,6 +139,17 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         circle_search_home = findView(R.id.circle_search_home);
 
         View view = LayoutInflater.from(context).inflate(R.layout.home_recly_header, null);
+        hsvLinear = (LinearLayout) view.findViewById(R.id.hsv_ll_home);
+        friendLinear = (LinearLayout) view.findViewById(R.id.friend_ll);
+
+        friendCreame = (ImageView) view.findViewById(R.id.your_friend_creame);
+        friendPakge = (ImageView) view.findViewById(R.id.your_friend_pakge);
+        friendIcon = (ImageView) view.findViewById(R.id.your_friend_image);
+        friendIcon.setImageResource(R.mipmap.vn);
+        Picasso.with(context).load(URLValues.HOME_FRIEND_PAKGE).into(friendCreame);
+        Picasso.with(context).load(URLValues.HOME_FRIEND_CREAME).into(friendPakge);
+
+
         recyviewHome.addHeaderView(view);
         bannerHome = findView(view, R.id.banner_home);
 
@@ -158,6 +175,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         imgSpending.setOnClickListener(this);
         tvSpent.setOnClickListener(this);
         imgSpent.setOnClickListener(this);
+        friendLinear.setOnClickListener(this);
         recyviewHome.setLoadingMoreEnabled(false);
 
         recyviewHome.setLoadingListener(new MyRecyclerView.LoadingListener() {
@@ -323,8 +341,31 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                 HomeBeanHot homeBeanHot = new HomeBeanHot();
                 homeBeanHot.setImageUrl(homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getImageUrl());
 //                homeBeanHot.setGoOperation(homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getGoOperation());
+
                 arrayList.add(homeBeanHot);
             }
+        }
+        for (int i = 0 ; i < 8 ; i++) {
+            View hsv_item = LayoutInflater.from(context).inflate(R.layout.hsv_item , null);
+            icon = (ImageView) hsv_item.findViewById(R.id.hsv_item_image);
+            Picasso.with(context).load(homeBean.getRespData().getLowBanners().get(i).getImageUrl()).into(icon);
+            final String clickUrl = homeBean.getRespData().getLowBanners().get(i).getGoUrl();
+            final String clickTitle = homeBean.getRespData().getLowBanners().get(i).getPostName();
+            final String hsv_click = URLValues.HOME_HOT_MARKET;
+            if (!TextUtils.isEmpty(hsv_click)) {
+                hsv_item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = Uri.parse(hsv_click);
+                        Intent intent = new Intent(AroundAPP.getContext() , HSVClickActivity.class);
+                        intent.putExtra("url" , clickUrl);
+                        intent.putExtra("title" , clickTitle);
+                        getActivity().startActivity(intent);
+                    }
+                });
+            }
+
+            hsvLinear.addView(hsv_item);
         }
 
 
@@ -430,6 +471,11 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                 imgSpent.setBackgroundResource(R.drawable.tab_shape);
                 imgSpending.setBackgroundResource(R.drawable.tab2_shape);
                 viewPagerHome.setCurrentItem(1);
+
+                break;
+            case R.id.friend_ll:
+               Intent intent  = new Intent(AroundAPP.getContext() , FriendActivity.class);
+                getActivity().startActivity(intent);
 
                 break;
 
