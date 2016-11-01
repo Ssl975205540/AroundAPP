@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:background="#FFFFFF">
 
+
             <lanou.around.widget.MyRecyclerView
                 android:id="@+id/recyview_home"
                 android:layout_width="match_parent"
