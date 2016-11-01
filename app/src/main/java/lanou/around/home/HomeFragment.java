@@ -56,7 +56,7 @@ import lanou.around.widget.WrapContentHeightViewPager;
 public class HomeFragment extends BaseFragment implements InterView, TransparentToolBar.OnScrollStateListener, StretchAnimation.AnimationListener, View.OnClickListener, OnItemClickListener {
 
     private MyRecyclerView recyviewHome;
-    private WrapContentHeightViewPager viewPagerHome;
+    private ViewPager viewPagerHome;
     private TabLayout tabHome;
     private HomeAdapter homeAdapter;
     private HomePresenter homePresenter;
