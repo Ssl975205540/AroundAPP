@@ -14,35 +14,22 @@ public class RecommendPresenter {
     private final RecommendModel homeModel;
 
     public RecommendPresenter(InterView interView) {
-
         this.interView = interView;
         homeModel = new RecommendModel();
-
-
     }
 
-
     public <T> void startRequest(String url, Class<T> tClass) {
-
         homeModel.StartRequest(url,tClass, new OnFinishedListener<T>() {
-
             @Override
             public void onFinished(T t) {
-
                 interView.onResponse(t);
-
             }
 
             @Override
             public void onError() {
 
-
             }
-
-
         });
-
-
     }
 }
 

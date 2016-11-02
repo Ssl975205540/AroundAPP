@@ -21,16 +21,16 @@ import java.util.List;
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+import lanou.around.bean.ClassifyBean;
+import lanou.around.bean.ClassifyTabBean;
 import lanou.around.classification.checkall.CheckAllActivity;
 import lanou.around.classification.classifyview.CenterViewFragment;
 import lanou.around.classification.classifyview.ClassifyViewAdapter;
 import lanou.around.classification.classifyview.LeftViewFragment;
 import lanou.around.classification.classifyview.RightViewFragment;
-import lanou.around.tools.http.URLValues;
-import lanou.around.bean.ClassifyBean;
-import lanou.around.bean.ClassifyTabBean;
-
+import lanou.around.classification.seek.SeekActivity;
 import lanou.around.presenter.ClassifyPresenter;
+import lanou.around.tools.http.URLValues;
 import lanou.around.tools.recycle.DisplayUtil;
 import lanou.around.widget.PullZoomView;
 import lanou.around.widget.TransparentToolBar;
@@ -58,6 +58,7 @@ public class ClassifyFragment extends BaseFragment
     private ArrayList<ImageView> dots = new ArrayList<>();
     private int statusBarHeight;
     private Button mCheckAll;
+    private LinearLayout mMessageEdit;
 
 
     @Override
@@ -81,6 +82,8 @@ public class ClassifyFragment extends BaseFragment
         mCheck = findView(R.id.iv_classify_check);
         mToolBar = findView(R.id.toobar_classify);
         mCheckAll = findView(R.id.btn_classify_check);
+        mMessageEdit = findView(R.id.linear_edit_message);
+
 
     }
 
@@ -93,6 +96,8 @@ public class ClassifyFragment extends BaseFragment
         mCheck.setImageAlpha(0);
 
         mCheckAll.setOnClickListener(this);
+        mMessageEdit.setOnClickListener(this);
+        mSearchText.setOnClickListener(this);
 
         ClassifyPresenter presenter = new ClassifyPresenter(this);
         presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE, ClassifyTabBean.class);
@@ -297,6 +302,14 @@ public class ClassifyFragment extends BaseFragment
             case R.id.btn_classify_check:
                 Intent intent = new Intent(context, CheckAllActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.linear_edit_message:
+                Intent editIntent = new Intent(context, SeekActivity.class);
+                startActivity(editIntent);
+                break;
+            case R.id.ll_classify_search:
+                Intent textIntent = new Intent(context, SeekActivity.class);
+                startActivity(textIntent);
                 break;
         }
     }

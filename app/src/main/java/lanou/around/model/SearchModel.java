@@ -3,48 +3,43 @@ package lanou.around.model;
 import lanou.around.aroundinterface.InterModel;
 import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
-
 import lanou.around.tools.http.HttpManger;
 import lanou.around.tools.http.OnCompletedListener;
 
 /**
- * Created by dllo on 16/10/25.
+ * Created by dllo on 16/11/2.
  */
 
-public class ClassifyViewModel implements InterModel {
-
+public class SearchModel implements InterModel {
+    private String body;
 
     @Override
     public <T> void StartRequest(String url, Class<T> tClass, final OnFinishedListener<T> onFinishedListener) {
-
-
-        HttpManger.getInstance().getRequest(url, tClass, new OnCompletedListener<T>() {
-
-
+        HttpManger.getInstance().postRequest(url, null, body, tClass, new OnCompletedListener<T>() {
             @Override
             public void onCompleted(T result) {
-                if (result.equals("")) {
-                    onFinishedListener.onError();
-                    return;
-                }
                 onFinishedListener.onFinished(result);
             }
 
             @Override
             public void onFailed() {
-                onFinishedListener.onError();
+
             }
         });
     }
 
     @Override
-    public <F> void InsertSQ(F t) {
+    public <T> void InsertSQ(T t) {
 
     }
 
     @Override
-    public <E> void QuerySQ(OnCompleted<E> onCompletedListener) {
+    public <T> void QuerySQ(OnCompleted<T> onCompletedListener) {
 
     }
 
+
+    public void setBody(String body) {
+        this.body = body;
+    }
 }

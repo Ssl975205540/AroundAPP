@@ -17,7 +17,6 @@ public class URLValues {
     //推荐
     public static final String POST_RECOMMEND = "http://zhuanzhuan.58.com/zz/transfer/getRecommendInfoForIndex";
 
-
     public static final String PIN_RECOMMEND = "http://pic8.58cdn.com.cn/zhuanzh/";
 
     public static final String POSTBODY_RECOMMEND = "pageNum=1&lat=38.883479&lng=121.544684&pageSize=20&";
@@ -30,7 +29,15 @@ public class URLValues {
     //分类页
     //手机,数码等图标 的网址接口
     public static final String CLASSIFY_CHILD_CATES_LOGIC = "http://zhuanzhuan.58.com/zz/transfer/getChildCatesLogic";
-    //手机,数码,电脑,母婴用品等 网址接口
+    //手机,数码等图标点击之后的二级界面接口
+    public static final String POST_CHILD_LOGIC = "http://zhuanzhuan.58.com/zz/transfer/getCateInfoList";
+    //手机,数码等图标点击之后的二级界面的请求头
+    public static final String REQUEST_HEADER_NAME = "Cookie";
+    public static final String REQUEST_HEADER_BODY = "t=15;tk=8F903AB448D41C95C48EF932A3AFFD59;v=2.4.4;channelid=market_908;lat=38.883299;lon=121.544463;model=Redmi 3";
+    //手机,数码等图标点击之后的二级界面的请求体
+    public static final String REQUEST_BODY_BEFOR = "pagenum=1&lon=121.544463&cateid=";
+    public static final String REQUEST_BODY_AFTER = "&sortpolicy=0&lat=38.883299&pagesize=20&";
+    //手机,数码,电脑,母婴用品等 网址接口"
     public static final String CLASSIFY_WANT_BUY_MESSAGE = "http://zhuanzhuan.58.com/zz/transfer/getIWantBuyCateMessage";
     //EditText中的图和文字等接口
     public static final String CLASSIFY_EDITTEXT_TITLTE = "http://zhuanzhuan.58.com/zz/transfer/getTitleInformation";

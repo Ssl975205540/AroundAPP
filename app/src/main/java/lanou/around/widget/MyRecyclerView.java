@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -231,24 +230,15 @@ public class MyRecyclerView extends RecyclerView {
         }
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-
-
-
                 mLastY = ev.getRawY();
-
                 break;
             case MotionEvent.ACTION_MOVE:
-
-
-
                 final float deltaY = ev.getRawY() - mLastY;
                 mLastY = ev.getRawY();
                 if (isOnTop() && pullRefreshEnabled && appbarState == AppBarStateChangeListener.State.EXPANDED) {
                     mRefreshHeader.onMove(deltaY / DRAG_RATE);
                     if (mRefreshHeader.getVisibleHeight() > 0 && mRefreshHeader.getState() < ArrowRefreshHeader.STATE_REFRESHING) {
                         mLoadingListener.setdisplay(1);
-                        Log.d("MyRecyclerView", "mRefreshHeader.getVisibleHeight():" + mRefreshHeader.getVisibleHeight());
-
                         return false;
                     }
                 }

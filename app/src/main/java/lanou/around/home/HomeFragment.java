@@ -345,7 +345,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                 arrayList.add(homeBeanHot);
             }
         }
-        for (int i = 0 ; i < 8 ; i++) {
+        for (int i = 0 ; i < homeBean.getRespData().getLowBanners().size() ; i++) {
             View hsv_item = LayoutInflater.from(context).inflate(R.layout.hsv_item , null);
             icon = (ImageView) hsv_item.findViewById(R.id.hsv_item_image);
             Picasso.with(context).load(homeBean.getRespData().getLowBanners().get(i).getImageUrl()).into(icon);
