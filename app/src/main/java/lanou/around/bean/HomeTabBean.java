@@ -1,4 +1,4 @@
-package lanou.around.home;
+package lanou.around.bean;
 
 import java.util.List;
 

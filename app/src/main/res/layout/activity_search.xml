@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/colorText"
-              android:orientation="vertical">
+              android:background="@color/colorText">
 
     <RelativeLayout
+        android:id="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
@@ -49,4 +49,10 @@
             android:layout_marginRight="5dp"
             android:src="@mipmap/nr"/>
     </RelativeLayout>
-</LinearLayout>
+
+    <lanou.around.widget.MyRecyclerView
+        android:layout_below="@+id/relative"
+        android:id="@+id/search_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

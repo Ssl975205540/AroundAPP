@@ -15,7 +15,7 @@ import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.EventBean;
-import lanou.around.home.HomeTabBean;
+import lanou.around.bean.HomeTabBean;
 import lanou.around.presenter.HomePresenter;
 import lanou.around.tools.http.URLValues;
 

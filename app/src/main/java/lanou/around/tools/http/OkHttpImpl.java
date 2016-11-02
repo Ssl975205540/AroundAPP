@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -34,35 +35,24 @@ public class OkHttpImpl implements IHttpRequest {
     private Handler handler;
 
     public OkHttpImpl() {
-
-
         //规定Handler 是在主线程的
         handler = new Handler(Looper.getMainLooper());
-
         File file = Environment.getDownloadCacheDirectory();
         mClient = new OkHttpClient.Builder().connectTimeout(5000, TimeUnit.MILLISECONDS).cache(new Cache(file, 10 * 1024 * 1024)).build();
-
         mGson = new Gson();
-
     }
 
     @Override
     public <T> void getRequest(String urlStr, final Class<T> tClass, final OnCompletedListener<T> listener) {
-
         Request request = new Request.Builder().url(urlStr).build();
-
-        asyncRequest(tClass,listener,request);
-
-
+        asyncRequest(tClass, listener, request);
     }
 
     private <T> void postResPonse(final T result, final OnCompletedListener<T> listener) {
         handler.post(new Runnable() {
             @Override
             public void run() {
-
                 listener.onCompleted(result);
-
             }
         });
     }
@@ -72,7 +62,6 @@ public class OkHttpImpl implements IHttpRequest {
             @Override
             public void run() {
                 listener.onFailed();
-
             }
         });
     }
@@ -81,66 +70,51 @@ public class OkHttpImpl implements IHttpRequest {
     public <T> void getRequest(String urlStr, Map<String, String> headers, final Class<T> tClass, final OnCompletedListener<T> listener) {
 
         Request request = new Request.Builder().url(urlStr).headers(Headers.of(headers)).build();
-
         asyncRequest(tClass, listener, request);
-
-
     }
-
-
 
     @Override
     public <T> void postRequest(String urlStr, Map<String, String> requestBody, Class<T> tClass, OnCompletedListener<T> listener) {
 
         FormBody formBody = getFormBody(requestBody);
-
-
         Request request = new Request.Builder().url(urlStr).post(formBody).build();
-
-
-        asyncRequest(tClass,listener,request);
-
-
+        asyncRequest(tClass, listener, request);
     }
 
     @Override
     public <T> void postRequest(String urlStr, Map<String, String> headers, String requestBody, Class<T> tClass, OnCompletedListener<T> listener) {
 
-
+        Log.d("OkHttpImpl111", urlStr);
+        Log.d("OkHttpImpl111", requestBody);
         MediaType MEDIA_TYPE_TEXT = MediaType.parse("application/x-www-form-urlencoded");
-        Request request = new Request.Builder().url(urlStr).headers(Headers.of(headers)).post(RequestBody.create(MEDIA_TYPE_TEXT, requestBody)).build();
-
-
-        asyncRequest(tClass,listener,request);
+        if(headers == null){
+            Request request = new Request.Builder().url(urlStr).post(RequestBody.create(MEDIA_TYPE_TEXT, requestBody)).build();
+            asyncRequest(tClass, listener, request);
+        }else {
+            Request request = new Request.Builder().url(urlStr).headers(Headers.of(headers)).post(RequestBody.create(MEDIA_TYPE_TEXT, requestBody)).build();
+            asyncRequest(tClass, listener, request);
+        }
 
     }
+
 
     @NonNull
     private FormBody getFormBody(Map<String, String> requestBody) {
 
-
         FormBody.Builder builder = new FormBody.Builder();
-
         for (String key : requestBody.keySet()) {
-
-            builder.add(key,requestBody.get(key));
+            builder.add(key, requestBody.get(key));
         }
-
-
         return builder.build();
     }
-
 
     @Override
     public <T> void postRequest(String urlStr, Map<String, String> headers, Map<String, String> requestBody, Class<T> tClass, OnCompletedListener<T> listener) {
 
         FormBody body = getFormBody(requestBody);
         Request request = new Request.Builder().url(urlStr).post(body).headers(Headers.of(headers)).build();
-        asyncRequest(tClass,listener,request);
-
-
+        asyncRequest(tClass, listener, request);
     }
-
 
     private <T> void asyncRequest(final Class<T> tClass, final OnCompletedListener<T> listener, final Request request) {
         mClient.newCall(request).enqueue(new Callback() {
@@ -148,32 +122,18 @@ public class OkHttpImpl implements IHttpRequest {
             public void onFailure(Call call, IOException e) {
 
                 postError(listener);
-
             }
-
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
                 if (response.isSuccessful()) {
-
-                                final T result = mGson.fromJson(response.body().string(),tClass);
-
-                                postResPonse(result, listener);
-
-
-
-
-
+                    final T result = mGson.fromJson(response.body().string(), tClass);
+                    postResPonse(result, listener);
                 } else {
-
                     postError(listener);
-
                 }
-
-
             }
         });
     }
-
 }
