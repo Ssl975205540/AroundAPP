@@ -1,72 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fffff"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <lanou.around.widget.StickyNavLayout
-        android:id="@+id/main_content"
+    <lanou.around.widget.MyRecyclerView
+        android:id="@+id/recyview_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
 
-
-        <RelativeLayout
-            android:id="@+id/recyview_appbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF">
-
-
-            <lanou.around.widget.MyRecyclerView
-                android:id="@+id/recyview_home"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="?android:attr/actionBarSize"
-                app:layout_scrollFlags="scroll" />
-
-
-            <LinearLayout
-                android:id="@+id/supplement"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/recyview_home"
-                android:orientation="vertical">
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/supplementary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/supplement"
-                android:background="#F2F3F6"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-
-        </RelativeLayout>
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_home"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@android:color/white"
-            app:tabIndicatorColor="@color/toolbar_home_color"
-            app:tabSelectedTextColor="@color/toolbar_home_color"
-            app:tabTextColor="@color/release" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager_home"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#ffffff"></android.support.v4.view.ViewPager>
-
-
-    </lanou.around.widget.StickyNavLayout>
+        />
 
 
     <lanou.around.widget.TransparentToolBar
@@ -83,7 +28,6 @@
 
             <RelativeLayout
                 android:id="@+id/rl1_home"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -162,7 +106,6 @@
                         android:layout_marginTop="3dp"
                         android:background="@android:color/white"
                         android:foregroundGravity="center"
-
                         android:src="@mipmap/wf" />
 
 
@@ -204,4 +147,29 @@
     </lanou.around.widget.TransparentToolBar>
 
 
-</FrameLayout>
+
+   <LinearLayout
+       android:id="@+id/linear"
+       android:orientation="vertical"
+       android:visibility="invisible"
+       android:clickable="true"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+
+       <android.support.design.widget.TabLayout
+           android:id="@+id/home_tab"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+       </android.support.design.widget.TabLayout>
+
+       <android.support.v4.view.ViewPager
+           android:id="@+id/home_viewpager"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:background="#ffffff" />
+
+
+   </LinearLayout>
+</RelativeLayout>

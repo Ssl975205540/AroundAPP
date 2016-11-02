@@ -3,10 +3,10 @@ package lanou.around.home.recommend;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,89 +21,68 @@ import lanou.around.tools.http.URLValues;
 import lanou.around.widget.CircleTransform;
 
 /**
- * Created by dllo on 16/10/28.
+ * Created by dllo on 16/11/2.
  */
-public class RecommendAdapter extends RecyclerView.Adapter {
+
+public class Listv extends BaseAdapter {
 
 
-    private Context context;
+    private  Context context;
+    private  List<RecommendBean.RespDataBean> list;
 
-    private List<RecommendBean.RespDataBean> data;
-
-    public void setData(List<RecommendBean.RespDataBean> data) {
-        this.data = data;
-    }
-
-    public RecommendAdapter(Context context) {
+    public Listv(Context context, List<RecommendBean.RespDataBean> list) {
 
         this.context = context;
+        this.list = list;
     }
 
 
+
     @Override
-    public int getItemViewType(int position) {
-
-        if (position < 0 || data.size() == position) {
-            return super.getItemViewType(position);
-        }
-
-        return Integer.parseInt(data.get(position).getType());
+    public int getCount() {
+        return list.size();
     }
 
     @Override
-    public int getItemCount() {
-        return data.size();
-    }
-
-
-    @Override
-    public RecommendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        switch (viewType) {
-
-            case 0:
-
-                View view = LayoutInflater.from(context).inflate(R.layout.recommend_adapter_item, parent, false);
-                RecommendViewHolder recommendViewHolder = new RecommendViewHolder(view);
-                return recommendViewHolder;
-
-            case 5:
-
-
-                break;
-
-
-        }
-
+    public Object getItem(int position) {
         return null;
-
-
     }
 
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+    public View getView(int position, View convertView, ViewGroup parent) {
 
         switch (getItemViewType(position)) {
 
             case 0:
 
-                RecommendViewHolder recommendViewHolder = (RecommendViewHolder) holder;
+                RecommendViewHolder recommendViewHolder=null;
+                if(convertView == null){
 
-                Picasso.with(context).load(data.get(position).getSellerPhoto()).transform(new CircleTransform()).into(recommendViewHolder.imgSellerPhoto);
-                recommendViewHolder.tvFriendTime.setText(data.get(position).getFriendTime());
-                Log.d("dd", data.get(position).getSellerNickname());
-                recommendViewHolder.tv_sellerNickname.setText(data.get(position).getSellerNickname());
-                recommendViewHolder.infoPrice.setText("¥" + data.get(position).getInfoPrice());
-                if(!data.get(position).getInfoOriginalPrice().equals("0")){
-                    recommendViewHolder.infoOriginalPrice.setText("原价"+data.get(position).getInfoOriginalPrice());
+                    convertView = LayoutInflater.from(context).inflate(R.layout.recommend_adapter_item,null);
+                           recommendViewHolder = new RecommendViewHolder(convertView);
+                    convertView.setTag(recommendViewHolder);
+                }else {
+                   recommendViewHolder = (RecommendViewHolder)convertView.getTag();
+
                 }
 
-                recommendViewHolder.area.setText(data.get(position).getArea());
-                recommendViewHolder.infoCityName.setText(data.get(position).getInfoCityName());
-                recommendViewHolder.infoDesc.setText(data.get(position).getInfoDesc());
-                String[] s = data.get(position).getInfoImageList().split("\\|");
+                Picasso.with(context).load(list.get(position).getSellerPhoto()).transform(new CircleTransform()).into(recommendViewHolder.imgSellerPhoto);
+                recommendViewHolder.tvFriendTime.setText(list.get(position).getFriendTime());
+                recommendViewHolder.tv_sellerNickname.setText(list.get(position).getSellerNickname());
+                recommendViewHolder.infoPrice.setText("¥" + list.get(position).getInfoPrice());
+                if(!list.get(position).getInfoOriginalPrice().equals("0")){
+                    recommendViewHolder.infoOriginalPrice.setText("原价"+list.get(position).getInfoOriginalPrice());
+                }
+
+                recommendViewHolder.area.setText(list.get(position).getArea());
+                recommendViewHolder.infoCityName.setText(list.get(position).getInfoCityName());
+                recommendViewHolder.infoDesc.setText(list.get(position).getInfoDesc());
+                String[] s = list.get(position).getInfoImageList().split("\\|");
 
                 ArrayList<String> arrayList = new ArrayList<>();
 
@@ -118,24 +97,35 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                 recommendViewHolder.scrollview_item.setAdapter(adapter);
                 recommendViewHolder.scrollview_item.setNestedScrollingEnabled(false);
 
-                recommendViewHolder.number.setText(data.get(position).getMessageNum());
-                recommendViewHolder.Leaving.setText(data.get(position).getScanNum());
+                recommendViewHolder.number.setText(list.get(position).getMessageNum());
+                recommendViewHolder.Leaving.setText(list.get(position).getScanNum());
 
-                break;
+
+
+                return convertView;
+
 
 
             case 5:
 
 
-                break;
+
+                return convertView;
+
 
         }
-
+        return convertView;
 
     }
 
+    @Override
+    public int getItemViewType(int position) {
 
-    public class RecommendViewHolder extends RecyclerView.ViewHolder {
+        return Integer.parseInt(list.get(position).getType());
+
+
+    }
+    public class RecommendViewHolder {
 
         private final ImageView imgSellerPhoto,uu;
         private final TextView tvFriendTime;
@@ -150,7 +140,6 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         private final TextView infoDesc;
 
         public RecommendViewHolder(View itemView) {
-            super(itemView);
 
             imgSellerPhoto = (ImageView) itemView.findViewById(R.id.img_sellerPhoto);
             tvFriendTime = (TextView) itemView.findViewById(R.id.tv_friendTime);
@@ -167,4 +156,5 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
         }
     }
+
 }

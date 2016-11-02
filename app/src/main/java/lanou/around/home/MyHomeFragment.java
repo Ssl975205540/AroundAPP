@@ -5,10 +5,9 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,71 +29,68 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import lanou.around.R;
 import lanou.around.app.AroundAPP;
-import lanou.around.aroundinterface.InterToolBar;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.EventBean;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeBeanHot;
-import lanou.around.home.nearby.NearByFragment;
-import lanou.around.home.recommend.RecommendFragment;
 import lanou.around.presenter.HomePresenter;
 import lanou.around.tools.http.URLValues;
-import lanou.around.tools.recycle.RevealToolbar;
 import lanou.around.widget.MorphFrameLayout;
 import lanou.around.widget.MyRecyclerView;
 import lanou.around.widget.RoundImageView;
-import lanou.around.widget.StickyNavLayout;
 import lanou.around.widget.StretchAnimation;
 import lanou.around.widget.TransparentToolBar;
 
+import static lanou.around.R.id.home_tab;
 
 /**
- * Created by dllo on 16/10/22.
+ * Created by dllo on 16/11/1.
  */
 
-public class HomeFragment extends BaseFragment implements InterView, TransparentToolBar.OnScrollStateListener, StretchAnimation.AnimationListener, View.OnClickListener, OnItemClickListener {
+public class MyHomeFragment extends BaseFragment implements InterView, TransparentToolBar.OnScrollStateListener, StretchAnimation.AnimationListener, View.OnClickListener, OnItemClickListener {
 
     private MyRecyclerView recyviewHome;
     private ViewPager viewPagerHome;
-    private TabLayout tabHome;
-    private HomeAdapter homeAdapter;
+    //    private TabLayout tabHome;
+    private MyHomeAdapter homeAdapter;
     private HomePresenter homePresenter;
-//    private AppBarLayout homeAppbar;
+    //    private AppBarLayout homeAppbar;
     private TransparentToolBar toolbarHome;
-    private NestedScrollView nestscrollHome;
+    //    private NestedScrollView nestscrollHome;
     private int statusBarHeight;
     private MorphFrameLayout rl;
     private RelativeLayout rl1, rl0;
     private TextView tvSpending, tvSpent;
-    private ImageView imgSpending, imgSpent , icon , friendIcon , friendCreame , friendPakge;
+    private ImageView imgSpending, imgSpent, icon, friendIcon, friendCreame, friendPakge;
     private boolean refresh = false;
     private RoundImageView circle_search_home;
     private ConvenientBanner bannerHome;
-    private LinearLayout supplementary, supplement , hsvLinear , friendLinear;
+    private LinearLayout supplementary, supplement, hsvLinear, friendLinear;
     private FrameLayout fffff;
     private NestedScrollView nestscroll;
-    private StickyNavLayout mainContent;
+    private ViewPager homeviewpager;
+    private TabLayout hometab;
+    private LinearLayout linear;
 
 
     @Override
     protected void initData() {
 
 
-        HomeViewPagerAdapter homeViewPagerAdapter = new HomeViewPagerAdapter(getChildFragmentManager());
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new RecommendFragment());
-        fragments.add(new NearByFragment());
+//        HomeViewPagerAdapter homeViewPagerAdapter = new HomeViewPagerAdapter(getChildFragmentManager());
+//        List<Fragment> fragments = new ArrayList<>();
+//        fragments.add(new RecommendFragment());
+//        fragments.add(new NearByFragment());
+//
+//        homeViewPagerAdapter.setFragments(fragments);
 
-        homeViewPagerAdapter.setFragments(fragments);
+//        viewPagerHome.setAdapter(homeViewPagerAdapter);
 
-        viewPagerHome.setAdapter(homeViewPagerAdapter);
-
-        tabHome.setupWithViewPager(viewPagerHome);
+//        tabHome.setupWithViewPager(viewPagerHome);
 
 //        tabHome.setTabGravity(TabLayout.GRAVITY_FILL);
 //        tabHome.setTabMode(TabLayout.MODE_FIXED);
@@ -103,15 +99,13 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
 
 
-
-
     }
 
 
     @Override
     protected int setContentView() {
 
-        return R.layout.home_fragment;
+        return R.layout.my_layout;
 
     }
 
@@ -119,29 +113,13 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     protected void initViews() {
         EventBus.getDefault().register(this);
         recyviewHome = findView(R.id.recyview_home);
-        viewPagerHome = findView(R.id.viewpager_home);
+//        viewPagerHome = findView(R.id.viewpager_home);
         toolbarHome = findView(R.id.toolbar_home);
-        tabHome = findView(R.id.tab_home);
-
-        mainContent = findView(R.id.main_content);
+//        tabHome = findView(R.id.tab_home);
 
 
-        mainContent.setToolbar(new InterToolBar() {
-            @Override
-            public void setTools(int t) {
-                toolbarHome.setChangeTop(t);
-
-                if(t == mainContent.getHeight()-tabHome.getHeight()-viewPagerHome.getHeight()){
-                    rl1.setVisibility(View.VISIBLE);
-                        RevealToolbar.HideReveal(rl0);
-
-                }else {
-                    rl1.setVisibility(View.INVISIBLE);
-                    rl0.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        fffff = findView(R.id.fffff);
+        linear = findView(R.id.linear);
+//        fffff = findView(R.id.fffff);
         supplement = findView(R.id.supplement);
 
         supplementary = findView(R.id.supplementary);
@@ -155,6 +133,12 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         tvSpent = findView(R.id.tv_yet_spent);
         imgSpent = findView(R.id.img_yet_spent);
         circle_search_home = findView(R.id.circle_search_home);
+
+
+        homeviewpager = findView(R.id.home_viewpager);
+
+        hometab = findView(home_tab);
+
 
         View view = LayoutInflater.from(context).inflate(R.layout.home_recly_header, null);
         hsvLinear = (LinearLayout) view.findViewById(R.id.hsv_ll_home);
@@ -176,7 +160,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     }
 
     @Subscribe
-    public void setEvent(EventBean event){
+    public void setEvent(EventBean event) {
 
 
     }
@@ -206,9 +190,9 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                     @Override
                     public void run() {
 
-                        if(refresh == true){
+                        if (refresh == true) {
                             homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
-                        }else {
+                        } else {
                             refresh = true;
                         }
 
@@ -242,28 +226,74 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         });
 
 
+        recyviewHome.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+
+                RecyclerView.LayoutManager layoutManager = recyviewHome.getLayoutManager();
+//判断是当前layoutManager是否为LinearLayoutManager
+//只有LinearLayoutManager才有查找第一个和最后一个可见view位置的方法
+                if (layoutManager instanceof LinearLayoutManager) {
+                    LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
+                    //获取最后一个可见view的位置
+                    int lastItemPosition = linearManager.findLastVisibleItemPosition();
+                    //获取第一个可见view的位置
+                    int firstItemPosition = linearManager.findFirstVisibleItemPosition();
+
+                    Log.d("111", String.valueOf(firstItemPosition));
+
+//
+//                    if (firstItemPosition == 3) {
+////                        linear.setVisibility(View.VISIBLE);
+////                        HomeViewPagerAdapter homeAdapter1 = new HomeViewPagerAdapter(getChildFragmentManager());
+////                        List<Fragment> fragments = new ArrayList<>();
+////                        fragments.add(new RecommendFragment());
+////                        fragments.add(new NearByFragment());
+////                        homeAdapter1.setFragments(fragments);
+////                        homeviewpager.setAdapter(homeAdapter1);
+////                        hometab.setupWithViewPager(homeviewpager);
+//                    }else {
+//
+//                        linear.setVisibility(View.GONE);
+//                    }
+
+
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE && lastItemPosition + 1 == homeAdapter.getItemCount()) {
+                        //最后一个itemView的position为adapter中最后一个数据时,说明该itemView就是底部的view了
+                        //需要注意position从0开始索引,adapter.getItemCount()是数据量总数
+                    }
+                    //同理检测是否为顶部itemView时,只需要判断其位置是否为0即可
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE && firstItemPosition == 0) {
+                    }
+
+                }
+            }
+        });
+
 
         toolbarHome.setOnScrollStateListener(this);
         toolbarHome.setOffset(360);
         toolbarHome.setBgColor(getResources().getColor(R.color.toolbar_home_color));
-        viewPagerHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
+//        viewPagerHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//
+//
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
+//
 //        homeAppbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
 //
 //
@@ -278,8 +308,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 //                if (-verticalOffset == appBarLayout.getHeight() - tabHome.getHeight() - statusBarHeight) {
 //
 //
-//                        rl1.setVisibility(View.VISIBLE);
-//                        RevealToolbar.HideReveal(rl0);
+//                    rl1.setVisibility(View.VISIBLE);
+//                    RevealToolbar.HideReveal(rl0);
 //
 //
 //
@@ -295,43 +325,43 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 //        });
 
 
-        viewPagerHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-                switch (position) {
-                    case 0:
-
-
-                        tvSpending.setTextColor(Color.parseColor("#FFFFFF"));
-                        tvSpent.setTextColor(Color.parseColor("#FF9A8F"));
-
-                        imgSpending.setBackgroundResource(R.drawable.tab_shape);
-                        imgSpent.setBackgroundResource(R.drawable.tab2_shape);
-                        break;
-                    case 1:
-                        tvSpending.setTextColor(Color.parseColor("#FF9A8F"));
-                        tvSpent.setTextColor(Color.parseColor("#FFFFFF"));
-                        imgSpent.setBackgroundResource(R.drawable.tab_shape);
-                        imgSpending.setBackgroundResource(R.drawable.tab2_shape);
-
-
-                        break;
-
-                }
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+//        viewPagerHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//                switch (position) {
+//                    case 0:
+//
+//
+//                        tvSpending.setTextColor(Color.parseColor("#FFFFFF"));
+//                        tvSpent.setTextColor(Color.parseColor("#FF9A8F"));
+//
+//                        imgSpending.setBackgroundResource(R.drawable.tab_shape);
+//                        imgSpent.setBackgroundResource(R.drawable.tab2_shape);
+//                        break;
+//                    case 1:
+//                        tvSpending.setTextColor(Color.parseColor("#FF9A8F"));
+//                        tvSpent.setTextColor(Color.parseColor("#FFFFFF"));
+//                        imgSpent.setBackgroundResource(R.drawable.tab_shape);
+//                        imgSpending.setBackgroundResource(R.drawable.tab2_shape);
+//
+//
+//                        break;
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
     }
 
 
@@ -364,8 +394,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                 arrayList.add(homeBeanHot);
             }
         }
-        for (int i = 0 ; i < homeBean.getRespData().getLowBanners().size() ; i++) {
-            View hsv_item = LayoutInflater.from(context).inflate(R.layout.hsv_item , null);
+        for (int i = 0; i < homeBean.getRespData().getLowBanners().size(); i++) {
+            View hsv_item = LayoutInflater.from(context).inflate(R.layout.hsv_item, null);
             icon = (ImageView) hsv_item.findViewById(R.id.hsv_item_image);
             Picasso.with(context).load(homeBean.getRespData().getLowBanners().get(i).getImageUrl()).into(icon);
             final String clickUrl = homeBean.getRespData().getLowBanners().get(i).getGoUrl();
@@ -376,9 +406,9 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                     @Override
                     public void onClick(View v) {
                         Uri uri = Uri.parse(hsv_click);
-                        Intent intent = new Intent(AroundAPP.getContext() , HSVClickActivity.class);
-                        intent.putExtra("url" , clickUrl);
-                        intent.putExtra("title" , clickTitle);
+                        Intent intent = new Intent(AroundAPP.getContext(), HSVClickActivity.class);
+                        intent.putExtra("url", clickUrl);
+                        intent.putExtra("title", clickTitle);
                         getActivity().startActivity(intent);
                     }
                 });
@@ -388,11 +418,17 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         }
 
 
-        homeAdapter = new HomeAdapter(context, arrayList);
+        homeAdapter = new MyHomeAdapter(context);
 
+        homeAdapter.setFragment(this);
+        homeAdapter.setData(arrayList);
+        ArrayList<Integer> a = new ArrayList<>();
+        a.add(0);
+        a.add(1);
+        homeAdapter.setType(a);
         setOnItemClick();
 
-        recyviewHome.setLayoutManager(new GridLayoutManager(context, 3));
+        recyviewHome.setLayoutManager(new LinearLayoutManager(context));
 
         recyviewHome.setAdapter(homeAdapter);
 
@@ -430,15 +466,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
 
     private void setOnItemClick() {
-        homeAdapter.setOnItemClick(new MyRecyclerView.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder viewHolder, int position) {
 
-                Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
     }
 
 
@@ -460,13 +488,12 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         Log.d("HomeFragment", "statusBarHeight:" + statusBarHeight);
 
 
-
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) rl.getLayoutParams();
         params.setMargins(50, statusBarHeight + 20, 50, 5);// 通过自定义坐标来放置你的控件
         rl.setLayoutParams(params);
-        toolbarHome.getLayoutParams().height = statusBarHeight + tabHome.getHeight();
-        supplementary.getLayoutParams().height = statusBarHeight / 2;
-        supplement.getLayoutParams().height = statusBarHeight / 2;
+//        toolbarHome.getLayoutParams().height = statusBarHeight + tabHome.getHeight();
+//        supplementary.getLayoutParams().height = statusBarHeight / 2;
+//        supplement.getLayoutParams().height = statusBarHeight / 2;
 
 
     }
@@ -493,7 +520,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
                 break;
             case R.id.friend_ll:
-               Intent intent  = new Intent(AroundAPP.getContext() , FriendActivity.class);
+                Intent intent = new Intent(AroundAPP.getContext(), FriendActivity.class);
                 getActivity().startActivity(intent);
 
                 break;

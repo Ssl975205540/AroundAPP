@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +40,10 @@ public class HomeTabAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
+
+        if(position > strings.size()-1){
+            return super.getPageTitle(position);
+        }
         return strings.get(position);
     }
 }
