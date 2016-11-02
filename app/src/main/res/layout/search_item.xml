@@ -1,13 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+              android:layout_height="100dp"
               android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/img"
+        android:id="@+id/img_phone"
         android:layout_width="100dp"
         android:layout_height="100dp"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_phone_news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxEms="15"
+            android:maxLines="2"
+            android:scrollHorizontally="false"
+            android:text="123456987"
+            android:textColor="@color/home_adapter_item"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_phone_cityName"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginRight="5dp"
+                android:text="00"/>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:background="@color/line"/>
+
+            <TextView
+                android:id="@+id/tv_phone_businessName"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginLeft="2dp"
+                android:text="111"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/aa"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥"/>
+
+            <TextView
+                android:id="@+id/tv_phone_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3000"/>
+
+            <TextView
+                android:id="@+id/tv_phone_friendTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="19小时前"/>
+        </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

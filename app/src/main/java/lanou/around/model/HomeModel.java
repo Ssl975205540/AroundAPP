@@ -21,6 +21,7 @@ public class HomeModel implements InterModel {
 
     @Override
     public <T> void StartRequest(String url, final Class<T> tClass, final OnFinishedListener<T> onFinishedListener) {
+
         HttpManger.getInstance().getRequest(url, tClass, new OnCompletedListener<T>() {
             @Override
             public void onCompleted(Object tClass1) {

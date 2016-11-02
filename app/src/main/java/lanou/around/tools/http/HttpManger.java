@@ -7,6 +7,7 @@ import java.util.Map;
  */
 public class HttpManger implements IHttpRequest{
 
+
     public static HttpManger getInstance() {
         return SingletonHolder.sInstance;
     }

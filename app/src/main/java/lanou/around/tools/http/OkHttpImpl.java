@@ -94,9 +94,7 @@ public class OkHttpImpl implements IHttpRequest {
             Request request = new Request.Builder().url(urlStr).headers(Headers.of(headers)).post(RequestBody.create(MEDIA_TYPE_TEXT, requestBody)).build();
             asyncRequest(tClass, listener, request);
         }
-
     }
-
 
     @NonNull
     private FormBody getFormBody(Map<String, String> requestBody) {
