@@ -1,6 +1,7 @@
 package lanou.around.classification.classifyview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -12,6 +13,7 @@ import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.ClassifyViewBean;
+import lanou.around.classification.search.SearchActivity;
 import lanou.around.presenter.ClassifyViewPresenter;
 import lanou.around.tools.http.URLValues;
 
@@ -21,6 +23,7 @@ import lanou.around.tools.http.URLValues;
 public class CenterViewFragment extends BaseFragment implements InterView {
     private Context context;
     private GridView gridView;
+    private List<ClassifyViewBean.RespDataBean> mRespDataBeanList;
 
 
     @Override
@@ -57,12 +60,12 @@ public class CenterViewFragment extends BaseFragment implements InterView {
     @Override
     public void onResponse(Object t) {
         ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
-        List<ClassifyViewBean.RespDataBean> respDataBeanList = new ArrayList<>();
+        mRespDataBeanList = new ArrayList<>();
         for (int i = 8; i < 16 ; i++) {
-            respDataBeanList.add(classifyViewBean.getRespData().get(i));
+            mRespDataBeanList.add(classifyViewBean.getRespData().get(i));
         }
         GridViewPagerAdapter gridViewAdapter = new GridViewPagerAdapter(context);
-        gridViewAdapter.setRespDataBeen(respDataBeanList);
+        gridViewAdapter.setRespDataBeen(mRespDataBeanList);
         gridView.setAdapter(gridViewAdapter);
     }
 
@@ -78,7 +81,10 @@ public class CenterViewFragment extends BaseFragment implements InterView {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                 long arg3) {
-            // TODO Auto-generated method stub
+            Intent intent = new Intent(getContext(), SearchActivity.class);
+            intent.putExtra("cateIdCenter",mRespDataBeanList.get(arg2).getCateId());
+            intent.putExtra("cateNameCenter",mRespDataBeanList.get(arg2).getCateName());
+            getActivity().startActivity(intent);
             System.out.println("arg2 = " + arg2); // 打印出点击的位置
         }
     }
