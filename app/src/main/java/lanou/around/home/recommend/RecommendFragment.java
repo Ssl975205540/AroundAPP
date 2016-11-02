@@ -1,13 +1,14 @@
 package lanou.around.home.recommend;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.RecommendBean;
 import lanou.around.presenter.RecommendPresenter;
-import lanou.around.widget.MyRecyclerView;
 
 /**
  * Created by dllo on 16/10/22.
@@ -15,14 +16,16 @@ import lanou.around.widget.MyRecyclerView;
 
 public class RecommendFragment extends BaseFragment implements InterView {
 
-    private MyRecyclerView recyclerview;
+    private RecyclerView recyclerview;
+    private int newState;
+    private RecommendAdapter recommendAdapter;
 
     @Override
     protected void initData() {
 
         RecommendPresenter recommendPresenter = new RecommendPresenter(this);
 
-        recommendPresenter.startRequest("http://zhuanzhuan.58.com/zz/transfer/getRecommendInfoForIndex",RecommendBean.class);
+        recommendPresenter.startRequest("http://zhuanzhuan.58.com/zz/transfer/getRecommendInfoForIndex", RecommendBean.class);
     }
 
     @Override
@@ -35,28 +38,41 @@ public class RecommendFragment extends BaseFragment implements InterView {
 
         recyclerview = findView(R.id.recyclerview_recommend);
 
+        recommendAdapter = new RecommendAdapter(context);
+
+
+
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        recyclerview.setLayoutManager(linearLayoutManager);
+        recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+
+            public boolean dasd = true;
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int visible  = linearLayoutManager.getChildCount();
+                int total = linearLayoutManager.getItemCount();
+                int past=linearLayoutManager.findLastVisibleItemPosition();
+
+                if (total-1 ==past){
+
+                    if(dasd){
+                        Log.d("sahbi","hhh");
+                        dasd =false;
+                    }
+
+                }
+            }
+        });
+
     }
 
     @Override
     protected void initListeners() {
 
 
-        recyclerview.setLoadingListener(new MyRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-
-            @Override
-            public void setdisplay(int i) {
-
-            }
-
-            @Override
-            public void onLoadMore() {
-
-            }
-        });
     }
 
     @Override
@@ -70,26 +86,20 @@ public class RecommendFragment extends BaseFragment implements InterView {
     }
 
     @Override
-    public  void onResponse(Object t) {
+    public void onResponse(Object t) {
 
         RecommendBean bean = (RecommendBean) t;
 
-        RecommendAdapter recommendAdapter = new RecommendAdapter(context, bean.getRespData());
+//        Listv listv = new Listv(context,bean.getRespData());
+//        recyclerview.setAdapter(listv);
 
+
+        recommendAdapter.setData(bean.getRespData());
         recyclerview.setAdapter(recommendAdapter);
-
-        recyclerview.setLayoutManager(new LinearLayoutManager(context));
-
-
-
-
-
     }
 
     @Override
     public void onError() {
-
-
 
 
     }

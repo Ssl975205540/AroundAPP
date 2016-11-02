@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="recyview_home" type="id"/>
+    <item name="viewpager_home" type="id"/>
+    <item name="tab_home" type="id"/>
+    <item name="id_stickynavlayout_innerscrollview" type="id"/>
+
+</resources>

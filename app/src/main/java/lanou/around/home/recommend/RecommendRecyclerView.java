@@ -1,4 +1,4 @@
-package lanou.around.widget;
+package lanou.around.home.recommend;
 
 import android.content.Context;
 import android.support.design.widget.AppBarLayout;
@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,11 @@ import android.view.ViewParent;
 import java.util.ArrayList;
 import java.util.List;
 
+import lanou.around.widget.ArrowRefreshHeader;
+import lanou.around.widget.LoadingMoreFooter;
 
-public class MyRecyclerView extends RecyclerView {
+
+public class RecommendRecyclerView extends RecyclerView {
     private boolean isLoadingData = false;
     private boolean isNoMore = false;
     private int mRefreshProgressStyle = ProgressStyle.SysProgress;
@@ -46,15 +50,15 @@ public class MyRecyclerView extends RecyclerView {
     private AppBarStateChangeListener.State appbarState = AppBarStateChangeListener.State.EXPANDED;
 
 
-    public MyRecyclerView(Context context) {
+    public RecommendRecyclerView(Context context) {
         this(context, null);
     }
 
-    public MyRecyclerView(Context context, AttributeSet attrs) {
+    public RecommendRecyclerView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MyRecyclerView(Context context, AttributeSet attrs, int defStyle) {
+    public RecommendRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
@@ -230,15 +234,24 @@ public class MyRecyclerView extends RecyclerView {
         }
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
+
+
+
                 mLastY = ev.getRawY();
+
                 break;
             case MotionEvent.ACTION_MOVE:
+
+
+
                 final float deltaY = ev.getRawY() - mLastY;
                 mLastY = ev.getRawY();
                 if (isOnTop() && pullRefreshEnabled && appbarState == AppBarStateChangeListener.State.EXPANDED) {
                     mRefreshHeader.onMove(deltaY / DRAG_RATE);
                     if (mRefreshHeader.getVisibleHeight() > 0 && mRefreshHeader.getState() < ArrowRefreshHeader.STATE_REFRESHING) {
                         mLoadingListener.setdisplay(1);
+                        Log.d("MyRecyclerView", "mRefreshHeader.getVisibleHeight():" + mRefreshHeader.getVisibleHeight());
+
                         return false;
                     }
                 }
@@ -293,10 +306,10 @@ public class MyRecyclerView extends RecyclerView {
                 }
                 if (adapter.getItemCount() == emptyCount) {
                     mEmptyView.setVisibility(View.VISIBLE);
-                    MyRecyclerView.this.setVisibility(View.GONE);
+                    RecommendRecyclerView.this.setVisibility(View.GONE);
                 } else {
                     mEmptyView.setVisibility(View.GONE);
-                    MyRecyclerView.this.setVisibility(View.VISIBLE);
+                    RecommendRecyclerView.this.setVisibility(View.VISIBLE);
                 }
             }
             if (mWrapAdapter != null) {
