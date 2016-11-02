@@ -5,17 +5,17 @@ import java.util.Map;
 /**
  * Created by dllo on 16/10/25.
  */
-public class HtttpManger implements IHttpRequest{
+public class HttpManger implements IHttpRequest{
 
 
 
-    public static HtttpManger getInstance() {
+    public static HttpManger getInstance() {
 
 
         return SingletonHolder.sInstance;
     }
 
-    private HtttpManger() {
+    private HttpManger() {
         mRequest = new OkHttpImpl();
 
     }
@@ -23,7 +23,7 @@ public class HtttpManger implements IHttpRequest{
 
     public static final class SingletonHolder{
 
-        private static final HtttpManger sInstance = new HtttpManger();
+        private static final HttpManger sInstance = new HttpManger();
 
     }
 

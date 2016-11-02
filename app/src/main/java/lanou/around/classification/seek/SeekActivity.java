@@ -1,5 +1,6 @@
 package lanou.around.classification.seek;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
         mSeekText.setOnClickListener(this);
         mBack.setOnClickListener(this);
         mSeek.setOnClickListener(this);
+
         ClassifyPresenter presenter = new ClassifyPresenter(this);
         presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE, ClassifyTabBean.class);
     }
@@ -61,7 +63,6 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
 
                 }
                 break;
-
         }
     }
 
@@ -69,7 +70,6 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
     public void onBackPressed() {
         super.onBackPressed();
     }
-
     @Override
     public void startAnimation() {
 
@@ -83,7 +83,8 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onResponse(Object t) {
         ClassifyTabBean tabBean = (ClassifyTabBean) t;
-        mSeekText.setText(tabBean.getRespData().getInputName());
+        mSeekText.setHint(tabBean.getRespData().getInputName());
+        mSeekText.setHintTextColor(Color.BLACK);
     }
 
     @Override

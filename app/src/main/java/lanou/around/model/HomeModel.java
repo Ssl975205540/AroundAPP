@@ -9,7 +9,7 @@ import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.HomeBean;
 import lanou.around.home.HomeTabBean;
 import lanou.around.tools.db.AroundDBManager;
-import lanou.around.tools.http.HtttpManger;
+import lanou.around.tools.http.HttpManger;
 import lanou.around.tools.http.OnCompletedListener;
 
 /**
@@ -22,7 +22,7 @@ public class HomeModel implements InterModel {
     @Override
     public <T> void StartRequest(String url, final Class<T> tClass, final OnFinishedListener<T> onFinishedListener) {
 
-        HtttpManger.getInstance().getRequest(url, tClass, new OnCompletedListener<T>() {
+        HttpManger.getInstance().getRequest(url, tClass, new OnCompletedListener<T>() {
             @Override
             public void onCompleted(Object tClass1) {
 

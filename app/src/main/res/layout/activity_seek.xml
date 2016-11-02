@@ -57,7 +57,7 @@
             android:textSize="13sp"
             android:background="@null"
             android:layout_toLeftOf="@+id/tv_seek_text"
-            android:textColor="@color/home_adapter_item"/>
+            android:textColorHint="@color/line"/>
 
         <TextView
             android:id="@+id/tv_seek_text"

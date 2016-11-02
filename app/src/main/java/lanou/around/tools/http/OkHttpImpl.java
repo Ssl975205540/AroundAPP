@@ -51,7 +51,7 @@ public class OkHttpImpl implements IHttpRequest {
 
         Request request = new Request.Builder().url(urlStr).build();
 
-        asyncRequest(tClass,listener,request);
+        asyncRequest(tClass, listener, request);
 
 
     }
@@ -88,7 +88,6 @@ public class OkHttpImpl implements IHttpRequest {
     }
 
 
-
     @Override
     public <T> void postRequest(String urlStr, Map<String, String> requestBody, Class<T> tClass, OnCompletedListener<T> listener) {
 
@@ -98,7 +97,7 @@ public class OkHttpImpl implements IHttpRequest {
         Request request = new Request.Builder().url(urlStr).post(formBody).build();
 
 
-        asyncRequest(tClass,listener,request);
+        asyncRequest(tClass, listener, request);
 
 
     }
@@ -111,7 +110,7 @@ public class OkHttpImpl implements IHttpRequest {
         Request request = new Request.Builder().url(urlStr).headers(Headers.of(headers)).post(RequestBody.create(MEDIA_TYPE_TEXT, requestBody)).build();
 
 
-        asyncRequest(tClass,listener,request);
+        asyncRequest(tClass, listener, request);
 
     }
 
@@ -123,7 +122,7 @@ public class OkHttpImpl implements IHttpRequest {
 
         for (String key : requestBody.keySet()) {
 
-            builder.add(key,requestBody.get(key));
+            builder.add(key, requestBody.get(key));
         }
 
 
@@ -136,7 +135,7 @@ public class OkHttpImpl implements IHttpRequest {
 
         FormBody body = getFormBody(requestBody);
         Request request = new Request.Builder().url(urlStr).post(body).headers(Headers.of(headers)).build();
-        asyncRequest(tClass,listener,request);
+        asyncRequest(tClass, listener, request);
 
 
     }
@@ -157,12 +156,9 @@ public class OkHttpImpl implements IHttpRequest {
 
                 if (response.isSuccessful()) {
 
-                                final T result = mGson.fromJson(response.body().string(),tClass);
+                    final T result = mGson.fromJson(response.body().string(), tClass);
 
-                                postResPonse(result, listener);
-
-
-
+                    postResPonse(result, listener);
 
 
                 } else {
