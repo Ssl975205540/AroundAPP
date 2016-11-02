@@ -1,6 +1,7 @@
 package lanou.around.classification.classifyview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -12,6 +13,7 @@ import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.ClassifyViewBean;
+import lanou.around.classification.search.SearchActivity;
 import lanou.around.presenter.ClassifyViewPresenter;
 import lanou.around.tools.http.URLValues;
 
@@ -21,6 +23,7 @@ import lanou.around.tools.http.URLValues;
 public class RightViewFragment extends BaseFragment implements InterView {
     private Context context;
     private GridView gridView;
+    private List<ClassifyViewBean.RespDataBean> mDataBeanList;
 
 
     @Override
@@ -57,12 +60,12 @@ public class RightViewFragment extends BaseFragment implements InterView {
     @Override
     public  void onResponse(Object t) {
         ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
-        List<ClassifyViewBean.RespDataBean> dataBeanList = new ArrayList<>();
+        mDataBeanList = new ArrayList<>();
         for (int i = 16; i < 19 ; i++) {
-            dataBeanList.add(classifyViewBean.getRespData().get(i));
+            mDataBeanList.add(classifyViewBean.getRespData().get(i));
         }
         GridViewPagerAdapter gridViewAdapter = new GridViewPagerAdapter(context);
-        gridViewAdapter.setRespDataBeen(dataBeanList);
+        gridViewAdapter.setRespDataBeen(mDataBeanList);
         gridView.setAdapter(gridViewAdapter);
     }
 
@@ -78,8 +81,11 @@ public class RightViewFragment extends BaseFragment implements InterView {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                 long arg3) {
-            // TODO Auto-generated method stub
             System.out.println("arg2 = " + arg2); // 打印出点击的位置
+            Intent intent = new Intent(getContext(), SearchActivity.class);
+            intent.putExtra("cateIdRight",mDataBeanList.get(arg2).getCateId());
+            intent.putExtra("cateNameRight",mDataBeanList.get(arg2).getCateName());
+            getActivity().startActivity(intent);
         }
     }
 
