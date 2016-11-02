@@ -7,9 +7,9 @@ import lanou.around.aroundinterface.InterModel;
 import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.HomeBean;
-import lanou.around.home.HomeTabBean;
+import lanou.around.bean.HomeTabBean;
 import lanou.around.tools.db.AroundDBManager;
-import lanou.around.tools.http.HtttpManger;
+import lanou.around.tools.http.HttpManger;
 import lanou.around.tools.http.OnCompletedListener;
 
 /**
@@ -22,49 +22,30 @@ public class HomeModel implements InterModel {
     @Override
     public <T> void StartRequest(String url, final Class<T> tClass, final OnFinishedListener<T> onFinishedListener) {
 
-        HtttpManger.getInstance().getRequest(url, tClass, new OnCompletedListener<T>() {
+        HttpManger.getInstance().getRequest(url, tClass, new OnCompletedListener<T>() {
             @Override
             public void onCompleted(Object tClass1) {
 
-
                 if(tClass1 instanceof HomeBean){
-
                     if(AroundAPP.isNetworkAvailable()){
-
                         onFinishedListener.onFinished((T) tClass1);
                     }else {
                         onFailed();
-
                     }
-
-
                 }
-
                 if (tClass1 instanceof HomeTabBean){
-
-
                     onFinishedListener.onFinished((T) tClass1);
-
                 }
-
             }
-
 
             @Override
             public void onFailed() {
-
                 QuerySQ(new OnCompleted<HomeBean>() {
-
                     @Override
                     public void onSuccess(HomeBean result) {
-
-
-
                         if(result != null){
                             onFinishedListener.onFinished((T) result);
                         }
-
-
                     }
 
                     @Override
@@ -73,8 +54,6 @@ public class HomeModel implements InterModel {
                     }
                 });
             }
-
-
         });
     }
 

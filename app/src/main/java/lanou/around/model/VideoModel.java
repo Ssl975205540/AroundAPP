@@ -4,7 +4,7 @@ import lanou.around.aroundinterface.InterModel;
 import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.VideoDetailsBean;
-import lanou.around.tools.http.HtttpManger;
+import lanou.around.tools.http.HttpManger;
 import lanou.around.tools.http.OnCompletedListener;
 
 
@@ -19,7 +19,7 @@ public class VideoModel implements InterModel{
     @Override
     public <T> void StartRequest(String url, Class<T> tClass, final OnFinishedListener<T> onFinishedListener) {
 
-        HtttpManger.getInstance().getRequest(url, tClass, new OnCompletedListener<T>() {
+        HttpManger.getInstance().getRequest(url, tClass, new OnCompletedListener<T>() {
 
             @Override
             public void onCompleted(T result) {
@@ -39,7 +39,7 @@ public class VideoModel implements InterModel{
         });
 
 
-        HtttpManger.getInstance().postRequest(url, null, VideoDetailsBean.class, new OnCompletedListener<VideoDetailsBean>() {
+        HttpManger.getInstance().postRequest(url, null, VideoDetailsBean.class, new OnCompletedListener<VideoDetailsBean>() {
             @Override
             public void onCompleted(VideoDetailsBean result) {
 
