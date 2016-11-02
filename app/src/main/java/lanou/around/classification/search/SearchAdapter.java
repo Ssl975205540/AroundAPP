@@ -42,7 +42,7 @@ public class SearchAdapter extends BaseRcvAdapter<SearchAdapter.MyViewHolder, Be
         private final ImageView img;
         public MyViewHolder(View itemView) {
             super(itemView);
-            img = (ImageView) itemView.findViewById(R.id.img);
+            img = (ImageView) itemView.findViewById(R.id.img_phone);
         }
     }
 }
