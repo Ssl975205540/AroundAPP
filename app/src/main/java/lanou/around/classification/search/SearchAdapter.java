@@ -57,12 +57,16 @@ public class SearchAdapter extends BaseRcvAdapter<SearchAdapter.MyViewHolder, Be
 
         public MyViewHolder(View itemView) {
             super(itemView);
+
+           
+
             image = (ImageView) itemView.findViewById(R.id.img_phone);
             mNews = (TextView) itemView.findViewById(R.id.tv_phone_news);
             mCityName = (TextView) itemView.findViewById(R.id.tv_phone_cityName);
             mBusinessName = (TextView) itemView.findViewById(R.id.tv_phone_businessName);
             mPrice = (TextView) itemView.findViewById(R.id.tv_phone_price);
             mFriendTime = (TextView) itemView.findViewById(R.id.tv_phone_friendTime);
+
         }
     }
 }

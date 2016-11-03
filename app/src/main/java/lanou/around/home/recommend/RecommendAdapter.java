@@ -28,10 +28,12 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
     private Context context;
 
-    private List<RecommendBean.RespDataBean> data;
+    private List<RecommendBean.RespDataBean> data = new ArrayList<>();
 
     public void setData(List<RecommendBean.RespDataBean> data) {
-        this.data = data;
+
+        this.data.addAll(data);
+        notifyDataSetChanged();
     }
 
     public RecommendAdapter(Context context) {
@@ -96,8 +98,8 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                 Log.d("dd", data.get(position).getSellerNickname());
                 recommendViewHolder.tv_sellerNickname.setText(data.get(position).getSellerNickname());
                 recommendViewHolder.infoPrice.setText("¥" + data.get(position).getInfoPrice());
-                if(!data.get(position).getInfoOriginalPrice().equals("0")){
-                    recommendViewHolder.infoOriginalPrice.setText("原价"+data.get(position).getInfoOriginalPrice());
+                if (!data.get(position).getInfoOriginalPrice().equals("0")) {
+                    recommendViewHolder.infoOriginalPrice.setText("原价" + data.get(position).getInfoOriginalPrice());
                 }
 
                 recommendViewHolder.area.setText(data.get(position).getArea());
@@ -121,6 +123,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                 recommendViewHolder.number.setText(data.get(position).getMessageNum());
                 recommendViewHolder.Leaving.setText(data.get(position).getScanNum());
 
+
                 break;
 
 
@@ -137,7 +140,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
     public class RecommendViewHolder extends RecyclerView.ViewHolder {
 
-        private final ImageView imgSellerPhoto,uu;
+        private final ImageView imgSellerPhoto, uu;
         private final TextView tvFriendTime;
         private final RecyclerView scrollview_item;
         private final TextView infoCityName;
