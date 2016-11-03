@@ -71,11 +71,13 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="35dp"
+                android:id="@+id/tv_search_area"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="区域"

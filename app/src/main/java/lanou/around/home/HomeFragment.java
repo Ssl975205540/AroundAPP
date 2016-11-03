@@ -11,10 +11,8 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -76,7 +74,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     private RoundImageView circle_search_home;
     private ConvenientBanner bannerHome;
     private LinearLayout supplementary, supplement , hsvLinear , friendLinear;
-    private FrameLayout fffff;
+
+    private int t;
     private NestedScrollView nestscroll;
     private StickyNavLayout mainContent;
 
@@ -126,22 +125,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         mainContent = findView(R.id.main_content);
 
 
-        mainContent.setToolbar(new InterToolBar() {
-            @Override
-            public void setTools(int t) {
-                toolbarHome.setChangeTop(t);
 
-                if(t == mainContent.getHeight()-tabHome.getHeight()-viewPagerHome.getHeight()){
-                    rl1.setVisibility(View.VISIBLE);
-                        RevealToolbar.HideReveal(rl0);
 
-                }else {
-                    rl1.setVisibility(View.INVISIBLE);
-                    rl0.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        fffff = findView(R.id.fffff);
         supplement = findView(R.id.supplement);
 
         supplementary = findView(R.id.supplementary);
@@ -196,6 +181,22 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         imgSpent.setOnClickListener(this);
         friendLinear.setOnClickListener(this);
         recyviewHome.setLoadingMoreEnabled(false);
+        mainContent.setToolbar(new InterToolBar() {
+            @Override
+            public void setTools(int t) {
+                toolbarHome.setChangeTop(t);
+
+                if(t == mainContent.getHeight()-tabHome.getHeight()-viewPagerHome.getHeight()){
+                    rl1.setVisibility(View.VISIBLE);
+                    RevealToolbar.HideReveal(rl0);
+
+                }else {
+                    rl1.setVisibility(View.INVISIBLE);
+                    rl0.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
 
         recyviewHome.setLoadingListener(new MyRecyclerView.LoadingListener() {
             @Override
@@ -206,11 +207,15 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                     @Override
                     public void run() {
 
+
                         if(refresh == true){
+
                             homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
                         }else {
                             refresh = true;
                         }
+                        recyviewHome.refreshComplete();
+
 
 
                     }
@@ -220,15 +225,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
             @Override
             public void setdisplay(int i) {
-                switch (i) {
-
-                    case 0:
-                        toolbarHome.setVisibility(View.VISIBLE);
-                        break;
-                    case 1:
-                        toolbarHome.setVisibility(View.GONE);
-                        break;
-                }
             }
 
             @Override
@@ -264,35 +260,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
             }
         });
 
-//        homeAppbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-//
-//
-//
-//
-//            @Override
-//            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-//
-//                toolbarHome.setChangeTop(-verticalOffset);
-//                Log.d("HomeFragment", "-verticalOffset:" + -verticalOffset);
-//                Log.d("HomeFragment", "appBarLayout.getHeight() - tabHome.getHeight() - statusBarHeight:" + (appBarLayout.getHeight() - tabHome.getHeight() - statusBarHeight));
-//                if (-verticalOffset == appBarLayout.getHeight() - tabHome.getHeight() - statusBarHeight) {
-//
-//
-//                        rl1.setVisibility(View.VISIBLE);
-//                        RevealToolbar.HideReveal(rl0);
-//
-//
-//
-//
-//                } else {
-//
-//
-//                    rl1.setVisibility(View.INVISIBLE);
-//                    rl0.setVisibility(View.VISIBLE);
-//
-//                }
-//            }
-//        });
+
+
 
 
         viewPagerHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -338,15 +307,12 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     @Override
     public void startAnimation() {
 
-        recyviewHome.setRefreshing(true);
-        toolbarHome.setVisibility(View.GONE);
+
     }
 
     @Override
     public void stopAnimation() {
 
-        recyviewHome.refreshComplete();
-        toolbarHome.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -364,6 +330,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                 arrayList.add(homeBeanHot);
             }
         }
+        hsvLinear.removeAllViews();
         for (int i = 0 ; i < homeBean.getRespData().getLowBanners().size() ; i++) {
             View hsv_item = LayoutInflater.from(context).inflate(R.layout.hsv_item , null);
             icon = (ImageView) hsv_item.findViewById(R.id.hsv_item_image);
@@ -383,6 +350,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                     }
                 });
             }
+
 
             hsvLinear.addView(hsv_item);
         }
@@ -424,6 +392,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     @Override
     public void onError() {
 
+
         Toast.makeText(AroundAPP.getContext(), "网络不可用", Toast.LENGTH_SHORT).show();
 
     }
@@ -457,8 +426,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
 
         this.statusBarHeight = statusBarHeight;
-        Log.d("HomeFragment", "statusBarHeight:" + statusBarHeight);
-
 
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) rl.getLayoutParams();

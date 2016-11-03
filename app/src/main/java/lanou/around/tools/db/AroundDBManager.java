@@ -71,6 +71,15 @@ public class AroundDBManager {
         }
 
 
+        for (int i = 0; i < bean.getRespData().getLowBanners().size(); i++) {
+
+
+            ContentValues content = new ContentValues();
+            content.put("lowbanners",bean.getRespData().getLowBanners().get(i).getImageUrl());
+            db.insert("homegettopbanner",null,content);
+
+        }
+
 
     }
 
@@ -91,7 +100,11 @@ public class AroundDBManager {
         if(key.equals("homegettopbanner")){
             ArrayList<HomeBeanHot> arraylist = new ArrayList<>();
             ArrayList<HomeBean.RespDataBean.TopBannersBean> topArrayList = new ArrayList<>();
-          Cursor cursor = db.query(key,null,null,null,null,null,null);
+            ArrayList<HomeBean.RespDataBean.LowBannersBean> lowArrayList = new ArrayList<>();
+
+
+
+            Cursor cursor = db.query(key,null,null,null,null,null,null);
             if(cursor.getCount() != 0){
                 while (cursor.moveToNext()){
                     String url = cursor.getString(cursor.getColumnIndex("url"));
@@ -99,6 +112,13 @@ public class AroundDBManager {
                     home.setImageUrl(url);
                     arraylist.add(home);
                     String topbanners =cursor.getString(cursor.getColumnIndex("topbanners"));
+                    String lowbanners = cursor.getString(cursor.getColumnIndex("lowbanners"));
+
+                    if(lowbanners != null){
+                        HomeBean.RespDataBean.LowBannersBean low = new HomeBean.RespDataBean.LowBannersBean();
+                        lowArrayList.add(low);
+
+                    }
                     if(topbanners != null){
                         HomeBean.RespDataBean.TopBannersBean top = new HomeBean.RespDataBean.TopBannersBean();
                         top.setImageUrl(topbanners);
@@ -118,6 +138,10 @@ public class AroundDBManager {
             homeBean.setRespCode("0");
             homeBean.setRespData(new HomeBean.RespDataBean());
             homeBean.getRespData().setActBanners(new ArrayList<HomeBean.RespDataBean.ActBannersBean>());
+
+            homeBean.getRespData().setLowBanners(lowArrayList);
+
+
 
             homeBean.getRespData().setTopBanners(topArrayList);
             homeBean.getRespData().getActBanners().add(new HomeBean.RespDataBean.ActBannersBean());
