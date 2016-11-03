@@ -18,7 +18,7 @@ public class AroundHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("create table homegettopbanner (_id integer primary key autoincrement," + "goUrl text,"+ "topbanners text," +"url text);");
+        db.execSQL("create table homegettopbanner (_id integer primary key autoincrement," + "goUrl text,"+ "lowbanners text,"+ "topbanners text," +"url text);");
 
     }
 

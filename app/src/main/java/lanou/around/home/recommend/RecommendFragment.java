@@ -2,7 +2,6 @@ package lanou.around.home.recommend;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
@@ -15,15 +14,15 @@ import lanou.around.presenter.RecommendPresenter;
  */
 
 public class RecommendFragment extends BaseFragment implements InterView {
-
+    public boolean loading = true;
     private RecyclerView recyclerview;
-    private int newState;
     private RecommendAdapter recommendAdapter;
+    private RecommendPresenter recommendPresenter;
 
     @Override
     protected void initData() {
 
-        RecommendPresenter recommendPresenter = new RecommendPresenter(this);
+        recommendPresenter = new RecommendPresenter(this);
 
         recommendPresenter.startRequest("http://zhuanzhuan.58.com/zz/transfer/getRecommendInfoForIndex", RecommendBean.class);
     }
@@ -40,6 +39,7 @@ public class RecommendFragment extends BaseFragment implements InterView {
 
         recommendAdapter = new RecommendAdapter(context);
 
+        recyclerview.setAdapter(recommendAdapter);
 
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
@@ -47,7 +47,6 @@ public class RecommendFragment extends BaseFragment implements InterView {
         recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
 
-            public boolean dasd = true;
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -58,9 +57,11 @@ public class RecommendFragment extends BaseFragment implements InterView {
 
                 if (total-1 ==past){
 
-                    if(dasd){
-                        Log.d("sahbi","hhh");
-                        dasd =false;
+                    if(loading){
+
+                        recommendPresenter.startRequest("http://zhuanzhuan.58.com/zz/transfer/getRecommendInfoForIndex", RecommendBean.class);
+
+                        loading =false;
                     }
 
                 }
@@ -95,7 +96,8 @@ public class RecommendFragment extends BaseFragment implements InterView {
 
 
         recommendAdapter.setData(bean.getRespData());
-        recyclerview.setAdapter(recommendAdapter);
+
+        loading =true;
     }
 
     @Override

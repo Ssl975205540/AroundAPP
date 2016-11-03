@@ -78,7 +78,7 @@ public class MyRecyclerView extends RecyclerView {
 
     //根据header的ViewType判断是哪个header
     private View getHeaderViewByType(int itemType) {
-        if(!isHeaderType(itemType)) {
+        if (!isHeaderType(itemType)) {
             return null;
         }
         return mHeaderViews.get(itemType - HEADER_INIT_INDEX);
@@ -86,12 +86,12 @@ public class MyRecyclerView extends RecyclerView {
 
     //判断一个type是否为HeaderType
     private boolean isHeaderType(int itemViewType) {
-        return  mHeaderViews.size() > 0 &&  sHeaderTypes.contains(itemViewType);
+        return mHeaderViews.size() > 0 && sHeaderTypes.contains(itemViewType);
     }
 
     //判断是否是RecyclerView保留的itemViewType
     private boolean isReservedItemViewType(int itemViewType) {
-        if(itemViewType == TYPE_REFRESH_HEADER || itemViewType == TYPE_FOOTER || sHeaderTypes.contains(itemViewType)) {
+        if (itemViewType == TYPE_REFRESH_HEADER || itemViewType == TYPE_FOOTER || sHeaderTypes.contains(itemViewType)) {
             return true;
         } else {
             return false;
@@ -111,17 +111,17 @@ public class MyRecyclerView extends RecyclerView {
         }
     }
 
-    public void setNoMore(boolean noMore){
+    public void setNoMore(boolean noMore) {
         isLoadingData = false;
         isNoMore = noMore;
         if (mFootView instanceof LoadingMoreFooter) {
-            ((LoadingMoreFooter) mFootView).setState(isNoMore ? LoadingMoreFooter.STATE_NOMORE:LoadingMoreFooter.STATE_COMPLETE);
+            ((LoadingMoreFooter) mFootView).setState(isNoMore ? LoadingMoreFooter.STATE_NOMORE : LoadingMoreFooter.STATE_COMPLETE);
         } else {
             mFootView.setVisibility(View.GONE);
         }
     }
 
-    public void reset(){
+    public void reset() {
         setNoMore(false);
         loadMoreComplete();
         refreshComplete();
@@ -141,7 +141,7 @@ public class MyRecyclerView extends RecyclerView {
         loadingMoreEnabled = enabled;
         if (!enabled) {
             if (mFootView instanceof LoadingMoreFooter) {
-                ((LoadingMoreFooter)mFootView).setState(LoadingMoreFooter.STATE_COMPLETE);
+                ((LoadingMoreFooter) mFootView).setState(LoadingMoreFooter.STATE_COMPLETE);
             }
         }
     }
@@ -188,16 +188,7 @@ public class MyRecyclerView extends RecyclerView {
         super.onScrollStateChanged(state);
 
 
-        if(mRefreshHeader.getVisibleHeight() >= 0){
-            if (mRefreshHeader.getState() == ArrowRefreshHeader.STATE_REFRESHING){
-                mLoadingListener.setdisplay(1);
-            }else {
-                mLoadingListener.setdisplay(0);
-
-            }
-
-        }
-
+        mLoadingListener.setdisplay(mRefreshHeader.getVisibleHeight());
         if (state == RecyclerView.SCROLL_STATE_IDLE && mLoadingListener != null && !isLoadingData && loadingMoreEnabled) {
             LayoutManager layoutManager = getLayoutManager();
             int lastVisibleItemPosition;
@@ -231,6 +222,9 @@ public class MyRecyclerView extends RecyclerView {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mLastY = ev.getRawY();
+
+
+
                 break;
             case MotionEvent.ACTION_MOVE:
                 final float deltaY = ev.getRawY() - mLastY;
@@ -277,7 +271,6 @@ public class MyRecyclerView extends RecyclerView {
     }
 
 
-
     private class DataObserver extends AdapterDataObserver {
 
         @Override
@@ -303,6 +296,7 @@ public class MyRecyclerView extends RecyclerView {
                 mWrapAdapter.notifyDataSetChanged();
             }
         }
+
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
             mWrapAdapter.notifyItemRangeInserted(positionStart, itemCount);
@@ -328,7 +322,10 @@ public class MyRecyclerView extends RecyclerView {
             mWrapAdapter.notifyItemMoved(fromPosition, toPosition);
         }
 
-    };
+    }
+
+    ;
+
     public class WrapAdapter extends Adapter<ViewHolder> {
 
         private Adapter adapter;
@@ -342,9 +339,9 @@ public class MyRecyclerView extends RecyclerView {
         }
 
         public boolean isFooter(int position) {
-            if(loadingMoreEnabled) {
+            if (loadingMoreEnabled) {
                 return position == getItemCount() - 1;
-            }else {
+            } else {
                 return false;
             }
         }
@@ -387,13 +384,13 @@ public class MyRecyclerView extends RecyclerView {
 
         @Override
         public int getItemCount() {
-            if(loadingMoreEnabled) {
+            if (loadingMoreEnabled) {
                 if (adapter != null) {
                     return getHeadersCount() + adapter.getItemCount() + 2;
                 } else {
                     return getHeadersCount() + 2;
                 }
-            }else {
+            } else {
                 if (adapter != null) {
                     return getHeadersCount() + adapter.getItemCount() + 1;
                 } else {
@@ -405,8 +402,8 @@ public class MyRecyclerView extends RecyclerView {
         @Override
         public int getItemViewType(int position) {
             int adjPosition = position - (getHeadersCount() + 1);
-            if(isReservedItemViewType(adapter.getItemViewType(adjPosition))) {
-                throw new IllegalStateException("XRecyclerView require itemViewType in adapter should be less than 10000 " );
+            if (isReservedItemViewType(adapter.getItemViewType(adjPosition))) {
+                throw new IllegalStateException("XRecyclerView require itemViewType in adapter should be less than 10000 ");
             }
             if (isRefreshHeader(position)) {
                 return TYPE_REFRESH_HEADER;
@@ -468,7 +465,7 @@ public class MyRecyclerView extends RecyclerView {
             ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
             if (lp != null
                     && lp instanceof StaggeredGridLayoutManager.LayoutParams
-                    && (isHeader(holder.getLayoutPosition()) ||isRefreshHeader(holder.getLayoutPosition()) || isFooter(holder.getLayoutPosition()))) {
+                    && (isHeader(holder.getLayoutPosition()) || isRefreshHeader(holder.getLayoutPosition()) || isFooter(holder.getLayoutPosition()))) {
                 StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
                 p.setFullSpan(true);
             }
@@ -507,6 +504,7 @@ public class MyRecyclerView extends RecyclerView {
             }
         }
     }
+
     public void setLoadingListener(LoadingListener listener) {
         mLoadingListener = listener;
     }
@@ -514,11 +512,13 @@ public class MyRecyclerView extends RecyclerView {
     public interface LoadingListener {
 
         void onRefresh();
+
         void setdisplay(int i);
 
         void onLoadMore();
 
     }
+
     public void setRefreshing(boolean refreshing) {
         if (refreshing && pullRefreshEnabled && mLoadingListener != null) {
             mRefreshHeader.setState(ArrowRefreshHeader.STATE_REFRESHING);
@@ -539,17 +539,17 @@ public class MyRecyclerView extends RecyclerView {
             }
             p = p.getParent();
         }
-        if(p instanceof CoordinatorLayout) {
-            CoordinatorLayout coordinatorLayout = (CoordinatorLayout)p;
+        if (p instanceof CoordinatorLayout) {
+            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) p;
             final int childCount = coordinatorLayout.getChildCount();
             for (int i = childCount - 1; i >= 0; i--) {
                 final View child = coordinatorLayout.getChildAt(i);
-                if(child instanceof AppBarLayout) {
-                    appBarLayout = (AppBarLayout)child;
+                if (child instanceof AppBarLayout) {
+                    appBarLayout = (AppBarLayout) child;
                     break;
                 }
             }
-            if(appBarLayout != null) {
+            if (appBarLayout != null) {
                 appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
 
                     @Override
@@ -561,42 +561,43 @@ public class MyRecyclerView extends RecyclerView {
         }
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(ViewHolder viewHolder, int position);
     }
 
     public class ProgressStyle {
 
-        public static final int SysProgress=-1;
-        public static final int BallPulse=0;
-        public static final int BallGridPulse=1;
-        public static final int BallClipRotate=2;
-        public static final int BallClipRotatePulse=3;
-        public static final int SquareSpin=4;
-        public static final int BallClipRotateMultiple=5;
-        public static final int BallPulseRise=6;
-        public static final int BallRotate=7;
-        public static final int CubeTransition=8;
-        public static final int BallZigZag=9;
-        public static final int BallZigZagDeflect=10;
-        public static final int BallTrianglePath=11;
-        public static final int BallScale=12;
-        public static final int LineScale=13;
-        public static final int LineScaleParty=14;
-        public static final int BallScaleMultiple=15;
-        public static final int BallPulseSync=16;
-        public static final int BallBeat=17;
-        public static final int LineScalePulseOut=18;
-        public static final int LineScalePulseOutRapid=19;
-        public static final int BallScaleRipple=20;
-        public static final int BallScaleRippleMultiple=21;
-        public static final int BallSpinFadeLoader=22;
-        public static final int LineSpinFadeLoader=23;
-        public static final int TriangleSkewSpin=24;
-        public static final int Pacman=25;
-        public static final int BallGridBeat=26;
-        public static final int SemiCircleSpin=27;
+        public static final int SysProgress = -1;
+        public static final int BallPulse = 0;
+        public static final int BallGridPulse = 1;
+        public static final int BallClipRotate = 2;
+        public static final int BallClipRotatePulse = 3;
+        public static final int SquareSpin = 4;
+        public static final int BallClipRotateMultiple = 5;
+        public static final int BallPulseRise = 6;
+        public static final int BallRotate = 7;
+        public static final int CubeTransition = 8;
+        public static final int BallZigZag = 9;
+        public static final int BallZigZagDeflect = 10;
+        public static final int BallTrianglePath = 11;
+        public static final int BallScale = 12;
+        public static final int LineScale = 13;
+        public static final int LineScaleParty = 14;
+        public static final int BallScaleMultiple = 15;
+        public static final int BallPulseSync = 16;
+        public static final int BallBeat = 17;
+        public static final int LineScalePulseOut = 18;
+        public static final int LineScalePulseOutRapid = 19;
+        public static final int BallScaleRipple = 20;
+        public static final int BallScaleRippleMultiple = 21;
+        public static final int BallSpinFadeLoader = 22;
+        public static final int LineSpinFadeLoader = 23;
+        public static final int TriangleSkewSpin = 24;
+        public static final int Pacman = 25;
+        public static final int BallGridBeat = 26;
+        public static final int SemiCircleSpin = 27;
     }
+
     interface BaseRefreshHeader {
         int STATE_NORMAL = 0;
 
@@ -607,6 +608,7 @@ public class MyRecyclerView extends RecyclerView {
         int STATE_REFRESHING = 2;
 
         int STATE_DONE = 3;
+
         void onMove(float delta);
 
         boolean releaseAction();
@@ -615,8 +617,7 @@ public class MyRecyclerView extends RecyclerView {
 
     }
 
-    public static abstract  class AppBarStateChangeListener implements AppBarLayout.OnOffsetChangedListener {
-
+    public static abstract class AppBarStateChangeListener implements AppBarLayout.OnOffsetChangedListener {
 
 
         public enum State {
@@ -624,6 +625,7 @@ public class MyRecyclerView extends RecyclerView {
             COLLAPSED,
             IDLE;
         }
+
         private State mCurrentState = State.IDLE;
 
         @Override
