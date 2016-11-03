@@ -23,6 +23,9 @@ public class URLValues {
 
     public static final String POST_BODY_RECOMMEND = "pageNum=1&lat=38.883479&lng=121.544684&pageSize=20&";
 
+    //附近
+    public static final String POST_NEARBY = "http://zhuanzhuan.58.com/zz/transfer/getNearInfoList";
+
     //首页附近的TabLayout中的标题
     public static final String HOME_NEAR_TAB_MARKET = "http://zhuanzhuan.58.com/zz/transfer/getNearAndVillageCateList";
 

@@ -23,6 +23,8 @@ public abstract class BaseRcvAdapter<Holder extends RecyclerView.ViewHolder, T> 
      */
     public MyRecyclerView.OnItemClickListener onItemClick;
 
+
+
     public void setOnItemClick(MyRecyclerView.OnItemClickListener onItemClick) {
 
         this.onItemClick = onItemClick;
