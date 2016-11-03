@@ -43,9 +43,9 @@ import lanou.around.home.recommend.RecommendFragment;
 import lanou.around.presenter.HomePresenter;
 import lanou.around.tools.http.URLValues;
 import lanou.around.tools.recycle.RevealToolbar;
+import lanou.around.widget.CircleTransform;
 import lanou.around.widget.MorphFrameLayout;
 import lanou.around.widget.MyRecyclerView;
-import lanou.around.widget.RoundImageView;
 import lanou.around.widget.StickyNavLayout;
 import lanou.around.widget.StretchAnimation;
 import lanou.around.widget.TransparentToolBar;
@@ -71,7 +71,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     private TextView tvSpending, tvSpent;
     private ImageView imgSpending, imgSpent , icon , friendIcon , friendCreame , friendPakge;
     private boolean refresh = false;
-    private RoundImageView circle_search_home;
+    private ImageView circle_search_home;
     private ConvenientBanner bannerHome;
     private LinearLayout supplementary, supplement , hsvLinear , friendLinear;
 
@@ -141,6 +141,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         imgSpent = findView(R.id.img_yet_spent);
         circle_search_home = findView(R.id.circle_search_home);
 
+        Picasso.with(context).load(R.mipmap.wf).transform(new CircleTransform()).into(circle_search_home);
         View view = LayoutInflater.from(context).inflate(R.layout.home_recly_header, null);
         hsvLinear = (LinearLayout) view.findViewById(R.id.hsv_ll_home);
         friendLinear = (LinearLayout) view.findViewById(R.id.friend_ll);

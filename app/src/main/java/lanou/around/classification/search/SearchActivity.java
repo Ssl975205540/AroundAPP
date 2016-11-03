@@ -188,7 +188,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     private void showAroeWindow(View view) {
         popupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
         // 设置动画效果
-        popupWindow.setAnimationStyle(R.style.e0);
+        popupWindow.setAnimationStyle(R.style.e1);
 
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
 
