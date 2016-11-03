@@ -366,11 +366,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 JSONObject provinceObject = jsonArray.optJSONObject(i);
                 //  获取省份名称放入集合
                 String provinceName = provinceObject.getString("province");
-
-
                 provinceBeanList.add(provinceName);
-
-
                 //  获取城市数组
                 JSONArray cityArray = provinceObject.optJSONArray("city");
                 cities = new ArrayList<>();//   声明存放城市的集合
@@ -381,11 +377,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     JSONObject cityObject = cityArray.optJSONObject(j);
                     //  将城市放入集合
                     String cityName = cityObject.optString("name");
-
-
                     cities.add(cityName);
-
-
                     district = new ArrayList<>();// 声明存放区县的集合
                     //  获取区县的数组
                     JSONArray areaArray = cityObject.optJSONArray("area");
@@ -396,9 +388,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     }
                     //  将区县的集合放入集合
 
-
                     districts.add(district);
-
 
                 }
                 //  将存放区县集合的集合放入集合
