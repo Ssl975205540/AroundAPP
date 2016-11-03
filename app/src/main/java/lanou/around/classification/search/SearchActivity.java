@@ -219,7 +219,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             mTabBean = (ClassifyTabBean) t;
             mSearchText.setText(mTabBean.getRespData().getInputName());
         }
-
     }
 
     @Override
