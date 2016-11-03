@@ -66,8 +66,6 @@ public class HomeTabFragment extends BaseFragment implements InterView{
     public void onResponse(Object t) {
         bean = (HomeTabItemBean) t;
 
-        Log.d("HomeTabFragment", "bean.getRespData().size():" + bean.getRespData().size());
-
         adapter = new HomeTabItemAdapter(context , bean.getRespData());
 
         recyclerView.setLayoutManager(new GridLayoutManager(context, 2));

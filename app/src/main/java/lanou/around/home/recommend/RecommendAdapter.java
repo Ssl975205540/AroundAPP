@@ -31,8 +31,10 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     private List<RecommendBean.RespDataBean> data = new ArrayList<>();
 
     public void setData(List<RecommendBean.RespDataBean> data) {
-
-        this.data.addAll(data);
+        try {
+            this.data.addAll(data);
+        } catch (NullPointerException e) {
+        }
         notifyDataSetChanged();
     }
 
