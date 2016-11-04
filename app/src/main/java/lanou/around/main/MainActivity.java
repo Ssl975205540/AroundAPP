@@ -21,6 +21,7 @@ import lanou.around.base.BaseActivity;
 import lanou.around.classification.classify.ClassifyFragment;
 import lanou.around.home.HomeFragment;
 import lanou.around.login.LoginFragment;
+import lanou.around.tools.recycle.StatusBarUtils;
 import lanou.around.video.VideoFragment;
 
 
@@ -100,6 +101,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
                 switchContent(homeFragment);
 
+                StatusBarUtils.setWindowStatusBarColor(this,R.color.black_a10_color);
+
                 ivHome.setBackgroundResource(R.mipmap.ma);
                 ivClass.setBackgroundResource(R.mipmap.vp);
                 ivLogin.setBackgroundResource(R.mipmap.sw);
@@ -110,9 +113,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 if (classFragment == null) {
                     classFragment = new ClassifyFragment(statusBarHeight);
-//                    //给此页的状态栏设置颜色 需添加依赖
-//                    StatusBarUtil.setColor(this, Color.RED);
+//
                 }
+                StatusBarUtils.setWindowStatusBarColor(this,R.color.home_adapter_item);
 
                 switchContent(classFragment);
                 
