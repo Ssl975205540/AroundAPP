@@ -23,13 +23,19 @@ import lanou.around.tools.http.URLValues;
 
 public class SearchAdapter extends BaseRcvAdapter<SearchAdapter.MyViewHolder, Bean.RespDataBean> {
 
+    private int layout;
+
     public SearchAdapter(Context context, List<Bean.RespDataBean> data) {
         super(context, data);
     }
 
+    public void setLayout(int layout) {
+        this.layout = layout;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.search_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(layout, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
@@ -40,9 +46,13 @@ public class SearchAdapter extends BaseRcvAdapter<SearchAdapter.MyViewHolder, Be
         Glide.with(context).load(URLValues.PIN_RECOMMEND + data.get(position).getInfoImage()).into(holder.image);
         holder.mNews.setText(data.get(position).getTitle());
         holder.mCityName.setText(data.get(position).getCityName());
-        holder.mBusinessName.setText(data.get(position).getBusinessName());
         holder.mPrice.setText(String.valueOf(data.get(position).getPrice()));
         holder.mFriendTime.setText(data.get(position).getFriendTime());
+        try {
+            holder.mBusinessName.setText(data.get(position).getBusinessName());
+        } catch (Exception e) {
+
+        }
 
     }
 
@@ -57,9 +67,6 @@ public class SearchAdapter extends BaseRcvAdapter<SearchAdapter.MyViewHolder, Be
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
-
-
             image = (ImageView) itemView.findViewById(R.id.img_phone);
             mNews = (TextView) itemView.findViewById(R.id.tv_phone_news);
             mCityName = (TextView) itemView.findViewById(R.id.tv_phone_cityName);

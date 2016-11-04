@@ -325,7 +325,12 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 HomeBeanHot homeBeanHot = new HomeBeanHot();
-                homeBeanHot.setImageUrl(homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getImageUrl());
+                try {
+                    homeBeanHot.setImageUrl(homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getImageUrl());
+
+                } catch (Exception e){
+
+                }
 //                homeBeanHot.setGoOperation(homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getGoOperation());
 
                 arrayList.add(homeBeanHot);

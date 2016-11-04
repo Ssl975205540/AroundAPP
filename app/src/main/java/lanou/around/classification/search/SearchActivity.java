@@ -2,6 +2,7 @@ package lanou.around.classification.search;
 
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -154,7 +155,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
 
             case R.id.tv_search_area:
-                if(popupWindow != null){
+                if (popupWindow != null) {
                     if (popupWindow.isShowing()) {
                         popupWindow.dismiss();
                         popupWindow = null;
@@ -174,7 +175,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.ll_order:
 
-                if(popupWindow != null){
+                if (popupWindow != null) {
                     if (popupWindow.isShowing()) {
                         popupWindow.dismiss();
                         popupWindow = null;
@@ -335,9 +336,18 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     public void onResponse(Object t) {
         if (t instanceof Bean) {
             Bean bean = (Bean) t;
-            SearchAdapter searchAdapter = new SearchAdapter(this, bean.getRespData());
-            search_recyclerview.setAdapter(searchAdapter);
-            search_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+            if (getIntent().getStringExtra("cateNameLeft").equals("服装鞋帽")) {
+                SearchAdapter searchAdapter = new SearchAdapter(this, bean.getRespData());
+                searchAdapter.setLayout(R.layout.search_item_grid);
+                search_recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
+                search_recyclerview.setAdapter(searchAdapter);
+            } else {
+                SearchAdapter searchAdapter = new SearchAdapter(this, bean.getRespData());
+                searchAdapter.setLayout(R.layout.search_item_linear);
+                search_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+                search_recyclerview.setAdapter(searchAdapter);
+
+            }
         }
         if (t instanceof ClassifyTabBean) {
             mTabBean = (ClassifyTabBean) t;
