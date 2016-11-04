@@ -1,7 +1,6 @@
 package lanou.around.classification.checkall;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -57,25 +56,35 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
         parseJson(type);
     }
 
+    ArrayList<ArrayList<String>> a = new ArrayList<>();
+
     private void parseJson(String str) {
-        mTypeList = new ArrayList<>();
+
         try {
             //  获取json中的数组
             JSONArray jsonArray = new JSONArray(str);
-            Log.d("CheckAllActivity", str);
             //  遍历数据组
             for (int i = 0; i < jsonArray.length(); i++) {
                 //  获取种类的对象
-                JSONObject typeObject = jsonArray.optJSONObject(i);
-                //  获取种类名称放入集合
-                String typeName = typeObject.getString("type");
-                mTypeList.add(typeName);
-                Log.d("CheckAllActivity", mTypeList.get(i));
+                ArrayList<String> mArrayLists = new ArrayList<>();
 
+                JSONObject j = jsonArray.getJSONObject(i);
+
+
+                JSONArray areaArray = j.optJSONArray("type");
+
+                for (int k = 0; k < areaArray.length(); k++) {
+                    String s1 = areaArray.getString(k);
+                    mArrayLists.add(s1);
+                }
+
+                //  获取种类名称放入集合
+                a.add(mArrayLists);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
 
     }
 
@@ -106,18 +115,18 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onResponse(Object t) {
-        ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
+        final ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
         CheckAllAdapter adapter = new CheckAllAdapter(this, classifyViewBean.getRespData());
         mClassify.setAdapter(adapter);
         mClassify.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(CheckAllActivity.this, ClassifyTypeActivity.class);
-                intent.putExtra("type",mTypeList.get(position));
+                intent.putExtra("name", classifyViewBean.getRespData().get(position).getCateName());
+                intent.putStringArrayListExtra("type", a.get(position));
                 startActivity(intent);
             }
         });
-
     }
 
 

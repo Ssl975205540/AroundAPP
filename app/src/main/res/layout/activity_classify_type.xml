@@ -8,7 +8,50 @@
     tools:context="lanou.around.classification.checkall.ClassifyTypeActivity">
 
     <RelativeLayout
+        android:id="@+id/rl_preparation"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:background="@color/colorText">
+
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/o3"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/preparation"
+            android:textColor="@color/home_adapter_item"/>
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_all_kind"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/rl_preparation"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorText">
+
+        <TextView
+            android:id="@+id/tv_all_kind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/home_adapter_item"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_preparation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_all_kind"
+        android:background="@color/colorText">
+    </ListView>
 </RelativeLayout>

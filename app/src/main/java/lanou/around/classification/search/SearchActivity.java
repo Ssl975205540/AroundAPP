@@ -240,15 +240,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                         AreaAdapter threeAdapter = new AreaAdapter(SearchActivity.this);
                         threeAdapter.setProvinceBeanList(districtList.get(finalI).get(j));
                         listView3.setAdapter(threeAdapter);
-
-
                     }
                 });
-
             }
         });
-
-
     }
 
     private void showPopupWindow(View view) {
