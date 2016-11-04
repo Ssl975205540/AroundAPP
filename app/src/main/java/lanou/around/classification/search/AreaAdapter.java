@@ -66,5 +66,6 @@ public class AreaAdapter extends BaseAdapter {
         public ViewHolder(View convertView) {
             mTv = (TextView) convertView.findViewById(R.id.tv);
         }
+
     }
 }
