@@ -87,7 +87,6 @@
         <activity android:name=".home.FriendActivity"/>
         <activity android:name=".classification.checkall.ClassifyTypeActivity">
         </activity>
-        <activity android:name=".classification.classify.ClassifyPhoneWebView"/>
     </application>
 
 </manifest>

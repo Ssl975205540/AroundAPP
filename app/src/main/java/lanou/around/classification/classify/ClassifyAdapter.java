@@ -104,13 +104,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 phoneViewHolder.mSanXing.setText(mSubCateArrBeanList.get(2).getSubCateName());
                 phoneViewHolder.mHuawei.setText(mSubCateArrBeanList.get(3).getSubCateName());
                 Picasso.with(context).load(mRespDataBeanList.get(0).getCateUrl()).into(phoneViewHolder.mPhoto);
-                 phoneViewHolder.rl.setOnClickListener(new View.OnClickListener() {
-                     @Override
-                     public void onClick(View v) {
-                         Intent intent = new Intent(context, ClassifyPhoneWebView.class);
-                         context.startActivity(intent);
-                     }
-                 });
+
                 break;
             case 1:
                 DigitViewHolder digitViewHolder = (DigitViewHolder) holder;
@@ -274,7 +268,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
         public final TextView mSanXing;
         public final TextView mHuawei;
         public final ImageView mPhoto;
-        public final RelativeLayout rl;
+
 
         public PhoneViewHolder(View itemView) {
             super(itemView);
@@ -285,7 +279,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
             mSanXing = (TextView) itemView.findViewById(R.id.tv_sanxing);
             mHuawei = (TextView) itemView.findViewById(R.id.tv_huawei);
             mPhoto = (ImageView) itemView.findViewById(R.id.iv_photo);
-            rl = (RelativeLayout) itemView.findViewById(R.id.simple_item_phone_rl);
+
         }
     }
 
