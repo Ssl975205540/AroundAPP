@@ -1,18 +1,15 @@
 package lanou.around.main;
 
 
+import android.content.Intent;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
@@ -23,6 +20,8 @@ import lanou.around.home.HomeFragment;
 import lanou.around.login.LoginFragment;
 import lanou.around.tools.recycle.StatusBarUtils;
 import lanou.around.video.VideoFragment;
+
+import static lanou.around.R.id.fl_main;
 
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -41,10 +40,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private LoginFragment loginFragment;
     private ImageView iv_release;
     private PopupWindow popupWindow;
-    private View view;
-    private LinearLayout pop_linear;
+    private FrameLayout flMain;
+    private boolean has = true;
     private int statusBarHeight;
-    private boolean dadsaa = true;
 
 
     @Override
@@ -61,9 +59,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ivClass = findView(R.id.iv_class);
         ivVideo = findView(R.id.iv_video);
         ivLogin = findView(R.id.iv_login);
-        view = LayoutInflater.from(this).inflate(R.layout.popupwindow_view, null);
 
-        pop_linear = findView(view, R.id.pop_linear);
+        flMain= findView(R.id.fl_main);
+
+
+
+
+
+
 
         iv_release = findView(R.id.iv_release);
     }
@@ -83,7 +86,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         homeFragment = new HomeFragment();
-        fragmentTransaction.add(R.id.fl_main, homeFragment);
+
+
+        fragmentTransaction.add(fl_main, homeFragment);
+        Log.d("statusBarHeight00", String.valueOf(statusBarHeight));
+
+
+
         fragmentTransaction.commit();
         fragmentGank = homeFragment;
 
@@ -99,6 +108,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 if (homeFragment == null) {
                     homeFragment = new HomeFragment();
                 }
+
                 switchContent(homeFragment);
 
                 StatusBarUtils.setWindowStatusBarColor(this,R.color.black_a10_color);
@@ -112,9 +122,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.iv_class:
 
                 if (classFragment == null) {
-                    classFragment = new ClassifyFragment(statusBarHeight);
+                    classFragment = new ClassifyFragment();
 //
                 }
+                classFragment.setStatusBarHeight(statusBarHeight);
                 StatusBarUtils.setWindowStatusBarColor(this,R.color.home_adapter_item);
 
                 switchContent(classFragment);
@@ -129,7 +140,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 if (videoFragment == null) {
                     videoFragment = new VideoFragment();
                 }
-
+                videoFragment.setStatusBarHeight(statusBarHeight);
                 switchContent(videoFragment);
 //                Intent intent = new Intent();
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -157,30 +168,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             case R.id.iv_release:
 
-                popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, 400, true);
-                // 设置动画效果
-//                popupWindow.setAnimationStyle(R.style.AnimationFade);
-                popupWindow.setAnimationStyle(R.style.j8);
-
-                popupWindow.setBackgroundDrawable(new BitmapDrawable());
-
-                popupWindow.showAtLocation(iv_release, Gravity.BOTTOM, 0, 0);
 
 
-                view.setFocusable(true);//comment by danielinbiti,设置view能够接听事件，标注1
-                view.setFocusableInTouchMode(true);
+//
+                Intent intent = new Intent(MainActivity.this,ReleaseActivity.class);
+
+                startActivity(intent);
 
 
-                view.setOnKeyListener(new View.OnKeyListener() {
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        if (keyCode == KeyEvent.KEYCODE_BACK) {
-                            if (popupWindow != null) {
-                                popupWindow.dismiss();
-                            }
-                        }
-                        return false;
-                    }
-                });
 
                 break;
         }
@@ -197,7 +192,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             if (!to.isAdded()) {
 
-                transaction.hide(fragmentGank).add(R.id.fl_main, to).commit();
+                transaction.hide(fragmentGank).add(fl_main, to).commit();
             } else {
 
                 transaction.hide(fragmentGank).show(to).commit();
@@ -220,19 +215,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
-
-        if(dadsaa){
+        if(has){
             Rect frame = new Rect();
-            Log.d("MainActivity", "statusBarHeight:" + statusBarHeight);
             getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
             // 状态栏高度
             statusBarHeight = frame.top;
+            Log.d("statusBarHeight0", String.valueOf(statusBarHeight));
             homeFragment.setStatusBarHeight(statusBarHeight);
-            dadsaa = false;
+            has = false;
         }
 
 

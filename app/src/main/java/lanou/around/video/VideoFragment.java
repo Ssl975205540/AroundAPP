@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,7 +70,8 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
      * 请求CAMERA权限码
      */
     public static final int REQUEST_CAMERA_PERM = 101;
-
+    private int statusBarHeight;
+    private LinearLayout toolbar;
 
 
     @Override
@@ -94,6 +96,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         //适配器
         adapter = new InnerAdapter(getContext());
 
+        toolbar = findView(R.id.video_toolbar);
 
     }
 
@@ -133,6 +136,12 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
             }
         });
         loadData();
+
+
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) toolbar.getLayoutParams();
+        params.setMargins(0, statusBarHeight, 0, 0);
+        toolbar.setLayoutParams(params);
+
 
 
     }
@@ -359,5 +368,9 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
                 break;
         }
 
+    }
+
+    public void setStatusBarHeight(int statusBarHeight) {
+        this.statusBarHeight = statusBarHeight;
     }
 }

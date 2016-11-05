@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import lanou.around.R;
+import lanou.around.aroundinterface.CanOnItemListener;
+import lanou.around.tools.db.CanHolderHelper;
+
 public abstract class CanRVAdapter<T> extends RecyclerView.Adapter<CanRViewHolder> {
 
     protected int mItemLayoutId;

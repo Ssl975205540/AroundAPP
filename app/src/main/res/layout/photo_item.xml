@@ -11,7 +11,7 @@
         android:scaleType="fitXY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
+    <!--CompoundButton-->
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_alignParentRight="true"
