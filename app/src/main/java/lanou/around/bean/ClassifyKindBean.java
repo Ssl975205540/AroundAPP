@@ -6,7 +6,7 @@ import java.util.List;
  * Created by dllo on 16/11/2.
  */
 
-public class Bean {
+public class ClassifyKindBean {
 
     /**
      * respCode : 0
