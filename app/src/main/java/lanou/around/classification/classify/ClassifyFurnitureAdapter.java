@@ -1,64 +1,33 @@
 package lanou.around.classification.classify;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.TextView;
 
+import java.util.List;
+
+import lanou.around.R;
+import lanou.around.base.BaseAdapter;
 import lanou.around.bean.ClassifyBean;
 
 /**
  * Created by dllo on 16/10/26.
  */
-public class ClassifyFurnitureAdapter extends BaseAdapter {
-    //上下文对象
-    private Context context;
-    private ClassifyBean mClassifyBean;
+public class ClassifyFurnitureAdapter extends BaseAdapter<ClassifyBean.RespDataBean.SubCateArrBean> {
 
-    public void setClassifyBean(ClassifyBean classifyBean) {
-        mClassifyBean = classifyBean;
-    }
-
-    public ClassifyFurnitureAdapter(Context context) {
-        this.context = context;
+    public ClassifyFurnitureAdapter(Context context, List<ClassifyBean.RespDataBean.SubCateArrBean> list) {
+        super(context, list);
     }
 
     @Override
-    public int getCount() {
-        return mClassifyBean.getRespData().get(6).getSubCateArr().size();
+    public int getContentView() {
+        return R.layout.item_computer;
     }
 
     @Override
-    public Object getItem(int position) {
-        return position;
-    }
+    public void onInitView(View view, int position) {
+        TextView textView = get(view, R.id.tv_computer_title);
+        textView.setText(list.get(position).getSubCateName());
 
-    @Override
-    public long getItemId(int id) {
-        return id;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        TextView textView;
-        if (convertView == null) {
-            textView = new TextView(context);
-            textView.setLayoutParams(new GridView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
-            textView.setTextSize(15);
-            textView.setGravity(Gravity.CENTER);
-            textView.setTextColor(Color.BLACK);
-            textView.setBackgroundColor(Color.WHITE);
-            textView.setPadding(8, 4, 8, 4);//设置间距
-        } else {
-            textView = (TextView) convertView;
-        }
-        textView.setText(mClassifyBean.getRespData().get(6).getSubCateArr().get(position).getSubCateName());
-        return textView;
     }
 }

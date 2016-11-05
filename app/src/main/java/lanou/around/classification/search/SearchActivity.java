@@ -2,6 +2,7 @@ package lanou.around.classification.search;
 
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.KeyEvent;
@@ -63,6 +64,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     private ArrayList<List<List<String>>> districtList = new ArrayList<>();
     private PopupWindow popupWindow;
     private SearchAdapter mSearchAdapter;
+    private Bundle mBundle;
 
     @Override
     protected int setContentView() {
@@ -119,48 +121,48 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void initData() {
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
+
+        mBundle = this.getIntent().getExtras();
+        String name = mBundle.getString("name");
         mPhone.setText(name);
 
-        viewPageJump(intent);
+        String cateIdLeft = mBundle.getString("cateIdLeft");
+        mCateNameLeft = mBundle.getString("cateNameLeft");
 
-        //  获取json数据
-        String province_data_json = JsonFileReader.getJson(this, "province_data.json");
-        //  解析json数据
-        parseJson(province_data_json);
+        String cateIdRight = mBundle.getString("cateIdRight");
+        String cateNameRight = mBundle.getString("cateNameRight");
 
-    }
+        String cateIdCenter = mBundle.getString("cateIdCenter");
+        String cateNameCenter = mBundle.getString("cateNameCenter");
 
-    private void viewPageJump(Intent intent) {
-        String cateIdLeft = intent.getStringExtra("cateIdLeft");
-        mCateNameLeft = intent.getStringExtra("cateNameLeft");
-
-        String cateIdRight = intent.getStringExtra("cateIdRight");
-        String cateNameRight = intent.getStringExtra("cateNameRight");
-
-        String cateIdCenter = intent.getStringExtra("cateIdCenter");
-        String cateNameCenter = intent.getStringExtra("cateNameCenter");
-
-        if (intent.getStringExtra("cateIdLeft") != null) {
+        if (mBundle.getString("cateIdLeft") != null) {
             String REQUEST_LEFT_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdLeft + URLValues.REQUEST_BODY_AFTER;
             SearchPresenter leftPresenter = new SearchPresenter(this, REQUEST_LEFT_BODY);
             leftPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
             mPhone.setText(mCateNameLeft);
         }
-        if (intent.getStringExtra("cateIdCenter") != null) {
+        if (mBundle.getString("cateIdCenter") != null) {
             String REQUEST_CENTER_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdCenter + URLValues.REQUEST_BODY_AFTER;
             SearchPresenter centerPresenter = new SearchPresenter(this, REQUEST_CENTER_BODY);
             centerPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
             mPhone.setText(cateNameCenter);
         }
-        if (intent.getStringExtra("cateIdRight") != null) {
+        if (mBundle.getString("cateIdRight") != null) {
             String REQUEST_RIGHT_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdRight + URLValues.REQUEST_BODY_AFTER;
             SearchPresenter rightPresenter = new SearchPresenter(this, REQUEST_RIGHT_BODY);
             rightPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
             mPhone.setText(cateNameRight);
         }
+            //  获取json数据
+            String province_data_json = JsonFileReader.getJson(this, "province_data.json");
+            //  解析json数据
+            parseJson(province_data_json);
+
     }
+
+
+
+
 
     @Override
     public void onClick(View v) {
@@ -344,8 +346,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         if (t instanceof Bean) {
             Bean bean = (Bean) t;
             mSearchAdapter = new SearchAdapter(this, bean.getRespData());
-            if (getIntent().getIntExtra("Left", 3) == 1) {
-                if (getIntent().getStringExtra("cateNameLeft").equals("服装鞋帽")) {
+            if (mBundle.getInt("Left", 3) == 1) {
+                if (mBundle.getString("cateNameLeft").equals("服装鞋帽")) {
                     mSearchAdapter.setLayout(R.layout.search_item_grid);
                     search_recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
                 } else {
@@ -353,9 +355,9 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     search_recyclerview.setLayoutManager(new LinearLayoutManager(this));
                 }
             }
-            if (getIntent().getIntExtra("Center", 1) == 2) {
-                if (getIntent().getStringExtra("cateNameCenter").equals("玩具乐器")
-                        || getIntent().getStringExtra("cateNameCenter").equals("珠宝配饰")) {
+            if (mBundle.getInt("Center", 1) == 2) {
+                if (mBundle.getString("cateNameCenter").equals("玩具乐器")
+                        || mBundle.getString("cateNameCenter").equals("珠宝配饰")) {
                     mSearchAdapter.setLayout(R.layout.search_item_grid);
                     search_recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
                 } else {
@@ -364,9 +366,9 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
                 }
             }
-            if (getIntent().getIntExtra("Right", 2) == 3) {
-                if (getIntent().getStringExtra("cateNameRight").equals("艺术古玩")
-                        || getIntent().getStringExtra("cateNameRight").equals("美容保健")) {
+            if (mBundle.getInt("Right", 2) == 3) {
+                if (mBundle.getString("cateNameRight").equals("艺术古玩")
+                        || mBundle.getString("cateNameRight").equals("美容保健")) {
                     mSearchAdapter.setLayout(R.layout.search_item_grid);
                     search_recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
                 } else {

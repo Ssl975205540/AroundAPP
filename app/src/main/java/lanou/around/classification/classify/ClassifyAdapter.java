@@ -2,7 +2,7 @@ package lanou.around.classification.classify;
 
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lanou.around.R;
+import lanou.around.base.Intents;
 import lanou.around.bean.ClassifyBean;
 import lanou.around.classification.search.SearchActivity;
 
@@ -110,9 +111,9 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 digitViewHolder.mDigit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, SearchActivity.class);
-                        intent.putExtra("name", mClassifyBean.getRespData().get(position).getCateName());
-                        context.startActivity(intent);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("name", mClassifyBean.getRespData().get(position).getCateName());
+                        Intents.getIntents().Intent(context,SearchActivity.class,bundle);
                     }
                 });
                 View viewLeft = mInflater.inflate(R.layout.layout_grid_left, null);
@@ -171,8 +172,8 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 furnitureViewHolder.furnitureTitle.setText(mRespDataBeanList.get(position).getCateName());
                 furnitureViewHolder.furnitureMessage.setText(mRespDataBeanList.get(position).getCateDescribe());
 
-                ClassifyFurnitureAdapter furnitureAdapter = new ClassifyFurnitureAdapter(context);
-                furnitureAdapter.setClassifyBean(mClassifyBean);
+                ClassifyFurnitureAdapter furnitureAdapter = new ClassifyFurnitureAdapter(context,
+                        mClassifyBean.getRespData().get(6).getSubCateArr());
                 furnitureViewHolder.mGridView.setAdapter(furnitureAdapter);
                 break;
 

@@ -1,7 +1,7 @@
 package lanou.around.classification.classifyview;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -13,6 +13,7 @@ import java.util.List;
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+import lanou.around.base.Intents;
 import lanou.around.bean.ClassifyViewBean;
 import lanou.around.classification.search.SearchActivity;
 import lanou.around.presenter.ClassifyViewPresenter;
@@ -36,11 +37,13 @@ public class RightViewFragment extends BaseFragment implements InterView {
     protected void initViews() {
         gridView = findView(R.id.gview_classify);
     }
+
     @Override
     protected void initListeners() {
         ClassifyViewPresenter presenter = new ClassifyViewPresenter(this);
-        presenter.startRequest(URLValues.CLASSIFY_CHILD_CATES_LOGIC,ClassifyViewBean.class);
+        presenter.startRequest(URLValues.CLASSIFY_CHILD_CATES_LOGIC, ClassifyViewBean.class);
     }
+
     @Override
     protected void initData() {
 
@@ -59,17 +62,16 @@ public class RightViewFragment extends BaseFragment implements InterView {
     }
 
     @Override
-    public  void onResponse(Object t) {
+    public void onResponse(Object t) {
         ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
         mDataBeanList = new ArrayList<>();
-        for (int i = 16; i < 19 ; i++) {
+        for (int i = 16; i < 19; i++) {
             mDataBeanList.add(classifyViewBean.getRespData().get(i));
         }
         GridViewPagerAdapter gridViewAdapter = new GridViewPagerAdapter(context);
         gridViewAdapter.setRespDataBeen(mDataBeanList);
         gridView.setAdapter(gridViewAdapter);
     }
-
 
 
     @Override
@@ -83,15 +85,13 @@ public class RightViewFragment extends BaseFragment implements InterView {
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                 long arg3) {
             Toast.makeText(context, "arg2:" + arg2, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getContext(), SearchActivity.class);
-            intent.putExtra("cateIdRight",mDataBeanList.get(arg2).getCateId());
-            intent.putExtra("Right", 3);
-            intent.putExtra("cateNameRight",mDataBeanList.get(arg2).getCateName());
-            getActivity().startActivity(intent);
+            Bundle bundle = new Bundle();
+            bundle.putString("cateIdRight", mDataBeanList.get(arg2).getCateId());
+            bundle.putString("cateNameRight", mDataBeanList.get(arg2).getCateName());
+            bundle.putInt("Right", 3);
+            Intents.getIntents().Intent(context, SearchActivity.class, bundle);
         }
     }
-
-
 
 
     @Override
