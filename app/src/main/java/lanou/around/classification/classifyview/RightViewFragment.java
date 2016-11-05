@@ -84,6 +84,7 @@ public class RightViewFragment extends BaseFragment implements InterView {
             System.out.println("arg2 = " + arg2); // 打印出点击的位置
             Intent intent = new Intent(getContext(), SearchActivity.class);
             intent.putExtra("cateIdRight",mDataBeanList.get(arg2).getCateId());
+            intent.putExtra("Right", 3);
             intent.putExtra("cateNameRight",mDataBeanList.get(arg2).getCateName());
             getActivity().startActivity(intent);
         }

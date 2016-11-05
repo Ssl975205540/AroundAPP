@@ -62,6 +62,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     private ArrayList<List<String>> districts;
     private ArrayList<List<List<String>>> districtList = new ArrayList<>();
     private PopupWindow popupWindow;
+    private SearchAdapter mSearchAdapter;
 
     @Override
     protected int setContentView() {
@@ -72,9 +73,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     protected void initViews() {
 
         popView = LayoutInflater.from(this).inflate(R.layout.layoutpop, null);
-
         listView1 = (ListView) popView.findViewById(R.id.pop_lv1);
-
         listView2 = (ListView) popView.findViewById(R.id.pop_lv2);
         listView3 = (ListView) popView.findViewById(R.id.pop_lv3);
         tv_search_area = findView(R.id.tv_search_area);
@@ -123,24 +122,31 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         Intent intent = getIntent();
         String cateIdLeft = intent.getStringExtra("cateIdLeft");
         mCateNameLeft = intent.getStringExtra("cateNameLeft");
-        mPhone.setText(mCateNameLeft);
-//        String cateIdRight = intent.getStringExtra("cateIdRight");
-//        String cateNameRight = intent.getStringExtra("cateNameRight");
-//        mPhone.setText(cateNameRight);
-//        String cateIdCenter = intent.getStringExtra("cateIdCenter");
-//        String cateNameCenter = intent.getStringExtra("cateNameCenter");
-//        mPhone.setText(cateNameCenter);
-        String REQUEST_LEFT_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdLeft + URLValues.REQUEST_BODY_AFTER;
-//        String REQUEST_RIGHT_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdRight + URLValues.REQUEST_BODY_AFTER;
-//        String REQUEST_CENTER_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdCenter + URLValues.REQUEST_BODY_AFTER;
-        SearchPresenter leftPresenter = new SearchPresenter(this, REQUEST_LEFT_BODY);
-        leftPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
 
-//        SearchPresenter centerPresenter = new SearchPresenter(this, REQUEST_CENTER_BODY);
-//        centerPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
-//
-//        SearchPresenter rightPresenter = new SearchPresenter(this, REQUEST_RIGHT_BODY);
-//        rightPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
+        String cateIdRight = intent.getStringExtra("cateIdRight");
+        String cateNameRight = intent.getStringExtra("cateNameRight");
+
+        String cateIdCenter = intent.getStringExtra("cateIdCenter");
+        String cateNameCenter = intent.getStringExtra("cateNameCenter");
+
+        if (intent.getStringExtra("cateIdLeft") != null) {
+            String REQUEST_LEFT_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdLeft + URLValues.REQUEST_BODY_AFTER;
+            SearchPresenter leftPresenter = new SearchPresenter(this, REQUEST_LEFT_BODY);
+            leftPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
+            mPhone.setText(mCateNameLeft);
+        }
+        if (intent.getStringExtra("cateIdCenter") != null) {
+            String REQUEST_CENTER_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdCenter + URLValues.REQUEST_BODY_AFTER;
+            SearchPresenter centerPresenter = new SearchPresenter(this, REQUEST_CENTER_BODY);
+            centerPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
+            mPhone.setText(cateNameCenter);
+        }
+        if (intent.getStringExtra("cateIdRight") != null) {
+            String REQUEST_RIGHT_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdRight + URLValues.REQUEST_BODY_AFTER;
+            SearchPresenter rightPresenter = new SearchPresenter(this, REQUEST_RIGHT_BODY);
+            rightPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
+            mPhone.setText(cateNameRight);
+        }
 
         //  获取json数据
         String province_data_json = JsonFileReader.getJson(this, "province_data.json");
@@ -152,8 +158,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
-
             case R.id.tv_search_area:
                 if (popupWindow != null) {
                     if (popupWindow.isShowing()) {
@@ -161,11 +165,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                         popupWindow = null;
                     }
                 }
-
                 showAroeWindow(v);
-
                 break;
-
             case R.id.iv_search_back:
                 onBackPressed();
                 break;
@@ -174,7 +175,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 startActivity(intent);
                 break;
             case R.id.ll_order:
-
                 if (popupWindow != null) {
                     if (popupWindow.isShowing()) {
                         popupWindow.dismiss();
@@ -336,18 +336,39 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     public void onResponse(Object t) {
         if (t instanceof Bean) {
             Bean bean = (Bean) t;
-            if (getIntent().getStringExtra("cateNameLeft").equals("服装鞋帽")) {
-                SearchAdapter searchAdapter = new SearchAdapter(this, bean.getRespData());
-                searchAdapter.setLayout(R.layout.search_item_grid);
-                search_recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
-                search_recyclerview.setAdapter(searchAdapter);
-            } else {
-                SearchAdapter searchAdapter = new SearchAdapter(this, bean.getRespData());
-                searchAdapter.setLayout(R.layout.search_item_linear);
-                search_recyclerview.setLayoutManager(new LinearLayoutManager(this));
-                search_recyclerview.setAdapter(searchAdapter);
-
+            mSearchAdapter = new SearchAdapter(this, bean.getRespData());
+            if (getIntent().getIntExtra("Left", 3) == 1) {
+                if (getIntent().getStringExtra("cateNameLeft").equals("服装鞋帽")) {
+                    mSearchAdapter.setLayout(R.layout.search_item_grid);
+                    search_recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
+                } else {
+                    mSearchAdapter.setLayout(R.layout.search_item_linear);
+                    search_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+                }
             }
+            if (getIntent().getIntExtra("Center", 1) == 2) {
+                if (getIntent().getStringExtra("cateNameCenter").equals("玩具乐器")
+                        || getIntent().getStringExtra("cateNameCenter").equals("珠宝配饰")) {
+                    mSearchAdapter.setLayout(R.layout.search_item_grid);
+                    search_recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
+                } else {
+                    mSearchAdapter.setLayout(R.layout.search_item_linear);
+                    search_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+
+                }
+            }
+            if (getIntent().getIntExtra("Right", 2) == 3) {
+                if (getIntent().getStringExtra("cateNameRight").equals("艺术古玩")
+                        || getIntent().getStringExtra("cateNameRight").equals("美容保健")) {
+                    mSearchAdapter.setLayout(R.layout.search_item_grid);
+                    search_recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
+                } else {
+                    mSearchAdapter.setLayout(R.layout.search_item_linear);
+                    search_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+
+                }
+            }
+            search_recyclerview.setAdapter(mSearchAdapter);
         }
         if (t instanceof ClassifyTabBean) {
             mTabBean = (ClassifyTabBean) t;
