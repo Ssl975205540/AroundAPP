@@ -26,7 +26,7 @@ import java.util.List;
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseActivity;
-import lanou.around.bean.Bean;
+import lanou.around.bean.ClassifyKindBean;
 import lanou.around.bean.ClassifyTabBean;
 import lanou.around.classification.seek.SeekActivity;
 import lanou.around.presenter.ClassifyPresenter;
@@ -138,19 +138,19 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         if (mBundle.getString("cateIdLeft") != null) {
             String REQUEST_LEFT_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdLeft + URLValues.REQUEST_BODY_AFTER;
             SearchPresenter leftPresenter = new SearchPresenter(this, REQUEST_LEFT_BODY);
-            leftPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
+            leftPresenter.startRequest(URLValues.POST_CHILD_LOGIC, ClassifyKindBean.class);
             mPhone.setText(mCateNameLeft);
         }
         if (mBundle.getString("cateIdCenter") != null) {
             String REQUEST_CENTER_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdCenter + URLValues.REQUEST_BODY_AFTER;
             SearchPresenter centerPresenter = new SearchPresenter(this, REQUEST_CENTER_BODY);
-            centerPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
+            centerPresenter.startRequest(URLValues.POST_CHILD_LOGIC, ClassifyKindBean.class);
             mPhone.setText(cateNameCenter);
         }
         if (mBundle.getString("cateIdRight") != null) {
             String REQUEST_RIGHT_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdRight + URLValues.REQUEST_BODY_AFTER;
             SearchPresenter rightPresenter = new SearchPresenter(this, REQUEST_RIGHT_BODY);
-            rightPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
+            rightPresenter.startRequest(URLValues.POST_CHILD_LOGIC, ClassifyKindBean.class);
             mPhone.setText(cateNameRight);
         }
             //  获取json数据
@@ -343,8 +343,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onResponse(Object t) {
-        if (t instanceof Bean) {
-            Bean bean = (Bean) t;
+        if (t instanceof ClassifyKindBean) {
+            ClassifyKindBean bean = (ClassifyKindBean) t;
             mSearchAdapter = new SearchAdapter(this, bean.getRespData());
             if (mBundle.getInt("Left", 3) == 1) {
                 if (mBundle.getString("cateNameLeft").equals("服装鞋帽")) {

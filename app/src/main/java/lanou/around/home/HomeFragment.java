@@ -3,6 +3,7 @@ package lanou.around.home;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -35,9 +36,11 @@ import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterToolBar;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+import lanou.around.tools.recycle.IntentUtils;
 import lanou.around.bean.EventBean;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeBeanHot;
+import lanou.around.classification.classifyview.DigitWebActivity;
 import lanou.around.home.nearby.NearByFragment;
 import lanou.around.home.recommend.RecommendFragment;
 import lanou.around.presenter.HomePresenter;
@@ -78,6 +81,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     private int t;
     private NestedScrollView nestscroll;
     private StickyNavLayout mainContent;
+    private HomeBean mHomeBean;
+    private ArrayList<HomeBeanHot> mArrayList;
 
 
     @Override
@@ -288,27 +293,28 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
     @Override
     public void onResponse(Object o) {
-        HomeBean homeBean = (HomeBean) o;
-        ArrayList<HomeBeanHot> arrayList = new ArrayList<>();
-        for (int i = 0; i < homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().size(); i++) {
-            for (int j = 0; j < homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(0).size(); j++) {
+        mHomeBean = (HomeBean) o;
+        mArrayList = new ArrayList<>();
+        for (int i = 0; i < mHomeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().size(); i++) {
+            for (int j = 0; j < mHomeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(0).size(); j++) {
                 HomeBeanHot homeBeanHot = new HomeBeanHot();
                 try {
-                    homeBeanHot.setImageUrl(homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getImageUrl());
+                    homeBeanHot.setImageUrl(mHomeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getImageUrl());
                 } catch (Exception e) {
 
                 }
-//                homeBeanHot.setGoOperation(homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getGoOperation());
-                arrayList.add(homeBeanHot);
+                homeBeanHot.setPostName(mHomeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getPostName());
+                homeBeanHot.setGoOperation(mHomeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getGoOperation());
+                mArrayList.add(homeBeanHot);
             }
         }
         hsvLinear.removeAllViews();
-        for (int i = 0; i < homeBean.getRespData().getLowBanners().size(); i++) {
+        for (int i = 0; i < mHomeBean.getRespData().getLowBanners().size(); i++) {
             View hsv_item = LayoutInflater.from(context).inflate(R.layout.hsv_item, null);
             icon = (ImageView) hsv_item.findViewById(R.id.hsv_item_image);
-            Picasso.with(context).load(homeBean.getRespData().getLowBanners().get(i).getImageUrl()).into(icon);
-            final String clickUrl = homeBean.getRespData().getLowBanners().get(i).getGoUrl();
-            final String clickTitle = homeBean.getRespData().getLowBanners().get(i).getPostName();
+            Picasso.with(context).load(mHomeBean.getRespData().getLowBanners().get(i).getImageUrl()).into(icon);
+            final String clickUrl = mHomeBean.getRespData().getLowBanners().get(i).getGoUrl();
+            final String clickTitle = mHomeBean.getRespData().getLowBanners().get(i).getPostName();
             final String hsv_click = URLValues.HOME_HOT_MARKET;
             if (!TextUtils.isEmpty(hsv_click)) {
                 hsv_item.setOnClickListener(new View.OnClickListener() {
@@ -325,14 +331,14 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
             hsvLinear.addView(hsv_item);
         }
 
-        homeAdapter = new HomeAdapter(context, arrayList);
+        homeAdapter = new HomeAdapter(context, mArrayList);
         setOnItemClick();
         recyviewHome.setLayoutManager(new GridLayoutManager(context, 3));
         recyviewHome.setAdapter(homeAdapter);
         recyviewHome.setRefreshProgressStyle(MyRecyclerView.ProgressStyle.BallSpinFadeLoader);
         ArrayList<String> arrayList1 = new ArrayList<>();
-        for (int i = 0; i < homeBean.getRespData().getTopBanners().size(); i++) {
-            arrayList1.add(homeBean.getRespData().getTopBanners().get(i).getImageUrl());
+        for (int i = 0; i < mHomeBean.getRespData().getTopBanners().size(); i++) {
+            arrayList1.add(mHomeBean.getRespData().getTopBanners().get(i).getImageUrl());
         }
 
         bannerHome.setPages(
@@ -363,6 +369,13 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, int position) {
                 Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putString("goUrl",mArrayList.get(position).getGoOperation().getParams().getGoUrl());
+                bundle.putString("postName",mArrayList.get(position).getPostName());
+//                bundle.putString("goUrl",mHomeBean.getRespData().getActBanners().get(0).
+//                        getMiddleBanner().getBanners().get(1).get(position).
+//                        getGoOperation().getParams().getGoUrl());
+                IntentUtils.getIntents().Intent(context, DigitWebActivity.class,bundle);
             }
         });
     }
