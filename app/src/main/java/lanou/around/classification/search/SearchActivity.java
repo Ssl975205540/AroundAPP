@@ -120,6 +120,19 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void initData() {
         Intent intent = getIntent();
+        String name = intent.getStringExtra("name");
+        mPhone.setText(name);
+
+        viewPageJump(intent);
+
+        //  获取json数据
+        String province_data_json = JsonFileReader.getJson(this, "province_data.json");
+        //  解析json数据
+        parseJson(province_data_json);
+
+    }
+
+    private void viewPageJump(Intent intent) {
         String cateIdLeft = intent.getStringExtra("cateIdLeft");
         mCateNameLeft = intent.getStringExtra("cateNameLeft");
 
@@ -147,12 +160,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             rightPresenter.startRequest(URLValues.POST_CHILD_LOGIC, Bean.class);
             mPhone.setText(cateNameRight);
         }
-
-        //  获取json数据
-        String province_data_json = JsonFileReader.getJson(this, "province_data.json");
-        //  解析json数据
-        parseJson(province_data_json);
-
     }
 
     @Override

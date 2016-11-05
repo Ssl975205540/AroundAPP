@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +82,7 @@ public class RightViewFragment extends BaseFragment implements InterView {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                 long arg3) {
-            System.out.println("arg2 = " + arg2); // 打印出点击的位置
+            Toast.makeText(context, "arg2:" + arg2, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getContext(), SearchActivity.class);
             intent.putExtra("cateIdRight",mDataBeanList.get(arg2).getCateId());
             intent.putExtra("Right", 3);

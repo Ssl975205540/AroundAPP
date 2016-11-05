@@ -17,7 +17,7 @@ public class ClassifyDigitAdapter extends PagerAdapter {
         this.context = context;
     }
 
-    ArrayList<View> viewList = new ArrayList<>();
+    private ArrayList<View> viewList;
 
     public void setViewList(ArrayList<View> viewList) {
         this.viewList = viewList;
