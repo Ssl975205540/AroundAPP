@@ -14,18 +14,18 @@ import java.util.List;
 
 import lanou.around.R;
 import lanou.around.base.BaseRcvAdapter;
-import lanou.around.bean.Bean;
+import lanou.around.bean.ClassifyKindBean;
 import lanou.around.tools.http.URLValues;
 
 /**
  * Created by dllo on 16/11/2.
  */
 
-public class SearchAdapter extends BaseRcvAdapter<SearchAdapter.MyViewHolder, Bean.RespDataBean> {
+public class SearchAdapter extends BaseRcvAdapter<SearchAdapter.MyViewHolder, ClassifyKindBean.RespDataBean> {
 
     private int layout;
 
-    public SearchAdapter(Context context, List<Bean.RespDataBean> data) {
+    public SearchAdapter(Context context, List<ClassifyKindBean.RespDataBean> data) {
         super(context, data);
     }
 
