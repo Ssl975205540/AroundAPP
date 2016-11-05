@@ -101,7 +101,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
                 switchContent(homeFragment);
 
-                StatusBarUtils.setWindowStatusBarColor(this,R.color.black_a10_color);
+                StatusBarUtils.setWindowStatusBarColor(this, R.color.black_a10_color);
 
                 ivHome.setBackgroundResource(R.mipmap.ma);
                 ivClass.setBackgroundResource(R.mipmap.vp);
@@ -115,10 +115,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     classFragment = new ClassifyFragment(statusBarHeight);
 //
                 }
-                StatusBarUtils.setWindowStatusBarColor(this,R.color.home_adapter_item);
+                StatusBarUtils.setWindowStatusBarColor(this, R.color.home_adapter_item);
 
                 switchContent(classFragment);
-                
+
                 ivHome.setBackgroundResource(R.mipmap.m_);
                 ivClass.setBackgroundResource(R.mipmap.vq);
                 ivLogin.setBackgroundResource(R.mipmap.sw);
@@ -187,7 +187,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
-
     public void switchContent(Fragment to) {
 
         if (fragmentGank != to) {
@@ -225,7 +224,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         super.onWindowFocusChanged(hasFocus);
 
 
-        if(dadsaa){
+        if (dadsaa) {
             Rect frame = new Rect();
             Log.d("MainActivity", "statusBarHeight:" + statusBarHeight);
             getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
@@ -237,7 +236,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
     }
-
 
 
 }

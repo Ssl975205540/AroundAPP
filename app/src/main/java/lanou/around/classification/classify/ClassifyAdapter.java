@@ -2,6 +2,7 @@ package lanou.around.classification.classify;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -19,6 +21,7 @@ import java.util.List;
 
 import lanou.around.R;
 import lanou.around.bean.ClassifyBean;
+import lanou.around.classification.search.SearchActivity;
 
 /**
  * Created by dllo on 16/10/22.
@@ -76,7 +79,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 ElectricalViewHolder electricalViewHolder = new ElectricalViewHolder(electricalView);
                 return electricalViewHolder;
             case 6:
-                View furnitureView = mInflater.inflate(R.layout.simple_item_furniture, parent,false);
+                View furnitureView = mInflater.inflate(R.layout.simple_item_furniture, parent, false);
                 FurnitureViewHolder furnitureViewHolder = new FurnitureViewHolder(furnitureView);
                 return furnitureViewHolder;
         }
@@ -84,7 +87,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         int type = getItemViewType(position);
         mRespDataBeanList = mClassifyBean.getRespData();
         mSubCateArrBeanList = mClassifyBean.getRespData().get(position).getSubCateArr();
@@ -104,7 +107,14 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 DigitViewHolder digitViewHolder = (DigitViewHolder) holder;
                 digitViewHolder.digit_name.setText(mClassifyBean.getRespData().get(position).getCateName());
                 digitViewHolder.digit_message.setText(mClassifyBean.getRespData().get(position).getCateDescribe());
-
+                digitViewHolder.mDigit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, SearchActivity.class);
+                        intent.putExtra("name", mClassifyBean.getRespData().get(position).getCateName());
+                        context.startActivity(intent);
+                    }
+                });
                 View viewLeft = mInflater.inflate(R.layout.layout_grid_left, null);
                 viewLeftRequest(position, viewLeft);
 
@@ -125,8 +135,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 computerViewHolder.computerTitle.setText(mRespDataBeanList.get(position).getCateName());
                 computerViewHolder.computerMessage.setText(mRespDataBeanList.get(position).getCateDescribe());
 
-                ClassifyComputerAdapter gridAdapter = new ClassifyComputerAdapter(context);
-                gridAdapter.setClassifyBean(mClassifyBean);
+                ClassifyComputerAdapter gridAdapter = new ClassifyComputerAdapter(context,mClassifyBean.getRespData().get(2).getSubCateArr());
                 computerViewHolder.mGridView.setAdapter(gridAdapter);
                 break;
             case 3:
@@ -134,8 +143,8 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 babyViewHolder.babyName.setText(mRespDataBeanList.get(position).getCateName());
                 babyViewHolder.babyMessage.setText(mRespDataBeanList.get(position).getCateDescribe());
 
-                ClassifyBabyAdapter babyAdapter = new ClassifyBabyAdapter(context);
-                babyAdapter.setClassifyBean(mClassifyBean);
+                ClassifyBabyAdapter babyAdapter = new ClassifyBabyAdapter(context,
+                        mClassifyBean.getRespData().get(3).getSubCateArr());
                 babyViewHolder.mGridView.setAdapter(babyAdapter);
                 break;
             case 4:
@@ -153,8 +162,8 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 ElectricalViewHolder electricalViewHolder = (ElectricalViewHolder) holder;
                 electricalViewHolder.electricalMessage.setText(mRespDataBeanList.get(position).getCateDescribe());
                 electricalViewHolder.electricalTitle.setText(mRespDataBeanList.get(position).getCateName());
-                ClassifyElectricalAdapter electricalAdapter = new ClassifyElectricalAdapter(context);
-                electricalAdapter.setClassifyBean(mClassifyBean);
+                ClassifyElectricalAdapter electricalAdapter = new ClassifyElectricalAdapter(context,
+                        mClassifyBean.getRespData().get(5).getSubCateArr());
                 electricalViewHolder.mGridView.setAdapter(electricalAdapter);
                 break;
             case 6:
@@ -194,7 +203,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
             @Override
             public void onPageSelected(int position) {
                 int a;
-                if (dots.size() > 0){
+                if (dots.size() > 0) {
                     a = position % dots.size();
                     for (int i = 0; i < dots.size(); i++) {
                         if (i == a) {
@@ -217,9 +226,9 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
         TextView gameName = (TextView) viewRight.findViewById(R.id.tv_game);
         ImageView game = (ImageView) viewRight.findViewById(R.id.iv_game);
         TextView kindleName = (TextView) viewRight.findViewById(R.id.tv_kindle);
-        ImageView  kindle = (ImageView) viewRight.findViewById(R.id.iv_kindle);
+        ImageView kindle = (ImageView) viewRight.findViewById(R.id.iv_kindle);
         TextView mobilePowerName = (TextView) viewRight.findViewById(R.id.tv_mobile_power);
-        ImageView  mobilePower = (ImageView) viewRight.findViewById(R.id.iv_mobile_power);
+        ImageView mobilePower = (ImageView) viewRight.findViewById(R.id.iv_mobile_power);
         gameName.setText(mSubCateArrBeanList.get(3).getSubCateName());
         Picasso.with(context).load(mSubCateArrBeanList.get(3).getSubCateLogo()).into(game);
         kindleName.setText(mSubCateArrBeanList.get(4).getSubCateName());
@@ -232,9 +241,9 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
         TextView photographName = (TextView) viewLeft.findViewById(R.id.tv_photograph);
         ImageView photograph = (ImageView) viewLeft.findViewById(R.id.iv_photograph);
         TextView mp4Name = (TextView) viewLeft.findViewById(R.id.tv_mp4);
-        ImageView  mp4 = (ImageView) viewLeft.findViewById(R.id.iv_mp4);
+        ImageView mp4 = (ImageView) viewLeft.findViewById(R.id.iv_mp4);
         TextView earphoneName = (TextView) viewLeft.findViewById(R.id.tv_earphone);
-        ImageView  earphone = (ImageView) viewLeft.findViewById(R.id.iv_earphone);
+        ImageView earphone = (ImageView) viewLeft.findViewById(R.id.iv_earphone);
         photographName.setText(mSubCateArrBeanList.get(0).getSubCateName());
         Picasso.with(context).load(mSubCateArrBeanList.get(0).getSubCateLogo()).into(photograph);
         mp4Name.setText(mSubCateArrBeanList.get(1).getSubCateName());
@@ -256,6 +265,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
         public final TextView mSanXing;
         public final TextView mHuawei;
         public final ImageView mPhoto;
+
         public PhoneViewHolder(View itemView) {
             super(itemView);
             phone_message = (TextView) itemView.findViewById(R.id.tv_phone_message);
@@ -274,6 +284,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
         public final TextView digit_message;
         public final ViewPager viewPager;
         public final LinearLayout mDotsLayout;
+        private final RelativeLayout mDigit;
 
         public DigitViewHolder(View itemView) {
             super(itemView);
@@ -282,6 +293,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
             digit_message = (TextView) itemView.findViewById(R.id.tv_digit_message);
             viewPager = (ViewPager) itemView.findViewById(R.id.viewPager_digit);
             mDotsLayout = (LinearLayout) itemView.findViewById(R.id.ll_viewpager);
+            mDigit = (RelativeLayout) itemView.findViewById(R.id.relative_digit);
         }
     }
 
@@ -342,6 +354,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
         public final TextView electricalMessage;
         public final TextView electricalTitle;
         public final GridView mGridView;
+
         public ElectricalViewHolder(View itemView) {
             super(itemView);
             electricalMessage = (TextView) itemView.findViewById(R.id.tv_electrical_message);
@@ -355,6 +368,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
         public final TextView furnitureMessage;
         public final TextView furnitureTitle;
         public final GridView mGridView;
+
         public FurnitureViewHolder(View itemView) {
             super(itemView);
             furnitureMessage = (TextView) itemView.findViewById(R.id.tv_furniture_message);
