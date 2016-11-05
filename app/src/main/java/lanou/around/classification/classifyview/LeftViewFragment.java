@@ -89,10 +89,10 @@ public class LeftViewFragment extends BaseFragment implements InterView {
                     intent.putExtra("url", mRespDataBeen.get(1).getMurl());
                     getActivity().startActivity(intent);
                 }
-
             } else {
                 Intent intent = new Intent(getContext(), SearchActivity.class);
                 intent.putExtra("cateIdLeft",mRespDataBeen.get(arg2).getCateId());
+                intent.putExtra("Left",1);
                 intent.putExtra("cateNameLeft",mRespDataBeen.get(arg2).getCateName());
                 getActivity().startActivity(intent);
             }

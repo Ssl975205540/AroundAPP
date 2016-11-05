@@ -83,6 +83,7 @@ public class CenterViewFragment extends BaseFragment implements InterView {
                                 long arg3) {
             Intent intent = new Intent(getContext(), SearchActivity.class);
             intent.putExtra("cateIdCenter",mRespDataBeanList.get(arg2).getCateId());
+            intent.putExtra("Center",2);
             intent.putExtra("cateNameCenter",mRespDataBeanList.get(arg2).getCateName());
             getActivity().startActivity(intent);
             System.out.println("arg2 = " + arg2); // 打印出点击的位置
