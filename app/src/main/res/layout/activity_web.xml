@@ -20,7 +20,6 @@
             android:src="@mipmap/o3"/>
 
         <TextView
-            android:id="@+id/tv_digit_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

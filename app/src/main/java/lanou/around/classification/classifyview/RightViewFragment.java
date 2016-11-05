@@ -13,7 +13,7 @@ import java.util.List;
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
-import lanou.around.tools.recycle.IntentUtils;
+import lanou.around.base.Intents;
 import lanou.around.bean.ClassifyViewBean;
 import lanou.around.classification.search.SearchActivity;
 import lanou.around.presenter.ClassifyViewPresenter;
@@ -89,7 +89,7 @@ public class RightViewFragment extends BaseFragment implements InterView {
             bundle.putString("cateIdRight", mDataBeanList.get(arg2).getCateId());
             bundle.putString("cateNameRight", mDataBeanList.get(arg2).getCateName());
             bundle.putInt("Right", 3);
-            IntentUtils.getIntents().Intent(context, SearchActivity.class, bundle);
+            Intents.getIntents().Intent(context, SearchActivity.class, bundle);
         }
     }
 

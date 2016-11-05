@@ -2,14 +2,12 @@ package lanou.around.classification.classifyview;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.View;
 import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import cn.sharesdk.framework.ShareSDK;
 import lanou.around.R;
@@ -26,7 +24,6 @@ public class DigitWebActivity extends BaseActivity {
     public ValueCallback<Uri> mUploadMessage;
     public ValueCallback<Uri[]> mUploadMessageForAndroid5;
     private ImageView mShare;
-    private TextView mTitle;
 
     @Override
     protected int setContentView() {
@@ -38,7 +35,6 @@ public class DigitWebActivity extends BaseActivity {
         mWebView = findView(R.id.webview);
         mBack = findView(R.id.iv_back);
         mShare = findView(R.id.iv_share);
-        mTitle = findView(R.id.tv_digit_title);
 
     }
 
@@ -46,13 +42,6 @@ public class DigitWebActivity extends BaseActivity {
     protected void initListeners() {
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
-        Bundle bundle = this.getIntent().getExtras();
-        String goUrl = bundle.getString("goUrl");
-        String postName = bundle.getString("postName");
-        if (bundle.getString("goUrl") != null) {
-            mWebView.loadUrl(goUrl);
-            mTitle.setText(postName);
-        }
         mWebView.loadUrl(url);
         WebSettings webSettings = mWebView.getSettings();
         // 设置WebView属性，能够执行Javascript脚本
