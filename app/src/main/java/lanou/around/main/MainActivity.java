@@ -1,7 +1,6 @@
 package lanou.around.main;
 
 
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.Fragment;
@@ -114,8 +113,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
                 if (classFragment == null) {
                     classFragment = new ClassifyFragment(statusBarHeight);
+//
                 }
-                StatusBarUtils.setWindowStatusBarColor(this, Color.BLACK);
+                StatusBarUtils.setWindowStatusBarColor(this, R.color.home_adapter_item);
 
                 switchContent(classFragment);
 

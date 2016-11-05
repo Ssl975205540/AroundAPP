@@ -1,4 +1,4 @@
-package lanou.around.tools.recycle;
+package lanou.around.base;
 
 
 import android.content.Context;
@@ -9,13 +9,13 @@ import android.os.Bundle;
  * Created by dllo on 16/11/5.
  */
 
-public class IntentUtils {
+public class Intents {
 
-    private static IntentUtils intents;
+    private static Intents intents;
 
-    public static IntentUtils getIntents(){
+    public static Intents getIntents(){
         if(intents == null)
-            intents = new IntentUtils();
+            intents = new Intents();
         return intents;
     }
     // context this, cs跳转对象 bundle 传递参数

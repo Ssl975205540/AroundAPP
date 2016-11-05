@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lanou.around.R;
-import lanou.around.tools.recycle.IntentUtils;
+import lanou.around.base.Intents;
 import lanou.around.bean.ClassifyBean;
 import lanou.around.classification.search.SearchActivity;
 
@@ -115,7 +115,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                     public void onClick(View v) {
                         Bundle bundle = new Bundle();
                         bundle.putString("name", mClassifyBean.getRespData().get(position).getCateName());
-                        IntentUtils.getIntents().Intent(context,SearchActivity.class,bundle);
+                        Intents.getIntents().Intent(context,SearchActivity.class,bundle);
                     }
                 });
                 View viewLeft = mInflater.inflate(R.layout.layout_grid_left, null);
@@ -379,6 +379,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
             furnitureMessage = (TextView) itemView.findViewById(R.id.tv_furniture_message);
             furnitureTitle = (TextView) itemView.findViewById(R.id.tv_furniture_name);
             mGridView = (GridView) itemView.findViewById(R.id.gridView_furniture);
+
         }
     }
 }
