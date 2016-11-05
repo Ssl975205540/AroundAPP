@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
     <include
          layout="@layout/video_title_layout"></include>
-    <lanou.around.tools.flingswipe.SwipeFlingAdapterView
+    <lanou.around.widget.flingswipe.SwipeFlingAdapterView
         android:id="@+id/video_swipe_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

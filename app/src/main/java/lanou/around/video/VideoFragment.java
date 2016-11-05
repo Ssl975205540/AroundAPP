@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 import lanou.around.R;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.VideoDetailsBean;
-import lanou.around.tools.flingswipe.SwipeFlingAdapterView;
+import lanou.around.widget.flingswipe.SwipeFlingAdapterView;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
