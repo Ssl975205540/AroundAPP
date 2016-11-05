@@ -60,13 +60,24 @@ public class PhotoAdapter extends CanRVAdapter<PictureBean> {
     public List<PictureBean> getCheckPhoto() {
         List<PictureBean> list = new ArrayList<>();
 
-        for (int i = 0; i < mList.size(); i++) {
+        if(mList.size()>12){
+            for (int i = 0; i < 12; i++) {
 
-            if (mList.get(i).check == true) {
-                list.add(mList.get(i));
+                if (mList.get(i).check == true) {
+                    list.add(mList.get(i));
+                }
             }
+        }else {
+            for (int i = 0; i < mList.size(); i++) {
 
+                if (mList.get(i).check == true) {
+                    list.add(mList.get(i));
+                }
+
+            }
         }
+
+
 
 
         return list;

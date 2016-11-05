@@ -1,74 +1,63 @@
 package lanou.around.main;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.List;
 
 import lanou.around.R;
-import lanou.around.base.CanRVAdapter;
-import lanou.around.tools.db.CanHolderHelper;
+import lanou.around.base.BaseRcvAdapter;
 
 /**
  * Created by dllo on 16/11/4.
  */
 
-public class ReleaseAdapter extends CanRVAdapter<String>{
-    public ReleaseAdapter(RecyclerView mRecyclerView, int itemLayoutId, List<String> mList) {
-        super(mRecyclerView, itemLayoutId, mList);
-    }
+public class ReleaseAdapter extends BaseRcvAdapter<ReleaseAdapter.ViewHolder, String> {
 
-    public interface OnItemClickLitener
-    {
-        void onItemClick(CanHolderHelper view, int position);
-    }
 
-    private ReleaseAdapter.OnItemClickLitener mOnItemClickLitener;
 
-    public void setOnItemClickLitener(ReleaseAdapter.OnItemClickLitener mOnItemClickLitener)
-    {
-        this.mOnItemClickLitener = mOnItemClickLitener;
+    public ReleaseAdapter(Context context, List<String> data) {
+        super(context, data);
     }
 
     @Override
-    protected void setView(CanHolderHelper viewHelper, int position, String model) {
-        ImageView imageView = viewHelper.getView(R.id.img_item);
-        if(mList.get(position).equals("")){
-            imageView.setBackgroundResource(R.mipmap.ic_launcher);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-//                viewHelper.getView(R.id.relayout_rekease).setVisibility(View.GONE);
+        View view = LayoutInflater.from(context).inflate(R.layout.rekease_item,parent,false);
+        ViewHolder viewHolder = new ViewHolder(view);
 
-        }else {
-
-
-            imageView.setImageBitmap(CanHolderHelper.convertToBitmap(model,200,200));
-//            viewHelper.getView(R.id.relayout_rekease).setVisibility(View.GONE);
-
-        }
-
-
+        return viewHolder;
     }
 
     @Override
-    protected void setItemListener(final CanHolderHelper viewHelper, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        viewHelper.getConvertView().setOnClickListener(new View.OnClickListener() {
+
+        holder.imgItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnItemClickLitener.onItemClick(viewHelper,position);
+
+                onItemClick.onItemClick(holder,position);
             }
         });
 
-
-
     }
 
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final ImageView imgItem;
 
+        public ViewHolder(View itemView) {
+            super(itemView);
 
-
+            imgItem = (ImageView) itemView.findViewById(R.id.img_item);
+        }
+    }
 
 
 

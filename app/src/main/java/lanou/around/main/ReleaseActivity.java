@@ -14,7 +14,7 @@ import java.util.List;
 
 import lanou.around.R;
 import lanou.around.base.BaseActivity;
-import lanou.around.tools.db.CanHolderHelper;
+import lanou.around.widget.MyRecyclerView;
 
 import static lanou.around.app.AroundAPP.context;
 
@@ -31,6 +31,7 @@ public class ReleaseActivity extends BaseActivity {
     private ReleaseAdapter galleryAdapter;
     private RelativeLayout release_toolbar;
     private List<String> list;
+    private ImageAdapter imageAdapter;
 
     @Override
     protected int setContentView() {
@@ -62,15 +63,15 @@ public class ReleaseActivity extends BaseActivity {
         for (int i = 0; i < 12; i++) {
             list.add("");
         }
-        galleryAdapter = new ReleaseAdapter(recyclerview_release, R.layout.rekease_item, list);
+        galleryAdapter = new ReleaseAdapter(context, list);
         recyclerview_release.setLayoutManager(new LinearLayoutManager(this, LinearLayout.HORIZONTAL, false));
 
         recyclerview_release.setAdapter(galleryAdapter);
 
 
-        galleryAdapter.setOnItemClickLitener(new ReleaseAdapter.OnItemClickLitener() {
+        galleryAdapter.setOnItemClick(new MyRecyclerView.OnItemClickListener() {
             @Override
-            public void onItemClick(CanHolderHelper view, int position) {
+            public void onItemClick(RecyclerView.ViewHolder viewHolder, int position) {
 
 
                 if (position == 0) {
@@ -86,6 +87,21 @@ public class ReleaseActivity extends BaseActivity {
         });
 
 
+        imageAdapter = new ImageAdapter(recyclerview_release);
+
+        imageAdapter.setOnItem(new ImageAdapter.onItem() {
+            @Override
+            public void setOnItemListenner(int position) {
+
+                if (position == 0) {
+
+                    Intent intent = new Intent(ReleaseActivity.this, SelectActivity.class);
+                    startActivityForResult(intent, 101);
+
+
+                }
+            }
+        });
     }
 
 
@@ -97,42 +113,35 @@ public class ReleaseActivity extends BaseActivity {
 
             if (data != null && data.hasExtra("ddd")) {
                 List<String> list1 = data.getStringArrayListExtra("ddd");
-                Log.d("list1", String.valueOf(list1.size()));
+                List<String> list = imageAdapter.getList();
+                if (list.size() != 0) {
 
-                List<String> list2 = galleryAdapter.getList();
+                    Log.d("dddddddd","null");
+                    int b = imageAdapter.getList().size();
+                    for (int i = 0; i < 12 - b; i++) {
+                        if (i >= list1.size()) {
 
-                List<String> list3 = new ArrayList<>();
-                Log.d("list2", String.valueOf(list2.size()));
 
+                        } else {
+                            list.add(list1.get(i));
 
-                for (int i = 0; i < list2.size(); i++) {
-                    if (list2.get(i).length() > 0) {
-                        list3.add(list2.get(i));
+                        }
+
                     }
-                }
+                    imageAdapter.setList(list);
+                }else {
 
-                int c = list3.size();
+                  List<String> list0  = new ArrayList<>();
 
-                if (list1.size() > 12 - c) {
-                    for (int i = 0; i < 12 - c; i++) {
-                        list3.add(list1.get(i));
-                    }
-
-                } else {
-                    for (int i = 0; i < list1.size(); i++) {
-                        list3.add(list1.get(i));
-                    }
-                }
-
-                if (list1.size() < 12) {
-
+                    list0.addAll(list1);
+                    imageAdapter.setList(list0);
                 }
 
 
-                galleryAdapter.setList(list1);
+                recyclerview_release.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+                recyclerview_release.setAdapter(imageAdapter);
             }
-
-
         }
     }
 
