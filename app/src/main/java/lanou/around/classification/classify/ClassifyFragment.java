@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -55,10 +56,14 @@ public class ClassifyFragment extends BaseFragment
     private ImageView mSearchPhoto;
     private LinearLayout mSearchText;
     private ImageView mCheck;
-    private ArrayList<ImageView> dots = new ArrayList<>();
+    private List<ImageView> dots = new ArrayList<>();
     private int statusBarHeight;
     private Button mCheckAll;
     private LinearLayout mMessageEdit;
+    private static String SENSITIVE = "sensitive";
+    private static String ZOOMTIME =  "zoomTime";
+    private static String ISPARALLAX =  "isParallax";
+    private static String ISZOOMENABLE = "isZoomEnable";
 
 
     @Override
@@ -75,7 +80,6 @@ public class ClassifyFragment extends BaseFragment
         mTitle = findView(R.id.tv_classify_title);
         mMessage = findView(R.id.tv_classify_message);
         mDotsLinear = findView(R.id.ll_viewpager);
-
         mSearch = findView(R.id.tv_classify_search);
         mSearchPhoto = findView(R.id.iv_classify_search);
         mSearchText = findView(R.id.ll_classify_search);
@@ -94,7 +98,6 @@ public class ClassifyFragment extends BaseFragment
         mSearch.setAlpha(0);
         mSearchText.setAlpha(0);
         mCheck.setImageAlpha(0);
-
         mCheckAll.setOnClickListener(this);
         mMessageEdit.setOnClickListener(this);
         mSearchText.setOnClickListener(this);
@@ -145,7 +148,7 @@ public class ClassifyFragment extends BaseFragment
 
     private void viewPagerScallListener() {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            int a;
+            int dotSize;
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -155,9 +158,9 @@ public class ClassifyFragment extends BaseFragment
             @Override
             public void onPageSelected(int position) {
                 if (dots.size() > 0) {
-                    a = position % dots.size();
+                    dotSize = position % dots.size();
                     for (int i = 0; i < dots.size(); i++) {
-                        if (i == a) {
+                        if (i == dotSize) {
                             dots.get(i).setImageResource(R.drawable.dot_normal);
                         } else {
                             dots.get(i).setImageResource(R.drawable.dot_focus);
@@ -175,10 +178,10 @@ public class ClassifyFragment extends BaseFragment
 
     private void pullZoomViewData() {
         Intent intent = getActivity().getIntent();
-        float sensitive = intent.getFloatExtra("sensitive", 1.5f);
-        int zoomTime = intent.getIntExtra("zoomTime", 500);
-        boolean isParallax = intent.getBooleanExtra("isParallax", true);
-        boolean isZoomEnable = intent.getBooleanExtra("isZoomEnable", true);
+        float sensitive = intent.getFloatExtra(SENSITIVE, 1.5f);
+        int zoomTime = intent.getIntExtra(ZOOMTIME, 500);
+        boolean isParallax = intent.getBooleanExtra(ISPARALLAX, true);
+        boolean isZoomEnable = intent.getBooleanExtra(ISZOOMENABLE, true);
 
         mPzv.setIsParallax(isParallax);
 
@@ -220,13 +223,12 @@ public class ClassifyFragment extends BaseFragment
 
             @Override
             public void onHeaderScroll(int currentY, int maxY) {
-                System.out.println("onHeaderScroll   currentY:" + currentY + "  maxY:" + maxY);
+                Log.d("ClassifyFragment", "maxY:" + maxY);
             }
 
             @Override
             public void onContentScroll(int l, int t, int oldl, int oldt) {
-                System.out.println("onContentScroll   t:" + t + "  oldt:" + oldt);
-
+                Log.d("ClassifyFragment", "oldt:" + oldt);
             }
         });
 
@@ -234,12 +236,11 @@ public class ClassifyFragment extends BaseFragment
         mPzv.setOnPullZoomListener(new PullZoomView.OnPullZoomListener() {
             @Override
             public void onPullZoom(int originHeight, int currentHeight) {
-                System.out.println("onPullZoom  originHeight:" + originHeight + "  currentHeight:" + currentHeight);
+                Log.d("ClassifyFragment", "currentHeight:" + currentHeight);
             }
 
             @Override
             public void onZoomFinish() {
-                System.out.println("onZoomFinish");
             }
         });
     }
@@ -265,7 +266,6 @@ public class ClassifyFragment extends BaseFragment
         }
 
         if (bean instanceof ClassifyBean) {
-
             ClassifyBean classifyBean = (ClassifyBean) bean;
             for (int i = 0; i < classifyBean.getRespData().size(); i++) {
                 classifyBean.getRespData().get(i).setType(i);

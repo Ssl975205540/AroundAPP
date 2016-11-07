@@ -33,13 +33,11 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private LayoutInflater mInflater;
-    private ClassifyBean mClassifyBean;
-    private ArrayList<ImageView> dots = new ArrayList<>();
+    private List<ImageView> dots = new ArrayList<>();
     private List<ClassifyBean.RespDataBean> mRespDataBeanList;
-    private List<ClassifyBean.RespDataBean.SubCateArrBean> mSubCateArrBeanList;
 
     public void setClassifyBean(ClassifyBean classifyBean) {
-        mClassifyBean = classifyBean;
+        mRespDataBeanList = classifyBean.getRespData();
     }
 
     public ClassifyAdapter(Context context) {
@@ -49,7 +47,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        return mClassifyBean.getRespData().get(position).getType();
+        return mRespDataBeanList.get(position).getType();
 
     }
 
@@ -91,43 +89,42 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         int type = getItemViewType(position);
-        mRespDataBeanList = mClassifyBean.getRespData();
-        mSubCateArrBeanList = mClassifyBean.getRespData().get(position).getSubCateArr();
+        List<ClassifyBean.RespDataBean.SubCateArrBean> subCateArr = mRespDataBeanList.get(position).getSubCateArr();
 
         switch (type) {
             case 0:
                 PhoneViewHolder phoneViewHolder = (PhoneViewHolder) holder;
                 phoneViewHolder.phone_name.setText(mRespDataBeanList.get(position).getCateName());
                 phoneViewHolder.phone_message.setText(mRespDataBeanList.get(position).getCateDescribe());
-                phoneViewHolder.mIPhone.setText(mSubCateArrBeanList.get(0).getSubCateName());
-                phoneViewHolder.mMic.setText(mSubCateArrBeanList.get(1).getSubCateName());
-                phoneViewHolder.mSanXing.setText(mSubCateArrBeanList.get(2).getSubCateName());
-                phoneViewHolder.mHuawei.setText(mSubCateArrBeanList.get(3).getSubCateName());
+                phoneViewHolder.mIPhone.setText(subCateArr.get(0).getSubCateName());
+                phoneViewHolder.mMic.setText(subCateArr.get(1).getSubCateName());
+                phoneViewHolder.mSanXing.setText(subCateArr.get(2).getSubCateName());
+                phoneViewHolder.mHuawei.setText(subCateArr.get(3).getSubCateName());
                 Picasso.with(context).load(mRespDataBeanList.get(0).getCateUrl()).into(phoneViewHolder.mPhoto);
 
                 break;
             case 1:
                 DigitViewHolder digitViewHolder = (DigitViewHolder) holder;
-                digitViewHolder.digit_name.setText(mClassifyBean.getRespData().get(position).getCateName());
-                digitViewHolder.digit_message.setText(mClassifyBean.getRespData().get(position).getCateDescribe());
+                digitViewHolder.digit_name.setText(mRespDataBeanList.get(position).getCateName());
+                digitViewHolder.digit_message.setText(mRespDataBeanList.get(position).getCateDescribe());
                 digitViewHolder.mDigit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("name", mClassifyBean.getRespData().get(position).getCateName());
+                        bundle.putString("name", mRespDataBeanList.get(position).getCateName());
                         IntentUtils.getIntents().Intent(context,SearchActivity.class,bundle);
                     }
                 });
                 View viewLeft = mInflater.inflate(R.layout.layout_grid_left, null);
-                viewLeftRequest(position, viewLeft);
+                viewLeftRequest(viewLeft,subCateArr);
 
                 View viewRight = mInflater.inflate(R.layout.layout_grid_right, null);
-                viewRightRequest(position, viewRight);
+                viewRightRequest(viewRight,subCateArr);
 
                 ArrayList<View> viewList = new ArrayList<>();
                 viewList.add(viewLeft);
                 viewList.add(viewRight);
-                ClassifyDigitAdapter adapter = new ClassifyDigitAdapter(context);
+                ClassifyDigitAdapter adapter = new ClassifyDigitAdapter();
                 adapter.setViewList(viewList);
                 digitViewHolder.viewPager.setAdapter(adapter);
                 //给ViewPager加小圆点
@@ -138,7 +135,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 computerViewHolder.computerTitle.setText(mRespDataBeanList.get(position).getCateName());
                 computerViewHolder.computerMessage.setText(mRespDataBeanList.get(position).getCateDescribe());
 
-                ClassifyComputerAdapter gridAdapter = new ClassifyComputerAdapter(context,mClassifyBean.getRespData().get(2).getSubCateArr());
+                ClassifyComputerAdapter gridAdapter = new ClassifyComputerAdapter(context,mRespDataBeanList.get(2).getSubCateArr());
                 computerViewHolder.mGridView.setAdapter(gridAdapter);
                 break;
             case 3:
@@ -147,26 +144,26 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 babyViewHolder.babyMessage.setText(mRespDataBeanList.get(position).getCateDescribe());
 
                 ClassifyBabyAdapter babyAdapter = new ClassifyBabyAdapter(context,
-                        mClassifyBean.getRespData().get(3).getSubCateArr());
+                        mRespDataBeanList.get(3).getSubCateArr());
                 babyViewHolder.mGridView.setAdapter(babyAdapter);
                 break;
             case 4:
                 EquipmentViewHolder equipmentViewHolder = (EquipmentViewHolder) holder;
                 equipmentViewHolder.equipmentName.setText(mRespDataBeanList.get(position).getCateName());
                 equipmentViewHolder.equipmentMessage.setText(mRespDataBeanList.get(position).getCateDescribe());
-                Picasso.with(context).load(mSubCateArrBeanList.get(0).getSubCateLogo()).into(equipmentViewHolder.mBike);
-                equipmentViewHolder.bike.setText(mSubCateArrBeanList.get(0).getSubCateName());
-                Picasso.with(context).load(mSubCateArrBeanList.get(1).getSubCateLogo()).into(equipmentViewHolder.mElectric);
-                equipmentViewHolder.electric.setText(mSubCateArrBeanList.get(1).getSubCateName());
-                Picasso.with(context).load(mSubCateArrBeanList.get(2).getSubCateLogo()).into(equipmentViewHolder.mMotor);
-                equipmentViewHolder.motor.setText(mSubCateArrBeanList.get(2).getSubCateName());
+                Picasso.with(context).load(subCateArr.get(0).getSubCateLogo()).into(equipmentViewHolder.mBike);
+                equipmentViewHolder.bike.setText(subCateArr.get(0).getSubCateName());
+                Picasso.with(context).load(subCateArr.get(1).getSubCateLogo()).into(equipmentViewHolder.mElectric);
+                equipmentViewHolder.electric.setText(subCateArr.get(1).getSubCateName());
+                Picasso.with(context).load(subCateArr.get(2).getSubCateLogo()).into(equipmentViewHolder.mMotor);
+                equipmentViewHolder.motor.setText(subCateArr.get(2).getSubCateName());
                 break;
             case 5:
                 ElectricalViewHolder electricalViewHolder = (ElectricalViewHolder) holder;
                 electricalViewHolder.electricalMessage.setText(mRespDataBeanList.get(position).getCateDescribe());
                 electricalViewHolder.electricalTitle.setText(mRespDataBeanList.get(position).getCateName());
                 ClassifyElectricalAdapter electricalAdapter = new ClassifyElectricalAdapter(context,
-                        mClassifyBean.getRespData().get(5).getSubCateArr());
+                        mRespDataBeanList.get(5).getSubCateArr());
                 electricalViewHolder.mGridView.setAdapter(electricalAdapter);
                 break;
             case 6:
@@ -175,7 +172,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 furnitureViewHolder.furnitureMessage.setText(mRespDataBeanList.get(position).getCateDescribe());
 
                 ClassifyFurnitureAdapter furnitureAdapter = new ClassifyFurnitureAdapter(context,
-                        mClassifyBean.getRespData().get(6).getSubCateArr());
+                        mRespDataBeanList.get(6).getSubCateArr());
                 furnitureViewHolder.mGridView.setAdapter(furnitureAdapter);
                 break;
 
@@ -225,39 +222,39 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
         });
     }
 
-    private void viewRightRequest(int position, View viewRight) {
+    private void viewRightRequest(View viewRight, List<ClassifyBean.RespDataBean.SubCateArrBean> subCateArr) {
         TextView gameName = (TextView) viewRight.findViewById(R.id.tv_game);
         ImageView game = (ImageView) viewRight.findViewById(R.id.iv_game);
         TextView kindleName = (TextView) viewRight.findViewById(R.id.tv_kindle);
         ImageView kindle = (ImageView) viewRight.findViewById(R.id.iv_kindle);
         TextView mobilePowerName = (TextView) viewRight.findViewById(R.id.tv_mobile_power);
         ImageView mobilePower = (ImageView) viewRight.findViewById(R.id.iv_mobile_power);
-        gameName.setText(mSubCateArrBeanList.get(3).getSubCateName());
-        Picasso.with(context).load(mSubCateArrBeanList.get(3).getSubCateLogo()).into(game);
-        kindleName.setText(mSubCateArrBeanList.get(4).getSubCateName());
-        Picasso.with(context).load(mSubCateArrBeanList.get(4).getSubCateLogo()).into(kindle);
-        mobilePowerName.setText(mSubCateArrBeanList.get(5).getSubCateName());
-        Picasso.with(context).load(mSubCateArrBeanList.get(5).getSubCateLogo()).into(mobilePower);
+        gameName.setText(subCateArr.get(3).getSubCateName());
+        Picasso.with(context).load(subCateArr.get(3).getSubCateLogo()).into(game);
+        kindleName.setText(subCateArr.get(4).getSubCateName());
+        Picasso.with(context).load(subCateArr.get(4).getSubCateLogo()).into(kindle);
+        mobilePowerName.setText(subCateArr.get(5).getSubCateName());
+        Picasso.with(context).load(subCateArr.get(5).getSubCateLogo()).into(mobilePower);
     }
 
-    private void viewLeftRequest(int position, View viewLeft) {
+    private void viewLeftRequest(View viewLeft, List<ClassifyBean.RespDataBean.SubCateArrBean> subCateArr) {
         TextView photographName = (TextView) viewLeft.findViewById(R.id.tv_photograph);
         ImageView photograph = (ImageView) viewLeft.findViewById(R.id.iv_photograph);
         TextView mp4Name = (TextView) viewLeft.findViewById(R.id.tv_mp4);
         ImageView mp4 = (ImageView) viewLeft.findViewById(R.id.iv_mp4);
         TextView earphoneName = (TextView) viewLeft.findViewById(R.id.tv_earphone);
         ImageView earphone = (ImageView) viewLeft.findViewById(R.id.iv_earphone);
-        photographName.setText(mSubCateArrBeanList.get(0).getSubCateName());
-        Picasso.with(context).load(mSubCateArrBeanList.get(0).getSubCateLogo()).into(photograph);
-        mp4Name.setText(mSubCateArrBeanList.get(1).getSubCateName());
-        Picasso.with(context).load(mSubCateArrBeanList.get(1).getSubCateLogo()).into(mp4);
-        earphoneName.setText(mSubCateArrBeanList.get(2).getSubCateName());
-        Picasso.with(context).load(mSubCateArrBeanList.get(2).getSubCateLogo()).into(earphone);
+        photographName.setText(subCateArr.get(0).getSubCateName());
+        Picasso.with(context).load(subCateArr.get(0).getSubCateLogo()).into(photograph);
+        mp4Name.setText(subCateArr.get(1).getSubCateName());
+        Picasso.with(context).load(subCateArr.get(1).getSubCateLogo()).into(mp4);
+        earphoneName.setText(subCateArr.get(2).getSubCateName());
+        Picasso.with(context).load(subCateArr.get(2).getSubCateLogo()).into(earphone);
     }
 
     @Override
     public int getItemCount() {
-        return mClassifyBean.getRespData().size();
+        return mRespDataBeanList.size();
     }
 
     class PhoneViewHolder extends RecyclerView.ViewHolder {
