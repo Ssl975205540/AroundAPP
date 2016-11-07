@@ -65,6 +65,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
         Log.d("sss", String.valueOf(list.size()));
 
         photoAdapter = new PhotoAdapter(photoRecyclerview, R.layout.photo_item, list1);
+        photoAdapter.setCheckPhoto(getIntent().getStringArrayListExtra("ddd"));
         photoRecyclerview.setLayoutManager(new GridLayoutManager(this,3));
         photoRecyclerview.setAdapter(photoAdapter);
 

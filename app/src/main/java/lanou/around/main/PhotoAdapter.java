@@ -20,17 +20,38 @@ import static lanou.around.tools.db.CanHolderHelper.convertToBitmap;
 
 public class PhotoAdapter extends CanRVAdapter<PictureBean> {
 
+    private ArrayList<String> list;
 
     public PhotoAdapter(RecyclerView mRecyclerView, int itemLayoutId, List<PictureBean> mList) {
         super(mRecyclerView, itemLayoutId, mList);
     }
 
+    public void setCheckPhoto(ArrayList<String> list) {
+        this.list = list;
+    }
+
     @Override
     protected void setView(CanHolderHelper viewHelper, int position, PictureBean model) {
 
+        CheckBox checkBox = viewHelper.getView(R.id.checkbox);
+
+        if (list.size() == 0) {
+            viewHelper.getImageView(R.id.img).setImageBitmap(convertToBitmap(mList.get(position).path, 300, 300));
+            checkBox.setChecked(false);
+
+        } else {
+            viewHelper.getImageView(R.id.img).setImageBitmap(convertToBitmap(mList.get(position).path, 300, 300));
 
 
-        viewHelper.getImageView(R.id.img).setImageBitmap(convertToBitmap(mList.get(position).path, 300, 300));
+            if(list.contains(model.path)){
+                checkBox.setChecked(true);
+            }else {
+                checkBox.setChecked(false);
+            }
+
+
+
+        }
 
     }
 
@@ -42,10 +63,10 @@ public class PhotoAdapter extends CanRVAdapter<PictureBean> {
             @Override
             public void onClick(View view) {
 
-                if (checkBox.isChecked()){
+                if (checkBox.isChecked()) {
 
                     mList.get(position).check = true;
-                }else {
+                } else {
 
                     mList.get(position).check = false;
 
@@ -56,18 +77,17 @@ public class PhotoAdapter extends CanRVAdapter<PictureBean> {
     }
 
 
-
     public List<PictureBean> getCheckPhoto() {
         List<PictureBean> list = new ArrayList<>();
 
-        if(mList.size()>12){
+        if (mList.size() > 12) {
             for (int i = 0; i < 12; i++) {
 
                 if (mList.get(i).check == true) {
                     list.add(mList.get(i));
                 }
             }
-        }else {
+        } else {
             for (int i = 0; i < mList.size(); i++) {
 
                 if (mList.get(i).check == true) {
@@ -76,8 +96,6 @@ public class PhotoAdapter extends CanRVAdapter<PictureBean> {
 
             }
         }
-
-
 
 
         return list;

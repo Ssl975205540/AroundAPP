@@ -41,11 +41,12 @@ public class HomeTabItemAdapter extends BaseRcvAdapter<HomeTabItemAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Glide.with(context).load(URLValues.PIN_RECOMMEND + data.get(position).getInfoImage()).into(holder.image);
-        holder.title.setText(data.get(position).getTitle() + "" + data.get(position).getDesc());
-        holder.price.setText("¥" + data.get(position).getPrice());
-        holder.minlin.setText(data.get(position).getDistance());
-        holder.time.setText(data.get(position).getFriendTime());
+        HomeTabItemBean.RespDataBean respDataBean = data.get(position);
+        Glide.with(context).load(URLValues.PIN_RECOMMEND + respDataBean.getInfoImage()).into(holder.image);
+        holder.title.setText(respDataBean.getTitle() + "" + respDataBean.getDesc());
+        holder.price.setText("¥" + respDataBean.getPrice());
+        holder.minlin.setText(respDataBean.getDistance());
+        holder.time.setText(respDataBean.getFriendTime());
 
 
 

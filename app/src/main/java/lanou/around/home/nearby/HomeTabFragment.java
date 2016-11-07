@@ -3,7 +3,6 @@ package lanou.around.home.nearby;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
@@ -33,7 +32,6 @@ public class HomeTabFragment extends BaseFragment implements InterView{
         String num = agres.getString("url");
         EncodeUtil encodeUtil = new EncodeUtil();
         encodeUtil.encode(num);
-        Log.d("HomeTabFragment",  encodeUtil.encode(num));
         String nearbyBodyURL = "pagenum=1&lon=121.544102&lat=38.883514&pagesize=20&cateId=" + num + "&";
         HomeNearbyPresenter homeNearbyPresenter = new HomeNearbyPresenter(this);
         homeNearbyPresenter.startRequest(URLValues.POST_NEARBY,nearbyBodyURL,HomeTabItemBean.class);
