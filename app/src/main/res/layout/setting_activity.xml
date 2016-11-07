@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/video_title_layout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/itemBackgrand"
+        ></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:gravity="center|left"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/home_adapter_item"
+            android:text="商品详情页弹幕"/>
+        <Switch
+            android:layout_marginTop="10dp"
+            android:id="@+id/switch_btn"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/itemBackgrand"
+        ></LinearLayout>
+    <Button
+        android:id="@+id/around_personal_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:textColor="@color/home_adapter_item"
+        android:text="个人资料"
+        android:gravity="left|center"
+        android:paddingLeft="10dp"
+        android:drawableRight="@mipmap/v4"
+        />
+    <Button
+        android:id="@+id/around_credit_sesame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:textColor="@color/home_adapter_item"
+        android:text="芝麻信用"
+        android:gravity="left|center"
+        android:paddingLeft="10dp"
+        android:drawableRight="@mipmap/v4"
+        />
+    <Button
+        android:id="@+id/around_preferences"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:textColor="@color/home_adapter_item"
+        android:text="偏好设置"
+        android:gravity="left|center"
+        android:paddingLeft="10dp"
+        android:drawableRight="@mipmap/v4"
+        />
+    <Button
+        android:id="@+id/around_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:textColor="@color/home_adapter_item"
+        android:text="消息提醒"
+        android:gravity="left|center"
+        android:paddingLeft="10dp"
+        android:drawableRight="@mipmap/v4"
+        />
+    <Button
+        android:id="@+id/around_shielding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:textColor="@color/home_adapter_item"
+        android:text="已屏蔽的人"
+        android:gravity="left|center"
+        android:paddingLeft="10dp"
+        android:drawableRight="@mipmap/v4"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/my_setting_clear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="清理缓存"
+            android:textColor="@color/home_adapter_item"
+           android:layout_marginLeft="5dp"
+            android:paddingLeft="5dp"
+            android:background="#00000000"
+            android:gravity="center|left"
+            />
+
+        <Button
+            android:id="@+id/my_setting_get"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0kb"
+            android:textColor="@color/home_adapter_item"
+            android:background="#00000000"
+            android:gravity="center|right"
+            android:paddingRight="5dp"/>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/around_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:textColor="@color/home_adapter_item"
+        android:text="关于转转"
+        android:gravity="left|center"
+        android:paddingLeft="10dp"
+        android:drawableRight="@mipmap/v4"
+        />
+    <Button
+        android:id="@+id/log_out"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="#dc370a"
+        android:text="退出登录"
+        android:textColor="#ffffff"
+        android:layout_marginTop="20dp"/>
+
+
+
+
+
+
+</LinearLayout>

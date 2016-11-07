@@ -99,6 +99,7 @@
         <activity android:name=".main.ReleaseActivity" />
 
         <activity android:name=".main.SelectActivity" />
+        <activity android:name=".login.SettingActivity"/>
     </application>
 
 </manifest>
