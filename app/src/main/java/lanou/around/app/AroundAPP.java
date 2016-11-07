@@ -21,6 +21,7 @@ public class AroundAPP extends Application {
         super.onCreate();
         this.context = this;
         initDisplayOpinion();
+
     }
 
     public static Context getContext() {
@@ -65,6 +66,7 @@ public class AroundAPP extends Application {
         }
         return false;
     }
+
 
 
 }

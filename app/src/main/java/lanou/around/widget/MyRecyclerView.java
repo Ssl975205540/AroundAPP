@@ -226,13 +226,22 @@ public class MyRecyclerView extends RecyclerView {
 
 
                 break;
+
+
+
             case MotionEvent.ACTION_MOVE:
                 final float deltaY = ev.getRawY() - mLastY;
+//                if(deltaY < 0 && mRefreshHeader.getVisibleHeight() > 0){
+//                    mLoadingListener.setdisplay(0);
+//                }
+//                if(deltaY > 0 ){
+//                    mLoadingListener.setdisplay(1);
+//                }
                 mLastY = ev.getRawY();
                 if (isOnTop() && pullRefreshEnabled && appbarState == AppBarStateChangeListener.State.EXPANDED) {
                     mRefreshHeader.onMove(deltaY / DRAG_RATE);
                     if (mRefreshHeader.getVisibleHeight() > 0 && mRefreshHeader.getState() < ArrowRefreshHeader.STATE_REFRESHING) {
-                        mLoadingListener.setdisplay(1);
+
                         return false;
                     }
                 }
@@ -655,5 +664,7 @@ public class MyRecyclerView extends RecyclerView {
     public void setPullRefreshEnabled(boolean enabled) {
         pullRefreshEnabled = enabled;
     }
+
+
 
 }

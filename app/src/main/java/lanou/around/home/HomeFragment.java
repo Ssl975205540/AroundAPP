@@ -12,6 +12,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -96,6 +97,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
         homeViewPagerAdapter.setFragments(fragments);
 
+
         viewPagerHome.setAdapter(homeViewPagerAdapter);
 
         tabHome.setupWithViewPager(viewPagerHome);
@@ -154,11 +156,12 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         Picasso.with(context).load(URLValues.HOME_FRIEND_PAKGE).into(friendCreame);
         Picasso.with(context).load(URLValues.HOME_FRIEND_CREAME).into(friendPakge);
 
-
         recyviewHome.addHeaderView(view);
-
         bannerHome = findView(view, R.id.banner_home);
+        Log.d("statusBarHeight", String.valueOf(statusBarHeight));
 
+        setview();
+        Log.d("statusBarHeight", String.valueOf(statusBarHeight));
 
     }
 
@@ -203,21 +206,57 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         recyviewHome.setLoadingListener(new MyRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+
+            }
+
+            @Override
+            public void setdisplay(int i) {
+
+            }
+
+            @Override
+            public void onLoadMore() {
+
+            }
+        });
+        recyviewHome.setLoadingListener(new MyRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        toolbarHome.setVisibility(View.VISIBLE);
+
                         if (refresh == true) {
+
+
                             homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
                         } else {
                             refresh = true;
                         }
                         recyviewHome.refreshComplete();
+
+                        toolbarHome.setVisibility(View.GONE);
+
                     }
                 }, 3000);
             }
 
+
             @Override
             public void setdisplay(int i) {
+
+                switch (i) {
+                    case 0:
+                        toolbarHome.setVisibility(View.VISIBLE);
+                        break;
+                    case 1:
+                        toolbarHome.setVisibility(View.GONE);
+
+                        break;
+                }
             }
 
             @Override
@@ -370,12 +409,12 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
             public void onItemClick(RecyclerView.ViewHolder viewHolder, int position) {
                 Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();
-                bundle.putString("goUrl",mArrayList.get(position).getGoOperation().getParams().getGoUrl());
-                bundle.putString("postName",mArrayList.get(position).getPostName());
+                bundle.putString("goUrl", mArrayList.get(position).getGoOperation().getParams().getGoUrl());
+                bundle.putString("postName", mArrayList.get(position).getPostName());
 //                bundle.putString("goUrl",mHomeBean.getRespData().getActBanners().get(0).
 //                        getMiddleBanner().getBanners().get(1).get(position).
 //                        getGoOperation().getParams().getGoUrl());
-                IntentUtils.getIntents().Intent(context, DigitWebActivity.class,bundle);
+                IntentUtils.getIntents().Intent(context, DigitWebActivity.class, bundle);
             }
         });
     }
@@ -391,6 +430,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     }
 
     public void setStatusBarHeight(int statusBarHeight) {
+
         this.statusBarHeight = statusBarHeight;
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) rl.getLayoutParams();
         params.setMargins(50, statusBarHeight + 20, 50, 5);// 通过自定义坐标来放置你的控件
@@ -398,6 +438,12 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         toolbarHome.getLayoutParams().height = statusBarHeight + tabHome.getHeight();
         supplementary.getLayoutParams().height = statusBarHeight / 2;
         supplement.getLayoutParams().height = statusBarHeight / 2;
+
+
+        this.statusBarHeight = statusBarHeight;
+
+        setview();
+
     }
 
     @Override
@@ -427,5 +473,17 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     @Override
     public void onItemClick(int position) {
 
+    }
+
+
+    private void setview() {
+
+
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) rl.getLayoutParams();
+        params.setMargins(50, statusBarHeight + 20, 50, 5);// 通过自定义坐标来放置你的控件
+        rl.setLayoutParams(params);
+        toolbarHome.getLayoutParams().height = statusBarHeight + tabHome.getHeight();
+        supplementary.getLayoutParams().height = statusBarHeight / 2;
+        supplement.getLayoutParams().height = statusBarHeight / 2;
     }
 }
