@@ -69,9 +69,9 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/tv_search_area"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
-                android:id="@+id/tv_search_area"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -97,6 +97,7 @@
                 android:background="@color/line"/>
 
             <LinearLayout
+                android:id="@+id/ll_search_phone"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
@@ -108,6 +109,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="手机"
+                    android:maxEms="4"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:textColor="@color/home_adapter_item"/>
 
                 <ImageView

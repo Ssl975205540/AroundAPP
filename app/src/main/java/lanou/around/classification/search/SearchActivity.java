@@ -1,6 +1,5 @@
 package lanou.around.classification.search;
 
-import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -28,12 +27,19 @@ import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseActivity;
 import lanou.around.bean.ClassifyKindBean;
 import lanou.around.bean.ClassifyTabBean;
+import lanou.around.bean.ClassifyViewBean;
+import lanou.around.classification.checkall.CheckAllActivity;
 import lanou.around.classification.seek.SeekActivity;
 import lanou.around.presenter.ClassifyPresenter;
+import lanou.around.presenter.ClassifyViewPresenter;
 import lanou.around.presenter.SearchPresenter;
 import lanou.around.tools.http.URLValues;
+import lanou.around.tools.recycle.IntentUtils;
 import lanou.around.tools.recycle.JsonFileReader;
 import lanou.around.widget.MyRecyclerView;
+
+import static lanou.around.classification.checkall.CheckAllActivity.JSON_TYPE;
+import static lanou.around.classification.checkall.CheckAllActivity.sLists;
 
 /**
  * Created by dllo on 16/10/31.
@@ -83,6 +89,11 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     private SearchAdapter mSearchAdapter;
     private Bundle mBundle;
     private Thread newThread; //声明一个子线程
+    private ListView mKindListView;
+    private ListView mClassifyListView;
+    private ClassifyViewBean mViewBean;
+    private LinearLayout mLinear;
+    private int mPosition;
 
 
     @Override
@@ -105,6 +116,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         search_recyclerview = findView(R.id.search_recyclerview);
         mPhone = findView(R.id.tv_search_phone);
         mOrderText = findView(R.id._tv_search_order);
+        mLinear = findView(R.id.ll_search_phone);
 
     }
 
@@ -115,6 +127,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         mSearch.setOnClickListener(this);
         mBack.setOnClickListener(this);
         mOrder.setOnClickListener(this);
+        mLinear.setOnClickListener(this);
         ClassifyPresenter presenter = new ClassifyPresenter(this);
         presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE, ClassifyTabBean.class);
 
@@ -138,6 +151,9 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     protected void initData() {
+
+        ClassifyViewPresenter presenter = new ClassifyViewPresenter(this);
+        presenter.startRequest(URLValues.CLASSIFY_CHILD_CATES_LOGIC, ClassifyViewBean.class);
 
         mBundle = this.getIntent().getExtras();
         String name = mBundle.getString(NAME);
@@ -202,8 +218,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 onBackPressed();
                 break;
             case R.id.ll_search:
-                Intent intent = new Intent(SearchActivity.this, SeekActivity.class);
-                startActivity(intent);
+                IntentUtils.getIntents().Intent(this, SeekActivity.class, new Bundle());
                 break;
             case R.id.ll_order:
                 if (popupWindow != null) {
@@ -213,6 +228,15 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     }
                 }
                 showPopupWindow(v);
+                break;
+            case R.id.ll_search_phone:
+                if (popupWindow != null) {
+                    if (popupWindow.isShowing()) {
+                        popupWindow.dismiss();
+                        popupWindow = null;
+                    }
+                }
+                showKindPopupWindow(v);
                 break;
         }
     }
@@ -248,7 +272,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
                 rightListView.setVisibility(View.INVISIBLE);
                 centerListView.setVisibility(View.VISIBLE);
-                twoAdapter = new AreaAdapter(SearchActivity.this,cityList.get(i));
+                twoAdapter = new AreaAdapter(SearchActivity.this, cityList.get(i));
                 centerListView.setAdapter(twoAdapter);
 
 
@@ -260,7 +284,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     public void onItemClick(AdapterView<?> adapterView, View view, int j, long l) {
 
                         rightListView.setVisibility(View.VISIBLE);
-                        AreaAdapter threeAdapter = new AreaAdapter(SearchActivity.this,districtList.get(finalI).get(j));
+                        AreaAdapter threeAdapter = new AreaAdapter(SearchActivity.this, districtList.get(finalI).get(j));
                         rightListView.setAdapter(threeAdapter);
                     }
                 });
@@ -338,10 +362,57 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     }
 
+    private void showKindPopupWindow(View view) {
+        // 一个自定义的布局，作为显示的内容
+        View contentView = LayoutInflater.from(this).inflate(
+                R.layout.kind_pop_window, null);
+        mKindListView = (ListView) contentView.findViewById(R.id.listview_kind);
+        mClassifyListView = (ListView) contentView.findViewById(R.id.listview_classify);
+        newThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String type = JsonFileReader.getJson(SearchActivity.this, JSON_TYPE);
+                CheckAllActivity.parseJson(type);
+            }
+        });
+        newThread.start(); //启动线程
+        KindAdapter kindAdapter = new KindAdapter(this, mViewBean.getRespData());
+        mKindListView.setAdapter(kindAdapter);
+        mKindListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                mPosition = position;
+                ClassAdapter classAdapter = new ClassAdapter(SearchActivity.this, sLists.get(position));
+                mClassifyListView.setAdapter(classAdapter);
+            }
+        });
+        mClassifyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mPhone.setText(sLists.get(mPosition).get(position));
+                popupWindow.dismiss();
+            }
+        });
+
+        popupWindow = new PopupWindow(contentView,
+                ViewGroup.LayoutParams.MATCH_PARENT, 800, true);
+        popupWindow.setTouchable(true);
+        // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(
+                R.drawable.popup_item));
+
+        // 设置好参数之后再show
+        popupWindow.showAsDropDown(view);
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
+
 
     @Override
     public void startAnimation() {
@@ -394,6 +465,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         if (t instanceof ClassifyTabBean) {
             mTabBean = (ClassifyTabBean) t;
             mSearchText.setText(mTabBean.getRespData().getInputName());
+        }
+
+        if (t instanceof ClassifyViewBean) {
+            mViewBean = (ClassifyViewBean) t;
         }
     }
 

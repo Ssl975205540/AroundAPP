@@ -23,6 +23,7 @@ public class DigitWebActivity extends BaseActivity {
     public static String URL = "url";
     public static String GO_URL = "goUrl";
     public static String POST_NAME = "postName";
+    public static String BANNER_URL = "bannerUrl";
 
 
     @Override
@@ -65,6 +66,14 @@ public class DigitWebActivity extends BaseActivity {
         Bundle bundle = this.getIntent().getExtras();
         String goUrl = bundle.getString(GO_URL);
         String postName = bundle.getString(POST_NAME);
+
+        //接受手机传过来的值
+        String bannerUrl = bundle.getString(BANNER_URL);
+        if (bundle.getString(BANNER_URL) != null) {
+            mWebView.loadUrl(bannerUrl);
+            mTitle.setText("转转优品");
+        }
+
         if (bundle.getString(GO_URL) != null) {
             mWebView.loadUrl(goUrl);
             mTitle.setText(postName);
