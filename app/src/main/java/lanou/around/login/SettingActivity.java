@@ -1,5 +1,6 @@
 package lanou.around.login;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +8,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.tencent.qq.QQ;
 import lanou.around.R;
 import lanou.around.base.BaseActivity;
 import lanou.around.widget.DataCleanManager;
@@ -16,7 +20,7 @@ import lanou.around.widget.DataCleanManager;
  */
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
-    private Button clearData, data;
+    private Button clearData, data , closeLogin;
     private ImageButton back;
     private TextView setting_title;
     @Override
@@ -30,12 +34,14 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         data = findView(R.id.my_setting_get);
         back = findView(R.id.video_title_back);
         setting_title = findView(R.id.video_title_tv);
+        closeLogin = findView(R.id.log_out);
 
     }
 
     @Override
     protected void initListeners() {
         back.setOnClickListener(this);
+        closeLogin.setOnClickListener(this);
 
     }
 
@@ -45,6 +51,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         setting_title.setText("设置");
         setting_title.setTextColor(Color.BLACK);
         back.setImageResource(R.mipmap.rn);
+        ShareSDK.initSDK(this,"sharesdk的appkey");
         //清理缓存
         try {
             data.setText(DataCleanManager.getTotalCacheSize(SettingActivity.this));
@@ -69,9 +76,28 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.video_title_back:
                 finish();
+                break;
+            case R.id.log_out:
+
+                Platform qq = ShareSDK.getPlatform(QQ.NAME);
+                if (qq.isAuthValid()) {
+                    qq.removeAccount(true);
+                    Intent intent = new Intent("getIcon");
+                    intent.putExtra("icon", "");
+                    sendBroadcast(intent);
+                    Toast.makeText(this, "下次再见,亲", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(this, "还未登录", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
                 break;
         }
     }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/video_title_layout"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="手机号  188****9854"
+        android:gravity="center|left"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/home_adapter_item"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="该号码需为支付宝实名认证账号绑定的手机号码"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:textColor="@color/line"
+        android:layout_marginLeft="10dp"
+        android:gravity="center|left"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+       android:background="#ffffff"
+        android:hint="请输入身份证后四位"
+        android:textColor="@color/line"
+        android:textSize="20sp"
+        android:gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="同意"
+        android:gravity="center|left"
+        android:textSize="18sp"
+        android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《芝麻信用协议及授权条款》"
+            android:textColor="#0f46df"
+            />
+    </LinearLayout>
+    <Button
+        android:layout_width="340dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="#dcd6d6"
+        android:layout_marginTop="10dp"
+        android:text="下一步"
+        android:textSize="20sp"
+        android:textColor="@color/line"/>
+
+</LinearLayout>

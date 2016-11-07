@@ -100,6 +100,7 @@
 
         <activity android:name=".main.SelectActivity" />
         <activity android:name=".login.SettingActivity"/>
+        <activity android:name=".login.SemaseActivity"/>
     </application>
 
 </manifest>
