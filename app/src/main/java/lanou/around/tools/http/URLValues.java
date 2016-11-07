@@ -12,7 +12,7 @@ public class URLValues {
     public static final String HOME_FRIEND_CREAME = "http://img.58cdn.com.cn/zhuanzhuan/friends/en1.png";
     public static final String HOME_FRIEND_PAKGE = "http://img.58cdn.com.cn/zhuanzhuan/friends/en2.png";
     //热门市场和轮播图 的网址接口
-    public static final String HOME_HOT_MARKET = "http://zhuanzhuan.58.com/zz/trnsfer/gettopbanner";
+    public static final String HOME_HOT_MARKET = "http://zhuanzhuan.58.com/zz/transfer/gettopbanner";
 
     //转转优品
     public static final String HOME_ZHUAN_MOST_THING = "http://youpin.m.58.com/?channel=zz_index&prefectureId=7";
