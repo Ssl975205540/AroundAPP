@@ -104,9 +104,7 @@ public class ClassifyFragment extends BaseFragment
         presenter.startRequest(URLValues.CLASSIFY_WANT_BUY_MESSAGE, ClassifyBean.class);
     }
 
-    public ClassifyFragment(int statusBarHeight) {
-        this.statusBarHeight = statusBarHeight;
-    }
+
 
     @Override
     protected void initData() {
@@ -313,4 +311,14 @@ public class ClassifyFragment extends BaseFragment
                 break;
         }
     }
+
+
+    public void setStatusBarHeight(int statusBarHeight) {
+
+        this.statusBarHeight = statusBarHeight;
+
+
+
+    }
+
 }

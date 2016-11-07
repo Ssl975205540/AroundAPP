@@ -252,7 +252,7 @@ public abstract class CanRVAdapter<T> extends RecyclerView.Adapter<CanRViewHolde
 
     protected abstract void setView(CanHolderHelper viewHelper, int position, T model);
 
-    protected abstract void setItemListener(CanHolderHelper viewHelper, int position);
+    protected abstract void setItemListener(CanHolderHelper viewHelper,int position);
 
 
 }

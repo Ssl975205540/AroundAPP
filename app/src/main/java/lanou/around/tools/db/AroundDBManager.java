@@ -47,7 +47,8 @@ public class AroundDBManager {
             for (int j = 0; j < bean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(0).size(); j++) {
                 HomeBeanHot homeBeanHot = new HomeBeanHot();
                 homeBeanHot.setImageUrl(bean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getImageUrl());
-//                homeBeanHot.setGoOperation(bean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getGoOperation());
+
+
                 arrayList.add(homeBeanHot);
             }
         }

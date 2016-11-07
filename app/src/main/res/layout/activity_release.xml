@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_release"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lanou.around.main.ReleaseActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/release_toolbar"
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="50dp">
+
+
+        <ImageView
+            android:src="@mipmap/o3"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="发布宝贝"
+            android:layout_centerInParent="true"
+            android:textSize="15dp"
+            android:textColor="@android:color/background_dark"
+            android:layout_height="wrap_content" />
+
+
+
+
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/release_toolbar"
+        android:id="@+id/recyclerview_release"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+
+
+
+</RelativeLayout>

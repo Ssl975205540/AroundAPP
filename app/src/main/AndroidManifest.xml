@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="lanou.around">
+    package="lanou.around">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- Sd写的权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE">
-    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- Sd读的权限 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!-- 二维码 -->
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!--第三方分享-->
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -48,11 +47,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/SupportTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -87,6 +87,18 @@
         <activity android:name=".home.FriendActivity"/>
         <activity android:name=".classification.checkall.ClassifyTypeActivity">
         </activity>
+
+        <activity android:name=".classification.classifyview.DigitWebActivity" />
+        <activity android:name=".classification.checkall.CheckAllActivity" />
+        <activity android:name=".login.LoginTreatyActivity" />
+        <activity android:name=".classification.search.SearchActivity" />
+        <activity android:name=".classification.seek.SeekActivity" />
+        <activity android:name=".home.HSVClickActivity" />
+        <activity android:name=".home.FriendActivity" />
+        <activity android:name=".classification.checkall.ClassifyTypeActivity" />
+        <activity android:name=".main.ReleaseActivity" />
+
+        <activity android:name=".main.SelectActivity" />
     </application>
 
 </manifest>

@@ -75,6 +75,12 @@ public abstract class BaseRcvAdapter<Holder extends RecyclerView.ViewHolder, T> 
         return adapter == null || adapter.isEmpty();
     }
 
+    public void setList(List<T> data){
+
+        this.data = data;
+
+        notifyDataSetChanged();
+    }
 
     public void refresh(List<T> data) {
         this.data.clear();
@@ -122,5 +128,8 @@ public abstract class BaseRcvAdapter<Holder extends RecyclerView.ViewHolder, T> 
     }
 
 
+    public List<T> getList(){
+        return data;
+    }
 
 }

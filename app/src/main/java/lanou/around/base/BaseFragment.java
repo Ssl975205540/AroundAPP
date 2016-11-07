@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 public abstract class BaseFragment extends Fragment {
 
     public Context context;
+    private int statusBarHeight;
 
     @Nullable
     @Override
@@ -64,4 +65,7 @@ public abstract class BaseFragment extends Fragment {
         super.onAttach(context);
         this.context = context;
     }
+
+
+
 }

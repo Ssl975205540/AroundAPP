@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="wrap_content"
+    android:paddingLeft="5dp"
+    android:paddingTop="5dp"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/img"
+        android:scaleType="fitXY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <!--CompoundButton-->
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
