@@ -6,44 +6,52 @@
               android:background="@color/colorText"
               android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/simple_item_phone_rl"
+    <LinearLayout
+        android:id="@+id/ll_phone_photo"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_phone_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textColor="@color/home_adapter_item"
-            android:layout_marginLeft="10dp" />
+        <RelativeLayout
+            android:id="@+id/simple_item_phone_rl"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/tv_phone_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:textColor="@color/home_adapter_item"
-            android:layout_toLeftOf="@+id/iv_phone_check"/>
+            <TextView
+                android:id="@+id/tv_phone_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/home_adapter_item"/>
+
+            <TextView
+                android:id="@+id/tv_phone_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/iv_phone_check"
+                android:textColor="@color/home_adapter_item"/>
+
+            <ImageView
+                android:id="@+id/iv_phone_check"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/v1"/>
+
+
+        </RelativeLayout>
+
         <ImageView
-            android:id="@+id/iv_phone_check"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:src="@mipmap/v1" />
-
-
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/iv_photo"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"/>
+            android:id="@+id/iv_photo"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,48 +62,51 @@
         <TextView
             android:id="@+id/tv_iphone"
             android:layout_width="0dp"
-            android:textColor="@color/home_adapter_item"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="@color/home_adapter_item"/>
+
         <View
             android:layout_width="0.5dp"
             android:layout_height="15dp"
-            android:background="@color/itemBackgrand"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:background="@color/itemBackgrand"/>
 
         <TextView
             android:id="@+id/tv_mic"
             android:layout_width="0dp"
-            android:textColor="@color/home_adapter_item"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="@color/home_adapter_item"/>
+
         <View
             android:layout_width="0.5dp"
             android:layout_height="15dp"
-            android:background="@color/itemBackgrand"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:background="@color/itemBackgrand"/>
 
         <TextView
             android:id="@+id/tv_sanxing"
             android:layout_width="0dp"
-            android:textColor="@color/home_adapter_item"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="@color/home_adapter_item"/>
+
         <View
             android:layout_width="0.5dp"
             android:layout_height="15dp"
-            android:background="@color/itemBackgrand"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:background="@color/itemBackgrand"/>
 
         <TextView
             android:id="@+id/tv_huawei"
             android:layout_width="0dp"
-            android:textColor="@color/home_adapter_item"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="@color/home_adapter_item"/>
     </LinearLayout>
 </LinearLayout>

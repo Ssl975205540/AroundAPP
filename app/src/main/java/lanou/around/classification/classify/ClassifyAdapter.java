@@ -20,9 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lanou.around.R;
+import lanou.around.classification.classifyview.DigitWebActivity;
 import lanou.around.tools.recycle.IntentUtils;
 import lanou.around.bean.ClassifyBean;
 import lanou.around.classification.search.SearchActivity;
+
+import static lanou.around.classification.classifyview.DigitWebActivity.BANNER_URL;
+import static lanou.around.classification.search.SearchActivity.NAME;
 
 
 /**
@@ -100,8 +104,17 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                 phoneViewHolder.mMic.setText(subCateArr.get(1).getSubCateName());
                 phoneViewHolder.mSanXing.setText(subCateArr.get(2).getSubCateName());
                 phoneViewHolder.mHuawei.setText(subCateArr.get(3).getSubCateName());
-                Picasso.with(context).load(mRespDataBeanList.get(0).getCateUrl()).into(phoneViewHolder.mPhoto);
+                Picasso.with(context).load(mRespDataBeanList.get(0).getCateUrl())
+                        .into(phoneViewHolder.mPhoto);
 
+                phoneViewHolder.mLinear.setOnClickListener(new View.OnClickListener() {
+                    Bundle bundle = new Bundle();
+                    @Override
+                    public void onClick(View v) {
+                        bundle.putString(BANNER_URL, mRespDataBeanList.get(0).getBannerUrl());
+                        IntentUtils.getIntents().Intent(context, DigitWebActivity.class, bundle);
+                    }
+                });
                 break;
             case 1:
                 DigitViewHolder digitViewHolder = (DigitViewHolder) holder;
@@ -111,7 +124,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
                     @Override
                     public void onClick(View v) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("name", mRespDataBeanList.get(position).getCateName());
+                        bundle.putString(NAME, mRespDataBeanList.get(position).getCateName());
                         IntentUtils.getIntents().Intent(context,SearchActivity.class,bundle);
                     }
                 });
@@ -265,6 +278,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
         public final TextView mSanXing;
         public final TextView mHuawei;
         public final ImageView mPhoto;
+        private final LinearLayout mLinear;
 
 
         public PhoneViewHolder(View itemView) {
@@ -276,6 +290,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter {
             mSanXing = (TextView) itemView.findViewById(R.id.tv_sanxing);
             mHuawei = (TextView) itemView.findViewById(R.id.tv_huawei);
             mPhoto = (ImageView) itemView.findViewById(R.id.iv_photo);
+            mLinear = (LinearLayout) itemView.findViewById(R.id.ll_phone_photo);
 
         }
     }

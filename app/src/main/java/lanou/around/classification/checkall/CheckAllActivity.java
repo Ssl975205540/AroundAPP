@@ -33,6 +33,7 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
     public static String JSON_TYPE = "type.json";
     public static String TYPE = "type";
     private Thread newThread;
+    public static List<ArrayList<String>> sLists;
 
 
     @Override
@@ -68,8 +69,9 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
 
     }
 
-    List<ArrayList<String>> mLists = new ArrayList<>();
-    private void parseJson(String str) {
+
+    public static void parseJson(String str) {
+        sLists = new ArrayList<>();
         try {
             //  获取json中的数组
             JSONArray jsonArray = new JSONArray(str);
@@ -84,7 +86,7 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
                     mArrayLists.add(s1);
                 }
                 //  获取种类名称放入集合
-                mLists.add(mArrayLists);
+                sLists.add(mArrayLists);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -125,7 +127,7 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(CheckAllActivity.this, ClassifyTypeActivity.class);
                 intent.putExtra(NAME, classifyViewBean.getRespData().get(position).getCateName());
-                intent.putStringArrayListExtra(TYPE, mLists.get(position));
+                intent.putStringArrayListExtra(TYPE, sLists.get(position));
                 startActivity(intent);
             }
         });
