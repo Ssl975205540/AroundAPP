@@ -72,7 +72,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     private MorphFrameLayout rl;
     private RelativeLayout rl1, rl0;
     private TextView tvSpending, tvSpent;
-    private ImageView imgSpending, imgSpent, icon, friendIcon, friendCreame, friendPakge;
+    private ImageView imgSpending, imgSpent, friendIcon, friendCreame, friendPakge;
     private boolean refresh = false;
     private ImageView circle_search_home;
     private ConvenientBanner bannerHome;
@@ -311,7 +311,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         hsvLinear.removeAllViews();
         for (int i = 0; i < mHomeBean.getRespData().getLowBanners().size(); i++) {
             View hsv_item = LayoutInflater.from(context).inflate(R.layout.hsv_item, null);
-            icon = (ImageView) hsv_item.findViewById(R.id.hsv_item_image);
+            ImageView icon = (ImageView) hsv_item.findViewById(R.id.hsv_item_image);
             Picasso.with(context).load(mHomeBean.getRespData().getLowBanners().get(i).getImageUrl()).into(icon);
             final String clickUrl = mHomeBean.getRespData().getLowBanners().get(i).getGoUrl();
             final String clickTitle = mHomeBean.getRespData().getLowBanners().get(i).getPostName();
