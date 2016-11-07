@@ -1,10 +1,8 @@
 package lanou.around.classification.classifyview;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,13 +18,12 @@ public class DigitWebActivity extends BaseActivity {
 
     private WebView mWebView;
     private ImageView mBack;
-
-    public final static int FILECHOOSER_RESULTCODE = 1;
-    public final static int FILECHOOSER_RESULTCODE_FOR_ANDROID_5 = 2;
-    public ValueCallback<Uri> mUploadMessage;
-    public ValueCallback<Uri[]> mUploadMessageForAndroid5;
     private ImageView mShare;
     private TextView mTitle;
+    public static String URL = "url";
+    public static String GO_URL = "goUrl";
+    public static String POST_NAME = "postName";
+
 
     @Override
     protected int setContentView() {
@@ -44,12 +41,31 @@ public class DigitWebActivity extends BaseActivity {
 
     @Override
     protected void initListeners() {
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        mShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showShare();
+            }
+        });
+
+    }
+
+    @Override
+    protected void initData() {
+
         Intent intent = getIntent();
-        String url = intent.getStringExtra("url");
+        String url = intent.getStringExtra(URL);
         Bundle bundle = this.getIntent().getExtras();
-        String goUrl = bundle.getString("goUrl");
-        String postName = bundle.getString("postName");
-        if (bundle.getString("goUrl") != null) {
+        String goUrl = bundle.getString(GO_URL);
+        String postName = bundle.getString(POST_NAME);
+        if (bundle.getString(GO_URL) != null) {
             mWebView.loadUrl(goUrl);
             mTitle.setText(postName);
         }
@@ -68,23 +84,6 @@ public class DigitWebActivity extends BaseActivity {
         mWebView.getSettings().setBuiltInZoomControls(true);
         mWebView.setInitialScale(200);
         mWebView.setHorizontalScrollbarOverlay(true);
-    }
-
-    @Override
-    protected void initData() {
-
-        mBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        mShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showShare();
-            }
-        });
 
     }
 
@@ -99,8 +98,6 @@ public class DigitWebActivity extends BaseActivity {
         //关闭sso授权
         oks.disableSSOWhenAuthorize();
 
-        // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
-//        oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
         oks.setTitle("标题");
         // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
@@ -119,11 +116,9 @@ public class DigitWebActivity extends BaseActivity {
         oks.setSite("ShareSDK");
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
         oks.setSiteUrl("http://sharesdk.cn");
-
         // 启动分享
         oks.show(this);
     }
-
 
 
 }

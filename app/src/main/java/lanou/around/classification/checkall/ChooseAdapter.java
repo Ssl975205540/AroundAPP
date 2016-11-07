@@ -14,7 +14,7 @@ import lanou.around.base.BaseAdapter;
  */
 public class ChooseAdapter extends BaseAdapter<String> {
 
-    public ChooseAdapter(Context context, List list) {
+    public ChooseAdapter(Context context, List<String> list) {
         super(context, list);
     }
 

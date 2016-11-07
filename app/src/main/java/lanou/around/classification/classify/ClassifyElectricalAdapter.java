@@ -13,7 +13,6 @@ import lanou.around.R;
 import lanou.around.base.BaseAdapter;
 import lanou.around.bean.ClassifyBean;
 
-import static lanou.around.app.AroundAPP.context;
 
 /**
  * Created by dllo on 16/10/26.
@@ -31,7 +30,7 @@ public class ClassifyElectricalAdapter extends BaseAdapter<ClassifyBean.RespData
     @Override
     public void onInitView(View view, int position) {
         ImageView photo = get(view, R.id.iv_electrical_photo);
-        Picasso.with(context).load(list.get(position).getSubCateLogo()).into(photo);
+        Picasso.with(mContext).load(list.get(position).getSubCateLogo()).into(photo);
         TextView title = get(view, R.id.tv_electrical_title);
         title.setText(list.get(position).getSubCateName());
     }

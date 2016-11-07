@@ -18,6 +18,10 @@ import lanou.around.classification.search.SearchActivity;
 import lanou.around.presenter.ClassifyViewPresenter;
 import lanou.around.tools.http.URLValues;
 
+import static lanou.around.classification.search.SearchActivity.CATE_ID_LEFT;
+import static lanou.around.classification.search.SearchActivity.CATE_NAME_LEFT;
+import static lanou.around.classification.search.SearchActivity.LEFT;
+
 /**
  * Created by dllo on 16/10/22.
  */
@@ -40,15 +44,14 @@ public class LeftViewFragment extends BaseFragment implements InterView {
 
     @Override
     protected void initListeners() {
-        ClassifyViewPresenter presenter = new ClassifyViewPresenter(this);
-        presenter.startRequest(URLValues.CLASSIFY_CHILD_CATES_LOGIC, ClassifyViewBean.class);
+        // 为GridView设定监听器
+        gridView.setOnItemClickListener(new gridViewListener());
     }
 
     @Override
     protected void initData() {
-
-        // 为GridView设定监听器
-        gridView.setOnItemClickListener(new gridViewListener());
+        ClassifyViewPresenter presenter = new ClassifyViewPresenter(this);
+        presenter.startRequest(URLValues.CLASSIFY_CHILD_CATES_LOGIC, ClassifyViewBean.class);
     }
 
     @Override
@@ -68,8 +71,7 @@ public class LeftViewFragment extends BaseFragment implements InterView {
         for (int i = 0; i < 8; i++) {
             mRespDataBeen.add(classifyViewBean.getRespData().get(i));
         }
-        GridViewPagerAdapter gridViewAdapter = new GridViewPagerAdapter(context);
-        gridViewAdapter.setRespDataBeen(mRespDataBeen);
+        GridViewPagerAdapter gridViewAdapter = new GridViewPagerAdapter(context,mRespDataBeen);
         gridView.setAdapter(gridViewAdapter);
     }
 
@@ -90,15 +92,11 @@ public class LeftViewFragment extends BaseFragment implements InterView {
                     IntentUtils.getIntents().Intent(context,DigitWebActivity.class, bundle);
                 }
             } else {
-                bundle.putString("cateIdLeft",mRespDataBeen.get(arg2).getCateId());
-                bundle.putString("cateNameLeft",mRespDataBeen.get(arg2).getCateName());
-                bundle.putInt("Left",1);
+                bundle.putString(CATE_ID_LEFT,mRespDataBeen.get(arg2).getCateId());
+                bundle.putString(CATE_NAME_LEFT,mRespDataBeen.get(arg2).getCateName());
+                bundle.putInt(LEFT,1);
                 IntentUtils.getIntents().Intent(context,  SearchActivity.class,bundle);
             }
-
-
         }
     }
-
-
 }

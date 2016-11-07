@@ -11,15 +11,11 @@ import java.util.List;
  */
 
 public class ClassifyViewAdapter extends FragmentPagerAdapter {
-    List<Fragment> fragments;
+    private List<Fragment> fragments;
 
     public ClassifyViewAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
-    }
-
-    public ClassifyViewAdapter(FragmentManager fm) {
-        super(fm);
     }
 
     @Override

@@ -21,6 +21,8 @@ import lanou.around.presenter.ClassifyViewPresenter;
 import lanou.around.tools.http.URLValues;
 import lanou.around.tools.recycle.JsonFileReader;
 
+import static lanou.around.classification.checkall.ClassifyTypeActivity.NAME;
+
 /**
  * Created by dllo on 16/10/31.
  */
@@ -28,7 +30,10 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
 
     private ImageView mBack;
     private ListView mClassify;
-    private List<String> mTypeList;
+    public static String JSON_TYPE = "type.json";
+    public static String TYPE = "type";
+    private Thread newThread;
+
 
     @Override
     protected int setContentView() {
@@ -44,7 +49,6 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void initListeners() {
         mBack.setOnClickListener(this);
-
     }
 
     @Override
@@ -52,14 +56,20 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
         ClassifyViewPresenter presenter = new ClassifyViewPresenter(this);
         presenter.startRequest(URLValues.CLASSIFY_CHILD_CATES_LOGIC, ClassifyViewBean.class);
 
-        String type = JsonFileReader.getJson(this, "type.json");
-        parseJson(type);
+        newThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 要写在子线程中
+                String type = JsonFileReader.getJson(CheckAllActivity.this, JSON_TYPE);
+                parseJson(type);
+            }
+        });
+        newThread.start(); //启动线程
+
     }
 
-    ArrayList<ArrayList<String>> a = new ArrayList<>();
-
+    List<ArrayList<String>> mLists = new ArrayList<>();
     private void parseJson(String str) {
-
         try {
             //  获取json中的数组
             JSONArray jsonArray = new JSONArray(str);
@@ -67,27 +77,19 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
             for (int i = 0; i < jsonArray.length(); i++) {
                 //  获取种类的对象
                 ArrayList<String> mArrayLists = new ArrayList<>();
-
-                JSONObject j = jsonArray.getJSONObject(i);
-
-
-                JSONArray areaArray = j.optJSONArray("type");
-
+                JSONObject json = jsonArray.getJSONObject(i);
+                JSONArray areaArray = json.optJSONArray(TYPE);
                 for (int k = 0; k < areaArray.length(); k++) {
                     String s1 = areaArray.getString(k);
                     mArrayLists.add(s1);
                 }
-
                 //  获取种类名称放入集合
-                a.add(mArrayLists);
+                mLists.add(mArrayLists);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
     }
-
 
     @Override
     public void onClick(View v) {
@@ -122,13 +124,12 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(CheckAllActivity.this, ClassifyTypeActivity.class);
-                intent.putExtra("name", classifyViewBean.getRespData().get(position).getCateName());
-                intent.putStringArrayListExtra("type", a.get(position));
+                intent.putExtra(NAME, classifyViewBean.getRespData().get(position).getCateName());
+                intent.putStringArrayListExtra(TYPE, mLists.get(position));
                 startActivity(intent);
             }
         });
     }
-
 
     @Override
     public void onError() {
