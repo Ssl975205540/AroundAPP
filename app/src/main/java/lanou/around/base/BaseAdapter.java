@@ -14,9 +14,8 @@ import java.util.List;
  */
 
 public abstract class BaseAdapter<T> extends android.widget.BaseAdapter {
-    public List<T> list;
-    public Context mContext;
-    public Object object;
+    protected List<T> list;
+    protected Context mContext;
     private LayoutInflater inflater;
 
     public BaseAdapter(Context context) {

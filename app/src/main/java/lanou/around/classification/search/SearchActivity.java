@@ -40,6 +40,23 @@ import lanou.around.widget.MyRecyclerView;
  */
 public class SearchActivity extends BaseActivity implements View.OnClickListener, InterView {
 
+    public static String NAME = "name";
+    public static String LEFT = "Left";
+    public static String RIGHT = "Right";
+    public static String CENTER = "Center";
+    public static String CATE_ID_LEFT = "cateIdLeft";
+    public static String CATE_NAME_LEFT = "cateNameLeft";
+    public static String CATE_ID_RIGHT = "cateIdRight";
+    public static String CATE_NAME_RIGHT = "cateNameRight";
+    public static String CATE_ID_CENTER = "cateIdCenter";
+    public static String CATE_NAME_CENTER = "cateNameCenter";
+    public static String PROVINCE_DATA = "province_data.json";
+    public static String JSON_PROVINCE = "province";
+    public static String JSON_CITY = "city";
+    public static String JSON_NAME = "name";
+    public static String JSON_AREA = "area";
+
+
     private TextView mSearchText;
     private ImageView mBack;
     private LinearLayout mSearch;
@@ -51,20 +68,22 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     private TextView mOrderText;
     private LinearLayout tv_search_area;
     private View popView;
-    private ListView listView1;
-    private ListView listView2;
-    private ListView listView3;
-    private ArrayList<String> provinceBeanList = new ArrayList<>();
-    //  城市
-    private ArrayList<String> cities;
+    private ListView leftListView;
+    private ListView centerListView;
+    private ListView rightListView;
+    private List<String> provinceBeanList = new ArrayList<>();
+    // 城市
+    private List<String> cities;
     private ArrayList<List<String>> cityList = new ArrayList<>();
-    //  区/县
-    private ArrayList<String> district;
-    private ArrayList<List<String>> districts;
-    private ArrayList<List<List<String>>> districtList = new ArrayList<>();
+    // 区/县
+    private List<String> district;
+    private List<List<String>> districts;
+    private List<List<List<String>>> districtList = new ArrayList<>();
     private PopupWindow popupWindow;
     private SearchAdapter mSearchAdapter;
     private Bundle mBundle;
+    private Thread newThread; //声明一个子线程
+
 
     @Override
     protected int setContentView() {
@@ -75,9 +94,9 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     protected void initViews() {
 
         popView = LayoutInflater.from(this).inflate(R.layout.layoutpop, null);
-        listView1 = (ListView) popView.findViewById(R.id.pop_lv1);
-        listView2 = (ListView) popView.findViewById(R.id.pop_lv2);
-        listView3 = (ListView) popView.findViewById(R.id.pop_lv3);
+        leftListView = (ListView) popView.findViewById(R.id.pop_lv1);
+        centerListView = (ListView) popView.findViewById(R.id.pop_lv2);
+        rightListView = (ListView) popView.findViewById(R.id.pop_lv3);
         tv_search_area = findView(R.id.tv_search_area);
         mSearchText = findView(R.id.tv_search);
         mBack = findView(R.id.iv_search_back);
@@ -102,7 +121,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         search_recyclerview.setLoadingListener(new MyRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-
                 search_recyclerview.refreshComplete();
             }
 
@@ -113,7 +131,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
             @Override
             public void onLoadMore() {
-
                 search_recyclerview.loadMoreComplete();
             }
         });
@@ -123,45 +140,50 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     protected void initData() {
 
         mBundle = this.getIntent().getExtras();
-        String name = mBundle.getString("name");
+        String name = mBundle.getString(NAME);
         mPhone.setText(name);
 
-        String cateIdLeft = mBundle.getString("cateIdLeft");
-        mCateNameLeft = mBundle.getString("cateNameLeft");
+        String cateIdLeft = mBundle.getString(CATE_ID_LEFT);
+        mCateNameLeft = mBundle.getString(CATE_NAME_LEFT);
 
-        String cateIdRight = mBundle.getString("cateIdRight");
-        String cateNameRight = mBundle.getString("cateNameRight");
+        String cateIdRight = mBundle.getString(CATE_ID_RIGHT);
+        String cateNameRight = mBundle.getString(CATE_NAME_RIGHT);
 
-        String cateIdCenter = mBundle.getString("cateIdCenter");
-        String cateNameCenter = mBundle.getString("cateNameCenter");
+        String cateIdCenter = mBundle.getString(CATE_ID_CENTER);
+        String cateNameCenter = mBundle.getString(CATE_NAME_CENTER);
 
-        if (mBundle.getString("cateIdLeft") != null) {
+        if (mBundle.getString(CATE_ID_LEFT) != null) {
             String REQUEST_LEFT_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdLeft + URLValues.REQUEST_BODY_AFTER;
             SearchPresenter leftPresenter = new SearchPresenter(this, REQUEST_LEFT_BODY);
             leftPresenter.startRequest(URLValues.POST_CHILD_LOGIC, ClassifyKindBean.class);
             mPhone.setText(mCateNameLeft);
         }
-        if (mBundle.getString("cateIdCenter") != null) {
+        if (mBundle.getString(CATE_ID_CENTER) != null) {
             String REQUEST_CENTER_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdCenter + URLValues.REQUEST_BODY_AFTER;
             SearchPresenter centerPresenter = new SearchPresenter(this, REQUEST_CENTER_BODY);
             centerPresenter.startRequest(URLValues.POST_CHILD_LOGIC, ClassifyKindBean.class);
             mPhone.setText(cateNameCenter);
         }
-        if (mBundle.getString("cateIdRight") != null) {
+        if (mBundle.getString(CATE_ID_RIGHT) != null) {
             String REQUEST_RIGHT_BODY = URLValues.REQUEST_BODY_BEFOR + cateIdRight + URLValues.REQUEST_BODY_AFTER;
             SearchPresenter rightPresenter = new SearchPresenter(this, REQUEST_RIGHT_BODY);
             rightPresenter.startRequest(URLValues.POST_CHILD_LOGIC, ClassifyKindBean.class);
             mPhone.setText(cateNameRight);
         }
-            //  获取json数据
-            String province_data_json = JsonFileReader.getJson(this, "province_data.json");
-            //  解析json数据
-            parseJson(province_data_json);
+
+        newThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //  获取json数据
+                String province_data_json = JsonFileReader.getJson(SearchActivity.this, PROVINCE_DATA);
+                //  解析json数据
+                parseJson(province_data_json);
+            }
+        });
+        newThread.start(); //启动线程
+
 
     }
-
-
-
 
 
     @Override
@@ -199,15 +221,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         popupWindow = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
         // 设置动画效果
         popupWindow.setAnimationStyle(R.style.e1);
-
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
-
         popupWindow.showAsDropDown(view);
-
-
-        view.setFocusable(true);//comment by danielinbiti,设置view能够接听事件，标注1
+        view.setFocusable(true);
         view.setFocusableInTouchMode(true);
-
 
         view.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -220,36 +237,31 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             }
         });
 
-
-        AreaAdapter oneAdapter = new AreaAdapter(SearchActivity.this);
-        oneAdapter.setProvinceBeanList(provinceBeanList);
-        listView1.setAdapter(oneAdapter);
-
-        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        AreaAdapter oneAdapter = new AreaAdapter(SearchActivity.this, provinceBeanList);
+        leftListView.setAdapter(oneAdapter);
+        leftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             private AreaAdapter twoAdapter;
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                listView3.setVisibility(View.INVISIBLE);
-                listView2.setVisibility(View.VISIBLE);
-                twoAdapter = new AreaAdapter(SearchActivity.this);
-                twoAdapter.setProvinceBeanList(cityList.get(i));
-                listView2.setAdapter(twoAdapter);
+                rightListView.setVisibility(View.INVISIBLE);
+                centerListView.setVisibility(View.VISIBLE);
+                twoAdapter = new AreaAdapter(SearchActivity.this,cityList.get(i));
+                centerListView.setAdapter(twoAdapter);
 
 
                 final int finalI = i;
-                listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                centerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int j, long l) {
 
-                        listView3.setVisibility(View.VISIBLE);
-                        AreaAdapter threeAdapter = new AreaAdapter(SearchActivity.this);
-                        threeAdapter.setProvinceBeanList(districtList.get(finalI).get(j));
-                        listView3.setAdapter(threeAdapter);
+                        rightListView.setVisibility(View.VISIBLE);
+                        AreaAdapter threeAdapter = new AreaAdapter(SearchActivity.this,districtList.get(finalI).get(j));
+                        rightListView.setAdapter(threeAdapter);
                     }
                 });
             }
@@ -346,8 +358,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         if (t instanceof ClassifyKindBean) {
             ClassifyKindBean bean = (ClassifyKindBean) t;
             mSearchAdapter = new SearchAdapter(this, bean.getRespData());
-            if (mBundle.getInt("Left", 3) == 1) {
-                if (mBundle.getString("cateNameLeft").equals("服装鞋帽")) {
+            if (mBundle.getInt(LEFT, 3) == 1) {
+                if (mBundle.getString(CATE_NAME_LEFT).equals("服装鞋帽")) {
                     mSearchAdapter.setLayout(R.layout.search_item_grid);
                     search_recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
                 } else {
@@ -355,9 +367,9 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     search_recyclerview.setLayoutManager(new LinearLayoutManager(this));
                 }
             }
-            if (mBundle.getInt("Center", 1) == 2) {
-                if (mBundle.getString("cateNameCenter").equals("玩具乐器")
-                        || mBundle.getString("cateNameCenter").equals("珠宝配饰")) {
+            if (mBundle.getInt(CENTER, 1) == 2) {
+                if (mBundle.getString(CATE_NAME_CENTER).equals("玩具乐器")
+                        || mBundle.getString(CATE_NAME_CENTER).equals("珠宝配饰")) {
                     mSearchAdapter.setLayout(R.layout.search_item_grid);
                     search_recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
                 } else {
@@ -366,9 +378,9 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
                 }
             }
-            if (mBundle.getInt("Right", 2) == 3) {
-                if (mBundle.getString("cateNameRight").equals("艺术古玩")
-                        || mBundle.getString("cateNameRight").equals("美容保健")) {
+            if (mBundle.getInt(RIGHT, 2) == 3) {
+                if (mBundle.getString(CATE_NAME_RIGHT).equals("艺术古玩")
+                        || mBundle.getString(CATE_NAME_RIGHT).equals("美容保健")) {
                     mSearchAdapter.setLayout(R.layout.search_item_grid);
                     search_recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
                 } else {
@@ -400,10 +412,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 //  获取省份的对象
                 JSONObject provinceObject = jsonArray.optJSONObject(i);
                 //  获取省份名称放入集合
-                String provinceName = provinceObject.getString("province");
+                String provinceName = provinceObject.getString(JSON_PROVINCE);
                 provinceBeanList.add(provinceName);
                 //  获取城市数组
-                JSONArray cityArray = provinceObject.optJSONArray("city");
+                JSONArray cityArray = provinceObject.optJSONArray(JSON_CITY);
                 cities = new ArrayList<>();//   声明存放城市的集合
                 districts = new ArrayList<>();//声明存放区县集合的集合
                 //  遍历城市数组
@@ -411,25 +423,21 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                     //  获取城市对象
                     JSONObject cityObject = cityArray.optJSONObject(j);
                     //  将城市放入集合
-                    String cityName = cityObject.optString("name");
+                    String cityName = cityObject.optString(JSON_NAME);
                     cities.add(cityName);
                     district = new ArrayList<>();// 声明存放区县的集合
                     //  获取区县的数组
-                    JSONArray areaArray = cityObject.optJSONArray("area");
+                    JSONArray areaArray = cityObject.optJSONArray(JSON_AREA);
                     //  遍历区县数组，获取到区县名称并放入集合
                     for (int k = 0; k < areaArray.length(); k++) {
                         String areaName = areaArray.getString(k);
                         district.add(areaName);
                     }
                     //  将区县的集合放入集合
-
                     districts.add(district);
-
                 }
                 //  将存放区县集合的集合放入集合
                 districtList.add(districts);
-
-
                 //  将存放城市的集合放入集合
                 cityList.add(cities);
 

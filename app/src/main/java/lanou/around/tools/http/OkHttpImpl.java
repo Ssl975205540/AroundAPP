@@ -4,7 +4,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -84,8 +83,6 @@ public class OkHttpImpl implements IHttpRequest {
     @Override
     public <T> void postRequest(String urlStr, Map<String, String> headers, String requestBody, Class<T> tClass, OnCompletedListener<T> listener) {
 
-        Log.d("OkHttpImpl111", urlStr);
-        Log.d("OkHttpImpl111", requestBody);
         MediaType MEDIA_TYPE_TEXT = MediaType.parse("application/x-www-form-urlencoded");
         if(headers == null){
             Request request = new Request.Builder().url(urlStr).post(RequestBody.create(MEDIA_TYPE_TEXT, requestBody)).build();

@@ -19,7 +19,7 @@ import lanou.around.bean.ClassifyViewBean;
  */
 public class CheckAllAdapter extends BaseAdapter<ClassifyViewBean.RespDataBean> {
 
-    public CheckAllAdapter(Context context, List list) {
+    public CheckAllAdapter(Context context, List<ClassifyViewBean.RespDataBean> list) {
         super(context, list);
     }
 
