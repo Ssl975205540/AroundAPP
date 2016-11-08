@@ -22,7 +22,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(setContentView(), container,false);
+        return inflater.inflate(setContentView(), container, false);
 
 
     }
@@ -39,11 +39,12 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int setContentView();
 
-    protected abstract void initData();
-
     protected abstract void initViews();
 
     protected abstract void initListeners();
+
+    protected abstract void initData();
+
 
     protected void initLoad() {
 
@@ -65,7 +66,6 @@ public abstract class BaseFragment extends Fragment {
         super.onAttach(context);
         this.context = context;
     }
-
 
 
 }

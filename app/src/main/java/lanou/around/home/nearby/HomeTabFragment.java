@@ -15,7 +15,7 @@ import lanou.around.tools.recycle.EncodeUtil;
 /**
  * Created by dllo on 16/10/29.
  */
-public class HomeTabFragment extends BaseFragment implements InterView{
+public class HomeTabFragment extends BaseFragment implements InterView {
     private RecyclerView recyclerView;
     private HomeTabItemAdapter adapter;
     private HomeTabItemBean bean;
@@ -34,7 +34,7 @@ public class HomeTabFragment extends BaseFragment implements InterView{
         encodeUtil.encode(num);
         String nearbyBodyURL = "pagenum=1&lon=121.544102&lat=38.883514&pagesize=20&cateId=" + num + "&";
         HomeNearbyPresenter homeNearbyPresenter = new HomeNearbyPresenter(this);
-        homeNearbyPresenter.startRequest(URLValues.POST_NEARBY,nearbyBodyURL,HomeTabItemBean.class);
+        homeNearbyPresenter.startRequest(URLValues.POST_NEARBY, nearbyBodyURL, HomeTabItemBean.class);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class HomeTabFragment extends BaseFragment implements InterView{
     public void onResponse(Object t) {
         bean = (HomeTabItemBean) t;
 
-        adapter = new HomeTabItemAdapter(context , bean.getRespData());
+        adapter = new HomeTabItemAdapter(context, bean.getRespData());
 
         recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
 
