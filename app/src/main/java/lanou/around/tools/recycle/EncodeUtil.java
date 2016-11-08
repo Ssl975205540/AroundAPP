@@ -13,7 +13,7 @@ import java.net.URLEncoder;
 public class EncodeUtil {
 
     // 将文字转为%%%%
-    public String encode(String str){
+    public static String encode(String str){
         try {
             Log.d("EncodeUtil", URLEncoder.encode(str, "utf-8"));
             return URLEncoder.encode(str,"utf-8");

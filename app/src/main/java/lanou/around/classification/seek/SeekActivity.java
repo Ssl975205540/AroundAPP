@@ -1,19 +1,25 @@
 package lanou.around.classification.seek;
 
 import android.graphics.Color;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseActivity;
 import lanou.around.bean.ClassifyTabBean;
 import lanou.around.presenter.ClassifyPresenter;
+import lanou.around.presenter.SeekPresenter;
 import lanou.around.tools.http.URLValues;
-import lanou.around.tools.recycle.EncodeUtil;
+import lanou.around.widget.FlowLayout;
 
 public class SeekActivity extends BaseActivity implements View.OnClickListener, InterView {
 
@@ -21,6 +27,9 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
     private EditText mSeekText;
     private ImageView mBack;
     private TextView mSeek;
+    private String mStr;
+    private FlowLayout mFlowLayout;
+    private ListView mSearch;
 
     @Override
     protected int setContentView() {
@@ -32,6 +41,8 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
         mSeekText = findView(R.id.et_seek_text);
         mBack = findView(R.id.iv_seek_back);
         mSeek = findView(R.id.tv_seek_text);
+        mFlowLayout = findView(R.id.flow_layout);
+        mSearch = findView(R.id.lv_class_search);
     }
 
     @Override
@@ -39,29 +50,55 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
         mSeekText.setOnClickListener(this);
         mBack.setOnClickListener(this);
         mSeek.setOnClickListener(this);
-
-        ClassifyPresenter presenter = new ClassifyPresenter(this);
-        presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE, ClassifyTabBean.class);
     }
 
     @Override
     protected void initData() {
-        EncodeUtil.decode("%E8%A3%A4%E5%AD%90");
-        Log.d("SeekActivity", EncodeUtil.decode("%E8%A3%A4%E5%AD%90"));
+        ClassifyPresenter presenter = new ClassifyPresenter(this);
+        presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE, ClassifyTabBean.class);
+
+
+
+        //搜索
+        mSeekText.addTextChangedListener(new TextWatcher() {
+            SeekPresenter seekPresenter = new SeekPresenter(SeekActivity.this);
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                mStr = null;
+                try {
+                    mStr = URLEncoder.encode(mSeekText.getText().toString(), "utf-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
+                seekPresenter.startRequest(URLValues.SEARCH_SUGGEST,
+                        URLValues.SEARCH_SUGGEST_BODY + mStr, SeekSuggestBean.class);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+
+            }
+        });
+
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_seek_back:
                 onBackPressed();
                 break;
             case R.id.ll_search_set:
                 break;
             case R.id.tv_seek_text:
-                if (mSeekText.getText().toString() == null){
 
-                }
                 break;
         }
     }
@@ -70,6 +107,7 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
     public void onBackPressed() {
         super.onBackPressed();
     }
+
     @Override
     public void startAnimation() {
 
@@ -82,9 +120,17 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onResponse(Object t) {
-        ClassifyTabBean tabBean = (ClassifyTabBean) t;
-        mSeekText.setHint(tabBean.getRespData().getInputName());
-        mSeekText.setHintTextColor(Color.BLACK);
+        if (t instanceof ClassifyTabBean) {
+            ClassifyTabBean tabBean = (ClassifyTabBean) t;
+            mSeekText.setHint(tabBean.getRespData().getInputName());
+            mSeekText.setHintTextColor(Color.BLACK);
+            mSeekText.setTextColor(Color.BLACK);
+        }
+        if (t instanceof SeekSuggestBean) {
+            SeekSuggestBean  suggestBean = (SeekSuggestBean) t;
+            SeekSuggestAdapter adapter = new SeekSuggestAdapter(SeekActivity.this, suggestBean.getRespData());
+            mSearch.setAdapter(adapter);
+        }
     }
 
     @Override
