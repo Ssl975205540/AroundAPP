@@ -9,11 +9,9 @@
     <ImageView
         android:id="@+id/img_item"
         android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="#F0F0F0">
+        android:layout_height="100dp">
 
     </ImageView>
-
 
 
 </RelativeLayout>

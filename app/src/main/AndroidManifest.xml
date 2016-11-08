@@ -88,19 +88,16 @@
         <activity android:name=".classification.checkall.ClassifyTypeActivity">
         </activity>
 
-        <activity android:name=".classification.classifyview.DigitWebActivity" />
-        <activity android:name=".classification.checkall.CheckAllActivity" />
-        <activity android:name=".login.LoginTreatyActivity" />
-        <activity android:name=".classification.search.SearchActivity" />
-        <activity android:name=".classification.seek.SeekActivity" />
-        <activity android:name=".home.HSVClickActivity" />
-        <activity android:name=".home.FriendActivity" />
-        <activity android:name=".classification.checkall.ClassifyTypeActivity" />
-        <activity android:name=".main.ReleaseActivity" />
 
-        <activity android:name=".main.SelectActivity" />
+        <activity android:name=".readphoto.ReleaseActivity" />
+
+        <activity android:name=".readphoto.SelectActivity" />
         <activity android:name=".login.SettingActivity"/>
         <activity android:name=".login.SemaseActivity"/>
+
+        <activity android:name=".readphoto.CanViewPagerActivity"></activity>
+
+
     </application>
 
 </manifest>

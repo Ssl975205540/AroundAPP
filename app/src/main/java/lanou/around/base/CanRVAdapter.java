@@ -255,6 +255,7 @@ public abstract class CanRVAdapter<T> extends RecyclerView.Adapter<CanRViewHolde
     protected abstract void setItemListener(CanHolderHelper viewHelper,int position);
 
 
+
 }
 
 class CanRViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {

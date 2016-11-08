@@ -4,20 +4,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
-public class CanOnItemListener {
+public interface CanOnItemListener {
 
 
-    public void onItemChildClick(View view, int position) {
-    }
+    void onItemChildClick(View view, int position);
 
-    public boolean onItemChildLongClick(View view, int position) {
-        return false;
-    }
 
-    public void onItemChildCheckedChanged(CompoundButton view, int position, boolean isChecked) {
-    }
+     boolean onItemChildLongClick(View view, int position);
 
-    public void onRVItemClick(ViewGroup parent, View itemView, int position){}
+     void onItemChildCheckedChanged(CompoundButton view, int position, boolean isChecked);
 
-    public boolean onRVItemLongClick(ViewGroup parent, View itemView, int position){return false;}
+     void onRVItemClick(ViewGroup parent, View itemView, int position);
+
+     boolean onRVItemLongClick(ViewGroup parent, View itemView, int position);
 }

@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_release"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    tools:context="lanou.around.main.ReleaseActivity">
+    tools:context="lanou.around.readphoto.ReleaseActivity">
 
 
     <RelativeLayout
@@ -35,13 +36,30 @@
 
 
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/release_toolbar"
-        android:id="@+id/recyclerview_release"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_below="@+id/release_toolbar"
+        android:layout_height="150dp">
 
-    </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_release"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <ImageView
+            android:id="@+id/img_release"
+            android:layout_width="70dp"
+            android:scaleType="fitXY"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content" />
+
+
+
+    </RelativeLayout>
+
 
 
 
