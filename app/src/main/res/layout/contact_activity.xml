@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/video_title_layout"/>
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:src="@mipmap/wa"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="转转团队"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/home_adapter_item"/>
+
+    <Button
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:maxLines="2"
+        android:maxEms="19"
+        android:textColor="@color/home_adapter_item"
+        android:text="欢迎关注转转QQ公众号联系我们,QQ搜索转转团队即可关注"
+        android:drawableLeft="@mipmap/r5"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:textColor="@color/home_adapter_item"
+        android:maxLines="2"
+        android:maxEms="19"
+        android:text="若遇到转转优品相关问题,请关注QQ公众号转转优品"
+        android:drawableLeft="@mipmap/qz"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:maxLines="2"
+        android:textColor="@color/home_adapter_item"
+        android:maxEms="19"
+        android:text="转转暂未开通客服电话,请不要相信假冒转转的客服电话"
+        android:drawableLeft="@mipmap/v8"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:maxLines="2"
+        android:textColor="@color/home_adapter_item"
+        android:maxEms="19"
+        android:text="企业商务合作请联系邮箱:hezuo@zhuanzhuan.com"
+           android:textAllCaps="false"
+        android:drawableLeft="@mipmap/r7"/>
+
+
+
+</LinearLayout>

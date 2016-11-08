@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -97,19 +98,39 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
 
                 break;
             case R.id.around_my_friend:
-                IntentUtils.getIntents().Intent(context , FriendActivity.class , new Bundle());
+                if (qq.isAuthValid()) {
+                    Toast.makeText(context, "好友都在这,快来分享宝贝", Toast.LENGTH_SHORT).show();
+                } else {
+                    IntentUtils.getIntents().Intent(context, FriendActivity.class, new Bundle());
+                }
                 break;
             case R.id.around_my_pay:
-                IntentUtils.getIntents().Intent(context , FriendActivity.class , new Bundle());
+                if (qq.isAuthValid()) {
+                    IntentUtils.getIntents().Intent(context , LoginPayActivity.class , new Bundle());
+                } else {
+                    IntentUtils.getIntents().Intent(context, FriendActivity.class, new Bundle());
+                }
                 break;
             case R.id.around_red_packet:
-                IntentUtils.getIntents().Intent(context , FriendActivity.class , new Bundle());
+                if (qq.isAuthValid()) {
+                    Toast.makeText(context, "亲,还没有红包,快去抢一个", Toast.LENGTH_SHORT).show();
+                } else {
+                    IntentUtils.getIntents().Intent(context, FriendActivity.class, new Bundle());
+                }
                 break;
             case R.id.around_my_circle:
-                IntentUtils.getIntents().Intent(context , FriendActivity.class , new Bundle());
+                if (qq.isAuthValid()) {
+                    Toast.makeText(context, "你还没有加入任何圈子", Toast.LENGTH_SHORT).show();
+                } else {
+                    IntentUtils.getIntents().Intent(context, FriendActivity.class, new Bundle());
+                }
                 break;
             case R.id.around_help_center:
-                IntentUtils.getIntents().Intent(context , FriendActivity.class , new Bundle());
+                if (qq.isAuthValid()) {
+                    Toast.makeText(context, "去设置里联系我们吧", Toast.LENGTH_SHORT).show();
+                } else {
+                    IntentUtils.getIntents().Intent(context, FriendActivity.class, new Bundle());
+                }
                 break;
 
         }
