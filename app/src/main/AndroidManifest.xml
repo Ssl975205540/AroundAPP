@@ -95,9 +95,15 @@
         <activity android:name=".login.SettingActivity"/>
         <activity android:name=".login.SemaseActivity"/>
 
+
         <activity android:name=".readphoto.CanViewPagerActivity"></activity>
 
 
+
+        <activity android:name=".login.LoginPayActivity"/>
+        <activity android:name=".login.AboutAroundActivity"/>
+        <activity android:name=".login.ContactActivity"/>
+        <activity android:name=".login.PresonDataActivity"/>
     </application>
 
 </manifest>

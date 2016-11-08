@@ -75,6 +75,7 @@ public class FriendActivity extends BaseActivity implements View.OnClickListener
                 Intent intent = new Intent("getIcon");
                 intent.putExtra("name", platDB.getUserName());
                 intent.putExtra("icon", platDB.getUserIcon());
+                intent.putExtra("sex" , platDB.getUserGender());
                 AroundAPP.getContext().sendBroadcast(intent);
                 Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
             }
