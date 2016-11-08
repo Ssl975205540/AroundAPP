@@ -1,4 +1,4 @@
-package lanou.around.main;
+package lanou.around.readphoto;
 
 import android.content.Context;
 import android.graphics.Bitmap;

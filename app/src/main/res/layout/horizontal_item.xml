@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:paddingLeft="10dp"
+    android:layout_width="100dp"
+    android:layout_height="100dp">
+
+
+        <ImageView
+            android:id="@+id/hori_item"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:src="@mipmap/wk"
+            android:layout_alignParentRight="true"
+            android:layout_height="15dp" />
+
+
+
+</RelativeLayout>

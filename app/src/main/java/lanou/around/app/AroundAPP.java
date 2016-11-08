@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.uuzuche.lib_zxing.DisplayUtil;
 
 /**
@@ -22,6 +23,7 @@ public class AroundAPP extends Application {
         this.context = this;
         initDisplayOpinion();
 
+        Fresco.initialize(this);
     }
 
     public static Context getContext() {
