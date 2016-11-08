@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.tencent.qq.QQ;
 import lanou.around.R;
@@ -29,7 +30,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
     private ImageView setting , userIcon;
     private Button sesame , friend , pay , redPaket , cricle , helpCenter;
     private LoginBroadCastRecevier recevier;
-
+    private Platform qq;
 
 
     @Override
@@ -39,13 +40,22 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         IntentFilter filter = new IntentFilter();
         filter.addAction("getIcon");
         getContext().registerReceiver(recevier, filter);
-        ShareSDK.initSDK(context,"sharesdk的appkey");
 
+        ShareSDK.initSDK(context,"sharesdk的appkey");
+        qq = ShareSDK.getPlatform(QQ.NAME);
+        PlatformDb platDB = qq.getDb();
+        if (qq.isAuthValid()) {
+            String str = platDB.getUserIcon();
+            Picasso.with(context).load(str).transform(new CircleTransform()).into(userIcon);
+        } else {
+            userIcon.setImageResource(R.mipmap.kp);
+        }
 
     }
 
     @Override
     protected int setContentView() {
+
         return R.layout.my_fragment;
     }
 
@@ -86,7 +96,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
 
                 break;
             case R.id.user_icon:
-                IntentUtils.getIntents().Intent(context , FriendActivity.class , new Bundle());
+                if (qq.isAuthValid()) {
+                    Toast.makeText(context, "你已经登录", Toast.LENGTH_SHORT).show();
+                } else {
+                    IntentUtils.getIntents().Intent(context, FriendActivity.class, new Bundle());
+                }
                 break;
             case R.id.around_zhima:
 
