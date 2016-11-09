@@ -1,10 +1,17 @@
 package lanou.around.readphoto;
 
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.List;
 
@@ -12,8 +19,6 @@ import lanou.around.R;
 import lanou.around.base.CanRVAdapter;
 import lanou.around.bean.PictureBean;
 import lanou.around.tools.db.CanHolderHelper;
-
-import static lanou.around.tools.db.CanHolderHelper.convertToBitmap;
 
 /**
  * Created by dllo on 16/11/5.
@@ -42,9 +47,22 @@ public class PhotoAdapter extends CanRVAdapter<PictureBean> {
     @Override
     protected void setView(CanHolderHelper viewHelper, final int position, PictureBean model) {
 
+      RelativeLayout rela = viewHelper.getView(R.id.rela);
+        if(position == 0){
+            rela.setVisibility(View.VISIBLE);
+        }else {
+            rela.setVisibility(View.GONE);
+
+        }
+        Log.d("PhotoAdapter", model.path);
         CheckBox checkBox = viewHelper.getView(R.id.checkbox);
-        ImageView imageView = viewHelper.getImageView(R.id.img);
-        imageView.setImageBitmap(convertToBitmap(mList.get(position).path, 300, 300));
+        final ImageView imageView = viewHelper.getImageView(R.id.img);
+        Glide.with(mContext).load(mList.get(position).path).asBitmap().into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                imageView.setImageBitmap(resource);
+            }
+        });
         checkBox.setChecked(mList.get(position).check);
 
     }
@@ -52,6 +70,16 @@ public class PhotoAdapter extends CanRVAdapter<PictureBean> {
     @Override
     protected void setItemListener(final CanHolderHelper viewHelper, final int position) {
         final CheckBox checkBox = viewHelper.getView(R.id.checkbox);
+        RelativeLayout rela = viewHelper.getView(R.id.rela);
+        rela.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                interPhoto.intentCarture();
+
+            }
+        });
+
+
 
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,8 +143,11 @@ public class PhotoAdapter extends CanRVAdapter<PictureBean> {
 
         void addphoto(String string,int age);
 
+        void intentCarture();
 
         void onImgListener(int position);
 
     }
+
+
 }

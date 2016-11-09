@@ -118,9 +118,11 @@ public class ReleaseActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == 100) {
-
             list1 = data.getStringArrayListExtra(SelectActivity.READ_PHOTO);
-            Log.d("ReleaseActivity", "list1.size():" + list1.size());
+            if (list1.size() == 0) {
+
+                return;
+            }
 
             imageAdapter = new ImageAdapter(recyclerview_release);
 
@@ -134,7 +136,6 @@ public class ReleaseActivity extends BaseActivity {
                 RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) recyclerview_release.getLayoutParams();
                 layoutParams.setMargins(0, 0, img_release.getWidth(), 0);
                 recyclerview_release.setLayoutParams(layoutParams);
-
 
 
             } else {
@@ -161,70 +162,58 @@ public class ReleaseActivity extends BaseActivity {
             imageAdapter.setList(list1);
             recyclerview_release.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             recyclerview_release.setAdapter(imageAdapter);
+            imageAdapter.setOnItemListener(new CanOnItemListener() {
+                @Override
+                public void onItemChildClick(View view, int position) {
 
+                }
+
+                @Override
+                public boolean onItemChildLongClick(View view, int position) {
+                    return false;
+                }
+
+                @Override
+                public void onItemChildCheckedChanged(CompoundButton view, int position, boolean isChecked) {
+
+                }
+
+                @Override
+                public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+
+                }
+
+                @Override
+                public boolean onRVItemLongClick(ViewGroup parent, View itemView, int position) {
+                    return false;
+                }
+            });
+            imageAdapter.setOnItem(new ImageAdapter.onItem() {
+                @Override
+                public void setOnItemListenner(int position) {
+
+                    if (list1.get(position).equals(".")) {
+
+                        Intent intent = new Intent(ReleaseActivity.this, SelectActivity.class);
+
+
+                        List<String> strings = new ArrayList<String>();
+
+                        for (int i = 0; i < list1.size(); i++) {
+                            if (list1.get(i).length() > 5) {
+                                strings.add(list1.get(i));
+                            }
+                        }
+                        intent.putStringArrayListExtra(SelectActivity.READ_PHOTO, (ArrayList<String>) strings);
+                        startActivityForResult(intent, 101);
+                    }
+
+                }
+            });
         }
 
 
-        imageAdapter.setOnItemListener(new CanOnItemListener() {
-            @Override
-            public void onItemChildClick(View view, int position) {
-
-            }
-
-            @Override
-            public boolean onItemChildLongClick(View view, int position) {
-                return false;
-            }
-
-            @Override
-            public void onItemChildCheckedChanged(CompoundButton view, int position, boolean isChecked) {
-
-            }
-
-            @Override
-            public void onRVItemClick(ViewGroup parent, View itemView, int position) {
-
-            }
-
-            @Override
-            public boolean onRVItemLongClick(ViewGroup parent, View itemView, int position) {
-                return false;
-            }
-        });
-        imageAdapter.setOnItem(new ImageAdapter.onItem() {
-            @Override
-            public void setOnItemListenner(int position) {
-
-                if (list1.get(position).equals(".")) {
-
-                    Intent intent = new Intent(ReleaseActivity.this, SelectActivity.class);
-
-
-                    List<String> strings = new ArrayList<String>();
-
-                    for (int i = 0; i < list1.size(); i++) {
-                        if (list1.get(i).length() > 5) {
-                            strings.add(list1.get(i));
-                        }
-                    }
-                    intent.putStringArrayListExtra(SelectActivity.READ_PHOTO, (ArrayList<String>) strings);
-                    startActivityForResult(intent, 101);
-                }
-
-//                if(list1.get(position).length()>2){
-//
-//                    Intent intent = new Intent(ReleaseActivity.this,BigImageActivity.class);
-//
-//                    intent.putStringArrayListExtra(IMAGES, (ArrayList<String>) list1);
-//                    intent.putExtra(PAGE,list1.size());
-//
-//                    startActivityForResult(intent,80);
-//
-//                }
-            }
-        });
     }
-
 
 
 }

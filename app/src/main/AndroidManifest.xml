@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="lanou.around">
 
+
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -28,8 +33,8 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <!-- 蓝牙分享所需的权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -77,33 +82,29 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".classification.classifyview.DigitWebActivity"/>
-        <activity android:name=".classification.checkall.CheckAllActivity"/>
-        <activity android:name=".login.LoginTreatyActivity"/>
-        <activity android:name=".classification.search.SearchActivity"/>
-        <activity android:name=".classification.seek.SeekActivity">
-        </activity>
-        <activity android:name=".home.HSVClickActivity"/>
-        <activity android:name=".home.FriendActivity"/>
-        <activity android:name=".classification.checkall.ClassifyTypeActivity">
-        </activity>
+        <activity android:name=".classification.classifyview.DigitWebActivity" />
+        <activity android:name=".classification.checkall.CheckAllActivity" />
+        <activity android:name=".login.LoginTreatyActivity" />
+        <activity android:name=".classification.search.SearchActivity" />
+        <activity android:name=".classification.seek.SeekActivity"></activity>
+        <activity android:name=".home.HSVClickActivity" />
+        <activity android:name=".home.FriendActivity" />
+        <activity android:name=".classification.checkall.ClassifyTypeActivity"></activity>
 
 
         <activity android:name=".readphoto.ReleaseActivity" />
 
         <activity android:name=".readphoto.SelectActivity" />
-        <activity android:name=".login.SettingActivity"/>
-        <activity android:name=".login.SemaseActivity"/>
+        <activity android:name=".login.SettingActivity" />
+        <activity android:name=".login.SemaseActivity" />
 
 
         <activity android:name=".readphoto.CanViewPagerActivity"></activity>
 
-
-
-        <activity android:name=".login.LoginPayActivity"/>
-        <activity android:name=".login.AboutAroundActivity"/>
-        <activity android:name=".login.ContactActivity"/>
-        <activity android:name=".login.PresonDataActivity"/>
+        <activity android:name=".login.LoginPayActivity" />
+        <activity android:name=".login.AboutAroundActivity" />
+        <activity android:name=".login.ContactActivity" />
+        <activity android:name=".login.PresonDataActivity" />
     </application>
 
 </manifest>
