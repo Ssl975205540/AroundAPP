@@ -2,8 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="lanou.around">
 
+
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <!-- Sd写的权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -23,6 +33,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <!--第三方分享-->
+
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
@@ -30,6 +41,13 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <!-- 蓝牙分享所需的权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
@@ -75,6 +93,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".classification.classifyview.DigitWebActivity"/>
         <activity android:name=".classification.checkall.CheckAllActivity"/>
         <activity android:name=".login.LoginTreatyActivity"/>

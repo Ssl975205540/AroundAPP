@@ -137,14 +137,12 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 search_recyclerview.refreshComplete();
             }
 
-            @Override
-            public void setdisplay(int i) {
-
-            }
 
             @Override
             public void onLoadMore() {
-                search_recyclerview.loadMoreComplete();
+
+//                search_recyclerview.loadMoreComplete();
+
             }
         });
     }

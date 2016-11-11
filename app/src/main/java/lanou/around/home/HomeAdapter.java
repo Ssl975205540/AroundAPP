@@ -24,6 +24,7 @@ public class HomeAdapter extends BaseRcvAdapter<HomeAdapter.HomeViewHolder, Home
 
     public HomeAdapter(Context context, ArrayList<HomeBeanHot> data) {
         super(context, data);
+
         Log.d("HomeAdapter", "data.size():" + data.size());
     }
 
@@ -33,7 +34,6 @@ public class HomeAdapter extends BaseRcvAdapter<HomeAdapter.HomeViewHolder, Home
         HomeViewHolder homeViewHolder = new HomeViewHolder(inflater.inflate(R.layout.home_adapter_item, parent, false));
 
         return homeViewHolder;
-
 
     }
 

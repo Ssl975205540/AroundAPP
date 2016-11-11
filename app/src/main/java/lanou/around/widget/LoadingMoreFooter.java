@@ -41,19 +41,18 @@ public class LoadingMoreFooter extends LinearLayout {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         progressCon = new SimpleViewSwitcher(getContext());
         progressCon.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                ViewGroup.LayoutParams.MATCH_PARENT,100));
 
         ImageView imageView =  new ImageView(getContext());
         imageView.setImageResource(R.drawable.selena);
         progressCon.setView(imageView);
 
-        addView(progressCon);
+//        addView(progressCon);
         mText = new TextView(getContext());
         mText.setText("正在加载...");
 
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins( (int)getResources().getDimension(R.dimen.textandiconmargin),0,0,0 );
-
+        layoutParams.setMargins(0,30,0,30 );
         mText.setLayoutParams(layoutParams);
         addView(mText);
     }
@@ -63,14 +62,14 @@ public class LoadingMoreFooter extends LinearLayout {
         if(style ==
                 MyRecyclerView.ProgressStyle.SysProgress){
 
-            ImageView imageView =  new ImageView(getContext());
-            imageView.setImageResource(R.drawable.selena);
-            progressCon.setView(imageView);
+//            ImageView imageView =  new ImageView(getContext());
+//            imageView.setImageResource(R.drawable.selena);
+//            progressCon.setView(imageView);
 //            progressCon.setView(new ProgressBar(getContext(), null, android.R.attr.progressBarStyle));
         }else{
-            ImageView imageView =  new ImageView(getContext());
-            imageView.setImageResource(R.drawable.selena);
-            progressCon.setView(imageView);
+//            ImageView imageView =  new ImageView(getContext());
+//            imageView.setImageResource(R.drawable.selena);
+//            progressCon.setView(imageView);
 //
         }
     }
@@ -79,15 +78,15 @@ public class LoadingMoreFooter extends LinearLayout {
         switch(state) {
             case STATE_LOADING:
                 progressCon.setVisibility(View.VISIBLE);
-                mText.setText("加载中");
+                mText.setText("正在加载...");
                 this.setVisibility(View.VISIBLE);
                     break;
             case STATE_COMPLETE:
-                mText.setText("加载中");
+                mText.setText("正在加载...");
                 this.setVisibility(View.GONE);
                 break;
             case STATE_NOMORE:
-                mText.setText("加载中");
+                mText.setText("正在加载...");
                 progressCon.setVisibility(View.GONE);
                 this.setVisibility(View.VISIBLE);
                 break;

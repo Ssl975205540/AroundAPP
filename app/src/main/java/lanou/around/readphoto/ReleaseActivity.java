@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +27,6 @@ import static lanou.around.app.AroundAPP.context;
 public class ReleaseActivity extends BaseActivity {
 
     private RecyclerView recyclerview_release;
-    private int statusBarHeight;
-    private boolean has = true;
     private ReleaseAdapter galleryAdapter;
     private RelativeLayout release_toolbar;
     private List<String> list;
@@ -85,11 +84,10 @@ public class ReleaseActivity extends BaseActivity {
             strings.add("");
         }
         galleryAdapter = new ReleaseAdapter(this, strings);
+
         recyclerview_release.setLayoutManager(new LinearLayoutManager(this, LinearLayout.HORIZONTAL, false));
 
         recyclerview_release.setAdapter(galleryAdapter);
-
-
         galleryAdapter.setOnItemClick(new MyRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, int position) {
@@ -118,113 +116,108 @@ public class ReleaseActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == 100) {
-
             list1 = data.getStringArrayListExtra(SelectActivity.READ_PHOTO);
-            Log.d("ReleaseActivity", "list1.size():" + list1.size());
+            if (list1.size() == 0) {
 
-            imageAdapter = new ImageAdapter(recyclerview_release);
+                Toast.makeText(this, "已取消", Toast.LENGTH_SHORT).show();
+                galleryAdapter.setList(strings);
+                recyclerview_release.setLayoutManager(new LinearLayoutManager(this, LinearLayout.HORIZONTAL, false));
 
-            int size = list1.size();
-            if (size == 12) {
-
-                Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.mj);
-                img_release.setImageBitmap(bmp);
-                img_release.setVisibility(View.VISIBLE);
-                Log.d("ReleaseActivity", "img_release.getHeight():" + img_release.getWidth());
-                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) recyclerview_release.getLayoutParams();
-                layoutParams.setMargins(0, 0, img_release.getWidth(), 0);
-                recyclerview_release.setLayoutParams(layoutParams);
-
-
+                recyclerview_release.setAdapter(galleryAdapter);
 
             } else {
-                for (int i = 0; i < 12 - size; i++) {
-                    if (i == 0) {
-                        if (size > 3) {
-                            list1.add("");
-                            Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.mj);
-                            img_release.setImageBitmap(bmp);
-                            img_release.setVisibility(View.VISIBLE);
+
+                imageAdapter = new ImageAdapter(recyclerview_release);
+
+                int size = list1.size();
+                if (size == 12) {
+
+                    Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.mj);
+                    img_release.setImageBitmap(bmp);
+                    img_release.setVisibility(View.VISIBLE);
+                    Log.d("ReleaseActivity", "img_release.getHeight():" + img_release.getWidth());
+                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) recyclerview_release.getLayoutParams();
+                    layoutParams.setMargins(0, 0, img_release.getWidth(), 0);
+                    recyclerview_release.setLayoutParams(layoutParams);
+
+
+                } else {
+                    for (int i = 0; i < 12 - size; i++) {
+                        if (i == 0) {
+                            if (size > 3) {
+                                list1.add("");
+                                Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.mj);
+                                img_release.setImageBitmap(bmp);
+                                img_release.setVisibility(View.VISIBLE);
+
+                            } else {
+                                img_release.setVisibility(View.GONE);
+
+                                list1.add(".");
+                            }
 
                         } else {
-                            img_release.setVisibility(View.GONE);
-
-                            list1.add(".");
+                            list1.add("");
                         }
-
-                    } else {
-                        list1.add("");
                     }
                 }
-            }
 
-            imageAdapter.setList(list1);
-            recyclerview_release.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-            recyclerview_release.setAdapter(imageAdapter);
+                imageAdapter.setList(list1);
+                recyclerview_release.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+                recyclerview_release.setAdapter(imageAdapter);
+                imageAdapter.setOnItemListener(new CanOnItemListener() {
+                    @Override
+                    public void onItemChildClick(View view, int position) {
+
+                    }
+
+                    @Override
+                    public boolean onItemChildLongClick(View view, int position) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onItemChildCheckedChanged(CompoundButton view, int position, boolean isChecked) {
+
+                    }
+
+                    @Override
+                    public void onRVItemClick(ViewGroup parent, View itemView, int position) {
+
+                    }
+
+                    @Override
+                    public boolean onRVItemLongClick(ViewGroup parent, View itemView, int position) {
+                        return false;
+                    }
+                });
+                imageAdapter.setOnItem(new ImageAdapter.onItem() {
+                    @Override
+                    public void setOnItemListenner(int position) {
+
+                        if (list1.get(position).equals(".")) {
+
+                            Intent intent = new Intent(ReleaseActivity.this, SelectActivity.class);
+
+
+                            List<String> strings = new ArrayList<String>();
+
+                            for (int i = 0; i < list1.size(); i++) {
+                                if (list1.get(i).length() > 5) {
+                                    strings.add(list1.get(i));
+                                }
+                            }
+                            intent.putStringArrayListExtra(SelectActivity.READ_PHOTO, (ArrayList<String>) strings);
+                            startActivityForResult(intent, 101);
+                        }
+
+                    }
+                });
+            }
 
         }
 
-
-        imageAdapter.setOnItemListener(new CanOnItemListener() {
-            @Override
-            public void onItemChildClick(View view, int position) {
-
-            }
-
-            @Override
-            public boolean onItemChildLongClick(View view, int position) {
-                return false;
-            }
-
-            @Override
-            public void onItemChildCheckedChanged(CompoundButton view, int position, boolean isChecked) {
-
-            }
-
-            @Override
-            public void onRVItemClick(ViewGroup parent, View itemView, int position) {
-
-            }
-
-            @Override
-            public boolean onRVItemLongClick(ViewGroup parent, View itemView, int position) {
-                return false;
-            }
-        });
-        imageAdapter.setOnItem(new ImageAdapter.onItem() {
-            @Override
-            public void setOnItemListenner(int position) {
-
-                if (list1.get(position).equals(".")) {
-
-                    Intent intent = new Intent(ReleaseActivity.this, SelectActivity.class);
-
-
-                    List<String> strings = new ArrayList<String>();
-
-                    for (int i = 0; i < list1.size(); i++) {
-                        if (list1.get(i).length() > 5) {
-                            strings.add(list1.get(i));
-                        }
-                    }
-                    intent.putStringArrayListExtra(SelectActivity.READ_PHOTO, (ArrayList<String>) strings);
-                    startActivityForResult(intent, 101);
-                }
-
-//                if(list1.get(position).length()>2){
-//
-//                    Intent intent = new Intent(ReleaseActivity.this,BigImageActivity.class);
-//
-//                    intent.putStringArrayListExtra(IMAGES, (ArrayList<String>) list1);
-//                    intent.putExtra(PAGE,list1.size());
-//
-//                    startActivityForResult(intent,80);
-//
-//                }
-            }
-        });
     }
-
 
 
 }

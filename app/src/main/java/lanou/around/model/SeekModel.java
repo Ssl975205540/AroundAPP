@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lanou.around.aroundinterface.InterModel;
-import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.tools.http.HttpManger;
 import lanou.around.tools.http.OnCompletedListener;
@@ -44,7 +43,7 @@ public class SeekModel implements InterModel {
     }
 
     @Override
-    public <T> void QuerySQ(OnCompleted<T> onCompletedListener) {
+    public <T> void QuerySQ(OnFinishedListener<T> onCompletedListener) {
 
     }
 }

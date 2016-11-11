@@ -1,6 +1,7 @@
 package lanou.around.home.recommend;
 
-import android.content.Context;
+import
+        android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,6 @@ import java.util.List;
 
 import lanou.around.R;
 
-import static lanou.around.app.AroundAPP.context;
-
 /**
  * Created by dllo on 16/11/1.
  */
@@ -23,6 +22,8 @@ import static lanou.around.app.AroundAPP.context;
 public class GalleryAdapter extends
         RecyclerView.Adapter<GalleryAdapter.ViewHolder>
 {
+
+    private final Context context;
 
     /**
      * ItemClick的回调接口
@@ -46,6 +47,7 @@ public class GalleryAdapter extends
 
     public GalleryAdapter(Context context, List<String> datats)
     {
+        this.context = context;
         mInflater = LayoutInflater.from(context);
         mDatas = datats;
     }

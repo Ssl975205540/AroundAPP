@@ -155,7 +155,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         friendIcon.setImageResource(R.mipmap.vn);
         Picasso.with(context).load(URLValues.HOME_FRIEND_PAKGE).into(friendCreame);
         Picasso.with(context).load(URLValues.HOME_FRIEND_CREAME).into(friendPakge);
-
         recyviewHome.addHeaderView(view);
         bannerHome = findView(view, R.id.banner_home);
         Log.d("statusBarHeight", String.valueOf(statusBarHeight));
@@ -203,31 +202,16 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         });
 
 
+
         recyviewHome.setLoadingListener(new MyRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-
-            }
-
-            @Override
-            public void setdisplay(int i) {
-
-            }
-
-            @Override
-            public void onLoadMore() {
-
-            }
-        });
-        recyviewHome.setLoadingListener(new MyRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-
+                toolbarHome.setVisibility(View.GONE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
 
-                        toolbarHome.setVisibility(View.VISIBLE);
+
 
                         if (refresh == true) {
 
@@ -237,27 +221,13 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                             refresh = true;
                         }
                         recyviewHome.refreshComplete();
+                        toolbarHome.setVisibility(View.VISIBLE);
 
-                        toolbarHome.setVisibility(View.GONE);
 
                     }
                 }, 3000);
             }
 
-
-            @Override
-            public void setdisplay(int i) {
-
-                switch (i) {
-                    case 0:
-                        toolbarHome.setVisibility(View.VISIBLE);
-                        break;
-                    case 1:
-                        toolbarHome.setVisibility(View.GONE);
-
-                        break;
-                }
-            }
 
             @Override
             public void onLoadMore() {
