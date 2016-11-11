@@ -1,16 +1,23 @@
 package lanou.around.classification.seek;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.UnsupportedEncodingException;
@@ -22,11 +29,18 @@ import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseActivity;
 import lanou.around.bean.ClassifyTabBean;
+import lanou.around.classification.search.SearchActivity;
 import lanou.around.presenter.ClassifyPresenter;
 import lanou.around.presenter.SeekPresenter;
 import lanou.around.tools.db.SearchHelper;
 import lanou.around.tools.http.URLValues;
+import lanou.around.tools.recycle.IntentUtils;
 import lanou.around.widget.FlowLayout;
+
+import static lanou.around.R.anim.p;
+import static lanou.around.R.id.ll_search;
+import static lanou.around.R.id.relative;
+import static lanou.around.classification.search.SearchActivity.K_NAME;
 
 public class SeekActivity extends BaseActivity implements View.OnClickListener, InterView {
 
@@ -38,6 +52,10 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
     private FlowLayout mFlowLayout;
     private ListView mSearch;
     private SQLiteDatabase mDatabase;
+    private LinearLayout mLinear;
+    private RelativeLayout mRelative;
+    private ImageView mDelete;
+    private List<String> mStrings;
 
     @Override
     protected int setContentView() {
@@ -50,7 +68,10 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
         mBack = findView(R.id.iv_seek_back);
         mSeek = findView(R.id.tv_seek_text);
         mFlowLayout = findView(R.id.flow_layout);
-        mSearch = findView(R.id.lv_class_search);
+        mSearch = findView(R.id.lv_seek_search);
+        mLinear = findView(R.id.linear_seek);
+        mRelative = findView(R.id.relative_seek);
+        mDelete = findView(R.id.seek_delete);
     }
 
     @Override
@@ -58,6 +79,7 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
         mSeekText.setOnClickListener(this);
         mBack.setOnClickListener(this);
         mSeek.setOnClickListener(this);
+        mDelete.setOnClickListener(this);
     }
 
     @Override
@@ -90,7 +112,7 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
                 seekPresenter.startRequest(URLValues.SEARCH_SUGGEST,
                         URLValues.SEARCH_SUGGEST_BODY + mStr, SeekSuggestBean.class);
 
-                mFlowLayout.setVisibility(View.INVISIBLE);
+                mLinear.setVisibility(View.INVISIBLE);
                 mSearch.setVisibility(View.VISIBLE);
             }
 
@@ -111,20 +133,20 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
 
     //查找数据库后放在FlowLayout
     public void queryData() {
-        List<String> strings = new ArrayList<>();
+        mStrings = new ArrayList<>();
         Cursor cursor = mDatabase.query("search", null, null, null, null, null, null);
 //        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(HomeQueryActivity.this,R.layout.item_record,cursor,new String[]{"name"},new int[]{R.id.tv_search_query});
 //        lv.setAdapter(adapter);
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 String name = cursor.getString(cursor.getColumnIndex("name"));
-                strings.add(name);
+                mStrings.add(name);
             }
-            if (!strings.isEmpty()) {
-                for (int i = 0; i < strings.size(); i++) {
-                    for (int j = strings.size() - 1; j > i; j--) {
-                        if (strings.get(i).equals(strings.get(j))) {
-                            strings.remove(j);
+            if (!mStrings.isEmpty()) {
+                for (int i = 0; i < mStrings.size(); i++) {
+                    for (int j = mStrings.size() - 1; j > i; j--) {
+                        if (mStrings.get(i).equals(mStrings.get(j))) {
+                            mStrings.remove(j);
                         }
                     }
                 }
@@ -135,14 +157,22 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
             lp.rightMargin = 15;
             lp.topMargin = 5;
 
-            for (int j = 0; j < strings.size(); j++) {
+            for (int j = 0; j < mStrings.size(); j++) {
                 TextView view = new TextView(SeekActivity.this);
-                view.setText(strings.get(j));
+                view.setText(mStrings.get(j));
                 view.setBackgroundDrawable(getResources().getDrawable(R.drawable.flowlayout));
-                mFlowLayout.setVisibility(View.VISIBLE);
+                mLinear.setVisibility(View.VISIBLE);
                 mSearch.setVisibility(View.INVISIBLE);
                 mFlowLayout.addView(view, lp);
             }
+            mFlowLayout.setOnItemClickListener(new FlowLayout.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    mSeekText.setText(mStrings.get(position));
+                    Bundle bundle = new Bundle();
+                    IntentUtils.getIntents().Intent(SeekActivity.this, SearchActivity.class, bundle);
+                }
+            });
         }
 
     }
@@ -157,6 +187,24 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
                 break;
             case R.id.tv_seek_text:
                 dataBase();
+
+                if (mSeekText.getText().length() > 0) {
+                    Bundle bundle = new Bundle();
+                    IntentUtils.getIntents().Intent(this, SearchActivity.class, bundle);
+                    finish();
+               } else {
+                    ProgressDialog.Builder builder = new ProgressDialog.Builder(SeekActivity.this);
+                    builder.setIcon(R.mipmap.a0x);
+                    builder.setMessage("搜索框内容不能为空");
+                    builder.show();
+                }
+
+                break;
+            case R.id.seek_delete:
+                mDatabase.delete("search", null, null);
+                mStrings.clear();
+                mLinear.setVisibility(View.INVISIBLE);
+
                 break;
         }
     }
@@ -185,10 +233,23 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
             mSeekText.setTextColor(Color.BLACK);
         }
         if (t instanceof SeekSuggestBean) {
-            SeekSuggestBean suggestBean = (SeekSuggestBean) t;
-            SeekSuggestAdapter adapter = new SeekSuggestAdapter(SeekActivity.this, suggestBean.getRespData());
+            final SeekSuggestBean suggestBean = (SeekSuggestBean) t;
+            SeekSuggestAdapter adapter =  new SeekSuggestAdapter(SeekActivity.this, suggestBean.getRespData());
             mSearch.setAdapter(adapter);
+            mSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Bundle bundle = new Bundle();
+                    mSeekText.setText(suggestBean.getRespData().get(position).getK());
+                    dataBase();
+                    bundle.getString(K_NAME, suggestBean.getRespData().get(position).getK());
+                    Log.d("SeekActivity", suggestBean.getRespData().get(position).getK());
+                    IntentUtils.getIntents().Intent(SeekActivity.this, SearchActivity.class, bundle);
+                }
+            });
+
         }
+
     }
 
     @Override

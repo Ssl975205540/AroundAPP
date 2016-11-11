@@ -61,6 +61,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     public static String JSON_CITY = "city";
     public static String JSON_NAME = "name";
     public static String JSON_AREA = "area";
+    public static String K_NAME = "kName";
 
 
     private TextView mSearchText;
@@ -159,6 +160,9 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         String name = mBundle.getString(NAME);
         mPhone.setText(name);
 
+        String kName = mBundle.getString(K_NAME);
+        mPhone.setText(kName);
+
         String cateIdLeft = mBundle.getString(CATE_ID_LEFT);
         mCateNameLeft = mBundle.getString(CATE_NAME_LEFT);
 
@@ -200,7 +204,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
 
     }
-
 
     @Override
     public void onClick(View v) {

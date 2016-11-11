@@ -93,6 +93,7 @@
         <activity android:name=".login.AboutAroundActivity"/>
         <activity android:name=".login.ContactActivity"/>
         <activity android:name=".login.PresonDataActivity"/>
+        <activity android:name=".home.recommend.RecommendWebView"/>
     </application>
 
 </manifest>

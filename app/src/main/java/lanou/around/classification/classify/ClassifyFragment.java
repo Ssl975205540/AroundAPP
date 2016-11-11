@@ -140,6 +140,7 @@ public class ClassifyFragment extends BaseFragment
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mToolBar.getLayoutParams();
         params.setMargins(0, statusBarHeight, 0, 0);
         mToolBar.setLayoutParams(params);
+//        StatusBarCompat.compat(getActivity(), getResources().getColor(R.color.home_adapter_item));
 
 
 
@@ -312,10 +313,9 @@ public class ClassifyFragment extends BaseFragment
         }
     }
 
-
     public void setStatusBarHeight(int statusBarHeight) {
-
         this.statusBarHeight = statusBarHeight;
+//        StatusBarUtils.setWindowStatusBarColor(getActivity(), R.color.default_bg);
 
 
 

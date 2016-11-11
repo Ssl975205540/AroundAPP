@@ -20,7 +20,6 @@ import lanou.around.classification.classify.ClassifyFragment;
 import lanou.around.home.HomeFragment;
 import lanou.around.login.LoginFragment;
 import lanou.around.readphoto.ReleaseActivity;
-import lanou.around.tools.recycle.StatusBarUtils;
 import lanou.around.video.VideoFragment;
 
 import static lanou.around.R.id.fl_main;
@@ -105,15 +104,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         switch (v.getId()) {
             case R.id.iv_home:
-
                 if (homeFragment == null) {
                     homeFragment = new HomeFragment();
                 }
-
                 switchContent(homeFragment);
-
-                StatusBarUtils.setWindowStatusBarColor(this, R.color.black_a10_color);
-
                 ivHome.setBackgroundResource(R.mipmap.ma);
                 ivClass.setBackgroundResource(R.mipmap.vp);
                 ivLogin.setBackgroundResource(R.mipmap.sw);
@@ -123,16 +117,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.iv_class:
 
                 if (classFragment == null) {
-
                     classFragment = new ClassifyFragment();
                 }
-
-
                 classFragment.setStatusBarHeight(statusBarHeight);
-
-
                 switchContent(classFragment);
-
                 ivHome.setBackgroundResource(R.mipmap.m_);
                 ivClass.setBackgroundResource(R.mipmap.vq);
                 ivLogin.setBackgroundResource(R.mipmap.sw);

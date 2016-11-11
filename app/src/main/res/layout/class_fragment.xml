@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-    android:id="@+id/frame_classify"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frame_classify"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/itemBackgrand">
@@ -96,12 +96,17 @@
         </LinearLayout>
     </lanou.around.widget.PullZoomView>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="@color/home_adapter_item"/>
+
     <lanou.around.widget.TransparentToolBar
         android:id="@+id/toobar_classify"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:clickable="true"
-        android:layout_gravity="top">
+        android:layout_gravity="top"
+        android:clickable="true">
 
         <ImageView
             android:id="@+id/iv_classify_search"

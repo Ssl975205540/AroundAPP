@@ -25,7 +25,11 @@ import lanou.around.tools.http.URLValues;
 public class HomeTabItemAdapter extends BaseRcvAdapter<HomeTabItemAdapter.MyViewHolder , HomeTabItemBean.RespDataBean>{
 
 
+    private OnRcvItemClickListener mClickListener;
 
+    public void setClickListener(OnRcvItemClickListener clickListener) {
+        mClickListener = clickListener;
+    }
 
     public HomeTabItemAdapter(Context context, List<HomeTabItemBean.RespDataBean> data) {
         super(context, data);
@@ -40,19 +44,30 @@ public class HomeTabItemAdapter extends BaseRcvAdapter<HomeTabItemAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         HomeTabItemBean.RespDataBean respDataBean = data.get(position);
         Glide.with(context).load(URLValues.PIN_RECOMMEND + respDataBean.getInfoImage()).into(holder.image);
         holder.title.setText(respDataBean.getTitle() + "" + respDataBean.getDesc());
         holder.price.setText("¥" + respDataBean.getPrice());
         holder.minlin.setText(respDataBean.getDistance());
         holder.time.setText(respDataBean.getFriendTime());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mClickListener != null) {
+                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mClickListener.onRcvClickListener(holder.itemView, position);
+                        }
+                    });
+                }
+            }
+        });
 
 
 
     }
-
-
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private  ImageView image;
@@ -65,6 +80,8 @@ public class HomeTabItemAdapter extends BaseRcvAdapter<HomeTabItemAdapter.MyView
             minlin = (TextView) itemView.findViewById(R.id.tab_item_minlin);
             time = (TextView) itemView.findViewById(R.id.tab_item_time);
         }
-
+    }
+    public interface OnRcvItemClickListener{
+        void onRcvClickListener(View view, int position);
     }
 }

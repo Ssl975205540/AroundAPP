@@ -21,13 +21,14 @@ public class URLValues {
 
     public static final String PIN_RECOMMEND = "http://pic8.58cdn.com.cn/zhuanzh/";
 
-    public static final String POSTBODY_RECOMMEND = "pageNum=1&lat=38.883479&lng=121.544684&pageSize=20&";
-
     public static final String POST_BODY_RECOMMEND = "pageNum=1&lat=38.883479&lng=121.544684&pageSize=20&";
 
     //附近
     public static final String POST_NEARBY = "http://zhuanzhuan.58.com/zz/transfer/getNearInfoList";
-
+    //附近跳转接口
+    public static final String PIN_RECOMMEND_JUMP = "http://zhuanzhuan.58.com/zz/transfer/getInfoById";
+    public static final String PIN_RECOMMEND_JUMP_HEADER ="Cookie: t=15;tk=ED7454894632EB3106DE5F63CA35708A;v=2.5.1;channelid=market_908;lat=38.88342;lon=121.54437;model=MI 4C;uid=42880272487959;PPU=\"UID=42880272487959&PPK=37e66a56&PPT=18caf435&SK=4E2D7FDC8FC54575814B5C607FC1E84118EEA09BE860D4DEF&LT=1478687642431&UN=%E9%9D%88%E9%AD%82%E6%B7%B1%E8%99%95%E6%9C%89%E5%80%8B%E5%A5%B9&LV=e5d60885&PBODY=JpydHEj6rFF1QyncPo82nxm6Nw5Ar_YzFSnoAV0nAka0bYR1syA-rr7JqT4wDdxGA9Ro7ZOjJo-HoJ_QF3LoQAQluz-MdacKNPPEJfbKQIe1CUyB-BoQLLKRY2zcId--Ko_UtDnK3C1zd4UTseNxvtZOH78DXaELR5wE3o2cVpM&VER=1\"; Version=1; Domain=58.com; Path=/;";
+    public static final String PIN_RECOMMEND_JUMP_BODY = "extra=&metric=f8fc5e397e9c1b85c6c767482efb981c&from=4&infoId=754243924884094980&detailtest=1&";
     //首页附近的TabLayout中的标题
     public static final String HOME_NEAR_TAB_MARKET = "http://zhuanzhuan.58.com/zz/transfer/getNearAndVillageCateList";
 
@@ -42,7 +43,7 @@ public class URLValues {
     //手机,数码等图标点击之后的二级界面的请求体
     public static final String REQUEST_BODY_BEFOR = "pagenum=1&lon=121.544463&cateid=";
     public static final String REQUEST_BODY_AFTER = "&sortpolicy=0&lat=38.883299&pagesize=20&";
-    //手机,数码,电脑,母婴用品等 网址接口"
+    //手机,数码,电脑,母婴用品等 网址接口
     public static final String CLASSIFY_WANT_BUY_MESSAGE = "http://zhuanzhuan.58.com/zz/transfer/getIWantBuyCateMessage";
     //EditText中的图和文字等接口
     public static final String CLASSIFY_EDITTEXT_TITLTE = "http://zhuanzhuan.58.com/zz/transfer/getTitleInformation";

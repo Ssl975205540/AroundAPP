@@ -22,7 +22,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         initJudge();
         setContentView(setContentView());
         initViews();
-
         initListeners();
         initData();
 
