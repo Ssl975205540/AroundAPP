@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_seek"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     android:background="@color/colorText"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="lanou.around.classification.seek.SeekActivity">
 
@@ -58,6 +58,8 @@
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/tv_seek_text"
             android:background="@null"
+            android:maxEms="10"
+            android:singleLine="true"
             android:textColorHint="@color/line"
             android:textSize="13sp"/>
 
@@ -73,15 +75,22 @@
             android:textSize="@dimen/fineSize"/>
     </RelativeLayout>
 
-    <lanou.around.widget.FlowLayout
-        android:id="@+id/flow_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"/>
-    <ListView
-        android:layout_below="@+id/relativeLayout"
-        android:id="@+id/lv_class_search"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@null"/>
+        android:layout_below="@+id/relativeLayout"
+        android:background="@color/itemBackgrand">
+
+        <lanou.around.widget.FlowLayout
+            android:id="@+id/flow_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"/>
+
+        <ListView
+            android:id="@+id/lv_class_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"/>
+    </FrameLayout>
 </RelativeLayout>
