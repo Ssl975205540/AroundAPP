@@ -14,8 +14,6 @@ import java.util.List;
 
 import lanou.around.R;
 
-import static org.cybergarage.http.HTTP.HEAD;
-
 /**
  * Created by dllo on 16/11/1.
  */
@@ -40,9 +38,9 @@ public class GalleryAdapter extends
     }
 
     private LayoutInflater mInflater;
-    private List<String> mDatas;
+    private List<Recommend> mDatas;
 
-    public GalleryAdapter(Context context, List<String> datats) {
+    public GalleryAdapter(Context context, List<Recommend> datats) {
         this.mContext = context;
         mInflater = LayoutInflater.from(context);
         mDatas = datats;
@@ -75,25 +73,20 @@ public class GalleryAdapter extends
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-
-
-        Glide.with(mContext).load(mDatas.get(i)).diskCacheStrategy(DiskCacheStrategy.ALL)
+        Glide.with(mContext).load(mDatas.get(i).getStr()).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.mipmap.home01_bg_card).placeholder(R.mipmap.rx)
                 .into(viewHolder.mImg);
 
-//        //如果设置了回调，则设置点击事件
-//        if (mOnItemClickLitener != null)
-//        {
-//            viewHolder.itemView.setOnClickListener(new View.OnClickListener()
-//            {
-//                @Override
-//                public void onClick(View v)
-//                {
-//                    mOnItemClickLitener.onItemClick(viewHolder.itemView, i);
-//                }
-//            });
+        //如果设置了回调，则设置点击事件
+        if (mOnItemClickLitener != null) {
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickLitener.onItemClick(viewHolder.itemView, mDatas.get(i).getPosition());
+                }
+            });
 
-//        }
+        }
 
     }
 

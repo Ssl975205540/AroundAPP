@@ -37,6 +37,8 @@ import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterToolBar;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+import lanou.around.classification.seek.SeekActivity;
+import lanou.around.tools.recycle.IntentUtils;
 import lanou.around.bean.EventBean;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeBeanHot;
@@ -194,6 +196,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         imgSpending.setOnClickListener(this);
         tvSpent.setOnClickListener(this);
         imgSpent.setOnClickListener(this);
+        toolbarHome.setOnClickListener(this);
         friendLinear.setOnClickListener(this);
         recyviewHome.setLoadingMoreEnabled(false);
         mainContent.setToolbar(new InterToolBar() {
@@ -452,6 +455,9 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
             case R.id.friend_ll:
                 Intent intent = new Intent(AroundAPP.getContext(), FriendActivity.class);
                 getActivity().startActivity(intent);
+                break;
+            case R.id.toolbar_home:
+                IntentUtils.getIntents().Intent(context, SeekActivity.class, new Bundle());
                 break;
         }
     }

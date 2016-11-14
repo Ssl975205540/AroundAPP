@@ -35,6 +35,8 @@ import lanou.around.tools.recycle.DisplayUtil;
 import lanou.around.widget.PullZoomView;
 import lanou.around.widget.TransparentToolBar;
 
+import static org.cybergarage.http.HTTP.HEAD;
+
 /**
  * Created by dllo on 16/10/22.
  */
@@ -139,6 +141,7 @@ public class ClassifyFragment extends BaseFragment
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mToolBar.getLayoutParams();
         params.setMargins(0, statusBarHeight, 0, 0);
         mToolBar.setLayoutParams(params);
+//        StatusBarCompat.compat(getActivity(), getResources().getColor(R.color.home_adapter_item));
 
 
 

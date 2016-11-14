@@ -26,6 +26,7 @@ public class DigitWebActivity extends BaseActivity {
     public static String BANNER_URL = "bannerUrl";
 
 
+
     @Override
     protected int setContentView() {
         return R.layout.activity_web;
@@ -37,7 +38,6 @@ public class DigitWebActivity extends BaseActivity {
         mBack = findView(R.id.iv_back);
         mShare = findView(R.id.iv_share);
         mTitle = findView(R.id.tv_digit_title);
-
     }
 
     @Override
@@ -67,6 +67,7 @@ public class DigitWebActivity extends BaseActivity {
         String goUrl = bundle.getString(GO_URL);
         String postName = bundle.getString(POST_NAME);
 
+
         //接受手机传过来的值
         String bannerUrl = bundle.getString(BANNER_URL);
         if (bundle.getString(BANNER_URL) != null) {
@@ -78,6 +79,7 @@ public class DigitWebActivity extends BaseActivity {
             mWebView.loadUrl(goUrl);
             mTitle.setText(postName);
         }
+
         mWebView.loadUrl(url);
         WebSettings webSettings = mWebView.getSettings();
         // 设置WebView属性，能够执行Javascript脚本

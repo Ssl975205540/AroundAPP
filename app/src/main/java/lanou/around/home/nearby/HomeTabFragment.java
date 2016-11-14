@@ -7,14 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+import lanou.around.bean.HomeItemBean;
 import lanou.around.bean.HomeTabItemBean;
+import lanou.around.home.recommend.RecommendWebView;
 import lanou.around.presenter.HomeNearbyPresenter;
 import lanou.around.tools.http.URLValues;
 import lanou.around.tools.recycle.EncodeUtil;
+import lanou.around.tools.recycle.IntentUtils;
+
+import static lanou.around.home.recommend.RecommendWebView.INFO_URL_JUMP;
 
 /**
  * Created by dllo on 16/10/29.
@@ -25,7 +29,9 @@ public class HomeTabFragment extends BaseFragment implements InterView {
     private HomeTabItemBean bean;
     private RelativeLayout mRelative;
     private ImageView mImage;
-    AnimationDrawable animationDrawable;
+    private AnimationDrawable animationDrawable;
+    private HomeItemBean mItemBean;
+
 
     @Override
     protected int setContentView() {
@@ -41,6 +47,9 @@ public class HomeTabFragment extends BaseFragment implements InterView {
         String nearbyBodyURL = "pagenum=1&lon=121.544102&lat=38.883514&pagesize=20&cateId=" + num + "&";
         HomeNearbyPresenter homeNearbyPresenter = new HomeNearbyPresenter(this);
         homeNearbyPresenter.startRequest(URLValues.POST_NEARBY, nearbyBodyURL, HomeTabItemBean.class);
+
+        HomeItemPresenter itemPresenter = new HomeItemPresenter(this);
+        itemPresenter.startRequest(URLValues.PIN_RECOMMEND_JUMP, HomeItemBean.class);
     }
 
     @Override
@@ -67,13 +76,31 @@ public class HomeTabFragment extends BaseFragment implements InterView {
 
     @Override
     public void onResponse(Object t) {
-        bean = (HomeTabItemBean) t;
-        adapter = new HomeTabItemAdapter(context, bean.getRespData());
-        recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+
         animationDrawable = (AnimationDrawable) mImage.getBackground();
         animationDrawable.start();
-        recyclerView.setAdapter(adapter);
+
         mRelative.setVisibility(View.GONE);
+
+        if (t instanceof HomeTabItemBean){
+            bean = (HomeTabItemBean) t;
+
+            adapter = new HomeTabItemAdapter(context, bean.getRespData());
+            recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+            recyclerView.setAdapter(adapter);
+            adapter.setClickListener(new HomeTabItemAdapter.OnRcvItemClickListener() {
+                @Override
+                public void onRcvClickListener(View view, int position) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(INFO_URL_JUMP, mItemBean.getRespData().getInfoUrl());
+                    IntentUtils.getIntents().Intent(context, RecommendWebView.class, bundle);
+                }
+            });
+        }
+
+        if (t instanceof HomeItemBean){
+            mItemBean = (HomeItemBean) t;
+        }
     }
 
     @Override
