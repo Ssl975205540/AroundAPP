@@ -27,6 +27,9 @@ public class HomeModel implements InterModel {
 
                 if(tClass1 instanceof HomeBean){
                     if(AroundAPP.isNetworkAvailable()){
+
+
+
                         onFinishedListener.onFinished((T) tClass1);
                     }else {
                         onFailed();

@@ -205,6 +205,12 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
+                            for (VideoDetailsBean b :
+                                    been) {
+                                Log.d("VideoFragment", b.getLinkMp4());
+                            }
+
                             Log.d("VideoFragment", "been.size():" + been.size());
                             adapter.setVideoDetailsBeans(been);
                             swipeView.setAdapter(adapter);
