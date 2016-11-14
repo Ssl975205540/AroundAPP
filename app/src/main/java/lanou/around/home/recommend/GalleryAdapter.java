@@ -14,8 +14,6 @@ import java.util.List;
 
 import lanou.around.R;
 
-import static lanou.around.app.AroundAPP.context;
-
 /**
  * Created by dllo on 16/11/1.
  */
@@ -23,6 +21,7 @@ import static lanou.around.app.AroundAPP.context;
 public class GalleryAdapter extends
         RecyclerView.Adapter<GalleryAdapter.ViewHolder>
 {
+    private Context mContext;
 
     /**
      * ItemClick的回调接口
@@ -46,6 +45,7 @@ public class GalleryAdapter extends
 
     public GalleryAdapter(Context context, List<String> datats)
     {
+        this.mContext = context;
         mInflater = LayoutInflater.from(context);
         mDatas = datats;
     }
@@ -84,7 +84,7 @@ public class GalleryAdapter extends
     {
 
 
-        Glide.with(context).load(mDatas.get(i)).diskCacheStrategy(DiskCacheStrategy.ALL)
+        Glide.with(mContext).load(mDatas.get(i)).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.mipmap.home01_bg_card).placeholder(R.mipmap.rx)
                 .into(viewHolder.mImg);
 

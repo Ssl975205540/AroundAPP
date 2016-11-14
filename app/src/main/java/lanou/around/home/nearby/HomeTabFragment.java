@@ -1,8 +1,12 @@
 package lanou.around.home.nearby;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
@@ -19,7 +23,9 @@ public class HomeTabFragment extends BaseFragment implements InterView {
     private RecyclerView recyclerView;
     private HomeTabItemAdapter adapter;
     private HomeTabItemBean bean;
-
+    private RelativeLayout mRelative;
+    private ImageView mImage;
+    AnimationDrawable animationDrawable;
 
     @Override
     protected int setContentView() {
@@ -39,10 +45,9 @@ public class HomeTabFragment extends BaseFragment implements InterView {
 
     @Override
     protected void initViews() {
-
         recyclerView = findView(R.id.fragment_home_tab_recycle);
-
-
+        mRelative = findView(R.id.relayout);
+        mImage = findView(R.id.image_home_tab);
     }
 
     @Override
@@ -63,14 +68,12 @@ public class HomeTabFragment extends BaseFragment implements InterView {
     @Override
     public void onResponse(Object t) {
         bean = (HomeTabItemBean) t;
-
         adapter = new HomeTabItemAdapter(context, bean.getRespData());
-
         recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
-
+        animationDrawable = (AnimationDrawable) mImage.getBackground();
+        animationDrawable.start();
         recyclerView.setAdapter(adapter);
-
-
+        mRelative.setVisibility(View.GONE);
     }
 
     @Override

@@ -28,6 +28,8 @@ import lanou.around.tools.db.SearchHelper;
 import lanou.around.tools.http.URLValues;
 import lanou.around.widget.FlowLayout;
 
+import static android.support.v7.widget.ListPopupWindow.WRAP_CONTENT;
+
 public class SeekActivity extends BaseActivity implements View.OnClickListener, InterView {
 
 
@@ -129,7 +131,8 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
                     }
                 }
             }
-            ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(
+                    WRAP_CONTENT, WRAP_CONTENT);
             lp.bottomMargin = 5;
             lp.leftMargin = 15;
             lp.rightMargin = 15;

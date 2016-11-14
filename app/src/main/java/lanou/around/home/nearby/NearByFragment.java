@@ -88,16 +88,15 @@ public class NearByFragment extends BaseFragment
             strings.add(0, "全部");
             mStringList.add(0, "都在这里");
 
-            for (int i = 0; i < strings.size() ; i++) {
+            for (int i = 0; i < strings.size(); i++) {
 
-                if(i == 0){
+                if (i == 0) {
                     args = new Bundle();
-                    args.putString("url","");
-                }else {
+                    args.putString("url", "");
+                } else {
                     args = new Bundle();
-                    args.putString("url",homeTabBean.getRespData().get(i-1).getCateId());
+                    args.putString("url", homeTabBean.getRespData().get(i - 1).getCateId());
                 }
-
 
 
                 mFragment = new HomeTabFragment();
@@ -129,8 +128,8 @@ public class NearByFragment extends BaseFragment
                 RecyclerView rv_popupWindow = (RecyclerView) view1.findViewById(R.id.rv_popup_window);
                 ImageView dropUpButton = (ImageView) view1.findViewById(R.id.iv_dropUpButton);
                 PopupWindowAdapter adapter = new PopupWindowAdapter(context);
-                adapter.setArrayList(strings,mStringList);
-                GridLayoutManager manager = new GridLayoutManager(context,3);
+                adapter.setArrayList(strings, mStringList);
+                GridLayoutManager manager = new GridLayoutManager(context, 3);
                 rv_popupWindow.setLayoutManager(manager);
                 rv_popupWindow.setAdapter(adapter);
 
@@ -140,7 +139,7 @@ public class NearByFragment extends BaseFragment
                 dropUpButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (popupWindow.isShowing()){
+                        if (popupWindow.isShowing()) {
                             popupWindow.dismiss();
                         }
                     }
