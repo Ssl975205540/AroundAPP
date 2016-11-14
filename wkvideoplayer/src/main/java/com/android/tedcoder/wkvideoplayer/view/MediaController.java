@@ -1,5 +1,6 @@
 package com.android.tedcoder.wkvideoplayer.view;
 
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -52,6 +53,7 @@ public class MediaController extends FrameLayout implements SeekBar.OnSeekBarCha
         } else if (view.getId() == R.id.expand) {
             mMediaControl.onPageTurn();
         } else if (view.getId() == R.id.shrink) {
+
             mMediaControl.onPageTurn();
         }
     }

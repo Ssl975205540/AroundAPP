@@ -32,6 +32,9 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.tencent.qq.QQ;
 import lanou.around.R;
 import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterToolBar;
@@ -108,7 +111,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         homePresenter = new HomePresenter(this);
         homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
 
-
+        ShareSDK.initSDK(context,"sharesdk的appkey");
     }
 
 
@@ -258,7 +261,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                         break;
                 }
             }
-
             @Override
             public void onLoadMore() {
                 new Handler().postDelayed(new Runnable() {
@@ -448,6 +450,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
     @Override
     public void onClick(View v) {
+        Platform qq = ShareSDK.getPlatform(QQ.NAME);
         switch (v.getId()) {
             case R.id.tv_not_spending:
                 tvSpending.setTextColor(Color.parseColor("#FFFFFF"));
@@ -464,8 +467,14 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                 viewPagerHome.setCurrentItem(1);
                 break;
             case R.id.friend_ll:
-                Intent intent = new Intent(AroundAPP.getContext(), FriendActivity.class);
-                getActivity().startActivity(intent);
+                if(qq.isAuthValid()) {
+                    friendLinear.setEnabled(qq.isAuthValid());
+                } else {
+                    friendLinear.setEnabled(!qq.isAuthValid());
+                    Intent intent = new Intent(AroundAPP.getContext(), FriendActivity.class);
+                    getActivity().startActivity(intent);
+                }
+
                 break;
         }
     }

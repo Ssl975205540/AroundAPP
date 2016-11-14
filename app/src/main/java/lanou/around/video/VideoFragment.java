@@ -110,7 +110,6 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         swipeView.setFlingListener(this);
         swipeView.setOnItemClickListener(this);
         video_code.setOnClickListener(this);
-        location.setOnClickListener(this);
     }
 
     @Override
@@ -120,8 +119,6 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         video_title.setText("视频");
         video_title.setTextColor(Color.BLACK);
         video_code.setImageResource(R.mipmap.icon_scan);
-        location.setImageResource(R.mipmap.locationsu);
-
         adapter.setCardHight(cardHeight);
         adapter.setCardWidth(cardWidth);
         adapter.setVideoSuper(new InnerAdapter.videoSuper() {
