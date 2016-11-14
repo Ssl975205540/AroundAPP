@@ -8,6 +8,7 @@ import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.RecommendBean;
 import lanou.around.presenter.RecommendPresenter;
+import lanou.around.tools.http.URLValues;
 
 /**
  * Created by dllo on 16/10/22.
@@ -18,13 +19,13 @@ public class RecommendFragment extends BaseFragment implements InterView {
     private RecyclerView recyclerview;
     private RecommendAdapter recommendAdapter;
     private RecommendPresenter recommendPresenter;
+    private RecommendBean mBean;
 
     @Override
     protected void initData() {
 
         recommendPresenter = new RecommendPresenter(this);
-
-        recommendPresenter.startRequest("http://zhuanzhuan.58.com/zz/transfer/getRecommendInfoForIndex", RecommendBean.class);
+        recommendPresenter.startRequest(URLValues.POST_RECOMMEND, RecommendBean.class);
     }
 
     @Override
@@ -36,11 +37,8 @@ public class RecommendFragment extends BaseFragment implements InterView {
     protected void initViews() {
 
         recyclerview = findView(R.id.recyclerview_recommend);
-
         recommendAdapter = new RecommendAdapter(context);
-
         recyclerview.setAdapter(recommendAdapter);
-
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         recyclerview.setLayoutManager(linearLayoutManager);
@@ -56,23 +54,17 @@ public class RecommendFragment extends BaseFragment implements InterView {
                 int past=linearLayoutManager.findLastVisibleItemPosition();
 
                 if (total-1 ==past){
-
                     if(loading){
-
-                        recommendPresenter.startRequest("http://zhuanzhuan.58.com/zz/transfer/getRecommendInfoForIndex", RecommendBean.class);
-
+                        recommendPresenter.startRequest(URLValues.POST_RECOMMEND, RecommendBean.class);
                         loading =false;
                     }
-
                 }
             }
         });
-
     }
 
     @Override
     protected void initListeners() {
-
 
     }
 
@@ -94,6 +86,10 @@ public class RecommendFragment extends BaseFragment implements InterView {
 
 
         recommendAdapter.setData(bean.getRespData());
+
+
+        mBean = (RecommendBean) t;
+        recommendAdapter.setData(mBean.getRespData());
 
         loading =true;
     }

@@ -1,6 +1,7 @@
 package lanou.around.home.recommend;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,16 +19,17 @@ import java.util.List;
 import lanou.around.R;
 import lanou.around.bean.RecommendBean;
 import lanou.around.tools.http.URLValues;
+import lanou.around.tools.recycle.IntentUtils;
 import lanou.around.widget.CircleTransform;
+
+import static lanou.around.home.recommend.RecommendWebView.INFO_URL;
 
 /**
  * Created by dllo on 16/10/28.
  */
 public class RecommendAdapter extends RecyclerView.Adapter {
 
-
     private Context context;
-
     private List<RecommendBean.RespDataBean> data = new ArrayList<>();
 
     public void setData(List<RecommendBean.RespDataBean> data) {
@@ -39,10 +41,8 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     }
 
     public RecommendAdapter(Context context) {
-
         this.context = context;
     }
-
 
     @Override
     public int getItemViewType(int position) {
@@ -64,35 +64,20 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     public RecommendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         switch (viewType) {
-
             case 0:
-
                 View view = LayoutInflater.from(context).inflate(R.layout.recommend_adapter_item, parent, false);
                 RecommendViewHolder recommendViewHolder = new RecommendViewHolder(view);
                 return recommendViewHolder;
-
             case 5:
-
-
                 break;
-
-
         }
-
         return null;
-
-
     }
 
-
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         switch (getItemViewType(position)) {
-
             case 0:
-
                 RecommendViewHolder recommendViewHolder = (RecommendViewHolder) holder;
 
                 Picasso.with(context).load(data.get(position).getSellerPhoto()).transform(new CircleTransform()).into(recommendViewHolder.imgSellerPhoto);
@@ -108,11 +93,13 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                 recommendViewHolder.infoCityName.setText(data.get(position).getInfoCityName());
                 recommendViewHolder.infoDesc.setText(data.get(position).getInfoDesc());
                 String[] s = data.get(position).getInfoImageList().split("\\|");
-
-                ArrayList<String> arrayList = new ArrayList<>();
+                final ArrayList<Recommend> arrayList = new ArrayList<>();
 
                 for (int i = 0; i < s.length; i++) {
-                    arrayList.add(URLValues.PIN_RECOMMEND + s[i]);
+                    Recommend recommend = new Recommend();
+                    recommend.setStr(URLValues.PIN_RECOMMEND + s[i]);
+                    recommend.setPosition(position);
+                    arrayList.add(recommend);
                 }
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
@@ -120,23 +107,25 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                 recommendViewHolder.scrollview_item.setLayoutManager(linearLayoutManager);
                 GalleryAdapter adapter = new GalleryAdapter(context, arrayList);
                 recommendViewHolder.scrollview_item.setAdapter(adapter);
-                recommendViewHolder.scrollview_item.setNestedScrollingEnabled(false);
+                adapter.setOnItemClickLitener(new GalleryAdapter.OnItemClickLitener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString(INFO_URL, data.get(position).getInfoUrl());
+                        IntentUtils.getIntents().Intent(context, RecommendWebView.class, bundle);
+                    }
+                });
 
+
+                recommendViewHolder.scrollview_item.setNestedScrollingEnabled(false);
                 recommendViewHolder.number.setText(data.get(position).getMessageNum());
                 recommendViewHolder.Leaving.setText(data.get(position).getScanNum());
 
-
                 break;
-
-
             case 5:
-
-
                 break;
 
         }
-
-
     }
 
 

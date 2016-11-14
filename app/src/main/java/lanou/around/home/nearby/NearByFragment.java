@@ -98,7 +98,6 @@ public class NearByFragment extends BaseFragment
                     args.putString("url", homeTabBean.getRespData().get(i - 1).getCateId());
                 }
 
-
                 mFragment = new HomeTabFragment();
                 mFragment.setArguments(args);
                 fragments.add(mFragment);
