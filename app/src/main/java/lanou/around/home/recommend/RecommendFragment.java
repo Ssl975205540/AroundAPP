@@ -91,8 +91,6 @@ public class RecommendFragment extends BaseFragment implements InterView {
 
         RecommendBean bean = (RecommendBean) t;
 
-//        Listv listv = new Listv(context,bean.getRespData());
-//        recyclerview.setAdapter(listv);
 
 
         recommendAdapter.setData(bean.getRespData());
