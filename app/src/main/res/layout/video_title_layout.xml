@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:orientation="horizontal">
 
-    android:layout_height="50dp">
 
     <LinearLayout
 
@@ -10,12 +11,14 @@
         android:layout_height="50dp"
         android:background="@android:color/white"
         android:orientation="horizontal">
+
         <ImageButton
             android:id="@+id/video_title_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:background="#fcfafa"/>
+
         <TextView
             android:id="@+id/video_title_tv"
             android:layout_width="wrap_content"
@@ -25,6 +28,7 @@
             android:gravity="center"
             android:text="标题"
             android:textSize="20sp"/>
+
         <ImageButton
             android:id="@+id/video_code"
             android:layout_width="wrap_content"

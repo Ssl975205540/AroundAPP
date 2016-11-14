@@ -138,9 +138,9 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         loadData();
 
 
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) toolbar.getLayoutParams();
-        params.setMargins(0, statusBarHeight, 0, 0);
-        toolbar.setLayoutParams(params);
+//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) toolbar.getLayoutParams();
+//        params.setMargins(0, statusBarHeight, 0, 0);
+//        toolbar.setLayoutParams(params);
 
 
 
