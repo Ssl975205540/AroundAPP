@@ -20,6 +20,9 @@ public class HSVClickActivity extends BaseActivity implements View.OnClickListen
     private WebView webView;
     private TextView clickTitle;
     private ImageButton back;
+    public static String URL = "url";
+    public static String TITLE = "title";
+
     @Override
     protected int setContentView() {
         return R.layout.hsv_click_activity;
@@ -49,8 +52,6 @@ public class HSVClickActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initData() {
-
-
 
 
         Intent intent = getIntent();

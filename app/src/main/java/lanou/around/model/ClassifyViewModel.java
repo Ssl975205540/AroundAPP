@@ -1,9 +1,7 @@
 package lanou.around.model;
 
 import lanou.around.aroundinterface.InterModel;
-import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
-
 import lanou.around.tools.http.HttpManger;
 import lanou.around.tools.http.OnCompletedListener;
 
@@ -43,7 +41,7 @@ public class ClassifyViewModel implements InterModel {
     }
 
     @Override
-    public <E> void QuerySQ(OnCompleted<E> onCompletedListener) {
+    public <E> void QuerySQ(OnFinishedListener<E> onCompletedListener) {
 
     }
 

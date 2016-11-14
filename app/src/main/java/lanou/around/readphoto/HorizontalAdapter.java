@@ -1,7 +1,6 @@
 package lanou.around.readphoto;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import java.util.List;
@@ -39,7 +38,6 @@ public class HorizontalAdapter extends CanRVAdapter<String> {
 
             return;
         } else {
-            Log.d("HorizontalAdapter", bean);
             helper.getImageView(R.id.hori_item).setImageBitmap(CanHolderHelper.convertToBitmap(bean, 300, 300));
 
         }

@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 
 import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterModel;
-import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeTabBean;
@@ -28,6 +27,9 @@ public class HomeModel implements InterModel {
 
                 if(tClass1 instanceof HomeBean){
                     if(AroundAPP.isNetworkAvailable()){
+
+
+
                         onFinishedListener.onFinished((T) tClass1);
                     }else {
                         onFailed();
@@ -40,16 +42,16 @@ public class HomeModel implements InterModel {
 
             @Override
             public void onFailed() {
-                QuerySQ(new OnCompleted<HomeBean>() {
+                QuerySQ(new OnFinishedListener<HomeBean>() {
                     @Override
-                    public void onSuccess(HomeBean result) {
+                    public void onFinished(HomeBean result) {
                         if(result != null){
                             onFinishedListener.onFinished((T) result);
                         }
                     }
 
                     @Override
-                    public void onFailed() {
+                    public void onError() {
 
                     }
                 });
@@ -66,9 +68,9 @@ public class HomeModel implements InterModel {
     }
 
     @Override
-    public <E> void QuerySQ(OnCompleted<E> onCompletedListener) {
+    public <E> void QuerySQ(OnFinishedListener<E> onCompletedListener) {
         myAsyncTask myAsyncTask = new myAsyncTask();
-        myAsyncTask.setArrayListOnCompletedListener((OnCompleted<HomeBean>) onCompletedListener);
+        myAsyncTask.setArrayListOnCompletedListener((OnFinishedListener<HomeBean>) onCompletedListener);
         myAsyncTask.execute();
     }
 
@@ -76,9 +78,9 @@ public class HomeModel implements InterModel {
     class myAsyncTask extends AsyncTask<Void, Void, HomeBean> {
 
 
-        private OnCompleted<HomeBean> arrayListOnCompletedListener;
+        private OnFinishedListener<HomeBean> arrayListOnCompletedListener;
 
-        public void setArrayListOnCompletedListener(OnCompleted<HomeBean> arrayListOnCompletedListener) {
+        public void setArrayListOnCompletedListener(OnFinishedListener<HomeBean> arrayListOnCompletedListener) {
             this.arrayListOnCompletedListener = arrayListOnCompletedListener;
         }
 
@@ -93,9 +95,9 @@ public class HomeModel implements InterModel {
         protected void onPostExecute(HomeBean o) {
             super.onPostExecute(o);
 
-            arrayListOnCompletedListener.onSuccess(o);
+            arrayListOnCompletedListener.onFinished(o);
 
-            arrayListOnCompletedListener.onFailed();
+            arrayListOnCompletedListener.onError();
 
 
         }

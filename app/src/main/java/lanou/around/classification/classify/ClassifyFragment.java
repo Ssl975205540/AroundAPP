@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -223,12 +222,12 @@ public class ClassifyFragment extends BaseFragment
 
             @Override
             public void onHeaderScroll(int currentY, int maxY) {
-                Log.d("ClassifyFragment", "maxY:" + maxY);
+
             }
 
             @Override
             public void onContentScroll(int l, int t, int oldl, int oldt) {
-                Log.d("ClassifyFragment", "oldt:" + oldt);
+
             }
         });
 
@@ -236,7 +235,7 @@ public class ClassifyFragment extends BaseFragment
         mPzv.setOnPullZoomListener(new PullZoomView.OnPullZoomListener() {
             @Override
             public void onPullZoom(int originHeight, int currentHeight) {
-                Log.d("ClassifyFragment", "currentHeight:" + currentHeight);
+
             }
 
             @Override
@@ -288,7 +287,6 @@ public class ClassifyFragment extends BaseFragment
         super.onDestroyView();
     }
 
-
     @Override
     public void updateFraction(float fraction) {
         //ToolBar滚动回调的百分比0~1
@@ -312,13 +310,8 @@ public class ClassifyFragment extends BaseFragment
         }
     }
 
-
     public void setStatusBarHeight(int statusBarHeight) {
-
         this.statusBarHeight = statusBarHeight;
-
-
-
     }
 
 }

@@ -50,8 +50,15 @@ public class URLValues {
 
     //手机按钮点击进入中iPhone SE的WebView接口
     public static final String CLASSIFY_PHONE_WEBVIEW = "http://youpin.m.58.com/bj/shouji/27769198399433x.shtml?channel=zz_youpin&webview=zzn&tt=E9E3D9A8EFFEF4A277C9C9D697C50FB21477299349933&zzv2.4.4";
-    //
+    //搜索接口
+    public static final String SEARCH = "http://zhuanzhuan.58.com/zz/transfer/search";
+    public static final String SEARCH_BODY = "pagenum=1&lon=121.544195&sortpolicy=0&lat=38.883377&pagesize=20&keyword=";
+    public static final String SEARCH_HERDER_KEY = "Cookie";
+    public static final String SEARCH_HERDER_VALUE = "t=15;tk=ED7454894632EB3106DE5F63CA35708A;v=2.5.1;channelid=market_908;lat=38.883384;lon=121.544266;model=MI 4C;uid=42880272487959;PPU=\"UID=42880272487959&PPK=20b31553&PPT=2998614e&SK=7A8AA9BF524FE0547BF140E06081581FD176D5ACCF821269C&LT=1478564765135&UN=%E9%9D%88%E9%AD%82%E6%B7%B1%E8%99%95%E6%9C%89%E5%80%8B%E5%A5%B9&LV=e5d60885&PBODY=Hj7js0XR0FxTL1SpmIdTgcrk7iBT5Jn6R-DM-CdRX78ymNYKwnLA6xOds6EsTEat0OzBjhUI3aJwWO-I5j8fWthlt4-TZiGM_8XcjIWBnoCbuydvc_UHz9QzypOTKaDopN_d8vnU_qefZ7t2TWNkPmvyd8W18sFTmJsfo7srIe4&VER=1\"; Version=1; Domain=58.com; Path=/;";
 
+    //搜索页面
+    public static final String SEARCH_SUGGEST = "http://zhuanzhuan.58.com/zz/transfer/searchSuggest";
+    public static final String SEARCH_SUGGEST_BODY = "inputText=";
     //视频界面接口
     public static final String URL_VIDEO = "http://m.live.netease.com/bolo/api/rank/hotVideo.htm";
     // 服务协议接口

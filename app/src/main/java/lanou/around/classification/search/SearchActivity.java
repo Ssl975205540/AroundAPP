@@ -4,6 +4,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -137,14 +138,12 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 search_recyclerview.refreshComplete();
             }
 
-            @Override
-            public void setdisplay(int i) {
-
-            }
 
             @Override
             public void onLoadMore() {
-                search_recyclerview.loadMoreComplete();
+
+//                search_recyclerview.loadMoreComplete();
+
             }
         });
     }
@@ -157,6 +156,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
         mBundle = this.getIntent().getExtras();
         String name = mBundle.getString(NAME);
+
         mPhone.setText(name);
 
         String cateIdLeft = mBundle.getString(CATE_ID_LEFT);

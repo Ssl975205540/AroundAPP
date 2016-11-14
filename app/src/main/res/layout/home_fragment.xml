@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fffff"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -22,9 +22,7 @@
             <lanou.around.widget.MyRecyclerView
                 android:id="@+id/recyview_home"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="?android:attr/actionBarSize"
-                app:layout_scrollFlags="scroll" />
+                android:layout_height="wrap_content" />
 
 
             <LinearLayout
@@ -56,7 +54,7 @@
             android:layout_height="45dp"
             android:background="@android:color/white"
             app:tabIndicatorColor="@color/toolbar_home_color"
-            app:tabSelectedTextColor="@color/toolbar_home_color"/>
+            app:tabSelectedTextColor="@color/toolbar_home_color" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager_home"
@@ -74,104 +72,117 @@
         android:layout_height="wrap_content"
         android:clickable="true">
 
-        <lanou.around.widget.MorphFrameLayout
+
+        <RelativeLayout
             android:id="@+id/rl_home"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
 
             <RelativeLayout
                 android:id="@+id/rl1_home"
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <RelativeLayout
-                        android:layout_width="100dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <LinearLayout
+
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true">
+                        android:layout_alignParentLeft="true"
+                        android:orientation="vertical">
 
-                        <LinearLayout
-
+                        <TextView
+                            android:id="@+id/tv_not_spending"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:orientation="vertical">
+                            android:layout_gravity="center"
+                            android:text="推荐"
+                            android:textColor="#FFFFFF"
+                            android:textSize="17dp" />
 
-                            <TextView
-                                android:id="@+id/tv_not_spending"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="推荐"
-                                android:textColor="#FFFFFF"
-                                android:textSize="17dp" />
-
-                            <ImageView
-                                android:id="@+id/img_not_spending"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="4dp"
-                                android:background="@drawable/tab_shape" />
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
+                        <ImageView
+                            android:id="@+id/img_not_spending"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/tab_shape" />
 
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_yet_spent"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="附近"
-                                android:textColor="#000000"
-                                android:textSize="17dp" />
-
-                            <ImageView
-                                android:id="@+id/img_yet_spent"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="4dp"
-                                android:background="@drawable/tab_shape" />
+                    </LinearLayout>
 
 
-                        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
 
-                    </RelativeLayout>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_yet_spent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="附近"
+                            android:textColor="#000000"
+                            android:textSize="17dp" />
+
+                        <ImageView
+                            android:id="@+id/img_yet_spent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/tab_shape" />
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+
+                style="@style/home_relayout">
+
+
+
+                    <lanou.around.widget.SellAnall
+                        android:id="@+id/sv_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                       android:layout_centerHorizontal="true" />
 
                     <ImageView
                         android:id="@+id/circle_search_home"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginTop="3dp"
-                        android:tint="@android:color/white"
-                      
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_alignRight="@+id/sv_1"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/wf"
+                        android:visibility="gone"
+                        android:tint="@android:color/holo_red_dark"
+
+
                         />
 
 
-                </RelativeLayout>
-            </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rl0_home"
-                style="@style/home_relayout">
 
                 <LinearLayout
+                    android:id="@+id/rl0_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -191,14 +202,16 @@
                         android:layout_marginLeft="5dp"
                         android:text="输入你正在找的宝贝"
                         android:textColor="@android:color/background_dark"
-
                         android:textSize="12dp" />
 
 
                 </LinearLayout>
 
+
             </RelativeLayout>
-        </lanou.around.widget.MorphFrameLayout>
+
+
+        </RelativeLayout>
     </lanou.around.widget.TransparentToolBar>
 
 

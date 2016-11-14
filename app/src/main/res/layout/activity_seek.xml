@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_seek"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorText"
-    android:orientation="horizontal"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context="lanou.around.classification.seek.SeekActivity">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
@@ -54,10 +56,12 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:textSize="13sp"
-            android:background="@null"
             android:layout_toLeftOf="@+id/tv_seek_text"
-            android:textColorHint="@color/line"/>
+            android:background="@null"
+            android:maxEms="10"
+            android:singleLine="true"
+            android:textColorHint="@color/line"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_seek_text"
@@ -71,4 +75,22 @@
             android:textSize="@dimen/fineSize"/>
     </RelativeLayout>
 
-</LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeLayout"
+        android:background="@color/itemBackgrand">
+
+        <lanou.around.widget.FlowLayout
+            android:id="@+id/flow_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"/>
+
+        <ListView
+            android:id="@+id/lv_class_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"/>
+    </FrameLayout>
+</RelativeLayout>

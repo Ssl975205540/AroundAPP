@@ -3,7 +3,6 @@ package lanou.around.model;
 import java.util.HashMap;
 
 import lanou.around.aroundinterface.InterModel;
-import lanou.around.aroundinterface.OnCompleted;
 import lanou.around.aroundinterface.OnFinishedListener;
 import lanou.around.tools.http.HttpManger;
 import lanou.around.tools.http.OnCompletedListener;
@@ -54,7 +53,7 @@ public class HomeNearbyModel implements InterModel{
     }
 
     @Override
-    public <T> void QuerySQ(OnCompleted<T> onCompletedListener) {
+    public <T> void QuerySQ(OnFinishedListener<T> onCompletedListener) {
 
     }
 }

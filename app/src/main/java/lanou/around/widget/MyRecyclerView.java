@@ -188,7 +188,6 @@ public class MyRecyclerView extends RecyclerView {
         super.onScrollStateChanged(state);
 
 
-        mLoadingListener.setdisplay(mRefreshHeader.getVisibleHeight());
         if (state == RecyclerView.SCROLL_STATE_IDLE && mLoadingListener != null && !isLoadingData && loadingMoreEnabled) {
             LayoutManager layoutManager = getLayoutManager();
             int lastVisibleItemPosition;
@@ -521,8 +520,6 @@ public class MyRecyclerView extends RecyclerView {
     public interface LoadingListener {
 
         void onRefresh();
-
-        void setdisplay(int i);
 
         void onLoadMore();
 

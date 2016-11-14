@@ -3,60 +3,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_release"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="lanou.around.readphoto.ReleaseActivity">
 
 
     <RelativeLayout
         android:id="@+id/release_toolbar"
         android:layout_width="match_parent"
-        android:background="@android:color/white"
-        android:layout_height="50dp">
+        android:layout_height="45dp"
+        android:background="@android:color/white">
 
 
         <ImageView
-            android:src="@mipmap/o3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
+            android:src="@mipmap/o3" />
 
 
         <TextView
             android:layout_width="wrap_content"
-            android:text="发布宝贝"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="15dp"
+            android:text="发布宝贝"
             android:textColor="@android:color/background_dark"
-            android:layout_height="wrap_content" />
-
-
+            android:textSize="15dp" />
 
 
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/release_rl"
         android:layout_width="match_parent"
-        android:layout_below="@+id/release_toolbar"
-        android:layout_height="150dp">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/release_toolbar">
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_release"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
         </android.support.v7.widget.RecyclerView>
 
         <ImageView
             android:id="@+id/img_release"
             android:layout_width="70dp"
-            android:scaleType="fitXY"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_height="wrap_content" />
-
+            android:scaleType="fitXY" />
 
 
     </RelativeLayout>
@@ -65,221 +62,248 @@
         android:id="@+id/release_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/release_rl"
         android:background="#ffffff"
         android:hint="宝贝标题 填写品牌型号更容易被买家搜到"
-        android:paddingLeft="10dp"
-        android:textSize="15sp"
+        android:padding="15dp"
         android:textColor="@color/line"
-        android:layout_below="@+id/release_rl"/>
+        android:textSize="15sp" />
+
     <RelativeLayout
         android:id="@+id/release_rl_two"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"
-        android:layout_below="@+id/release_et"></RelativeLayout>
+        android:layout_below="@+id/release_et"
+        android:background="@color/line"></RelativeLayout>
+
     <EditText
         android:id="@+id/relsase_et_two"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:paddingLeft="10dp"
         android:layout_below="@+id/release_rl_two"
+        android:background="#ffffff"
+        android:gravity="top"
         android:hint="宝贝描述 描述一下宝贝的购买渠道,新旧程度,型号/尺码等,可以让宝贝更快卖出"
         android:maxLines="2"
-        android:textSize="15sp"
-        android:gravity="top"
-        android:background="#ffffff"
 
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
         android:textColor="@color/line"
-        />
+
+        android:textSize="15sp" />
+
     <RelativeLayout
         android:id="@+id/release_rl_sss"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"
-        android:layout_below="@+id/relsase_et_two"></RelativeLayout>
+        android:layout_below="@+id/relsase_et_two"
+        android:background="@color/line"></RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/release_rl_three"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="#ffffff"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/release_rl_sss"
-        android:layout_alignParentStart="true">
+        android:background="#ffffff">
+
         <TextView
             android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:paddingLeft="10dp"
-            android:textSize="18sp"
             android:layout_centerVertical="true"
-            android:text="分类"/>
+            android:paddingLeft="10dp"
+            android:text="分类"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
         <ImageView
             android:id="@+id/release_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/v4"/>
+            android:src="@mipmap/v4" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="选择分类"
-            android:textColor="@color/line"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/release_iv"/>
+            android:layout_toLeftOf="@+id/release_iv"
+            android:text="选择分类"
+            android:textColor="@color/line" />
 
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/release_rl_ssss"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"
-        android:layout_below="@+id/release_rl_three"></RelativeLayout>
+        android:layout_below="@+id/release_rl_three"
+        android:background="@color/line"></RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/release_rl_four"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="#ffffff"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/release_rl_ssss"
-        android:layout_alignParentStart="true">
+        android:background="#ffffff">
+
         <TextView
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:textSize="18sp"
-            android:paddingLeft="10dp"
             android:layout_centerVertical="true"
-            android:text="价格"/>
+            android:paddingLeft="10dp"
+            android:text="价格"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
         <ImageView
             android:id="@+id/release_iv_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/v4"/>
+            android:src="@mipmap/v4" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¥0"
-            android:textColor="@color/line"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/release_iv_two"/>
+            android:layout_toLeftOf="@+id/release_iv_two"
+            android:text="¥0"
+            android:textColor="@color/line" />
 
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/release_rl_sssss"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"
-        android:layout_below="@+id/release_rl_four"></RelativeLayout>
+        android:layout_below="@+id/release_rl_four"
+        android:background="@color/line"></RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/release_rl_five"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="#ffffff"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/release_rl_sssss"
-        android:layout_alignParentStart="true">
+        android:background="#ffffff">
+
         <TextView
             android:id="@+id/difang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:textSize="18sp"
-            android:paddingLeft="10dp"
             android:layout_centerVertical="true"
-            android:text="位置"/>
+            android:paddingLeft="10dp"
+            android:text="位置"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
         <ImageView
             android:id="@+id/release_iv_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/v4"/>
+            android:src="@mipmap/v4" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="大连 高新园"
-            android:textColor="@color/home_adapter_item"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/release_iv_three"/>
+            android:layout_toLeftOf="@+id/release_iv_three"
+            android:text="大连 高新园"
+            android:textColor="@color/home_adapter_item"
+            android:textSize="12dp" />
 
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/release_rl_sssssw"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"
-        android:layout_below="@+id/release_rl_five"></RelativeLayout>
+        android:layout_below="@+id/release_rl_five"
+        android:background="@color/line"></RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/release_rl_six"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="#ffffff"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/release_rl_sssssw"
-        android:layout_alignParentStart="true">
+        android:background="#ffffff">
+
         <TextView
             android:id="@+id/baobei"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:textSize="18sp"
-            android:paddingLeft="10dp"
             android:layout_centerVertical="true"
-            android:text="全新宝贝"/>
+            android:paddingLeft="10dp"
+            android:text="全新宝贝"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/release_rl_ssssssw"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line"
-        android:layout_below="@+id/release_rl_six"></RelativeLayout>
+        android:layout_below="@+id/release_rl_six"
+        android:background="@color/line"></RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/release_rl_seven"
+        android:layout_marginTop="5dp"
+        android:background="#ffffff">
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:background="@color/toolbar_home_color"
+            android:text="发布"
+            android:textColor="#ffffff" />
+
+    </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/release_rl_seven"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:layout_below="@+id/release_rl_ssssssw">
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/release_rl_ssssssw"
+        android:background="#1caeadad">
+
         <CheckBox
             android:id="@+id/release_check"
-         android:layout_marginLeft="10dp"
             style="@style/checkbox"
-            />
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="允许在好友圈展示. 好友转发曝光更多!"
-            android:layout_marginLeft="30dp"
-            android:textColor="#000"
-            android:layout_toRightOf="@+id/release_check"/>
+            android:textColor="#000" />
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="#ffffff"
-        android:layout_marginTop="5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_height="40dp">
-        <Button
-            android:layout_width="300dp"
-            android:layout_centerHorizontal="true"
-            android:background="@color/toolbar_home_color"
-            android:text="发布"
-            android:textColor="#ffffff"
-            android:layout_height="30dp" />
-
-    </RelativeLayout>
-
-
 
 
 </RelativeLayout>

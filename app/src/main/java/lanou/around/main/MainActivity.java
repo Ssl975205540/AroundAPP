@@ -170,6 +170,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     loginFragment = new LoginFragment();
                 }
                 switchContent(loginFragment);
+
+                loginFragment.setStatusBarHeight(statusBarHeight);
+
                 ivLogin.setBackgroundResource(R.mipmap.sx);
                 ivHome.setBackgroundResource(R.mipmap.m_);
                 ivClass.setBackgroundResource(R.mipmap.vp);

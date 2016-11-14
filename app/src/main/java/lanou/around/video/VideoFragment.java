@@ -135,9 +135,9 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         loadData();
 
 
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) toolbar.getLayoutParams();
-        params.setMargins(0, statusBarHeight, 0, 0);
-        toolbar.setLayoutParams(params);
+//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) toolbar.getLayoutParams();
+//        params.setMargins(0, statusBarHeight, 0, 0);
+//        toolbar.setLayoutParams(params);
 
 
 
@@ -202,6 +202,12 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+
+                            for (VideoDetailsBean b :
+                                    been) {
+                                Log.d("VideoFragment", b.getLinkMp4());
+                            }
+
                             Log.d("VideoFragment", "been.size():" + been.size());
                             adapter.setVideoDetailsBeans(been);
                             swipeView.setAdapter(adapter);

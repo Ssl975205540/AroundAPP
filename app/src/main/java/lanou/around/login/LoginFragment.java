@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -21,27 +23,37 @@ import lanou.around.base.BaseFragment;
 import lanou.around.home.FriendActivity;
 import lanou.around.tools.recycle.IntentUtils;
 import lanou.around.widget.CircleTransform;
+import lanou.around.widget.adapters.OverScrollDecoratorHelper;
 
 /**
  * Created by dllo on 16/10/22.
  */
 
 public class LoginFragment extends BaseFragment implements View.OnClickListener {
-    private ImageView setting , userIcon;
-    private Button sesame , friend , pay , redPaket , cricle , helpCenter;
+    private ImageView setting, userIcon;
+    private Button sesame, friend, pay, redPaket, cricle, helpCenter;
     private LoginBroadCastRecevier recevier;
     private Platform qq;
+    private int statusBarHeight;
+    private RelativeLayout my_toolbar;
+    private ScrollView scrollLogin;
 
 
     @Override
     protected void initData() {
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) my_toolbar.getLayoutParams();
+        params.setMargins(0, 100, 0, 0);
+        my_toolbar.setLayoutParams(params);
 
+        RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) setting.getLayoutParams();
+        params1.setMargins(0, statusBarHeight, 20, 0);
+        setting.setLayoutParams(params1);
         recevier = new LoginBroadCastRecevier();
         IntentFilter filter = new IntentFilter();
         filter.addAction("getIcon");
         getContext().registerReceiver(recevier, filter);
 
-        ShareSDK.initSDK(context,"sharesdk的appkey");
+        ShareSDK.initSDK(context, "sharesdk的appkey");
         qq = ShareSDK.getPlatform(QQ.NAME);
         PlatformDb platDB = qq.getDb();
         if (qq.isAuthValid()) {
@@ -61,6 +73,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     protected void initViews() {
+        scrollLogin = findView(R.id.scroll_login);
+        my_toolbar = findView(R.id.my_toolbar);
         setting = findView(R.id.around_setting);
         userIcon = findView(R.id.user_icon);
         sesame = findView(R.id.around_zhima);
@@ -70,8 +84,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         cricle = findView(R.id.around_my_circle);
         helpCenter = findView(R.id.around_help_center);
 
-
-
+        OverScrollDecoratorHelper.setUpOverScroll(scrollLogin);
     }
 
     @Override
@@ -79,6 +92,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         setting.setOnClickListener(this);
         userIcon.setOnClickListener(this);
         sesame.setOnClickListener(this);
+
         friend.setOnClickListener(this);
         pay.setOnClickListener(this);
         redPaket.setOnClickListener(this);
@@ -92,7 +106,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         Platform qq = ShareSDK.getPlatform(QQ.NAME);
         switch (v.getId()) {
             case R.id.around_setting:
-                IntentUtils.getIntents().Intent(context , SettingActivity.class , new Bundle());
+                IntentUtils.getIntents().Intent(context, SettingActivity.class, new Bundle());
 
                 break;
             case R.id.user_icon:
@@ -105,9 +119,9 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
             case R.id.around_zhima:
 
                 if (qq.isAuthValid()) {
-                    IntentUtils.getIntents().Intent(context , SemaseActivity.class , new Bundle());
+                    IntentUtils.getIntents().Intent(context, SemaseActivity.class, new Bundle());
                 } else {
-                    IntentUtils.getIntents().Intent(context , FriendActivity.class , new Bundle());
+                    IntentUtils.getIntents().Intent(context, FriendActivity.class, new Bundle());
                 }
 
                 break;
@@ -120,7 +134,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                 break;
             case R.id.around_my_pay:
                 if (qq.isAuthValid()) {
-                    IntentUtils.getIntents().Intent(context , LoginPayActivity.class , new Bundle());
+                    IntentUtils.getIntents().Intent(context, LoginPayActivity.class, new Bundle());
                 } else {
                     IntentUtils.getIntents().Intent(context, FriendActivity.class, new Bundle());
                 }
@@ -151,20 +165,23 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
 
     }
 
-    private class LoginBroadCastRecevier extends BroadcastReceiver{
+    public void setStatusBarHeight(int statusBarHeight) {
+        this.statusBarHeight = statusBarHeight;
+    }
+
+    private class LoginBroadCastRecevier extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
 
             String str = intent.getStringExtra("icon");
             if (str.equals("")) {
                 userIcon.setImageResource(R.mipmap.kp);
-            }else  {
+            } else {
                 Picasso.with(context).load(str).transform(new CircleTransform()).into(userIcon);
 
             }
         }
     }
-
 
 
     @Override
