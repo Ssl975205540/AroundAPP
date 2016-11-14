@@ -134,7 +134,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
         supplementary = findView(R.id.supplementary);
 
-//        homeAppbar = findView(R.id.recyview_appbar);
         rl = findView(R.id.rl_home);
         rl1 = findView(R.id.rl1_home);
         rl0 = findView(R.id.rl0_home);
@@ -160,10 +159,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         Picasso.with(context).load(URLValues.HOME_FRIEND_CREAME).into(friendPakge);
         recyviewHome.addHeaderView(view);
         bannerHome = findView(view, R.id.banner_home);
-        Log.d("statusBarHeight", String.valueOf(statusBarHeight));
 
         setview();
-        Log.d("statusBarHeight", String.valueOf(statusBarHeight));
 
     }
 

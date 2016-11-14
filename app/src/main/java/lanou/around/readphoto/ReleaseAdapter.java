@@ -21,8 +21,14 @@ import lanou.around.base.BaseRcvAdapter;
 public class ReleaseAdapter extends BaseRcvAdapter<ReleaseAdapter.ViewHolder, String> {
 
 
+    private final Bitmap addimg;
+    private final Bitmap addnull;
+
     public ReleaseAdapter(Context context, List<String> data) {
         super(context, data);
+        addimg = BitmapFactory.decodeResource(context.getResources(), R.drawable.addimg);
+        addnull = BitmapFactory.decodeResource(context.getResources(), R.drawable.addnull);
+
     }
 
     @Override
@@ -39,11 +45,10 @@ public class ReleaseAdapter extends BaseRcvAdapter<ReleaseAdapter.ViewHolder, St
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         if (position == 0) {
-            Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.addimg);
-            holder.imgItem.setImageBitmap(bmp);
+
+            holder.imgItem.setImageBitmap(addimg);
         }else {
-            Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.addnull);
-            holder.imgItem.setImageBitmap(bmp);
+            holder.imgItem.setImageBitmap(addnull);
         }
 
         holder.imgItem.setOnClickListener(new View.OnClickListener() {
