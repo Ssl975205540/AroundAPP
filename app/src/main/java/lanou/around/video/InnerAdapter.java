@@ -178,4 +178,6 @@ public class InnerAdapter extends lanou.around.base.BaseAdapter{
         void superVideo(SuperVideoPlayer superVideoPlayer, String url);
 
     }
+
+
 }
