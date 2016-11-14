@@ -32,6 +32,9 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.tencent.qq.QQ;
 import lanou.around.R;
 import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterToolBar;
@@ -110,7 +113,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         homePresenter = new HomePresenter(this);
         homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
 
-
+        ShareSDK.initSDK(context,"sharesdk的appkey");
     }
 
 
@@ -136,7 +139,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
         supplementary = findView(R.id.supplementary);
 
-//        homeAppbar = findView(R.id.recyview_appbar);
         rl = findView(R.id.rl_home);
         rl1 = findView(R.id.rl1_home);
         rl0 = findView(R.id.rl0_home);
@@ -162,10 +164,8 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         Picasso.with(context).load(URLValues.HOME_FRIEND_CREAME).into(friendPakge);
         recyviewHome.addHeaderView(view);
         bannerHome = findView(view, R.id.banner_home);
-        Log.d("statusBarHeight", String.valueOf(statusBarHeight));
 
         setview();
-        Log.d("statusBarHeight", String.valueOf(statusBarHeight));
 
     }
 
@@ -263,7 +263,9 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
             }
 
 
+
             @Override
+
             public void onLoadMore() {
                 new Handler().postDelayed(new Runnable() {
                     public void run() {
@@ -437,6 +439,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
     @Override
     public void onClick(View v) {
+        Platform qq = ShareSDK.getPlatform(QQ.NAME);
         switch (v.getId()) {
             case R.id.tv_not_spending:
                 tvSpending.setTextColor(Color.parseColor("#FFFFFF"));
@@ -453,8 +456,14 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                 viewPagerHome.setCurrentItem(1);
                 break;
             case R.id.friend_ll:
-                Intent intent = new Intent(AroundAPP.getContext(), FriendActivity.class);
-                getActivity().startActivity(intent);
+                if(qq.isAuthValid()) {
+                    friendLinear.setEnabled(qq.isAuthValid());
+                } else {
+                    friendLinear.setEnabled(!qq.isAuthValid());
+                    Intent intent = new Intent(AroundAPP.getContext(), FriendActivity.class);
+                    getActivity().startActivity(intent);
+                }
+
                 break;
             case R.id.toolbar_home:
                 IntentUtils.getIntents().Intent(context, SeekActivity.class, new Bundle());
