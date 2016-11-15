@@ -1,7 +1,8 @@
-package lanou.around.home.nearby;
+package lanou.around.presenter;
 
 import lanou.around.aroundinterface.InterView;
 import lanou.around.aroundinterface.OnFinishedListener;
+import lanou.around.model.HomeItemModel;
 
 /**
  * Created by dllo on 16/11/9.

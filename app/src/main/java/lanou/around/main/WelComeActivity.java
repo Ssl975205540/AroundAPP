@@ -35,8 +35,6 @@ public class WelComeActivity extends BaseActivity {
             startActivity(i);
             finish();
         }
-
-
     }
 
     @Override
@@ -74,12 +72,8 @@ public class WelComeActivity extends BaseActivity {
 
                 @Override
                 public void run() {
-
-
                     try {
-
                         for (int j = 0; j <= 100; j++) {
-
                             if (progress == 0 || progress == 20 || progress == 40 || progress == 60 || progress == 80 || progress == 100) {
                                 publishProgress(String.valueOf(c));
                                 c--;
@@ -88,36 +82,23 @@ public class WelComeActivity extends BaseActivity {
                             progress += 1;
                             Thread.sleep(50);
                         }
-
-
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
                 }
-
-
             }).start();
-
-
             return null;
         }
-
 
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-            Log.d("WelAsyncTask", "values[0]:" + values[0]);
             textWelcome.setText(values[0]);
             if (values[0].equals("0")) {
                 Intent i = new Intent(WelComeActivity.this, MainActivity.class);
                 startActivity(i);
                 finish();
             }
-
-
         }
     }
-
-
 }

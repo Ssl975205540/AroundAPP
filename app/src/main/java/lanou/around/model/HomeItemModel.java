@@ -1,4 +1,4 @@
-package lanou.around.home.nearby;
+package lanou.around.model;
 
 import java.util.HashMap;
 

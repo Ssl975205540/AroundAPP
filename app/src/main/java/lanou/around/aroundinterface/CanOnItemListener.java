@@ -10,11 +10,11 @@ public interface CanOnItemListener {
     void onItemChildClick(View view, int position);
 
 
-     boolean onItemChildLongClick(View view, int position);
+    boolean onItemChildLongClick(View view, int position);
 
-     void onItemChildCheckedChanged(CompoundButton view, int position, boolean isChecked);
+    void onItemChildCheckedChanged(CompoundButton view, int position, boolean isChecked);
 
-     void onRVItemClick(ViewGroup parent, View itemView, int position);
+    void onRVItemClick(ViewGroup parent, View itemView, int position);
 
-     boolean onRVItemLongClick(ViewGroup parent, View itemView, int position);
+    boolean onRVItemLongClick(ViewGroup parent, View itemView, int position);
 }

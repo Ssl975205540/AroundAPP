@@ -44,7 +44,7 @@ public class AboutAroundActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void initData() {
-//标题
+        //标题
         about_title.setText("关于转转");
         about_title.setTextColor(Color.BLACK);
         back.setImageResource(R.mipmap.rn);
@@ -69,6 +69,5 @@ public class AboutAroundActivity extends BaseActivity implements View.OnClickLis
                 startActivity(intent1);
                 break;
         }
-
     }
 }
