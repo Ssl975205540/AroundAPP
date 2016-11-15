@@ -1,6 +1,7 @@
 package lanou.around.classification.checkall;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class ChooseAdapter extends BaseAdapter<String> {
     public void onInitView(View view, int position) {
         TextView name = get(view, R.id.tv_choose);
         name.setText(list.get(position));
+        Log.d("ChooseAdapter", list.get(position));
     }
 
 
