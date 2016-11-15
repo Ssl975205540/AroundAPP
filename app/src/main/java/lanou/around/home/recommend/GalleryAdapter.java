@@ -74,7 +74,7 @@ public class GalleryAdapter extends
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
         Glide.with(mContext).load(mDatas.get(i).getStr()).diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.mipmap.home01_bg_card).placeholder(R.mipmap.rx)
+                .error(R.mipmap.home01_bg_card).placeholder(R.mipmap.x3)
                 .into(viewHolder.mImg);
 
         //如果设置了回调，则设置点击事件

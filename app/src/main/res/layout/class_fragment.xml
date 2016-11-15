@@ -96,17 +96,18 @@
         </LinearLayout>
     </lanou.around.widget.PullZoomView>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="@color/home_adapter_item"/>
 
     <lanou.around.widget.TransparentToolBar
         android:id="@+id/toobar_classify"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:clickable="true">
+
+        <RelativeLayout
+            android:id="@+id/rela_class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_classify_search"
@@ -138,6 +139,7 @@
                 android:textColor="@color/home_adapter_item"
                 android:textSize="@dimen/fineSize"/>
         </LinearLayout>
+        </RelativeLayout>
 
 
     </lanou.around.widget.TransparentToolBar>

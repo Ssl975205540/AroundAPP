@@ -14,7 +14,7 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.tencent.qq.QQ;
 import lanou.around.R;
 import lanou.around.base.BaseActivity;
-import lanou.around.tools.recycle.IntentUtils;
+import lanou.around.tools.util.IntentUtils;
 import lanou.around.widget.DataCleanManager;
 
 /**
@@ -55,7 +55,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void initData() {
-//标题
+        //标题
         setting_title.setText("设置");
         setting_title.setTextColor(Color.BLACK);
         back.setImageResource(R.mipmap.rn);

@@ -1,76 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="5dp"
-              android:orientation="vertical">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <LinearLayout
+
+    <ImageView
+        android:id="@+id/img_phone"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/tv_phone_news"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:orientation="vertical">
+        android:layout_marginLeft="10dp"
+        android:ellipsize="end"
+        android:maxEms="15"
+        android:maxLines="1"
+        android:scrollHorizontally="false"
+        android:textColor="@color/home_adapter_item"
+        android:textSize="12dp" />
 
-        <TextView
-            android:id="@+id/tv_phone_news"
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxEms="15"
-            android:maxLines="2"
-            android:scrollHorizontally="false"
-            android:text="123456987"
-            android:textColor="@color/home_adapter_item"/>
-        <RelativeLayout
-            android:layout_width="150dp"
-            android:layout_marginTop="15dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+
+            android:layout_marginLeft="10dp">
 
             <TextView
                 android:id="@+id/tv_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¥"
-                android:textColor="@color/home_adapter_item"/>
+                android:textColor="@color/home_adapter_item"
+
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tv_phone_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3000"
                 android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/tv_money"
+                android:text="3000"
                 android:textColor="@color/home_adapter_item"
-                android:layout_alignParentBottom="true"
-                android:layout_toEndOf="@+id/tv_money" />
+
+                android:textSize="12dp" />
 
 
         </RelativeLayout>
-        <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tv_phone_cityName"
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:text="00"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/home_adapter_item"/>
-        <TextView
-            android:id="@+id/tv_phone_friendTime"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="19小时前"
-            android:gravity="right"
-            android:textColor="@color/home_adapter_item"/>
-        </LinearLayout>
-    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/img_phone"
-        android:layout_width="150dp"
-        android:layout_height="150dp"/>
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_phone_cityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/home_adapter_item"
+
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_phone_friendTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="19小时前"
+                android:textColor="@color/home_adapter_item"
+
+                android:textSize="12dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
 
 </LinearLayout>

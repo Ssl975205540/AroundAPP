@@ -34,7 +34,7 @@ public class ContactActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void initData() {
-//标题
+        //标题
         contaxt_title.setText("联系我们");
         contaxt_title.setTextColor(Color.BLACK);
         back.setImageResource(R.mipmap.rn);

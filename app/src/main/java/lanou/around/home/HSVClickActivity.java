@@ -32,7 +32,7 @@ public class HSVClickActivity extends BaseActivity implements View.OnClickListen
     protected void initViews() {
         webView = findView(R.id.hsv_click_webview);
         clickTitle = findView(R.id.video_title_tv);
-        back = findView(R.id.video_title_back);
+
 
     }
 
@@ -46,7 +46,6 @@ public class HSVClickActivity extends BaseActivity implements View.OnClickListen
         webView.getSettings().setBuiltInZoomControls(true);
         webView.setInitialScale(200);
         webView.setHorizontalScrollbarOverlay(true);
-        back.setOnClickListener(this);
 
     }
 
@@ -59,7 +58,7 @@ public class HSVClickActivity extends BaseActivity implements View.OnClickListen
         String title = intent.getStringExtra("title");
         clickTitle.setText(title);
         clickTitle.setTextColor(Color.BLACK);
-        back.setImageResource(R.mipmap.rn);
+
         webView.loadUrl(url);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);

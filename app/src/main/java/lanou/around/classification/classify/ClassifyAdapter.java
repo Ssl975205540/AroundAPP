@@ -21,7 +21,7 @@ import java.util.List;
 
 import lanou.around.R;
 import lanou.around.classification.classifyview.DigitWebActivity;
-import lanou.around.tools.recycle.IntentUtils;
+import lanou.around.tools.util.IntentUtils;
 import lanou.around.bean.ClassifyBean;
 import lanou.around.classification.search.SearchActivity;
 

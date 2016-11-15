@@ -4,7 +4,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,8 +34,8 @@ import lanou.around.presenter.ClassifyPresenter;
 import lanou.around.presenter.ClassifyViewPresenter;
 import lanou.around.presenter.SearchPresenter;
 import lanou.around.tools.http.URLValues;
-import lanou.around.tools.recycle.IntentUtils;
-import lanou.around.tools.recycle.JsonFileReader;
+import lanou.around.tools.util.IntentUtils;
+import lanou.around.tools.util.JsonFileReader;
 import lanou.around.widget.MyRecyclerView;
 
 import static lanou.around.classification.checkall.CheckAllActivity.JSON_TYPE;

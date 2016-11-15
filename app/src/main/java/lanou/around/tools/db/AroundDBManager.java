@@ -41,14 +41,13 @@ public class AroundDBManager {
     
     
     public void insert(HomeBean bean){
+
        SQLiteDatabase db = aroundHelper.getWritableDatabase();
         ArrayList<HomeBeanHot> arrayList = new ArrayList<>();
         for (int i = 0; i < bean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().size(); i++) {
             for (int j = 0; j < bean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(0).size(); j++) {
                 HomeBeanHot homeBeanHot = new HomeBeanHot();
                 homeBeanHot.setImageUrl(bean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).getImageUrl());
-
-
                 arrayList.add(homeBeanHot);
             }
         }

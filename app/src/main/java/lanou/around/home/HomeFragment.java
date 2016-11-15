@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
@@ -39,17 +40,18 @@ import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterToolBar;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+import lanou.around.classification.seek.SeekActivity;
+import lanou.around.tools.util.IntentUtils;
+
 import lanou.around.bean.EventBean;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeBeanHot;
 import lanou.around.classification.classifyview.DigitWebActivity;
 import lanou.around.classification.search.SearchActivity;
-import lanou.around.classification.seek.SeekActivity;
 import lanou.around.home.nearby.NearByFragment;
 import lanou.around.home.recommend.RecommendFragment;
 import lanou.around.presenter.HomePresenter;
 import lanou.around.tools.http.URLValues;
-import lanou.around.tools.recycle.IntentUtils;
 import lanou.around.widget.MyRecyclerView;
 import lanou.around.widget.SellAnall;
 import lanou.around.widget.StickyNavLayout;
@@ -111,7 +113,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         homePresenter = new HomePresenter(this);
         homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
 
-        ShareSDK.initSDK(context,"sharesdk的appkey");
+        ShareSDK.initSDK(context, "sharesdk的appkey");
     }
 
 
@@ -334,7 +336,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
             List<HomeBean.RespDataBean.LowBannersBean> lowBanners = mHomeBean.getRespData().getLowBanners();
             View hsv_item = LayoutInflater.from(context).inflate(R.layout.hsv_item, null);
             ImageView icon = (ImageView) hsv_item.findViewById(R.id.hsv_item_image);
-            Picasso.with(context).load(lowBanners.get(i).getImageUrl()).into(icon);
+            Glide.with(context).load(lowBanners.get(i).getImageUrl()).into(icon);
             final String clickUrl = lowBanners.get(i).getGoUrl();
             final String clickTitle = lowBanners.get(i).getPostName();
             final String hsv_click = URLValues.HOME_HOT_MARKET;
@@ -435,7 +437,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                 viewPagerHome.setCurrentItem(1);
                 break;
             case R.id.friend_ll:
-                if(qq.isAuthValid()) {
+                if (qq.isAuthValid()) {
                     friendLinear.setEnabled(qq.isAuthValid());
                 } else {
                     friendLinear.setEnabled(!qq.isAuthValid());

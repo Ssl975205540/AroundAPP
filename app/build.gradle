@@ -40,7 +40,11 @@ dependencies {
     compile 'com.bigkoo:convenientbanner:2.0.5'
     compile 'me.relex:circleindicator:1.1.5@aar'
     compile 'com.facebook.fresco:fresco:0.8.1'
-
+    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.5.1'
+    compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.5.1'
+    compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.5.1'
+    compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.5.1'
+    compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.5.1'
     compile 'com.pnikosis:materialish-progress:1.7'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile files('libs/MobCommons-2016.1102.1128.jar')

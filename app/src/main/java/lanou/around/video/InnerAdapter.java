@@ -135,6 +135,7 @@ public class InnerAdapter extends lanou.around.base.BaseAdapter{
             @Override
             public void onClick(View v) {
                 holder.imageView.setVisibility(View.GONE);
+
                 videoSuper.superVideo(holder.superVideoPlayer,videoDetailsBean.getLinkMp4());
             }
         });

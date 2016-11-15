@@ -8,9 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -31,11 +31,9 @@ import lanou.around.classification.classifyview.RightViewFragment;
 import lanou.around.classification.seek.SeekActivity;
 import lanou.around.presenter.ClassifyPresenter;
 import lanou.around.tools.http.URLValues;
-import lanou.around.tools.recycle.DisplayUtil;
+import lanou.around.tools.util.DisplayUtil;
 import lanou.around.widget.PullZoomView;
 import lanou.around.widget.TransparentToolBar;
-
-import static org.cybergarage.http.HTTP.HEAD;
 
 /**
  * Created by dllo on 16/10/22.
@@ -65,6 +63,7 @@ public class ClassifyFragment extends BaseFragment
     private static String ZOOMTIME =  "zoomTime";
     private static String ISPARALLAX =  "isParallax";
     private static String ISZOOMENABLE = "isZoomEnable";
+    private RelativeLayout relaClass;
 
 
     @Override
@@ -88,7 +87,7 @@ public class ClassifyFragment extends BaseFragment
         mToolBar = findView(R.id.toobar_classify);
         mCheckAll = findView(R.id.btn_classify_check);
         mMessageEdit = findView(R.id.linear_edit_message);
-
+        relaClass = findView(R.id.rela_class);
 
     }
 
@@ -138,9 +137,9 @@ public class ClassifyFragment extends BaseFragment
         pullZoomViewData();
 
         // 通过自定义坐标来放置你的控件
-        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mToolBar.getLayoutParams();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) relaClass.getLayoutParams();
         params.setMargins(0, statusBarHeight, 0, 0);
-        mToolBar.setLayoutParams(params);
+        relaClass.setLayoutParams(params);
 //        StatusBarCompat.compat(getActivity(), getResources().getColor(R.color.home_adapter_item));
 
 
