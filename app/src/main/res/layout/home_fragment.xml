@@ -156,20 +156,28 @@
                 style="@style/home_relayout">
 
 
+                <RelativeLayout
+
+                    android:id="@+id/relative1111"
+                    android:layout_width="320dp"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content">
+
+
 
                     <lanou.around.widget.SellAnall
                         android:id="@+id/sv_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_centerVertical="true"
-                       android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true" />
 
                     <ImageView
                         android:id="@+id/circle_search_home"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_alignRight="@+id/sv_1"
+                        android:layout_marginRight="7dp"
+                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:src="@mipmap/wf"
                         android:visibility="gone"
@@ -177,6 +185,11 @@
 
 
                         />
+
+
+                </RelativeLayout>
+
+
 
 
 

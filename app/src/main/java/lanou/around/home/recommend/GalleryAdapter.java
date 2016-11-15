@@ -13,6 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.List;
 
 import lanou.around.R;
+import lanou.around.bean.Recommend;
 
 /**
  * Created by dllo on 16/11/1.

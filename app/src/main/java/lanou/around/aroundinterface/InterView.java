@@ -6,14 +6,10 @@ package lanou.around.aroundinterface;
 
 public interface InterView<T>  {
 
-    void startAnimation();
-
-    void stopAnimation();
 
     void onResponse(T t);
 
     void onError();
-
 
 
 }

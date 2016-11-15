@@ -416,15 +416,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     }
 
 
-    @Override
-    public void startAnimation() {
 
-    }
-
-    @Override
-    public void stopAnimation() {
-
-    }
 
     @Override
     public void onResponse(Object t) {

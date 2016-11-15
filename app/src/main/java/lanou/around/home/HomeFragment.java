@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -40,11 +39,6 @@ import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterToolBar;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
-
-import lanou.around.classification.seek.SeekActivity;
-import lanou.around.tools.util.IntentUtils;
-
-
 import lanou.around.bean.EventBean;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeBeanHot;
@@ -76,9 +70,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     private TabLayout tabHome;
     private HomeAdapter homeAdapter;
     private HomePresenter homePresenter;
-    //    private AppBarLayout homeAppbar;
     private TransparentToolBar toolbarHome;
-    private NestedScrollView nestscrollHome;
     private int statusBarHeight;
     private RelativeLayout rl;
     private RelativeLayout rl1;
@@ -89,7 +81,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
     private ImageView circle_search_home;
     private ConvenientBanner bannerHome;
     private LinearLayout supplementary, supplement, hsvLinear, friendLinear;
-
     private StickyNavLayout mainContent;
     private HomeBean mHomeBean;
     private ArrayList<HomeBeanHot> mArrayList;
@@ -104,19 +95,13 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new RecommendFragment());
         fragments.add(new NearByFragment());
-
         homeViewPagerAdapter.setFragments(fragments);
-
-
         viewPagerHome.setAdapter(homeViewPagerAdapter);
-
         tabHome.setupWithViewPager(viewPagerHome);
-
-
         homePresenter = new HomePresenter(this);
         homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
+        ShareSDK.initSDK(context);
 
-        ShareSDK.initSDK(context, "sharesdk的appkey");
     }
 
 
@@ -145,12 +130,10 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         tvSpent = findView(R.id.tv_yet_spent);
         imgSpent = findView(R.id.img_yet_spent);
         circle_search_home = findView(R.id.circle_search_home);
-
         View view = LayoutInflater.from(context).inflate(R.layout.home_recly_header, null);
         hsvLinear = (LinearLayout) view.findViewById(R.id.hsv_ll_home);
         friendLinear = (LinearLayout) view.findViewById(R.id.friend_ll);
         mSv1 = findView(R.id.sv_1);
-
 
         friendCreame = (ImageView) view.findViewById(R.id.your_friend_creame);
         friendPakge = (ImageView) view.findViewById(R.id.your_friend_pakge);
@@ -304,15 +287,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         });
     }
 
-    @Override
-    public void startAnimation() {
-
-    }
-
-    @Override
-    public void stopAnimation() {
-
-    }
 
     @Override
     public void onResponse(Object o) {

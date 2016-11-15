@@ -1,7 +1,6 @@
 package lanou.around.readphoto;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -51,16 +50,10 @@ public class PhotoAdapter extends CanRVAdapter<PictureBean> {
             rela.setVisibility(View.GONE);
 
         }
-        Log.d("PhotoAdapter", model.path);
 
         CheckBox checkBox = viewHelper.getView(R.id.checkbox);
         final ImageView imageView = viewHelper.getImageView(R.id.img);
-//        Glide.with(mContext).load(mList.get(position).path).asBitmap().into(new SimpleTarget<Bitmap>() {
-//            @Override
-//            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-//                imageView.setImageBitmap(resource);
-//            }
-//        });
+
         Glide.with(mContext).load(mList.get(position).path).asBitmap().into(imageView);
 
         checkBox.setChecked(mList.get(position).check);

@@ -210,15 +210,6 @@ public class SeekActivity extends BaseActivity implements View.OnClickListener, 
         super.onBackPressed();
     }
 
-    @Override
-    public void startAnimation() {
-
-    }
-
-    @Override
-    public void stopAnimation() {
-
-    }
 
     @Override
     public void onResponse(Object t) {

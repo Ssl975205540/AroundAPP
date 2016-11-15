@@ -107,15 +107,7 @@ public class CheckAllActivity extends BaseActivity implements View.OnClickListen
         super.onBackPressed();
     }
 
-    @Override
-    public void startAnimation() {
 
-    }
-
-    @Override
-    public void stopAnimation() {
-
-    }
 
     @Override
     public void onResponse(Object t) {

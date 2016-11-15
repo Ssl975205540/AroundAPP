@@ -52,15 +52,7 @@ public class RightViewFragment extends BaseFragment implements InterView {
         presenter.startRequest(URLValues.CLASSIFY_CHILD_CATES_LOGIC, ClassifyViewBean.class);
     }
 
-    @Override
-    public void startAnimation() {
 
-    }
-
-    @Override
-    public void stopAnimation() {
-
-    }
 
     @Override
     public void onResponse(Object t) {

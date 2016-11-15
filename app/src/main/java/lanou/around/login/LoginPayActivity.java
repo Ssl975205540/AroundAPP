@@ -1,7 +1,7 @@
 package lanou.around.login;
 
 import android.graphics.Color;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import lanou.around.R;
@@ -12,7 +12,7 @@ import lanou.around.base.BaseActivity;
  */
 
 public class LoginPayActivity extends BaseActivity{
-    private ImageButton back;
+    private ImageView back;
     private TextView pay_title;
     @Override
     protected int setContentView() {

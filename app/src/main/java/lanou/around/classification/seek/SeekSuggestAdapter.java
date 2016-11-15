@@ -13,6 +13,7 @@ import lanou.around.base.BaseAdapter;
  * Created by dllo on 16/11/8.
  */
 public class SeekSuggestAdapter extends BaseAdapter<SeekSuggestBean.RespDataBean> {
+
     public SeekSuggestAdapter(Context context, List<SeekSuggestBean.RespDataBean> list) {
         super(context, list);
     }

@@ -56,15 +56,7 @@ public class CenterViewFragment extends BaseFragment implements InterView {
         mRespDataBeanList = new ArrayList<>();
     }
 
-    @Override
-    public void startAnimation() {
 
-    }
-
-    @Override
-    public void stopAnimation() {
-
-    }
 
     @Override
     public void onResponse(Object t) {
