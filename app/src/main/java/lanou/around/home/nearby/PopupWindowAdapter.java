@@ -33,7 +33,6 @@ public class PopupWindowAdapter extends RecyclerView.Adapter<PopupWindowAdapter.
     }
 
     public PopupWindowAdapter(Context context) {
-
         this.context = context;
     }
 
@@ -49,7 +48,6 @@ public class PopupWindowAdapter extends RecyclerView.Adapter<PopupWindowAdapter.
         holder.mName.setText(arrayList.get(position));
         holder.mBody.setText(mStringList.get(position));
 
-
         if (popupOnItemClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -62,7 +60,6 @@ public class PopupWindowAdapter extends RecyclerView.Adapter<PopupWindowAdapter.
         }
     }
 
-
     @Override
     public int getItemCount() {
         return arrayList == null ? 0 : arrayList.size();
@@ -70,14 +67,11 @@ public class PopupWindowAdapter extends RecyclerView.Adapter<PopupWindowAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-
         private final TextView mName;
         private final TextView mBody;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
-
             mName = (TextView) itemView.findViewById(R.id.tv_popup_name);
             mBody = (TextView) itemView.findViewById(R.id.tv_popup_body);
 

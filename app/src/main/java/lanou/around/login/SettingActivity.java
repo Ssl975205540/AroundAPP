@@ -55,7 +55,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void initData() {
-//标题
+        //标题
         setting_title.setText("设置");
         setting_title.setTextColor(Color.BLACK);
         back.setImageResource(R.mipmap.rn);

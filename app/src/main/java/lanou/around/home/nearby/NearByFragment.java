@@ -12,15 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
-import lanou.around.bean.EventBean;
 import lanou.around.bean.HomeTabBean;
 import lanou.around.presenter.HomePresenter;
 import lanou.around.tools.http.URLValues;
@@ -120,9 +117,7 @@ public class NearByFragment extends BaseFragment
         switch (view.getId()) {
             case R.id.iv_dropDownButton:
                 //自定义布局,显示内容
-                EventBean eventBean = new EventBean();
 
-                EventBus.getDefault().post(eventBean);
                 View view1 = LayoutInflater.from(context).inflate(R.layout.popup_window_top, null);
                 RecyclerView rv_popupWindow = (RecyclerView) view1.findViewById(R.id.rv_popup_window);
                 ImageView dropUpButton = (ImageView) view1.findViewById(R.id.iv_dropUpButton);

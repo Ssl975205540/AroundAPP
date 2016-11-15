@@ -6,10 +6,10 @@ package lanou.around.aroundinterface;
 
 public interface InterModel {
 
-    <T>void StartRequest(String url,Class<T> tClass,OnFinishedListener<T> onFinishedListener);
+    <T> void StartRequest(String url, Class<T> tClass, OnFinishedListener<T> onFinishedListener);
 
-    <T>void InsertSQ(T t);
+    <T> void InsertSQ(T t);
 
-   <T>void QuerySQ(OnFinishedListener<T> onCompletedListener);
+    <T> void QuerySQ(OnFinishedListener<T> onCompletedListener);
 
 }

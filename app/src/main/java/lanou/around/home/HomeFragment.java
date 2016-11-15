@@ -40,6 +40,11 @@ import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterToolBar;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
+
+import lanou.around.classification.seek.SeekActivity;
+import lanou.around.tools.util.IntentUtils;
+
+
 import lanou.around.bean.EventBean;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeBeanHot;
@@ -129,14 +134,9 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         viewPagerHome = findView(R.id.viewpager_home);
         toolbarHome = findView(R.id.toolbar_home);
         tabHome = findView(R.id.tab_home);
-
         mainContent = findView(R.id.main_content);
-
-
         supplement = findView(R.id.supplement);
-
         supplementary = findView(R.id.supplementary);
-
         rl = findView(R.id.rl_home);
         rl1 = findView(R.id.rl1_home);
         rl0 = findView(R.id.rl0_home);
@@ -146,11 +146,9 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         imgSpent = findView(R.id.img_yet_spent);
         circle_search_home = findView(R.id.circle_search_home);
 
-
         View view = LayoutInflater.from(context).inflate(R.layout.home_recly_header, null);
         hsvLinear = (LinearLayout) view.findViewById(R.id.hsv_ll_home);
         friendLinear = (LinearLayout) view.findViewById(R.id.friend_ll);
-
         mSv1 = findView(R.id.sv_1);
 
 
@@ -219,15 +217,10 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
                             }
                         });
-
-
                     }
-
-
                 }
             }
         });
-
 
         recyviewHome.setLoadingListener(new MyRecyclerView.LoadingListener() {
             @Override
@@ -239,20 +232,15 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
 
                         if (refresh == true) {
-
-
                             homePresenter.startRequest(URLValues.HOME_HOT_MARKET, HomeBean.class);
                         } else {
                             refresh = true;
                         }
                         recyviewHome.refreshComplete();
                         toolbarHome.setVisibility(View.VISIBLE);
-
-
                     }
                 }, 3000);
             }
-
 
             @Override
 
@@ -380,7 +368,6 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                         return new LocalImageHolderView();
                     }
                 }, arrayList1)
-
                 .setOnItemClickListener(this).startTurning(4000);
 
     }

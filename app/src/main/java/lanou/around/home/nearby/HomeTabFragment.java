@@ -14,6 +14,7 @@ import lanou.around.base.BaseFragment;
 import lanou.around.bean.HomeItemBean;
 import lanou.around.bean.HomeTabItemBean;
 import lanou.around.home.recommend.RecommendWebView;
+import lanou.around.presenter.HomeItemPresenter;
 import lanou.around.presenter.HomeNearbyPresenter;
 import lanou.around.tools.http.URLValues;
 import lanou.around.tools.util.EncodeUtil;
