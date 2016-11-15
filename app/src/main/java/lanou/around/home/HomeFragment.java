@@ -40,17 +40,16 @@ import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterToolBar;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
-import lanou.around.classification.seek.SeekActivity;
-import lanou.around.tools.util.IntentUtils;
 import lanou.around.bean.EventBean;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeBeanHot;
 import lanou.around.classification.classifyview.DigitWebActivity;
-import lanou.around.classification.search.SearchActivity;
+import lanou.around.classification.seek.SeekActivity;
 import lanou.around.home.nearby.NearByFragment;
 import lanou.around.home.recommend.RecommendFragment;
 import lanou.around.presenter.HomePresenter;
 import lanou.around.tools.http.URLValues;
+import lanou.around.tools.util.IntentUtils;
 import lanou.around.widget.MyRecyclerView;
 import lanou.around.widget.SellAnall;
 import lanou.around.widget.StickyNavLayout;
@@ -183,14 +182,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
     @Override
     protected void initListeners() {
-        circle_search_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
-            }
-        });
         tvSpending.setOnClickListener(this);
         imgSpending.setOnClickListener(this);
         tvSpent.setOnClickListener(this);
