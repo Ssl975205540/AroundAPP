@@ -14,7 +14,7 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.tencent.qq.QQ;
 import lanou.around.R;
 import lanou.around.base.BaseActivity;
-import lanou.around.tools.recycle.IntentUtils;
+import lanou.around.tools.util.IntentUtils;
 import lanou.around.widget.DataCleanManager;
 
 /**

@@ -3,6 +3,7 @@ package lanou.around.main;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ public class WelComeActivity extends BaseActivity {
     private ImageView img1Welcome, img2Welcome;
     private TextView textWelcome;
     private RoundProgressBar roundProgressBar;
+    private Thread thread;
 
     @Override
     protected int setContentView() {
@@ -50,6 +52,17 @@ public class WelComeActivity extends BaseActivity {
     @Override
     protected void initListeners() {
 
+        roundProgressBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                thread.interrupt();
+                Intent i = new Intent(WelComeActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+
+            }
+        });
     }
 
     @Override
@@ -68,7 +81,7 @@ public class WelComeActivity extends BaseActivity {
         protected Void doInBackground(Void... params) {
 
 
-            new Thread(new Runnable() {
+            thread = new Thread(new Runnable() {
 
                 private int c = 5;
 
@@ -97,9 +110,9 @@ public class WelComeActivity extends BaseActivity {
                 }
 
 
-            }).start();
+            });
 
-
+            thread.start();
             return null;
         }
 
@@ -119,5 +132,10 @@ public class WelComeActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        thread.interrupt();
 
+    }
 }

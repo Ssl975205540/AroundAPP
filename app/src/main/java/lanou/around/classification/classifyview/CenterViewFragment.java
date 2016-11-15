@@ -16,7 +16,7 @@ import lanou.around.bean.ClassifyViewBean;
 import lanou.around.classification.search.SearchActivity;
 import lanou.around.presenter.ClassifyViewPresenter;
 import lanou.around.tools.http.URLValues;
-import lanou.around.tools.recycle.IntentUtils;
+import lanou.around.tools.util.IntentUtils;
 
 import static lanou.around.classification.search.SearchActivity.CATE_ID_CENTER;
 import static lanou.around.classification.search.SearchActivity.CATE_NAME_CENTER;
@@ -26,7 +26,9 @@ import static lanou.around.classification.search.SearchActivity.CENTER;
  * Created by dllo on 16/10/25.
  */
 public class CenterViewFragment extends BaseFragment implements InterView {
+
     private GridView gridView;
+
     private List<ClassifyViewBean.RespDataBean> mRespDataBeanList;
 
 

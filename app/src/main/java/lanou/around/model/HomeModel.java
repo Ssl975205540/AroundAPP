@@ -25,17 +25,16 @@ public class HomeModel implements InterModel {
             @Override
             public void onCompleted(Object tClass1) {
 
-                if(tClass1 instanceof HomeBean){
-                    if(AroundAPP.isNetworkAvailable()){
-
+                if (tClass1 instanceof HomeBean) {
+                    if (AroundAPP.isNetworkAvailable()) {
 
 
                         onFinishedListener.onFinished((T) tClass1);
-                    }else {
+                    } else {
                         onFailed();
                     }
                 }
-                if (tClass1 instanceof HomeTabBean){
+                if (tClass1 instanceof HomeTabBean) {
                     onFinishedListener.onFinished((T) tClass1);
                 }
             }
@@ -45,7 +44,7 @@ public class HomeModel implements InterModel {
                 QuerySQ(new OnFinishedListener<HomeBean>() {
                     @Override
                     public void onFinished(HomeBean result) {
-                        if(result != null){
+                        if (result != null) {
                             onFinishedListener.onFinished((T) result);
                         }
                     }
@@ -61,8 +60,12 @@ public class HomeModel implements InterModel {
 
     @Override
     public <F> void InsertSQ(F t) {
-        if(t instanceof HomeBean){
-            AroundDBManager.getInstance().insert((HomeBean) t);
+        if (t instanceof HomeBean) {
+
+            InsertSqAsyncTask insertSqAsyncTask = new InsertSqAsyncTask();
+            insertSqAsyncTask.execute((HomeBean) t);
+
+
 
         }
     }
@@ -72,6 +75,19 @@ public class HomeModel implements InterModel {
         myAsyncTask myAsyncTask = new myAsyncTask();
         myAsyncTask.setArrayListOnCompletedListener((OnFinishedListener<HomeBean>) onCompletedListener);
         myAsyncTask.execute();
+    }
+
+
+    class InsertSqAsyncTask extends AsyncTask<HomeBean, Void, HomeBean> {
+
+
+        @Override
+        protected HomeBean doInBackground(HomeBean... params) {
+
+            AroundDBManager.getInstance().insert(params[0]);
+
+            return null;
+        }
     }
 
 
@@ -104,7 +120,6 @@ public class HomeModel implements InterModel {
 
 
     }
-
 
 
 }

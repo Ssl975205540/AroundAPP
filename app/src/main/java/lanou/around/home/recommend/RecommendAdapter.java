@@ -19,7 +19,7 @@ import java.util.List;
 import lanou.around.R;
 import lanou.around.bean.RecommendBean;
 import lanou.around.tools.http.URLValues;
-import lanou.around.tools.recycle.IntentUtils;
+import lanou.around.tools.util.IntentUtils;
 import lanou.around.widget.CircleTransform;
 
 import static lanou.around.home.recommend.RecommendWebView.INFO_URL;

@@ -21,7 +21,7 @@ import cn.sharesdk.tencent.qq.QQ;
 import lanou.around.R;
 import lanou.around.base.BaseFragment;
 import lanou.around.home.FriendActivity;
-import lanou.around.tools.recycle.IntentUtils;
+import lanou.around.tools.util.IntentUtils;
 import lanou.around.widget.CircleTransform;
 import lanou.around.widget.adapters.OverScrollDecoratorHelper;
 

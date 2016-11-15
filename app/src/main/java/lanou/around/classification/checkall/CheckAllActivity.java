@@ -19,7 +19,7 @@ import lanou.around.base.BaseActivity;
 import lanou.around.bean.ClassifyViewBean;
 import lanou.around.presenter.ClassifyViewPresenter;
 import lanou.around.tools.http.URLValues;
-import lanou.around.tools.recycle.JsonFileReader;
+import lanou.around.tools.util.JsonFileReader;
 
 import static lanou.around.classification.checkall.ClassifyTypeActivity.NAME;
 

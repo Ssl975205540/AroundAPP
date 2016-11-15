@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,16 +51,16 @@ import static lanou.around.tools.http.URLValues.URL_VIDEO;
  */
 
 public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView.onFlingListener,
-        SwipeFlingAdapterView.OnItemClickListener , EasyPermissions.PermissionCallbacks, View.OnClickListener {
+        SwipeFlingAdapterView.OnItemClickListener, EasyPermissions.PermissionCallbacks, View.OnClickListener {
 
     private TextView video_title;
-    private ImageButton video_code , location;
+    private ImageView video_code;
     private SuperVideoPlayer mSuperVideoPlayer;
     private int cardWidth;
     private int cardHeight;
 
     private SwipeFlingAdapterView swipeView;
-   private InnerAdapter adapter;
+    private InnerAdapter adapter;
     /**
      * 扫描跳转Activity RequestCode
      */
@@ -79,13 +79,12 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         return R.layout.video_fragment;
     }
 
-   
+
     @Override
     protected void initViews() {
         //标题栏
         video_title = findView(R.id.video_title_tv);
         video_code = findView(R.id.video_code);
-        location = findView(R.id.video_title_back);
 
         //卡片模式
         DisplayMetrics dm = getResources().getDisplayMetrics();
@@ -116,9 +115,8 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
     protected void initData() {
 
         //设置标题栏
-        video_title.setText("视频");
+
         video_title.setTextColor(Color.BLACK);
-        video_code.setImageResource(R.mipmap.icon_scan);
         adapter.setCardHight(cardHeight);
         adapter.setCardWidth(cardWidth);
         adapter.setVideoSuper(new InnerAdapter.videoSuper() {
@@ -138,7 +136,6 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
 //        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) toolbar.getLayoutParams();
 //        params.setMargins(0, statusBarHeight, 0, 0);
 //        toolbar.setLayoutParams(params);
-
 
 
     }
@@ -197,7 +194,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
                     Gson gson = new Gson();
                     Type type = new TypeToken<List<VideoDetailsBean>>() {
                     }.getType();
-                    String s =  type.toString();
+                    String s = type.toString();
                     final List<VideoDetailsBean> been = gson.fromJson(str, type);
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
@@ -208,7 +205,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
                                 Log.d("VideoFragment", b.getLinkMp4());
                             }
 
-                            Log.d("VideoFragment", "been.size():" + been.size());
+
                             adapter.setVideoDetailsBeans(been);
                             swipeView.setAdapter(adapter);
                         }
@@ -337,9 +334,6 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
     }
 
 
-
-
-
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
         Toast.makeText(context, "走", Toast.LENGTH_SHORT).show();
@@ -347,24 +341,24 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-                   if (EasyPermissions.somePermissionPermanentlyDenied(getContext() , perms)) {
-                       new AppSettingsDialog.Builder(this , "当前App需要申请camera权限,需要打开设置页面么?")
-                               .setTitle("权限申请")
-                               .setPositiveButton("确认")
-                               .setNegativeButton("取消" , null)
-                               .setRequestCode(REQUEST_CAMERA_PERM)
-                               .build()
-                               .show();
+        if (EasyPermissions.somePermissionPermanentlyDenied(getContext(), perms)) {
+            new AppSettingsDialog.Builder(this, "当前App需要申请camera权限,需要打开设置页面么?")
+                    .setTitle("权限申请")
+                    .setPositiveButton("确认")
+                    .setNegativeButton("取消", null)
+                    .setRequestCode(REQUEST_CAMERA_PERM)
+                    .build()
+                    .show();
 
-                   }
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.video_code:
-                Intent intent =new Intent(getContext() , CaptureActivity.class);
-                startActivityForResult(intent , REQUEST_CODE);
+                Intent intent = new Intent(getContext(), CaptureActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
                 break;
             case R.id.video_title_back:
 

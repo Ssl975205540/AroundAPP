@@ -15,8 +15,8 @@ import lanou.around.bean.HomeTabItemBean;
 import lanou.around.home.recommend.RecommendWebView;
 import lanou.around.presenter.HomeNearbyPresenter;
 import lanou.around.tools.http.URLValues;
-import lanou.around.tools.recycle.EncodeUtil;
-import lanou.around.tools.recycle.IntentUtils;
+import lanou.around.tools.util.EncodeUtil;
+import lanou.around.tools.util.IntentUtils;
 
 import static lanou.around.home.recommend.RecommendWebView.INFO_URL_JUMP;
 
