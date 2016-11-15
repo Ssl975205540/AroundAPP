@@ -27,7 +27,7 @@ public class LocalImageHolderView implements Holder<String> {
     public void UpdateUI(Context context, int position, String data) {
 
         Glide.with(context).load(data).diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.mipmap.home01_bg_card).placeholder(R.mipmap.rx)
+                .error(R.mipmap.home01_bg_card).placeholder(R.mipmap.x3)
                 .into(imageView);
     }
 }
