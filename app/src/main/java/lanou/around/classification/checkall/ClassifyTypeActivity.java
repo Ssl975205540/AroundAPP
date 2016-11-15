@@ -13,7 +13,6 @@ import lanou.around.base.BaseActivity;
 
 public class ClassifyTypeActivity extends BaseActivity {
 
-
     private ListView mPreparation;
     private List<String> mChoose;
     private ImageView mBack;
@@ -36,13 +35,12 @@ public class ClassifyTypeActivity extends BaseActivity {
 
     @Override
     protected void initListeners() {
-        Intent intent = getIntent();
-        mChoose = intent.getStringArrayListExtra(TYPE);
+
 
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               finish();
+                finish();
             }
         });
     }
@@ -54,8 +52,10 @@ public class ClassifyTypeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        Intent intent = getIntent();
+        mChoose = intent.getStringArrayListExtra(TYPE);
 
-        ChooseAdapter adapter = new ChooseAdapter(this,mChoose);
+        ChooseAdapter adapter = new ChooseAdapter(this, mChoose);
         mPreparation.setAdapter(adapter);
         mKind.setText(KIND_ALL + getIntent().getStringExtra(NAME));
     }
