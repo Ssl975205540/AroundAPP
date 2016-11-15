@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import lanou.around.aroundinterface.IHttpRequest;
+import lanou.around.aroundinterface.OnCompletedListener;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;

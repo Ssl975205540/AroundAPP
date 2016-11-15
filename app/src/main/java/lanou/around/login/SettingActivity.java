@@ -22,9 +22,10 @@ import lanou.around.widget.DataCleanManager;
  */
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
-    private Button clearData, data , closeLogin , aroundAbout , aroundShielding , personData;
+    private Button clearData, data, closeLogin, aroundAbout, aroundShielding, personData;
     private ImageButton back;
     private TextView setting_title;
+
     @Override
     protected int setContentView() {
         return R.layout.setting_activity;
@@ -59,7 +60,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         setting_title.setText("设置");
         setting_title.setTextColor(Color.BLACK);
         back.setImageResource(R.mipmap.rn);
-        ShareSDK.initSDK(this,"sharesdk的appkey");
+        ShareSDK.initSDK(this, "sharesdk的appkey");
         //清理缓存
         try {
             data.setText(DataCleanManager.getTotalCacheSize(SettingActivity.this));
@@ -102,13 +103,13 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 }
                 break;
             case R.id.around_about:
-                IntentUtils.getIntents().Intent(this , AboutAroundActivity.class , new Bundle());
+                IntentUtils.getIntents().Intent(this, AboutAroundActivity.class, new Bundle());
                 break;
             case R.id.around_shielding:
                 Toast.makeText(this, "你还没有屏蔽任何人哦", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.around_personal_data:
-                IntentUtils.getIntents().Intent(this , PresonDataActivity.class , new Bundle());
+                IntentUtils.getIntents().Intent(this, PresonDataActivity.class, new Bundle());
                 break;
         }
     }

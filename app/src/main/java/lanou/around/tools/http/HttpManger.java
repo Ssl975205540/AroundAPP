@@ -2,10 +2,13 @@ package lanou.around.tools.http;
 
 import java.util.Map;
 
+import lanou.around.aroundinterface.IHttpRequest;
+import lanou.around.aroundinterface.OnCompletedListener;
+
 /**
  * Created by dllo on 16/10/25.
  */
-public class HttpManger implements IHttpRequest{
+public class HttpManger implements IHttpRequest {
 
 
     public static HttpManger getInstance() {

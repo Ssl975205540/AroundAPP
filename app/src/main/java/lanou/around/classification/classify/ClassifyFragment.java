@@ -23,6 +23,7 @@ import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.ClassifyBean;
 import lanou.around.bean.ClassifyTabBean;
+import lanou.around.bean.ClassifyViewBean;
 import lanou.around.classification.checkall.CheckAllActivity;
 import lanou.around.classification.classifyview.CenterViewFragment;
 import lanou.around.classification.classifyview.ClassifyViewAdapter;
@@ -30,6 +31,7 @@ import lanou.around.classification.classifyview.LeftViewFragment;
 import lanou.around.classification.classifyview.RightViewFragment;
 import lanou.around.classification.seek.SeekActivity;
 import lanou.around.presenter.ClassifyPresenter;
+import lanou.around.presenter.ClassifyViewPresenter;
 import lanou.around.tools.http.URLValues;
 import lanou.around.tools.util.DisplayUtil;
 import lanou.around.widget.PullZoomView;
@@ -60,10 +62,13 @@ public class ClassifyFragment extends BaseFragment
     private Button mCheckAll;
     private LinearLayout mMessageEdit;
     private static String SENSITIVE = "sensitive";
-    private static String ZOOMTIME =  "zoomTime";
-    private static String ISPARALLAX =  "isParallax";
+    private static String ZOOMTIME = "zoomTime";
+    private static String ISPARALLAX = "isParallax";
     private static String ISZOOMENABLE = "isZoomEnable";
     private RelativeLayout relaClass;
+    LeftViewFragment mLeftFragment = new LeftViewFragment();
+    RightViewFragment mRightFragment = new RightViewFragment();
+    CenterViewFragment mCenterFragment = new CenterViewFragment();
 
 
     @Override
@@ -105,17 +110,18 @@ public class ClassifyFragment extends BaseFragment
         ClassifyPresenter presenter = new ClassifyPresenter(this);
         presenter.startRequest(URLValues.CLASSIFY_EDITTEXT_TITLTE, ClassifyTabBean.class);
         presenter.startRequest(URLValues.CLASSIFY_WANT_BUY_MESSAGE, ClassifyBean.class);
-    }
 
+        ClassifyViewPresenter viewPresenter = new ClassifyViewPresenter(this);
+        viewPresenter.startRequest(URLValues.CLASSIFY_CHILD_CATES_LOGIC, ClassifyViewBean.class);
+    }
 
 
     @Override
     protected void initData() {
-
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new LeftViewFragment());
-        fragments.add(new CenterViewFragment());
-        fragments.add(new RightViewFragment());
+        fragments.add(mLeftFragment);
+        fragments.add(mCenterFragment);
+        fragments.add(mRightFragment);
 
         ClassifyViewAdapter adapter = new ClassifyViewAdapter(getChildFragmentManager(), fragments);
         mViewPager.setAdapter(adapter);
@@ -140,9 +146,6 @@ public class ClassifyFragment extends BaseFragment
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) relaClass.getLayoutParams();
         params.setMargins(0, statusBarHeight, 0, 0);
         relaClass.setLayoutParams(params);
-//        StatusBarCompat.compat(getActivity(), getResources().getColor(R.color.home_adapter_item));
-
-
 
     }
 
@@ -276,6 +279,12 @@ public class ClassifyFragment extends BaseFragment
             mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
             mRecyclerView.setAdapter(myAdapter);
         }
+        if (bean instanceof ClassifyViewBean) {
+            ClassifyViewBean viewBean = (ClassifyViewBean) bean;
+            mLeftFragment.setDatas(viewBean);
+            mRightFragment.setDatas(viewBean);
+            mCenterFragment.setDatas(viewBean);
+        }
     }
 
     @Override
@@ -296,7 +305,7 @@ public class ClassifyFragment extends BaseFragment
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_classify_check:
                 Intent intent = new Intent(context, CheckAllActivity.class);
                 startActivity(intent);

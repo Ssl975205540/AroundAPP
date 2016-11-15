@@ -9,7 +9,9 @@
     <ImageView
         android:id="@+id/image_left"
         android:layout_width="50dp"
-        android:layout_height="50dp"/>
+        android:layout_height="50dp"
+        android:src="@mipmap/a0r"
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/text_left"

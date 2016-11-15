@@ -26,6 +26,8 @@
         android:id="@+id/iv_baby_photo"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:src="@mipmap/a0r"
+        android:scaleType="fitXY"/>
 
 </LinearLayout>
