@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +22,9 @@ import lanou.around.widget.DataCleanManager;
  */
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
-    private Button clearData, data, closeLogin, aroundAbout, aroundShielding, personData;
-    private ImageButton back;
+
+    private Button clearData, data , closeLogin , aroundAbout , aroundShielding , personData;
+    private ImageView back;
     private TextView setting_title;
 
     @Override
@@ -51,7 +52,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         aroundAbout.setOnClickListener(this);
         aroundShielding.setOnClickListener(this);
         personData.setOnClickListener(this);
-
     }
 
     @Override

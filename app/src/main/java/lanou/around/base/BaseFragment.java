@@ -16,13 +16,13 @@ import android.view.ViewGroup;
 public abstract class BaseFragment extends Fragment {
 
     public Context context;
-    private int statusBarHeight;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(setContentView(), container, false);
+        return inflater.inflate(setContentView(),null);
 
 
     }

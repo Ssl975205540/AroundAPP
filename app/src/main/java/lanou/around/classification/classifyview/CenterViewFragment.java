@@ -15,6 +15,8 @@ import lanou.around.bean.ClassifyViewBean;
 import lanou.around.classification.search.SearchActivity;
 import lanou.around.tools.util.IntentUtils;
 
+import static lanou.around.R.id.gridView;
+import static lanou.around.app.AroundAPP.context;
 import static lanou.around.classification.search.SearchActivity.CATE_ID_CENTER;
 import static lanou.around.classification.search.SearchActivity.CATE_NAME_CENTER;
 import static lanou.around.classification.search.SearchActivity.CENTER;
@@ -44,6 +46,7 @@ public class CenterViewFragment extends BaseFragment {
         // 为GridView设定监听器
         gridView.setOnItemClickListener(new gridViewListener());
     }
+
 
     @Override
     protected void initData() {

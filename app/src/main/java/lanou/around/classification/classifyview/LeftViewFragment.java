@@ -13,11 +13,15 @@ import lanou.around.R;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.ClassifyViewBean;
 import lanou.around.classification.search.SearchActivity;
+import lanou.around.presenter.ClassifyViewPresenter;
+import lanou.around.tools.http.URLValues;
 import lanou.around.tools.util.IntentUtils;
 
+import static lanou.around.app.AroundAPP.context;
 import static lanou.around.classification.search.SearchActivity.CATE_ID_LEFT;
 import static lanou.around.classification.search.SearchActivity.CATE_NAME_LEFT;
 import static lanou.around.classification.search.SearchActivity.LEFT;
+import static org.cybergarage.http.HTTP.HEAD;
 
 /**
  * Created by dllo on 16/10/22.
@@ -45,7 +49,6 @@ public class LeftViewFragment extends BaseFragment {
     protected void initListeners() {
         // 为GridView设定监听器
         gridView.setOnItemClickListener(new gridViewListener());
-
     }
 
     @Override

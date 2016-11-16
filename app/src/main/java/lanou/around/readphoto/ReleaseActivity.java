@@ -20,6 +20,7 @@ import java.util.List;
 import lanou.around.R;
 import lanou.around.aroundinterface.CanOnItemListener;
 import lanou.around.base.BaseActivity;
+import lanou.around.readphoto.region.RegionActivity;
 import lanou.around.widget.MyRecyclerView;
 
 import static lanou.around.app.AroundAPP.context;
@@ -34,6 +35,7 @@ public class ReleaseActivity extends BaseActivity {
     private ImageView img_release;
     private List<String> strings;
     private List<String> list1;
+    private RelativeLayout releaseRlFive;
 
     @Override
     protected int setContentView() {
@@ -49,10 +51,23 @@ public class ReleaseActivity extends BaseActivity {
         recyclerview_release = findView(R.id.recyclerview_release);
         release_toolbar = findView(R.id.release_toolbar);
         img_release = findView(R.id.img_release);
+        releaseRlFive = findView(R.id.release_rl_five);
     }
 
     @Override
     protected void initListeners() {
+
+        releaseRlFive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(ReleaseActivity.this, RegionActivity.class);
+
+                startActivity(intent);
+
+
+            }
+        });
         img_release.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

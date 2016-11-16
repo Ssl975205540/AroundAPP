@@ -2,7 +2,6 @@ package lanou.around.login;
 
 import android.graphics.Color;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +22,7 @@ import static lanou.around.app.AroundAPP.context;
  */
 
 public class PresonDataActivity extends BaseActivity implements View.OnClickListener {
-    private ImageButton back;
+    private ImageView back;
     private TextView person_title , name , sex;
     private ImageView personIcon;
     private Platform qq;

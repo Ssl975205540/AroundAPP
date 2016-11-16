@@ -64,15 +64,7 @@ public class NearByFragment extends BaseFragment
 
     }
 
-    @Override
-    public void startAnimation() {
 
-    }
-
-    @Override
-    public void stopAnimation() {
-
-    }
 
     @Override
     public void onResponse(Object bean) {

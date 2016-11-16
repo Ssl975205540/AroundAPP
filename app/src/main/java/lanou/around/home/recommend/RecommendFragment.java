@@ -68,15 +68,7 @@ public class RecommendFragment extends BaseFragment implements InterView {
 
     }
 
-    @Override
-    public void startAnimation() {
 
-    }
-
-    @Override
-    public void stopAnimation() {
-
-    }
 
     @Override
     public void onResponse(Object t) {

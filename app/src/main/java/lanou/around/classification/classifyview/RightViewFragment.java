@@ -47,9 +47,7 @@ public class RightViewFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
     }
-
 
     public void setDatas(ClassifyViewBean datas) {
         mDatas = datas;

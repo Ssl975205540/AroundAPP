@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +17,7 @@ import lanou.around.tools.http.URLValues;
  */
 
 public class AboutAroundActivity extends BaseActivity implements View.OnClickListener {
-    private ImageButton back ;
+    private ImageView back ;
     private TextView about_title;
     private Button update , agreement , contact;
     @Override

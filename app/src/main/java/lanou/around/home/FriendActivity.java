@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +28,7 @@ import static lanou.around.app.AroundAPP.context;
  */
 
 public class FriendActivity extends BaseActivity implements View.OnClickListener {
-    private ImageButton back;
+    private ImageView back;
     private TextView login_title , treaty;
     private Button login_btn;
 

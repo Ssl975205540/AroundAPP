@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lanou.around.R;
+import lanou.around.bean.Recommend;
 import lanou.around.bean.RecommendBean;
 import lanou.around.tools.http.URLValues;
 import lanou.around.tools.util.IntentUtils;

@@ -18,7 +18,7 @@ public class HomePresenter {
 
         this.interView = interView;
         homeModel = new HomeModel();
-        interView.startAnimation();
+
 
     }
 
@@ -34,7 +34,7 @@ public class HomePresenter {
             @Override
             public void onFinished(T t) {
 
-                interView.stopAnimation();
+
                 interView.onResponse(t);
                 if(AroundAPP.isNetworkAvailable()){
                     homeModel.InsertSQ(t);

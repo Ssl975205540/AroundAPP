@@ -1,4 +1,4 @@
-package lanou.around.home.recommend;
+package lanou.around.bean;
 
 /**
  * Created by dllo on 16/11/9.

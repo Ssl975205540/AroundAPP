@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
 import lanou.around.R;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
@@ -32,7 +33,7 @@ public class HomeTabFragment extends BaseFragment implements InterView {
     private ImageView mImage;
     private AnimationDrawable animationDrawable;
     private HomeItemBean mItemBean;
-
+    protected boolean isVisible;
 
     @Override
     protected int setContentView() {
@@ -41,16 +42,9 @@ public class HomeTabFragment extends BaseFragment implements InterView {
 
     @Override
     protected void initData() {
-        Bundle agres = getArguments();
-        String num = agres.getString("url");
-        EncodeUtil encodeUtil = new EncodeUtil();
-        encodeUtil.encode(num);
-        String nearbyBodyURL = "pagenum=1&lon=121.544102&lat=38.883514&pagesize=20&cateId=" + num + "&";
-        HomeNearbyPresenter homeNearbyPresenter = new HomeNearbyPresenter(this);
-        homeNearbyPresenter.startRequest(URLValues.POST_NEARBY, nearbyBodyURL, HomeTabItemBean.class);
 
-        HomeItemPresenter itemPresenter = new HomeItemPresenter(this);
-        itemPresenter.startRequest(URLValues.PIN_RECOMMEND_JUMP, HomeItemBean.class);
+
+
     }
 
     @Override
@@ -58,6 +52,7 @@ public class HomeTabFragment extends BaseFragment implements InterView {
         recyclerView = findView(R.id.fragment_home_tab_recycle);
         mRelative = findView(R.id.relayout);
         mImage = findView(R.id.image_home_tab);
+
     }
 
     @Override
@@ -65,25 +60,15 @@ public class HomeTabFragment extends BaseFragment implements InterView {
 
     }
 
-    @Override
-    public void startAnimation() {
 
-    }
-
-    @Override
-    public void stopAnimation() {
-
-    }
 
     @Override
     public void onResponse(Object t) {
 
-        animationDrawable = (AnimationDrawable) mImage.getBackground();
-        animationDrawable.start();
 
-        mRelative.setVisibility(View.GONE);
 
-        if (t instanceof HomeTabItemBean){
+
+        if (t instanceof HomeTabItemBean) {
             bean = (HomeTabItemBean) t;
 
             adapter = new HomeTabItemAdapter(context, bean.getRespData());
@@ -99,13 +84,55 @@ public class HomeTabFragment extends BaseFragment implements InterView {
             });
         }
 
-        if (t instanceof HomeItemBean){
+        if (t instanceof HomeItemBean) {
             mItemBean = (HomeItemBean) t;
         }
+
+        mRelative.setVisibility(View.GONE);
     }
 
     @Override
     public void onError() {
 
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (getUserVisibleHint()) {
+            isVisible = true;
+            onVisible();
+        } else {
+            isVisible = false;
+            onInvisible();
+        }
+    }
+
+    private void onInvisible() {
+
+
+    }
+
+
+    private void onVisible() {
+
+        if(animationDrawable != null){
+            animationDrawable = (AnimationDrawable) mImage.getBackground();
+            animationDrawable.start();
+        }
+
+        Bundle agres = getArguments();
+        String num = agres.getString("url");
+        EncodeUtil encodeUtil = new EncodeUtil();
+        encodeUtil.encode(num);
+        String nearbyBodyURL = "pagenum=1&lon=121.544102&lat=38.883514&pagesize=20&cateId=" + num + "&";
+        HomeNearbyPresenter homeNearbyPresenter = new HomeNearbyPresenter(this);
+        homeNearbyPresenter.startRequest(URLValues.POST_NEARBY, nearbyBodyURL, HomeTabItemBean.class);
+
+        HomeItemPresenter itemPresenter = new HomeItemPresenter(this);
+        itemPresenter.startRequest(URLValues.PIN_RECOMMEND_JUMP, HomeItemBean.class);
+
+    }
+
 }
