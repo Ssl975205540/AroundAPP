@@ -99,7 +99,8 @@
         <activity android:name=".home.HSVClickActivity" />
         <activity android:name=".home.FriendActivity" />
         <activity android:name=".classification.checkall.ClassifyTypeActivity" />
-        <activity android:name=".readphoto.ReleaseActivity" />
+        <activity android:name=".readphoto.ReleaseActivity"
+           />
         <activity android:name=".readphoto.SelectActivity" />
         <activity android:name=".login.SettingActivity" />
         <activity android:name=".login.SemaseActivity" />

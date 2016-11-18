@@ -2,7 +2,7 @@ package lanou.around.login;
 
 import android.graphics.Color;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import lanou.around.R;
@@ -13,8 +13,10 @@ import lanou.around.base.BaseActivity;
  */
 
 public class ContactActivity extends BaseActivity implements View.OnClickListener {
-    private ImageButton back;
+    private ImageView back;
     private TextView contaxt_title;
+    private ImageView videoCode;
+
     @Override
     protected int setContentView() {
         return R.layout.contact_activity;
@@ -24,6 +26,9 @@ public class ContactActivity extends BaseActivity implements View.OnClickListene
     protected void initViews() {
         back = findView(R.id.video_title_back);
         contaxt_title = findView(R.id.video_title_tv);
+        contaxt_title.setVisibility(View.GONE);
+        videoCode = findView(R.id.video_code);
+
     }
 
     @Override

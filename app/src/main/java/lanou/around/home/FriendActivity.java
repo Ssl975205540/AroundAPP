@@ -31,6 +31,7 @@ public class FriendActivity extends BaseActivity implements View.OnClickListener
     private ImageView back;
     private TextView login_title , treaty;
     private Button login_btn;
+    private ImageView videoCode;
 
     @Override
     protected int setContentView() {
@@ -42,7 +43,9 @@ public class FriendActivity extends BaseActivity implements View.OnClickListener
         back = findView(R.id.video_title_back);
         login_title = findView(R.id.video_title_tv);
         login_btn = findView(R.id.around_login);
+        videoCode = findView(R.id.video_code);
         treaty = findView(R.id.around_treaty);
+        videoCode.setVisibility(View.GONE);
     }
 
     @Override

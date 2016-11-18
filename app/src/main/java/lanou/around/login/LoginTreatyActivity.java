@@ -8,7 +8,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import lanou.around.R;
@@ -20,7 +20,7 @@ import lanou.around.base.BaseActivity;
 
 public class LoginTreatyActivity extends BaseActivity implements View.OnClickListener {
     private TextView loginTreaty;
-    private ImageButton back;
+    private ImageView back;
     private WebView loginWeb;
 
 

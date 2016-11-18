@@ -135,7 +135,11 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         search_recyclerview.setLoadingListener(new MyRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+
+
                 search_recyclerview.refreshComplete();
+
+
             }
 
 
@@ -160,8 +164,15 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         mPhone.setText(name);
 
         String kName = mBundle.getString(K_NAME);
-        mPhone.setText(kName);
 
+        if (kName == null) {
+
+            mPhone.setText("分类");
+        } else {
+
+            mPhone.setText(name);
+
+        }
         String cateIdLeft = mBundle.getString(CATE_ID_LEFT);
         mCateNameLeft = mBundle.getString(CATE_NAME_LEFT);
 
@@ -414,8 +425,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     public void onBackPressed() {
         super.onBackPressed();
     }
-
-
 
 
     @Override

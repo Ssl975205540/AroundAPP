@@ -15,7 +15,7 @@ import cn.sharesdk.tencent.qq.QQ;
 import lanou.around.R;
 import lanou.around.base.BaseActivity;
 import lanou.around.tools.util.IntentUtils;
-import lanou.around.widget.DataCleanManager;
+import lanou.around.tools.db.DataCleanManager;
 
 /**
  * Created by dllo on 16/11/7.

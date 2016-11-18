@@ -2,7 +2,6 @@ package lanou.around.home;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,7 +24,6 @@ public class HomeAdapter extends BaseRcvAdapter<HomeAdapter.HomeViewHolder, Home
     public HomeAdapter(Context context, ArrayList<HomeBeanHot> data) {
         super(context, data);
 
-        Log.d("HomeAdapter", "data.size():" + data.size());
     }
 
     @Override

@@ -19,15 +19,61 @@ import lanou.around.bean.HomeBeanHot;
 
 public class AroundDBManager {
 
-    public  AroundHelper aroundHelper;
+    public AroundHelper aroundHelper;
 
 
-    public static AroundDBManager getInstance(){
-        
-        return Svvv.aroundDBManager;
+    public static AroundDBManager getInstance() {
+
+        return StaticInner.aroundDBManager;
+
     }
-    
-    private final static class Svvv{
+
+    public void insertSeek(String s) {
+        SQLiteDatabase db = aroundHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", s);
+        db.insert("search", null, values);
+
+    }
+
+    public List<String> querySeek() {
+        SQLiteDatabase db = aroundHelper.getWritableDatabase();
+
+        List<String> mStrings = new ArrayList<>();
+        Cursor cursor = db.query("search", null, null, null, null, null, null);
+//        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(HomeQueryActivity.this,R.layout.item_record,cursor,new String[]{"name"},new int[]{R.id.tv_search_query});
+//        lv.setAdapter(adapter);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                mStrings.add(name);
+            }
+            if (!mStrings.isEmpty()) {
+                for (int i = 0; i < mStrings.size(); i++) {
+                    for (int j = mStrings.size() - 1; j > i; j--) {
+                        if (mStrings.get(i).equals(mStrings.get(j))) {
+                            mStrings.remove(j);
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+        return mStrings;
+    }
+
+    public void delete(String search) {
+        SQLiteDatabase db = aroundHelper.getWritableDatabase();
+        db.delete(search,null,null);
+
+
+
+    }
+
+
+    private final static class StaticInner {
 
         private final static AroundDBManager aroundDBManager = new AroundDBManager();
 
@@ -36,13 +82,13 @@ public class AroundDBManager {
     public AroundDBManager() {
 
         aroundHelper = new AroundHelper(AroundAPP.getContext());
-    
-    }
-    
-    
-    public void insert(HomeBean bean){
 
-       SQLiteDatabase db = aroundHelper.getWritableDatabase();
+    }
+
+
+    public void insert(HomeBean bean) {
+
+        SQLiteDatabase db = aroundHelper.getWritableDatabase();
         ArrayList<HomeBeanHot> arrayList = new ArrayList<>();
         for (int i = 0; i < bean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().size(); i++) {
             for (int j = 0; j < bean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(0).size(); j++) {
@@ -53,30 +99,30 @@ public class AroundDBManager {
         }
 
 
-            db.delete("homegettopbanner",null,null);
+        db.delete("homegettopbanner", null, null);
 
         for (int j = 0; j < arrayList.size(); j++) {
 
             ContentValues content = new ContentValues();
-            content.put("url",arrayList.get(j).getImageUrl());
-            db.insert("homegettopbanner",null,content);
+            content.put("url", arrayList.get(j).getImageUrl());
+            db.insert("homegettopbanner", null, content);
         }
 
-        for (int i = 0; i <bean.getRespData().getTopBanners().size(); i++) {
+        for (int i = 0; i < bean.getRespData().getTopBanners().size(); i++) {
 
             ContentValues content = new ContentValues();
-            content.put("topbanners",bean.getRespData().getTopBanners().get(i).getImageUrl());
-            db.insert("homegettopbanner",null,content);
+            content.put("topbanners", bean.getRespData().getTopBanners().get(i).getImageUrl());
+            db.insert("homegettopbanner", null, content);
 
         }
 
 
         for (int i = 0; i < bean.getRespData().getLowBanners().size(); i++) {
 
-
             ContentValues content = new ContentValues();
-            content.put("lowbanners",bean.getRespData().getLowBanners().get(i).getImageUrl());
-            db.insert("homegettopbanner",null,content);
+            content.put("lowbanners", bean.getRespData().getLowBanners().get(i).getImageUrl());
+            db.insert("homegettopbanner", null, content);
+
 
         }
 
@@ -84,42 +130,46 @@ public class AroundDBManager {
     }
 
 
-     public HomeBean query(String key){
+    public HomeBean query(String key) {
 
-         SharedPreferences sharedPreferences = AroundAPP.getContext().getSharedPreferences("aroundfirst", Context.MODE_PRIVATE);
-         SharedPreferences.Editor edit = sharedPreferences.edit();
-         edit.commit();
+        SharedPreferences sharedPreferences = AroundAPP.getContext().getSharedPreferences("aroundfirst", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.commit();
 
-         if(sharedPreferences.getBoolean("first",true)){
-             edit.putBoolean("first",false);
-             edit.commit();
-             return null;
-         }
+        if (sharedPreferences.getBoolean("first", true)) {
+            edit.putBoolean("first", false);
+            edit.commit();
+            return null;
+        }
 
-         SQLiteDatabase db = aroundHelper.getWritableDatabase();
-        if(key.equals("homegettopbanner")){
+        SQLiteDatabase db = aroundHelper.getWritableDatabase();
+        if (key.equals("homegettopbanner")) {
             ArrayList<HomeBeanHot> arraylist = new ArrayList<>();
             ArrayList<HomeBean.RespDataBean.TopBannersBean> topArrayList = new ArrayList<>();
             ArrayList<HomeBean.RespDataBean.LowBannersBean> lowArrayList = new ArrayList<>();
 
 
+            Cursor cursor = db.query(key, null, null, null, null, null, null);
+            if (cursor.getCount() != 0) {
+                while (cursor.moveToNext()) {
 
-            Cursor cursor = db.query(key,null,null,null,null,null,null);
-            if(cursor.getCount() != 0){
-                while (cursor.moveToNext()){
+
                     String url = cursor.getString(cursor.getColumnIndex("url"));
-                    HomeBeanHot home = new HomeBeanHot();
-                    home.setImageUrl(url);
-                    arraylist.add(home);
-                    String topbanners =cursor.getString(cursor.getColumnIndex("topbanners"));
+                    if (url != null) {
+                        HomeBeanHot home = new HomeBeanHot();
+                        home.setImageUrl(url);
+                        arraylist.add(home);
+                    }
+                    String topbanners = cursor.getString(cursor.getColumnIndex("topbanners"));
                     String lowbanners = cursor.getString(cursor.getColumnIndex("lowbanners"));
 
-                    if(lowbanners != null){
+                    if (lowbanners != null) {
                         HomeBean.RespDataBean.LowBannersBean low = new HomeBean.RespDataBean.LowBannersBean();
+                        low.setImageUrl(lowbanners);
                         lowArrayList.add(low);
 
                     }
-                    if(topbanners != null){
+                    if (topbanners != null) {
                         HomeBean.RespDataBean.TopBannersBean top = new HomeBean.RespDataBean.TopBannersBean();
                         top.setImageUrl(topbanners);
                         topArrayList.add(top);
@@ -127,11 +177,9 @@ public class AroundDBManager {
 
                 }
 
-            }else {
+            } else {
                 return null;
             }
-
-
 
 
             HomeBean homeBean = new HomeBean();
@@ -142,12 +190,11 @@ public class AroundDBManager {
             homeBean.getRespData().setLowBanners(lowArrayList);
 
 
-
             homeBean.getRespData().setTopBanners(topArrayList);
             homeBean.getRespData().getActBanners().add(new HomeBean.RespDataBean.ActBannersBean());
             homeBean.getRespData().getActBanners().get(0).setMiddleBanner(new HomeBean.RespDataBean.ActBannersBean.MiddleBannerBean());
             List<List<HomeBean.RespDataBean.ActBannersBean.MiddleBannerBean.BannersBean>> arrayLists = new ArrayList<>();
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < arraylist.size() / 3; i++) {
 
                 ArrayList<HomeBean.RespDataBean.ActBannersBean.MiddleBannerBean.BannersBean> arrayList = new ArrayList<>();
                 arrayList.add(new HomeBean.RespDataBean.ActBannersBean.MiddleBannerBean.BannersBean());
@@ -158,10 +205,10 @@ public class AroundDBManager {
             }
 
 
-
             homeBean.getRespData().getActBanners().get(0).getMiddleBanner().setBanners(arrayLists);
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().size(); i++) {
+
                 if (i == 0) {
                     for (int j = 0; j < 3; j++) {
                         homeBean.getRespData().getActBanners().get(0).getMiddleBanner().getBanners().get(i).get(j).setImageUrl(arraylist.get(j).getImageUrl());
@@ -192,14 +239,12 @@ public class AroundDBManager {
             }
 
 
-
             return homeBean;
         }
 
 
-         return null;
+        return null;
     }
-    
-    
-    
+
+
 }

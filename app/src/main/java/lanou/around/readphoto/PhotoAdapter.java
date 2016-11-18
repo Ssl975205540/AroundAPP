@@ -52,6 +52,7 @@ public class PhotoAdapter extends CanRVAdapter<PictureBean> {
         }
 
         CheckBox checkBox = viewHelper.getView(R.id.checkbox);
+
         final ImageView imageView = viewHelper.getImageView(R.id.img);
 
         Glide.with(mContext).load(mList.get(position).path).asBitmap().into(imageView);

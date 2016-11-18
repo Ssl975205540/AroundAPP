@@ -567,7 +567,7 @@ public class Attacher implements IAttacher, View.OnTouchListener, OnScaleDragGes
         }
     }
 
-    protected void onDetachedFromWindow() {
+    public void onDetachedFromWindow() {
         cancelFling();
     }
 }

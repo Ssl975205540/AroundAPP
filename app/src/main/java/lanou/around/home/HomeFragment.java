@@ -25,9 +25,6 @@ import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +36,6 @@ import lanou.around.app.AroundAPP;
 import lanou.around.aroundinterface.InterToolBar;
 import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
-import lanou.around.bean.EventBean;
 import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeBeanHot;
 import lanou.around.classification.classifyview.DigitWebActivity;
@@ -114,7 +110,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
     @Override
     protected void initViews() {
-        EventBus.getDefault().register(this);
+
         recyviewHome = findView(R.id.recyview_home);
         viewPagerHome = findView(R.id.viewpager_home);
         toolbarHome = findView(R.id.toolbar_home);
@@ -148,17 +144,13 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
 
     }
 
-    @Subscribe
-    public void setEvent(EventBean event) {
 
-
-    }
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
+
     }
 
     @Override
@@ -332,7 +324,9 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         recyviewHome.setRefreshProgressStyle(MyRecyclerView.ProgressStyle.BallSpinFadeLoader);
         ArrayList<String> arrayList1 = new ArrayList<>();
         for (int i = 0; i < mHomeBean.getRespData().getTopBanners().size(); i++) {
-            arrayList1.add(mHomeBean.getRespData().getTopBanners().get(i).getImageUrl());
+            if ((i + 1) % 2 == 0) {
+                arrayList1.add(mHomeBean.getRespData().getTopBanners().get(i).getImageUrl());
+            }
         }
 
         bannerHome.setPages(
@@ -342,7 +336,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
                         return new LocalImageHolderView();
                     }
                 }, arrayList1)
-                .setOnItemClickListener(this).startTurning(4000);
+                .setOnItemClickListener(this).startTurning(3000);
 
     }
 
@@ -357,7 +351,7 @@ public class HomeFragment extends BaseFragment implements InterView, Transparent
         homeAdapter.setOnItemClick(new MyRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView.ViewHolder viewHolder, int position) {
-                Toast.makeText(context, "position:" + position, Toast.LENGTH_SHORT).show();
+
                 Bundle bundle = new Bundle();
                 bundle.putString("goUrl", mArrayList.get(position).getGoOperation().getParams().getGoUrl());
                 bundle.putString("postName", mArrayList.get(position).getPostName());

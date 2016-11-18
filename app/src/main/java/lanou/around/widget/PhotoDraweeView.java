@@ -1,4 +1,4 @@
-package lanou.around.readphoto;
+package lanou.around.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,6 +15,7 @@ import lanou.around.aroundinterface.IAttacher;
 import lanou.around.aroundinterface.OnPhotoTapListener;
 import lanou.around.aroundinterface.OnScaleChangeListener;
 import lanou.around.aroundinterface.OnViewTapListener;
+import lanou.around.readphoto.Attacher;
 
 public class PhotoDraweeView extends SimpleDraweeView implements IAttacher {
 

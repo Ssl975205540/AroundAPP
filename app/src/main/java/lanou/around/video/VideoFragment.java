@@ -85,13 +85,14 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
         //标题栏
         video_title = findView(R.id.video_title_tv);
         video_code = findView(R.id.video_code);
+        video_code.setVisibility(View.VISIBLE);
         video_code.setBackgroundResource(R.mipmap.icon_scan);
         //卡片模式
         DisplayMetrics dm = getResources().getDisplayMetrics();
         float density = dm.density;
         cardWidth = (int) (dm.widthPixels - (2 * 18 * density));
         cardHeight = (int) (dm.heightPixels - (338 * density));
-        swipeView = (SwipeFlingAdapterView) findView(R.id.video_swipe_view);
+        swipeView =findView(R.id.video_swipe_view);
         //适配器
         adapter = new InnerAdapter(getContext());
 
@@ -202,7 +203,7 @@ public class VideoFragment extends BaseFragment implements SwipeFlingAdapterView
 
                             for (VideoDetailsBean b :
                                     been) {
-                                Log.d("VideoFragment", b.getLinkMp4());
+
                             }
 
 

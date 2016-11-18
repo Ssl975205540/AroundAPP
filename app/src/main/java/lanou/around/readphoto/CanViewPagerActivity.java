@@ -57,6 +57,7 @@ import java.util.Map;
 import lanou.around.R;
 import lanou.around.bean.PictureBean;
 import lanou.around.widget.MultiTouchViewPager;
+import lanou.around.widget.PhotoDraweeView;
 import me.relex.circleindicator.CircleIndicator;
 
 public class CanViewPagerActivity extends AppCompatActivity {

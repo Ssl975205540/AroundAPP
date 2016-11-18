@@ -178,6 +178,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
                 return position == 0 ? 3 : 1;
             }
         });
+
         photoRecyclerview.setLayoutManager(layoutManager);
 
 

@@ -108,7 +108,7 @@
                     android:id="@+id/tv_search_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="手机"
+                    android:text="分类"
                     android:maxEms="4"
                     android:ellipsize="end"
                     android:singleLine="true"

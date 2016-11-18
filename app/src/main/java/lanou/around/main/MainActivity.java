@@ -87,12 +87,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         homeFragment = new HomeFragment();
-
-
         fragmentTransaction.add(fl_main, homeFragment);
-
-
-
         fragmentTransaction.commit();
         fragmentGank = homeFragment;
 

@@ -2,7 +2,6 @@ package lanou.around.main;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +36,8 @@ public class WelComeActivity extends BaseActivity {
             startActivity(i);
             finish();
         }
+
+
     }
 
     @Override
@@ -109,11 +110,15 @@ public class WelComeActivity extends BaseActivity {
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             textWelcome.setText(values[0]);
-            if (values[0].equals("0")) {
-                Intent i = new Intent(WelComeActivity.this, MainActivity.class);
-                startActivity(i);
-                finish();
+            if (AroundAPP.isNetworkAvailable() == true) {
+                if (values[0].equals("0")) {
+
+                    Intent i = new Intent(WelComeActivity.this, MainActivity.class);
+                    startActivity(i);
+                    finish();
+                }
             }
+
         }
     }
 

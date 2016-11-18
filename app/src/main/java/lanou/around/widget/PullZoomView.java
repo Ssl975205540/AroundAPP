@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
 import android.widget.Scroller;
+
+import com.bigkoo.convenientbanner.ConvenientBanner;
+
 import lanou.around.R;
 
 
@@ -137,6 +140,8 @@ public class PullZoomView extends ScrollView {
                 if (childView instanceof ViewGroup) {
                     findTagViews(childView);
                 }
+
+
             }
         } else {
             String tag = (String) v.getTag();
