@@ -9,7 +9,7 @@ import lanou.around.bean.HomeBean;
 import lanou.around.bean.HomeTabBean;
 import lanou.around.tools.db.AroundDBManager;
 import lanou.around.tools.http.HttpManger;
-import lanou.around.tools.http.OnCompletedListener;
+import lanou.around.aroundinterface.OnCompletedListener;
 
 /**
  * Created by dllo on 16/10/25.

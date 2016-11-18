@@ -1,12 +1,13 @@
 package lanou.around.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by dllo on 16/10/25.
  */
 
-public class ClassifyViewBean {
+public class ClassifyViewBean implements Serializable {
 
     /**
      * respCode : 0

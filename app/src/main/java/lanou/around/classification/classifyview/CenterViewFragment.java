@@ -10,14 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lanou.around.R;
-import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.ClassifyViewBean;
 import lanou.around.classification.search.SearchActivity;
-import lanou.around.presenter.ClassifyViewPresenter;
-import lanou.around.tools.http.URLValues;
 import lanou.around.tools.util.IntentUtils;
 
+import static lanou.around.R.id.gridView;
+import static lanou.around.app.AroundAPP.context;
 import static lanou.around.classification.search.SearchActivity.CATE_ID_CENTER;
 import static lanou.around.classification.search.SearchActivity.CATE_NAME_CENTER;
 import static lanou.around.classification.search.SearchActivity.CENTER;
@@ -25,12 +24,12 @@ import static lanou.around.classification.search.SearchActivity.CENTER;
 /**
  * Created by dllo on 16/10/25.
  */
-public class CenterViewFragment extends BaseFragment implements InterView {
+public class CenterViewFragment extends BaseFragment {
 
     private GridView gridView;
-
     private List<ClassifyViewBean.RespDataBean> mRespDataBeanList;
-
+    private ClassifyViewBean mDatas;
+    private boolean mBoolean = true;
 
     @Override
     protected int setContentView() {
@@ -44,35 +43,22 @@ public class CenterViewFragment extends BaseFragment implements InterView {
 
     @Override
     protected void initListeners() {
-        ClassifyViewPresenter presenter = new ClassifyViewPresenter(this);
-        presenter.startRequest(URLValues.CLASSIFY_CHILD_CATES_LOGIC, ClassifyViewBean.class);
+        // 为GridView设定监听器
+        gridView.setOnItemClickListener(new gridViewListener());
     }
+
 
     @Override
     protected void initData() {
-
-        // 为GridView设定监听器
-        gridView.setOnItemClickListener(new gridViewListener());
-        mRespDataBeanList = new ArrayList<>();
-    }
-
-
-
-    @Override
-    public void onResponse(Object t) {
-        ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
-
-        for (int i = 8; i < 16; i++) {
-            mRespDataBeanList.add(classifyViewBean.getRespData().get(i));
+        if (mDatas != null) {
+            DatasAll();
         }
-        GridViewPagerAdapter gridViewAdapter = new GridViewPagerAdapter(context, mRespDataBeanList);
-        gridView.setAdapter(gridViewAdapter);
     }
 
 
-    @Override
-    public void onError() {
-
+    public void setDatas(ClassifyViewBean datas) {
+        mDatas = datas;
+        DatasAll();
     }
 
     private class gridViewListener implements AdapterView.OnItemClickListener {
@@ -89,5 +75,23 @@ public class CenterViewFragment extends BaseFragment implements InterView {
         }
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (mBoolean){
+            if (isVisibleToUser ) {
+                DatasAll();
+            }
+        }
+        mBoolean = false;
+    }
 
+    private void DatasAll() {
+        mRespDataBeanList = new ArrayList<>();
+        for (int i = 8; i < 16; i++) {
+            mRespDataBeanList.add(mDatas.getRespData().get(i));
+        }
+        GridViewPagerAdapter gridViewAdapter = new GridViewPagerAdapter(context, mRespDataBeanList);
+        gridView.setAdapter(gridViewAdapter);
+    }
 }

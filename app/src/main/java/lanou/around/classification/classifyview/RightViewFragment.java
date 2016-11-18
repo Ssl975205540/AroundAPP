@@ -10,13 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lanou.around.R;
-import lanou.around.aroundinterface.InterView;
 import lanou.around.base.BaseFragment;
 import lanou.around.bean.ClassifyViewBean;
 import lanou.around.classification.search.SearchActivity;
-import lanou.around.presenter.ClassifyViewPresenter;
-import lanou.around.tools.http.URLValues;
 import lanou.around.tools.util.IntentUtils;
+
 import static lanou.around.classification.search.SearchActivity.CATE_ID_RIGHT;
 import static lanou.around.classification.search.SearchActivity.CATE_NAME_RIGHT;
 import static lanou.around.classification.search.SearchActivity.RIGHT;
@@ -24,10 +22,11 @@ import static lanou.around.classification.search.SearchActivity.RIGHT;
 /**
  * Created by dllo on 16/10/25.
  */
-public class RightViewFragment extends BaseFragment implements InterView {
+public class RightViewFragment extends BaseFragment {
 
     private GridView gridView;
     private List<ClassifyViewBean.RespDataBean> mDataBeanList;
+    private ClassifyViewBean mDatas;
 
 
     @Override
@@ -48,26 +47,10 @@ public class RightViewFragment extends BaseFragment implements InterView {
 
     @Override
     protected void initData() {
-        ClassifyViewPresenter presenter = new ClassifyViewPresenter(this);
-        presenter.startRequest(URLValues.CLASSIFY_CHILD_CATES_LOGIC, ClassifyViewBean.class);
     }
 
-
-
-    @Override
-    public void onResponse(Object t) {
-        ClassifyViewBean classifyViewBean = (ClassifyViewBean) t;
-        mDataBeanList = new ArrayList<>();
-        for (int i = 16; i < 19; i++) {
-            mDataBeanList.add(classifyViewBean.getRespData().get(i));
-        }
-        GridViewPagerAdapter gridViewAdapter = new GridViewPagerAdapter(context,mDataBeanList);
-        gridView.setAdapter(gridViewAdapter);
-    }
-
-
-    @Override
-    public void onError() {
+    public void setDatas(ClassifyViewBean datas) {
+        mDatas = datas;
 
     }
 
@@ -85,5 +68,18 @@ public class RightViewFragment extends BaseFragment implements InterView {
     }
 
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
 
+        if(getUserVisibleHint()){
+            mDataBeanList = new ArrayList<>();
+            for (int i = 16; i < 19; i++) {
+                mDataBeanList.add(mDatas.getRespData().get(i));
+            }
+            GridViewPagerAdapter gridViewAdapter = new GridViewPagerAdapter(context, mDataBeanList);
+            gridView.setAdapter(gridViewAdapter);
+        }
+
+    }
 }

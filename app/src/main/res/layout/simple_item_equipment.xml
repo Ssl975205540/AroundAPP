@@ -66,7 +66,9 @@
             <ImageView
                 android:id="@+id/iv_equipment_bike"
                 android:layout_width="75dp"
-                android:layout_height="75dp"/>
+                android:layout_height="75dp"
+                android:src="@mipmap/a0r"
+                android:scaleType="fitXY"/>
         </LinearLayout>
 
         <View
@@ -91,7 +93,9 @@
             <ImageView
                 android:id="@+id/iv_equipment_electric"
                 android:layout_width="75dp"
-                android:layout_height="75dp"/>
+                android:layout_height="75dp"
+                android:src="@mipmap/a0r"
+                android:scaleType="fitXY"/>
         </LinearLayout>
 
         <View
@@ -116,7 +120,9 @@
             <ImageView
                 android:id="@+id/iv_equipment_motor"
                 android:layout_width="75dp"
-                android:layout_height="75dp"/>
+                android:layout_height="75dp"
+                android:src="@mipmap/a0r"
+                android:scaleType="fitXY"/>
         </LinearLayout>
     </LinearLayout>
 
